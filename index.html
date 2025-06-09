@@ -6,6 +6,7 @@
   <meta name="color-scheme" content="light dark">
   <title>Beyond Solutions – Fibra 2025</title>
   <link rel="icon" href="https://fav.farm/🏗️">
+  <meta name="description" content="Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,14 +15,22 @@
       theme: {
         extend: {
           colors: {
-            primary: { 900: '#192c64', 700: '#243f8f' },
-            accent: { 300: '#bdc5dd', 100: '#e9ebf3' },
+            primary: { 950: '#121f45', 900: '#192c64', 800: '#203679', 700: '#243f8f', 600: '#2f51b5' },
+            accent: { 500: '#8390be', 300: '#bdc5dd', 100: '#e9ebf3', 50: '#f4f6fa' },
           },
           fontFamily: {
             display: ['"Open Sauce One"', 'sans-serif'],
             body: ['"Open Sauce One"', 'sans-serif'],
             aux: ['Muli', 'sans-serif'],
           },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.06)',
+            'soft-lg': '0 10px 30px -3px rgba(0, 0, 0, 0.1)',
+          },
+          transitionProperty: {
+            'height': 'height',
+            'spacing': 'margin, padding',
+          }
         },
       },
       darkMode: 'class',
@@ -51,14 +60,24 @@
         active: 'about',
         init() {
           this.applyTheme();
+          
+          // Usar IntersectionObserver para seguimiento de secciones visibles
           const obs = new IntersectionObserver((entries) => {
             entries.forEach((e) => {
               if (e.isIntersecting) this.active = e.target.id;
             });
-          }, { threshold: 0.5 });
+          }, { rootMargin: '-20% 0px -80% 0px' });
+          
           this.items.forEach(i => {
             const el = document.getElementById(i.id);
             if (el) obs.observe(el);
+          });
+          
+          // Manejar teclas de accesibilidad para menú móvil
+          window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.open) {
+              this.open = false;
+            }
           });
         },
         linkClass(id) {
@@ -80,20 +99,45 @@
 
   <!-- AOS JS -->
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>addEventListener('load', () => AOS.init({ once: true, duration: 600 }));</script>
 
   <style>
     [x-cloak]{display:none!important}
     body {
       font-family: 'Open Sauce One', 'Open Sans', sans-serif;
+      line-height: 1.7;
     }
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Open Sauce One', 'Open Sans', sans-serif;
       letter-spacing: -0.02em;
+      line-height: 1.3;
     }
     .text-aux {
       font-family: 'Muli', sans-serif;
       letter-spacing: 0.01em;
+    }
+    /* Optimizar para evitar CLS */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    .hero-section {
+      min-height: 80vh;
+    }
+    .section-heading::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background-color: #243f8f;
+      margin: 16px auto 0;
+    }
+    .dark .section-heading::after {
+      background-color: white;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .transition {
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -101,48 +145,48 @@
   <!-- Header -->
   <header x-data="nav" x-init="init()" class="fixed inset-x-0 top-0 z-50 bg-white/80 dark:bg-primary-900/80 backdrop-blur shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-      <a href="#about" class="text-primary-700 dark:text-white font-bold text-lg">Beyond&nbsp;Solutions</a>
-      <nav class="hidden md:flex space-x-6">
+      <a href="#about" class="text-primary-700 dark:text-white font-bold text-lg" aria-label="Ir a la sección Sobre Nosotros">Beyond&nbsp;Solutions</a>
+      <nav class="hidden md:flex space-x-6" aria-label="Navegación principal">
         <template x-for="item in items" :key="item.id">
-          <a :href="item.href" :class="linkClass(item.id)" x-text="item.label" class="transition"></a>
+          <a :href="item.href" :class="linkClass(item.id)" x-text="item.label" class="px-1 py-2 transition-colors" :aria-current="active === item.id ? 'page' : null"></a>
         </template>
       </nav>
       <div class="flex items-center space-x-4">
-        <button @click="toggleTheme" :aria-label="theme==='dark'?'Activar modo claro':'Activar modo oscuro'" class="text-xl focus:outline-none">
+        <button @click="toggleTheme" :aria-label="theme==='dark'?'Activar modo claro':'Activar modo oscuro'" class="text-xl focus:outline-none focus:ring-2 focus:ring-primary-700 rounded-full p-1">
           <template x-if="theme==='dark'">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M21.752 15.002A9.718 9.718 0 0112.003 22 9.996 9.996 0 012 12C2 6.486 6.486 2 12.003 2c.499 0 .991.036 1.474.106a.75.75 0 01.223 1.393A7.496 7.496 0 0013.5 12c0 4.136 3.364 7.5 7.5 7.5.589 0 1.167-.06 1.725-.178a.75.75 0 01.997.78z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.752 15.002A9.718 9.718 0 0112.003 22 9.996 9.996 0 012 12C2 6.486 6.486 2 12.003 2c.499 0 .991.036 1.474.106a.75.75 0 01.223 1.393A7.496 7.496 0 0013.5 12c0 4.136 3.364 7.5 7.5 7.5.589 0 1.167-.06 1.725-.178a.75.75 0 01.997.78z"/></svg>
           </template>
           <template x-if="theme==='light'">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="6"/></svg>
           </template>
         </button>
-        <button @click="open=!open" class="md:hidden text-primary-700 dark:text-white focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <button @click="open=!open" class="md:hidden text-primary-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-700 rounded p-1" aria-expanded="false" :aria-expanded="open" aria-controls="mobile-menu" aria-label="Abrir menú de navegación">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
     </div>
     <!-- Mobile Nav -->
-    <div x-cloak x-show="open" x-transition class="md:hidden bg-white/95 dark:bg-primary-900/95 border-t py-4 px-6 space-y-4">
+    <div id="mobile-menu" x-cloak x-show="open" x-transition class="md:hidden bg-white/95 dark:bg-primary-900/95 border-t py-4 px-6 space-y-4">
       <template x-for="item in items" :key="'mob-'+item.id">
-        <a :href="item.href" @click="open=false" x-text="item.label" class="block"></a>
+        <a :href="item.href" @click="open=false" x-text="item.label" class="block py-3 px-2 rounded hover:bg-accent-100 dark:hover:bg-primary-800 transition-colors" :class="active === item.id ? 'bg-accent-50 dark:bg-primary-800 font-semibold' : ''" :aria-current="active === item.id ? 'page' : null"></a>
       </template>
     </div>
   </header>
 
   <!-- Hero / Sobre Nosotros -->
-  <section id="about" class="relative pt-24 md:pt-28 pb-16 text-white">
-    <div class="absolute inset-0 bg-center bg-cover" style="background-image:url('./img/main-cover.jpg');"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20 dark:from-primary-900/80"></div>
+  <section id="about" class="relative pt-24 md:pt-28 pb-16 text-white hero-section">
+    <div class="absolute inset-0 bg-center bg-cover" style="background-image:url('./img/main-cover.jpg'); background-color: #192c64;" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20 dark:from-primary-900/80" aria-hidden="true"></div>
     <div class="relative py-20">
       <div class="max-w-5xl mx-auto px-6" data-aos="fade-up">
         <h1 class="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.</h1>
         <p class="text-lg md:text-xl">A través de soluciones basadas en automatización, inteligencia artificial (IA), aprendizaje automático (ML) y análisis avanzado de big data.</p>
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="#modelo" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-primary-700 hover:bg-primary-900 transition">
+          <a href="#modelo" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-primary-700 hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-white/10">
             Conocer más
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="#contacto" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-primary-700 bg-white hover:bg-accent-100 transition">
+          <a href="#contacto" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-primary-700 bg-white hover:bg-accent-100 transition focus:outline-none focus:ring-2 focus:ring-primary-700">
             Contáctanos
           </a>
         </div>
@@ -154,10 +198,10 @@
     <!-- Modelo -->
     <section id="modelo" class="py-20 bg-accent-100 dark:bg-zinc-800">
       <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Modelo</h2>
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-16 section-heading" data-aos="fade-up">Modelo</h2>
         <div class="grid gap-16 lg:grid-cols-2" data-aos="fade-up">
-          <figure class="aspect-video lg:aspect-square overflow-hidden rounded-lg shadow-lg order-last lg:order-first">
-            <img loading="lazy" decoding="async" src="./img/modelo.jpg" alt="Modelo de desarrollo inmobiliario" class="w-full h-full object-cover dark:brightness-75">
+          <figure class="aspect-video lg:aspect-square overflow-hidden rounded-lg shadow-soft-lg order-last lg:order-first relative">
+            <img loading="lazy" decoding="async" src="./img/modelo.jpg" alt="Modelo de desarrollo inmobiliario" class="w-full h-full object-cover dark:brightness-75 hover:scale-105 transition-transform duration-700">
           </figure>
           <div class="space-y-6 text-lg leading-relaxed">
             <p>El modelo abarca la orquestación integral de terrenos, materiales, arquitectura, diseño, arte, normatividad, construcción y desarrollo, con el objetivo de habilitar de forma eficiente la operación y comercialización de activos inmobiliarios a nivel nacional e internacional.</p>
@@ -177,18 +221,33 @@
     <!-- Por qué Beyond -->
     <section id="por-que" class="py-20">
       <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">¿Por qué Beyond?</h2>
-        <div class="grid gap-12 md:grid-cols-3" data-aos="fade-up">
-          <div class="space-y-3 p-6 bg-accent-100 dark:bg-zinc-800/50 rounded-lg shadow">
-            <h3 class="font-semibold text-xl">DISEÑO CON PROPÓSITO Y BIENESTAR</h3>
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-16 section-heading" data-aos="fade-up">¿Por qué Beyond?</h2>
+        <div class="grid gap-8 md:grid-cols-3" data-aos="fade-up">
+          <div class="space-y-4 p-8 bg-accent-50 dark:bg-zinc-800/50 rounded-xl shadow-soft transition-transform duration-300 hover:shadow-soft-lg hover:-translate-y-1">
+            <div class="bg-primary-700 w-12 h-12 flex items-center justify-center rounded-lg text-white mb-4 shadow-soft">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-xl text-primary-900 dark:text-white">DISEÑO CON PROPÓSITO Y BIENESTAR</h3>
             <p>Arquitectura, arte y materiales que elevan la vida diaria, creando espacios con sentido y conexión con su entorno.</p>
           </div>
-          <div class="space-y-3 p-6 bg-accent-100 dark:bg-zinc-800/50 rounded-lg shadow">
-            <h3 class="font-semibold text-xl">TECNOLOGÍA Y EFICIENCIA OPERATIVA</h3>
+          <div class="space-y-4 p-8 bg-accent-50 dark:bg-zinc-800/50 rounded-xl shadow-soft transition-transform duration-300 hover:shadow-soft-lg hover:-translate-y-1">
+            <div class="bg-primary-700 w-12 h-12 flex items-center justify-center rounded-lg text-white mb-4 shadow-soft">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-xl text-primary-900 dark:text-white">TECNOLOGÍA Y EFICIENCIA OPERATIVA</h3>
             <p>Automatización, data y excelencia operativa que optimizan procesos, reducen costos y mejoran la calidad en cada etapa del desarrollo.</p>
           </div>
-          <div class="space-y-3 p-6 bg-accent-100 dark:bg-zinc-800/50 rounded-lg shadow">
-            <h3 class="font-semibold text-xl">COMPROMISO SOCIAL Y AMBIENTAL</h3>
+          <div class="space-y-4 p-8 bg-accent-50 dark:bg-zinc-800/50 rounded-xl shadow-soft transition-transform duration-300 hover:shadow-soft-lg hover:-translate-y-1">
+            <div class="bg-primary-700 w-12 h-12 flex items-center justify-center rounded-lg text-white mb-4 shadow-soft">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-xl text-primary-900 dark:text-white">COMPROMISO SOCIAL Y AMBIENTAL</h3>
             <p>Construcción responsable con impacto positivo, respetando normas laborales y ambientales, e impulsando sostenibilidad y equidad.</p>
           </div>
         </div>
@@ -351,50 +410,52 @@
         <h2 class="text-2xl md:text-4xl font-bold text-center mb-8">Contacto</h2>
         <div class="bg-white dark:bg-zinc-900 rounded-lg shadow-lg overflow-hidden">
           <div class="relative h-48">
-            <img src="./img/contact-us.jpg" alt="Nuestras oficinas" class="w-full h-full object-cover">
+            <img src="./img/contact-us.jpg" alt="Nuestras oficinas en Torre Guttenberg" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
               <div class="flex items-center text-white">
-                <img src="./img/icon-maps.jpg" alt="Ubicación" class="w-6 h-6 mr-3">
+                <img src="./img/icon-maps.jpg" alt="" class="w-6 h-6 mr-3" aria-hidden="true">
                 <p>Torre Guttenberg – J. Rousseau 3, Anzures, Miguel Hidalgo, Ciudad de México, México</p>
               </div>
             </div>
           </div>
           <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="flex items-center">
-              <img src="./img/icon-phone.png" alt="Teléfono" class="w-8 h-8 mr-4">
+              <img src="./img/icon-phone.png" alt="" class="w-8 h-8 mr-4" aria-hidden="true">
               <div>
                 <p class="text-sm text-zinc-500 dark:text-zinc-400">Teléfono Fijo</p>
-                <a href="tel:+5215586470143" class="hover:text-primary-700">+52 55 (86470143) - Recepción</a>
+                <a href="tel:+5215586470143" class="hover:text-primary-700 focus:outline-none focus:underline" aria-label="Llamar al teléfono fijo: +52 55 (86470143)">+52 55 (86470143) - Recepción</a>
               </div>
             </div>
             <div class="flex items-center">
-              <img src="./img/icon-whatsapp.png" alt="WhatsApp" class="w-8 h-8 mr-4">
+              <img src="./img/icon-whatsapp.png" alt="" class="w-8 h-8 mr-4" aria-hidden="true">
               <div>
                 <p class="text-sm text-zinc-500 dark:text-zinc-400">WhatsApp Business</p>
-                <a href="https://api.whatsapp.com/send?phone=+525560553710&text=Hola%20Smartports,%20me%20gustar%C3%ADa%20optimizar%20mi%20cadena%20de%20suministro" target="_blank" class="hover:text-primary-700">+52 55 (60553710) - Business WA</a>
+                <a href="https://api.whatsapp.com/send?phone=+525560553710&text=Hola%20Smartports,%20me%20gustar%C3%ADa%20optimizar%20mi%20cadena%20de%20suministro" target="_blank" rel="noopener" class="hover:text-primary-700 focus:outline-none focus:underline" aria-label="Contactar por WhatsApp: +52 55 (60553710)">+52 55 (60553710) - Business WA</a>
               </div>
+
             </div>
             <div class="flex items-center">
-              <img src="./img/icon-mail.png" alt="Email" class="w-8 h-8 mr-4">
+              <img src="./img/icon-mail.png" alt="" class="w-8 h-8 mr-4" aria-hidden="true">
               <div>
                 <p class="text-sm text-zinc-500 dark:text-zinc-400">Email</p>
-                <a href="mailto:info@beyondsolutions.app" class="hover:text-primary-700">info@beyondsolutions.app</a>
+                <a href="mailto:info@beyondsolutions.app" class="hover:text-primary-700 focus:outline-none focus:underline">info@beyondsolutions.app</a>
               </div>
+
             </div>
             <div class="flex items-center">
-              <img src="./img/smartports.png" alt="Sitio Web" class="w-8 h-8 mr-4">
+              <img src="./img/smartports.png" alt="" class="w-8 h-8 mr-4" aria-hidden="true">
               <div>
                 <p class="text-sm text-zinc-500 dark:text-zinc-400">Sitio Web</p>
-                <a href="https://www.beyondsolutions.app" target="_blank" class="hover:text-primary-700">www.beyondsolutions.app</a>
+                <a href="https://www.beyondsolutions.app" target="_blank" rel="noopener" class="hover:text-primary-700 focus:outline-none focus:underline">www.beyondsolutions.app</a>
               </div>
             </div>
           </div>
           <div class="p-6 border-t border-zinc-200 dark:border-zinc-700 text-center">
             <div class="flex items-center justify-center mb-4">
-              <img src="./img/icon-meets.png" alt="Reunión" class="w-8 h-8 mr-3">
+              <img src="./img/icon-meets.png" alt="" class="w-8 h-8 mr-3" aria-hidden="true">
               <p class="text-zinc-500 dark:text-zinc-400">Haz clic aquí para programar una reunión con nuestro equipo</p>
             </div>
-            <a href="https://calendar.app.google/b5XhKmQwJNNpdhq79" target="_blank" class="inline-block px-6 py-3 rounded-full bg-primary-700 text-white hover:bg-primary-900 transition">Agenda una reunión</a>
+            <a href="https://calendar.app.google/b5XhKmQwJNNpdhq79" target="_blank" rel="noopener" class="inline-block px-6 py-3 rounded-full bg-primary-700 text-white hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2">Agenda una reunión</a>
           </div>
         </div>
       </div>
@@ -410,22 +471,30 @@
           <p class="text-sm text-zinc-500 dark:text-zinc-400">Desarrollo inmobiliario inteligente</p>
         </div>
       </div>
-      <div class="mb-8 py-6 border-t border-b border-zinc-100 dark:border-zinc-800">
-        <h4 class="mb-6 text-sm uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Alianzas estratégicas</h4>
-        <div class="flex flex-wrap justify-center gap-8 md:gap-12">
-          <img src="./img/logo-1.png" alt="Saint-Gobain" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition">
-          <img src="./img/logo-2.png" alt="Holcim" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition">
-          <img src="./img/logo-3.png" alt="CNBM" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition">
-          <img src="./img/logo-4.png" alt="ArcelorMittal" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition">
-          <img src="./img/logo-5.png" alt="Cemex" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition">
+      <div class="mb-12 py-8 border-t border-b border-zinc-100 dark:border-zinc-800">
+        <h4 class="mb-8 text-sm uppercase text-zinc-500 dark:text-zinc-400 tracking-wider font-semibold">Alianzas estratégicas</h4>
+        <div class="flex flex-wrap justify-center gap-10 md:gap-16">
+          <div class="flex items-center justify-center w-32 h-16">
+            <img src="./img/logo-1.png" alt="Saint-Gobain" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+          </div>
+          <div class="flex items-center justify-center w-32 h-16">
+            <img src="./img/logo-2.png" alt="Holcim" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+          </div>
+          <div class="flex items-center justify-center w-32 h-16">
+            <img src="./img/logo-3.png" alt="CNBM" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+          </div>
+          <div class="flex items-center justify-center w-32 h-16">
+            <img src="./img/logo-4.png" alt="ArcelorMittal" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+          </div>
+          <div class="flex items-center justify-center w-32 h-16">
+            <img src="./img/logo-5.png" alt="Cemex" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+          </div>
         </div>
       </div>
       <div class="flex flex-col md:flex-row items-center justify-between pt-4 text-sm text-zinc-500 dark:text-zinc-400">
         <p>© 2025 Beyond Solutions. Todos los derechos reservados.</p>
         <div class="flex gap-6 mt-4 md:mt-0">
-          <!--a href="#" class="hover:text-primary-700">Política de privacidad</a>
-          <a href="#" class="hover:text-primary-700">Términos y condiciones</a-->
-          <a href="#contacto" class="hover:text-primary-700">Contacto</a>
+          <a href="#contacto" class="hover:text-primary-700 dark:hover:text-primary-600 transition-colors duration-300 focus:outline-none focus:underline">Contacto</a>
         </div>
       </div>
     </div>
@@ -435,8 +504,8 @@
   <link rel="preload" as="image" href="./img/main-cover.jpg">
 
   <!-- Back to top button -->
-  <button id="back-to-top" class="fixed bottom-6 right-6 p-3 rounded-full bg-primary-700 text-white shadow-lg opacity-0 transition-opacity duration-300 hover:bg-primary-900 focus:outline-none" aria-label="Volver arriba">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <button id="back-to-top" class="fixed bottom-6 right-6 p-3 rounded-full bg-primary-700 text-white shadow-lg opacity-0 transition-all duration-300 hover:bg-primary-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 z-50" aria-label="Volver arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
     </svg>
   </button>
@@ -462,6 +531,15 @@
         el.removeAttribute('data-aos');
       });
     }
+
+    // Inicializar AOS solo después de que el contenido principal se haya cargado
+    document.addEventListener('DOMContentLoaded', () => {
+      AOS.init({ 
+        once: true, 
+        duration: 600,
+        disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      });
+    });
   </script>
 </body>
 </html>
