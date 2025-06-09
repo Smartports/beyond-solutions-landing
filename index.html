@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Beyond Solutions – Fibra 2025</title>
+  <link rel="icon" href="https://fav.farm/🏗️">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: { 900: '#192c64', 700: '#243f8f' },
+            accent: { 300: '#bdc5dd', 100: '#e9ebf3' },
+          },
+          fontFamily: {
+            display: ['"Open Sauce One"', 'sans-serif'],
+            body: ['"Open Sauce One"', 'sans-serif'],
+            aux: ['Muli', 'sans-serif'],
+          },
+        },
+      },
+      darkMode: 'class',
+    }
+  </script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Alpine component -->
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('nav', () => ({
+        open: false,
+        theme: localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+        items: [
+          { id: 'about', label: 'Sobre Nosotros', href: '#about' },
+          { id: 'modelo', label: 'Modelo', href: '#modelo' },
+          { id: 'por-que', label: '¿Por qué Beyond?', href: '#por-que' },
+          { id: 'sectores', label: 'Sectores', href: '#sectores' },
+          { id: 'capacidades', label: 'Capacidades', href: '#capacidades' },
+          { id: 'contacto', label: 'Contacto', href: '#contacto' }
+        ],
+        active: 'about',
+        init() {
+          this.applyTheme();
+          const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) this.active = e.target.id;
+            });
+          }, { threshold: 0.5 });
+          this.items.forEach(i => {
+            const el = document.getElementById(i.id);
+            if (el) obs.observe(el);
+          });
+        },
+        linkClass(id) {
+          return this.active === id
+            ? 'text-primary-700 dark:text-primary-700 font-semibold'
+            : 'hover:text-primary-700 dark:hover:text-primary-700';
+        },
+        toggleTheme() {
+          this.theme = this.theme === 'dark' ? 'light' : 'dark';
+          localStorage.setItem('theme', this.theme);
+          this.applyTheme();
+        },
+        applyTheme() {
+          document.documentElement.classList.toggle('dark', this.theme === 'dark');
+        }
+      }));
+    });
+  </script>
+
+  <!-- AOS JS -->
+  <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>addEventListener('load', () => AOS.init({ once: true, duration: 600 }));</script>
+
+  <style>
+    [x-cloak]{display:none!important}
+    body {
+      font-family: 'Open Sauce One', 'Open Sans', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Open Sauce One', 'Open Sans', sans-serif;
+      letter-spacing: -0.02em;
+    }
+    .text-aux {
+      font-family: 'Muli', sans-serif;
+      letter-spacing: 0.01em;
+    }
+  </style>
+</head>
+<body class="font-body antialiased leading-relaxed text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900">
+  <!-- Header -->
+  <header x-data="nav" x-init="init()" class="fixed inset-x-0 top-0 z-50 bg-white/80 dark:bg-primary-900/80 backdrop-blur shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <a href="#about" class="text-primary-700 dark:text-white font-bold text-lg">Beyond&nbsp;Solutions</a>
+      <nav class="hidden md:flex space-x-6">
+        <template x-for="item in items" :key="item.id">
+          <a :href="item.href" :class="linkClass(item.id)" x-text="item.label" class="transition"></a>
+        </template>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <button @click="toggleTheme" :aria-label="theme==='dark'?'Activar modo claro':'Activar modo oscuro'" class="text-xl focus:outline-none">
+          <template x-if="theme==='dark'">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M21.752 15.002A9.718 9.718 0 0112.003 22 9.996 9.996 0 012 12C2 6.486 6.486 2 12.003 2c.499 0 .991.036 1.474.106a.75.75 0 01.223 1.393A7.496 7.496 0 0013.5 12c0 4.136 3.364 7.5 7.5 7.5.589 0 1.167-.06 1.725-.178a.75.75 0 01.997.78z"/></svg>
+          </template>
+          <template x-if="theme==='light'">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+          </template>
+        </button>
+        <button @click="open=!open" class="md:hidden text-primary-700 dark:text-white focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Nav -->
+    <div x-cloak x-show="open" x-transition class="md:hidden bg-white/95 dark:bg-primary-900/95 border-t py-4 px-6 space-y-4">
+      <template x-for="item in items" :key="'mob-'+item.id">
+        <a :href="item.href" @click="open=false" x-text="item.label" class="block"></a>
+      </template>
+    </div>
+  </header>
+
+  <!-- Hero / Sobre Nosotros -->
+  <section id="about" class="relative pt-24 md:pt-28 pb-16 text-white">
+    <div class="absolute inset-0 bg-center bg-cover" style="background-image:url('./img/main-cover.jpg');"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20 dark:from-primary-900/80"></div>
+    <div class="relative py-20">
+      <div class="max-w-5xl mx-auto px-6" data-aos="fade-up">
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.</h1>
+        <p class="text-lg md:text-xl">A través de soluciones basadas en automatización, inteligencia artificial (IA), aprendizaje automático (ML) y análisis avanzado de big data.</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="#modelo" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-primary-700 hover:bg-primary-900 transition">
+            Conocer más
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#contacto" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-primary-700 bg-white hover:bg-accent-100 transition">
+            Contáctanos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- Modelo -->
+    <section id="modelo" class="py-20 bg-accent-100 dark:bg-zinc-800">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Modelo</h2>
+        <div class="grid gap-16 lg:grid-cols-2" data-aos="fade-up">
+          <figure class="aspect-video lg:aspect-square overflow-hidden rounded-lg shadow-lg order-last lg:order-first">
+            <img loading="lazy" decoding="async" src="./img/modelo.jpg" alt="Modelo de desarrollo inmobiliario" class="w-full h-full object-cover dark:brightness-75">
+          </figure>
+          <div class="space-y-6 text-lg leading-relaxed">
+            <p>El modelo abarca la orquestación integral de terrenos, materiales, arquitectura, diseño, arte, normatividad, construcción y desarrollo, con el objetivo de habilitar de forma eficiente la operación y comercialización de activos inmobiliarios a nivel nacional e internacional.</p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>Terrenos y Materiales</li>
+              <li>Arquitectura, Diseño y Arte</li>
+              <li>Regulatorio y Legal</li>
+              <li>Construcción y Desarrollo</li>
+              <li>Operación</li>
+              <li>Comercialización</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Por qué Beyond -->
+    <section id="por-que" class="py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">¿Por qué Beyond?</h2>
+        <div class="grid gap-12 md:grid-cols-3" data-aos="fade-up">
+          <div class="space-y-3 p-6 bg-accent-100 dark:bg-zinc-800/50 rounded-lg shadow">
+            <h3 class="font-semibold text-xl">DISEÑO CON PROPÓSITO Y BIENESTAR</h3>
+            <p>Arquitectura, arte y materiales que elevan la vida diaria, creando espacios con sentido y conexión con su entorno.</p>
+          </div>
+          <div class="space-y-3 p-6 bg-accent-100 dark:bg-zinc-800/50 rounded-lg shadow">
+            <h3 class="font-semibold text-xl">TECNOLOGÍA Y EFICIENCIA OPERATIVA</h3>
+            <p>Automatización, data y excelencia operativa que optimizan procesos, reducen costos y mejoran la calidad en cada etapa del desarrollo.</p>
+          </div>
+          <div class="space-y-3 p-6 bg-accent-100 dark:bg-zinc-800/50 rounded-lg shadow">
+            <h3 class="font-semibold text-xl">COMPROMISO SOCIAL Y AMBIENTAL</h3>
+            <p>Construcción responsable con impacto positivo, respetando normas laborales y ambientales, e impulsando sostenibilidad y equidad.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sectores -->
+    <section id="sectores" class="py-20 bg-accent-100 dark:bg-zinc-800">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Sectores</h2>
+        <div class="grid gap-16 lg:grid-cols-2" data-aos="fade-up">
+          <div class="space-y-8">
+            <div class="flex items-start gap-4">
+              <img src="./img/icon-residencial.png" alt="Icono Residencial" class="w-10 h-10 mt-1">
+              <div>
+                <h3 class="font-semibold text-xl mb-2">RESIDENCIAL</h3>
+                <p>Estilo de vida exclusivo y sostenible, donde diseño, tecnología y arte se integran para brindar experiencias únicas con calidad y confort.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <img src="./img/icon-restore.png" alt="Icono Restauración" class="w-10 h-10 mt-1">
+              <div>
+                <h3 class="font-semibold text-xl mb-2">RESTAURACIÓN Y RECONVERSIÓN</h3>
+                <p>Restauración de alta gama que fusiona conservación avanzada y diseño contemporáneo, preservando el valor histórico y elevando la funcionalidad.</p>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-8">
+            <div class="flex items-start gap-4">
+              <img src="./img/icon-brain.png" alt="Icono Educación" class="w-10 h-10 mt-1">
+              <div>
+                <h3 class="font-semibold text-xl mb-2">EDUCACIÓN, ARTE Y CULTURA</h3>
+                <p>Espacios que impulsan la educación, el arte y la cultura, combinando arquitectura moderna, tecnología y diseño para fomentar la creatividad, el aprendizaje y la expresión artística.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <img src="./img/icon-handshake.png" alt="Icono Comercial" class="w-10 h-10 mt-1">
+              <div>
+                <h3 class="font-semibold text-xl mb-2">COMERCIAL E INDUSTRIAL</h3>
+                <p>Entornos dinámicos que combinan diseño, tecnología y datos para optimizar la experiencia del usuario, la rentabilidad y el desempeño inmobiliario.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capacidades -->
+    <section id="capacidades" class="py-20">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Capacidades</h2>
+        <div class="space-y-16" data-aos="fade-up">
+          <!-- Terrenos -->
+          <div class="grid lg:grid-cols-2 gap-10 items-center">
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
+              <img loading="lazy" decoding="async" src="./img/terrenos.jpg" alt="Terrenos - Adquisición Inteligente" class="w-full h-full object-cover dark:brightness-75">
+            </figure>
+            <div class="space-y-3">
+              <h3 class="font-semibold text-2xl">Terrenos – Adquisión Inteligente</h3>
+              <p>Mediante el análisis avanzado de big data, parámetros derivados y tecnología como realidad aumentada y vistas satelitales, identificamos y evaluamos estratégicamente terrenos a nivel global. Consideramos factores como uso de suelo, clima, topografía, sostenibilidad y materiales innovadores para maximizar el valor de cada desarrollo según su geolocalización.</p>
+            </div>
+          </div>
+          <!-- Materiales -->
+          <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
+              <img loading="lazy" decoding="async" src="./img/materiales.jpg" alt="Materiales - Redefiniendo la cadena de suministros" class="w-full h-full object-cover dark:brightness-75">
+            </figure>
+            <div class="space-y-3 lg:order-first">
+              <h3 class="font-semibold text-2xl">Materiales – Redefiniendo la cadena de suministros</h3>
+              <p>Optimizamos la cadena de suministro mediante tecnología avanzada, trazabilidad en tiempo real y selección de materiales sostenibles y de alto rendimiento. Nuestra estrategia de procurement directo con fabricantes maximiza eficiencia, reduce costos y garantiza calidad.</p>
+            </div>
+          </div>
+          <!-- Arquitectura -->
+          <div class="grid lg:grid-cols-2 gap-10 items-center">
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
+              <img loading="lazy" decoding="async" src="./img/arquitectura.jpg" alt="Arquitectura - Vanguardismo y Alto Impacto" class="w-full h-full object-cover dark:brightness-75">
+            </figure>
+            <div class="space-y-3">
+              <h3 class="font-semibold text-2xl">Arquitectura – Vanguardismo y Alto Impacto</h3>
+              <p>Diseñamos espacios urbanos que integran modernismo disruptivo con funcionalidad, estética y eficiencia energética. Nuestros desarrollos interactúan de forma inteligente con su entorno, promoviendo la sostenibilidad y el bienestar. Cumplimos con los más altos estándares internacionales, obteniendo certificaciones como LEED, WELL, EDGE y PASSIVE.</p>
+            </div>
+          </div>
+          <!-- Diseño -->
+          <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
+              <img loading="lazy" decoding="async" src="./img/design.jpg" alt="Diseño - Adaptabilidad, Tecnología, Experiencia" class="w-full h-full object-cover dark:brightness-75">
+            </figure>
+            <div class="space-y-3 lg:order-first">
+              <h3 class="font-semibold text-2xl">Diseño – Adaptabilidad, Tecnología, Experiencia</h3>
+              <p>Desarrollamos espacios modulares y personalizables que se adaptan a las tendencias del mercado y a las necesidades cambiantes de los usuarios. Integramos inteligencia artificial, simulaciones 3D y herramientas digitales para optimizar el diseño y crear experiencias habitacionales y comerciales de alto valor, redefiniendo los estándares de la industria inmobiliaria.</p>
+            </div>
+          </div>
+          <!-- Arte -->
+          <div class="grid lg:grid-cols-2 gap-10 items-center">
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
+              <img loading="lazy" decoding="async" src="./img/art.jpg" alt="Arte - Curaduría, Identidad, Experiencia" class="w-full h-full object-cover dark:brightness-75">
+            </figure>
+            <div class="space-y-3">
+              <h3 class="font-semibold text-2xl">Arte – Curaduría, Identidad, Experiencia</h3>
+              <p>Fusionamos arte y arquitectura mediante una curaduría exclusiva de piezas originales y gráficas contemporáneas, en colaboración con artistas de renombre internacional. Cada espacio es concebido para resaltar las obras y generar una experiencia inmersiva.</p>
+            </div>
+          </div>
+          <!-- Regulatorio -->
+          <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
+              <img loading="lazy" decoding="async" src="./img/regulations.jpg" alt="Regulatorio - Gestión Normativa Integral" class="w-full h-full object-cover dark:brightness-75">
+            </figure>
+            <div class="space-y-3 lg:order-first">
+              <h3 class="font-semibold text-2xl">Regulatorio – Gestión Normativa Integral</h3>
+              <p>Ofrecemos una gestión experta en normativas, licencias y cumplimiento legal para desarrollos inmobiliarios y de construcción. Aseguramos la viabilidad jurídica y regulatoria de cada proyecto, mitigando riesgos y acelerando procesos a través de un enfoque estratégico y actualizado con los marcos legales locales e internacionales.</p>
+            </div>
+          </div>
+          <!-- Construcción -->
+          <div class="grid lg:grid-cols-2 gap-10 items-center">
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
+              <img loading="lazy" decoding="async" src="./img/we-building.jpg" alt="Construcción - Tecnológica y Global" class="w-full h-full object-cover dark:brightness-75">
+            </figure>
+            <div class="space-y-3">
+              <h3 class="font-semibold text-2xl">Construcción – Tecnológica y Global</h3>
+              <p>Ejecución eficiente mediante digitalización y colaboración global de socios estratégicos, redefiniendo los estándares del sector inmobiliario con herramientas como BIM, automatización y robótica.</p>
+            </div>
+          </div>
+          <!-- Desarrollo -->
+          <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
+              <img loading="lazy" decoding="async" src="./img/development.jpg" alt="Desarrollo - Modelo Inmobiliario Disruptor" class="w-full h-full object-cover dark:brightness-75">
+            </figure>
+            <div class="space-y-3 lg:order-first">
+              <h3 class="font-semibold text-2xl">Desarrollo – Modelo Inmobiliario Disruptor</h3>
+              <p>Revolucionamos el desarrollo con alianzas globales y esquemas de financiamiento innovadores como self-funding, debt-funding y crowdfunding, democratizando la inversión y escalabilidad de proyectos.</p>
+            </div>
+          </div>
+          <!-- Comercialización -->
+          <div class="grid lg:grid-cols-2 gap-10 items-center">
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
+              <img loading="lazy" decoding="async" src="./img/marketing.jpg" alt="Comercialización - Datos, Precisión y Conversión" class="w-full h-full object-cover dark:brightness-75">
+            </figure>
+            <div class="space-y-3">
+              <h3 class="font-semibold text-2xl">Comercialización – Datos, Precisión y Conversión</h3>
+              <p>Estrategias de mercado basadas en big-data para una segmentación precisa y comercialización efectiva en esquemas B2B y B2C.</p>
+            </div>
+          </div>
+          <!-- Operación -->
+          <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
+              <img loading="lazy" decoding="async" src="./img/operations.jpg" alt="Operación - Rendimiento y Optimización" class="w-full h-full object-cover dark:brightness-75">
+            </figure>
+            <div class="space-y-3 lg:order-first">
+              <h3 class="font-semibold text-2xl">Operación – Rendimiento y Optimización</h3>
+              <p>Administración y mantenimiento profesional orientado a maximizar la eficiencia operativa y la rentabilidad de los activos inmobiliarios.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-20 bg-accent-100 dark:bg-zinc-800">
+      <div class="max-w-4xl mx-auto px-6" data-aos="fade-up">
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-8">Contacto</h2>
+        <div class="bg-white dark:bg-zinc-900 rounded-lg shadow-lg overflow-hidden">
+          <div class="relative h-48">
+            <img src="./img/contact-us.jpg" alt="Nuestras oficinas" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+              <div class="flex items-center text-white">
+                <img src="./img/icon-maps.jpg" alt="Ubicación" class="w-6 h-6 mr-3">
+                <p>Torre Guttenberg – J. Rousseau 3, Anzures, Miguel Hidalgo, Ciudad de México, México</p>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex items-center">
+              <img src="./img/icon-phone.png" alt="Teléfono" class="w-8 h-8 mr-4">
+              <div>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400">Teléfono Fijo</p>
+                <a href="tel:+5215586470143" class="hover:text-primary-700">+52 55 8647 0143 (Recepción)</a>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="./img/icon-whatsapp.png" alt="WhatsApp" class="w-8 h-8 mr-4">
+              <div>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400">WhatsApp Business</p>
+                <a href="https://api.whatsapp.com/send?phone=525560553710&text=Hola%20Beyond%20Solutions" target="_blank" class="hover:text-primary-700">+52 55 6055 3710</a>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="./img/icon-mail.png" alt="Email" class="w-8 h-8 mr-4">
+              <div>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400">Email</p>
+                <a href="mailto:info@beyondsolutions.app" class="hover:text-primary-700">info@beyondsolutions.app</a>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img src="./img/smartports.png" alt="Sitio Web" class="w-8 h-8 mr-4">
+              <div>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400">Sitio Web</p>
+                <a href="https://www.beyondsolutions.app" target="_blank" class="hover:text-primary-700">www.beyondsolutions.app</a>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 border-t border-zinc-200 dark:border-zinc-700 text-center">
+            <div class="flex items-center justify-center mb-4">
+              <img src="./img/icon-meets.png" alt="Reunión" class="w-8 h-8 mr-3">
+              <p class="text-zinc-500 dark:text-zinc-400">Haz clic aquí para programar una reunión con nuestro equipo</p>
+            </div>
+            <a href="https://calendar.app.google/b5XhKmQwJNNpdhq79" target="_blank" class="inline-block px-6 py-3 rounded-full bg-primary-700 text-white hover:bg-primary-900 transition">Agenda una reunión</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-12 text-center border-t border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between mb-8">
+        <div class="text-left mb-6 md:mb-0">
+          <h3 class="font-bold text-xl text-primary-700 dark:text-white">Beyond Solutions</h3>
+          <p class="text-sm text-zinc-500 dark:text-zinc-400">Desarrollo inmobiliario inteligente</p>
+        </div>
+      </div>
+      <div class="mb-8 py-6 border-t border-b border-zinc-100 dark:border-zinc-800">
+        <h4 class="mb-6 text-sm uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Alianzas estratégicas</h4>
+        <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+          <img src="./img/logo-1.png" alt="Saint-Gobain" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition">
+          <img src="./img/logo-2.png" alt="Holcim" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition">
+          <img src="./img/logo-3.png" alt="CNBM" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition">
+          <img src="./img/logo-4.png" alt="ArcelorMittal" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition">
+          <img src="./img/logo-5.png" alt="Cemex" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition">
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row items-center justify-between pt-4 text-sm text-zinc-500 dark:text-zinc-400">
+        <p>© 2025 Beyond Solutions. Todos los derechos reservados.</p>
+        <div class="flex gap-6 mt-4 md:mt-0">
+          <!--a href="#" class="hover:text-primary-700">Política de privacidad</a>
+          <a href="#" class="hover:text-primary-700">Términos y condiciones</a-->
+          <a href="#contacto" class="hover:text-primary-700">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Preload important images for better performance -->
+  <link rel="preload" as="image" href="./img/main-cover.jpg">
+
+  <!-- Back to top button -->
+  <button id="back-to-top" class="fixed bottom-6 right-6 p-3 rounded-full bg-primary-700 text-white shadow-lg opacity-0 transition-opacity duration-300 hover:bg-primary-900 focus:outline-none" aria-label="Volver arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+  <script>
+    // Back to top button
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.replace('opacity-0', 'opacity-100');
+      } else {
+        backToTop.classList.replace('opacity-100', 'opacity-0');
+      }
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Reducir animaciones si el usuario prefiere reducir el movimiento
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const animated = document.querySelectorAll('[data-aos]');
+      animated.forEach(el => {
+        el.removeAttribute('data-aos');
+      });
+    }
+  </script>
+</body>
+</html>
