@@ -15,7 +15,7 @@ const i18n = {
   async init() {
     try {
       // Load configuration
-      this.config = await this.fetchJSON('/i18n/config.json');
+      this.config = await this.fetchJSON('./i18n/config.json');
       
       // Detect preferred language or use from localStorage
       const savedLocale = localStorage.getItem('beyondLocale');
