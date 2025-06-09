@@ -19,7 +19,7 @@ Landing page de Beyond Solutions, una plataforma digital diseñada para integrar
 - `DECK_CONTEXT.md` - Contenido y estructura de la presentación
 
 ### Sistema de Internacionalización (i18n)
-- `/i18n/` - Directorio principal del sistema multilenguaje
+- `./i18n/` - Directorio principal del sistema multilenguaje
   - `i18n.js` - Script principal del sistema
   - `language-selector.js` - Componente Alpine.js para el selector de idiomas
   - `rtl.css` - Estilos para idiomas de derecha a izquierda

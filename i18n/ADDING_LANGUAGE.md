@@ -31,7 +31,7 @@ Este documento detalla los pasos para añadir un nuevo idioma al sistema de inte
 
 ### 2. Agregar el idioma al archivo de configuración
 
-Edita el archivo `/i18n/config.json` y añade el nuevo idioma a la lista `availableLocales`:
+Edita el archivo `./i18n/config.json` y añade el nuevo idioma a la lista `availableLocales`:
 
 ```json
 {
@@ -60,7 +60,7 @@ Para idiomas que se escriben de derecha a izquierda (RTL) como árabe (ar) o heb
 
 1. Establece `"dir": "rtl"` en la sección `metadata` del archivo de traducción
 2. Asegúrate de añadir también `"dir": "rtl"` en el objeto del idioma en `config.json`
-3. Verifica que los estilos de RTL en `/i18n/rtl.css` funcionen correctamente con el nuevo idioma
+3. Verifica que los estilos de RTL en `./i18n/rtl.css` funcionen correctamente con el nuevo idioma
 
 ## Códigos de idioma y banderas comunes
 

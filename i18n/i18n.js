@@ -76,7 +76,7 @@ const i18n = {
   async setLocale(localeCode) {
     try {
       // Load translations
-      this.translations = await this.fetchJSON(`/i18n/${localeCode}.json`);
+      this.translations = await this.fetchJSON(`./i18n/${localeCode}.json`);
       
       // Set current locale
       this.currentLocale = localeCode;
