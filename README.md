@@ -8,6 +8,7 @@ Landing page de Beyond Solutions, una plataforma digital diseñada para integrar
 - TailwindCSS (via CDN)
 - Alpine.js (para interactividad)
 - AOS (Animate On Scroll)
+- Sistema multilenguaje personalizado (i18n)
 - Responsive Design
 
 ## Estructura del Proyecto
@@ -16,6 +17,16 @@ Landing page de Beyond Solutions, una plataforma digital diseñada para integrar
 - `index.html` - Página principal
 - `DESIGN_SYSTEM.md` - Documentación del sistema de diseño
 - `DECK_CONTEXT.md` - Contenido y estructura de la presentación
+
+### Sistema de Internacionalización (i18n)
+- `/i18n/` - Directorio principal del sistema multilenguaje
+  - `i18n.js` - Script principal del sistema
+  - `language-selector.js` - Componente Alpine.js para el selector de idiomas
+  - `rtl.css` - Estilos para idiomas de derecha a izquierda
+  - `config.json` - Configuración general del sistema i18n
+  - `es.json`, `en.json`, etc. - Archivos de traducción por idioma
+  - `README.md` - Documentación del sistema i18n
+  - `ADDING_LANGUAGE.md` - Guía para añadir nuevos idiomas
 
 ### Recursos
 - Imágenes de secciones (arquitectura.jpg, art.jpg, etc.)
@@ -50,6 +61,30 @@ Landing page de Beyond Solutions, una plataforma digital diseñada para integrar
 - Diseño completamente responsive
 - Soporte para prefers-reduced-motion
 - Botón "volver arriba"
+- **Sistema multilenguaje**:
+  - Detección automática del idioma del navegador
+  - Selector de idiomas con banderas
+  - Soporte para idiomas RTL (derecha a izquierda)
+  - Almacenamiento de preferencia de idioma en localStorage
+  - Fácil adición de nuevos idiomas mediante archivos JSON
+
+## Sistema Multilenguaje
+
+### Características
+- **Detección automática**: El sistema detecta el idioma preferido del navegador del usuario
+- **Selector visual**: Selector de idiomas con banderas en el header
+- **Persistencia**: La selección de idioma se guarda en localStorage
+- **Extensible**: Fácil adición de nuevos idiomas mediante archivos JSON
+- **Soporte RTL**: Diseño adaptable para idiomas que se escriben de derecha a izquierda
+- **Internacionalización completa**: Todos los textos del sitio están disponibles para traducción
+
+### Idiomas Disponibles
+- Español (es) - Idioma predeterminado
+- Inglés (en)
+- *Más idiomas pueden ser añadidos fácilmente siguiendo la guía en `/i18n/ADDING_LANGUAGE.md`*
+
+### Cómo Añadir un Nuevo Idioma
+Ver la guía detallada en `/i18n/ADDING_LANGUAGE.md`
 
 ## Instalación y Despliegue
 
@@ -114,6 +149,7 @@ El diseño de la página sigue los lineamientos del sistema de diseño documenta
 - Navegación lógica por teclado
 - Soporte para prefers-reduced-motion
 - Uso apropiado de roles ARIA
+- Soporte para múltiples idiomas y contextos culturales
 
 ## Contacto
 - **Email**: info@beyondsolutions.app

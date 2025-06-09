@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "locale": "fr",
+    "name": "French",
+    "nativeName": "Français",
+    "dir": "ltr"
+  },
+  "general": {
+    "title": "Beyond Solutions – Fibre 2025",
+    "description": "Beyond est une plateforme numérique conçue pour intégrer et gérer stratégiquement tous les éléments qui composent un développement immobilier de classe mondiale."
+  },
+  "nav": {
+    "brand": "Beyond Solutions",
+    "items": {
+      "about": "À Propos",
+      "modelo": "Modèle",
+      "por_que": "Pourquoi Beyond?",
+      "sectores": "Secteurs",
+      "capacidades": "Capacités",
+      "contacto": "Contact"
+    },
+    "theme": {
+      "light": "Passer en mode clair",
+      "dark": "Passer en mode sombre"
+    },
+    "menu": {
+      "open": "Ouvrir le menu de navigation",
+      "close": "Fermer le menu de navigation"
+    }
+  },
+  "hero": {
+    "title": "Beyond est une plateforme numérique conçue pour intégrer et gérer stratégiquement tous les éléments qui composent un développement immobilier de classe mondiale.",
+    "subtitle": "Grâce à des solutions basées sur l'automatisation, l'intelligence artificielle (IA), l'apprentissage automatique (ML) et l'analyse avancée de big data.",
+    "cta": {
+      "primary": "En savoir plus",
+      "secondary": "Contactez-nous"
+    }
+  },
+  "sections": {
+    "modelo": {
+      "title": "Modèle",
+      "intro": "Le modèle englobe l'orchestration complète des terrains, matériaux, architecture, design, art, réglementations, construction et développement, dans le but de permettre efficacement l'exploitation et la commercialisation d'actifs immobiliers à l'échelle nationale et internationale.",
+      "items": [
+        {
+          "title": "Terrains et Matériaux",
+          "desc": "Identification stratégique des fournitures en fonction du site de construction, garantissant disponibilité, efficacité et temps de transport optimaux."
+        },
+        {
+          "title": "Architecture, Design et Art",
+          "desc": "Incorporation de propositions architecturales innovantes avec un design de haute valeur et une intégration artistique."
+        },
+        {
+          "title": "Réglementaire et Juridique",
+          "desc": "Conformité réglementaire complète permettant de réaliser les processus en temps opportun, minimisant les risques."
+        },
+        {
+          "title": "Construction et Développement",
+          "desc": "Exécution efficace grâce à la numérisation et à la collaboration mondiale avec des partenaires stratégiques, redéfinissant les normes du secteur immobilier."
+        },
+        {
+          "title": "Marketing",
+          "desc": "Stratégies de marché basées sur le big data pour une segmentation précise et un marketing efficace dans les schémas B2B et B2C."
+        },
+        {
+          "title": "Exploitation",
+          "desc": "Administration et maintenance professionnelles visant à maximiser l'efficacité opérationnelle et la rentabilité des actifs immobiliers."
+        }
+      ]
+    },
+    "por_que": {
+      "title": "Pourquoi Beyond?",
+      "items": [
+        {
+          "title": "DESIGN INTENTIONNEL ET BIEN-ÊTRE",
+          "desc": "Architecture, art et matériaux qui élèvent la vie quotidienne, créant des espaces avec sens et connexion à leur environnement."
+        },
+        {
+          "title": "TECHNOLOGIE ET EFFICACITÉ OPÉRATIONNELLE",
+          "desc": "Automatisation, données et excellence opérationnelle qui optimisent les processus, réduisent les coûts et améliorent la qualité à chaque étape du développement."
+        },
+        {
+          "title": "ENGAGEMENT SOCIAL ET ENVIRONNEMENTAL",
+          "desc": "Construction responsable à impact positif, respectant les normes du travail et environnementales, et promouvant la durabilité et l'équité."
+        }
+      ]
+    },
+    "sectores": {
+      "title": "Secteurs",
+      "items": [
+        {
+          "title": "RÉSIDENTIEL",
+          "desc": "Style de vie exclusif et durable, où design, technologie et art s'intègrent pour offrir des expériences uniques avec qualité et confort."
+        },
+        {
+          "title": "RESTAURATION ET RECONVERSION",
+          "desc": "Restauration haut de gamme qui fusionne conservation avancée et design contemporain, préservant la valeur historique et élevant la fonctionnalité."
+        },
+        {
+          "title": "ÉDUCATION, ART ET CULTURE",
+          "desc": "Espaces qui favorisent l'éducation, l'art et la culture, combinant architecture moderne, technologie et design pour encourager la créativité, l'apprentissage et l'expression artistique."
+        },
+        {
+          "title": "COMMERCIAL ET INDUSTRIEL",
+          "desc": "Environnements dynamiques qui combinent design, technologie et données pour optimiser l'expérience utilisateur, la rentabilité et la performance immobilière."
+        }
+      ]
+    },
+    "capacidades": {
+      "title": "Capacités",
+      "items": [
+        {
+          "title": "Terrains – Acquisition Intelligente",
+          "desc": "Grâce à l'analyse avancée de big data, aux paramètres dérivés et à la technologie comme la réalité augmentée et les vues satellite, nous identifions et évaluons stratégiquement les terrains à l'échelle mondiale. Nous considérons des facteurs tels que l'utilisation des sols, le climat, la topographie, la durabilité et les matériaux innovants pour maximiser la valeur de chaque développement selon sa géolocalisation."
+        },
+        {
+          "title": "Matériaux – Redéfinir la Chaîne d'Approvisionnement",
+          "desc": "Nous optimisons la chaîne d'approvisionnement grâce à la technologie avancée, la traçabilité en temps réel et la sélection de matériaux durables et haute performance. Notre stratégie d'approvisionnement direct auprès des fabricants maximise l'efficacité, réduit les coûts et garantit la qualité."
+        },
+        {
+          "title": "Architecture – Avant-garde et Haut Impact",
+          "desc": "Nous concevons des espaces urbains qui intègrent un modernisme disruptif avec fonctionnalité, esthétique et efficacité énergétique. Nos développements interagissent intelligemment avec leur environnement, favorisant la durabilité et le bien-être. Nous respectons les plus hautes normes internationales, obtenant des certifications comme LEED, WELL, EDGE et PASSIVE, ce qui garantit qualité, responsabilité environnementale et valeur à long terme."
+        },
+        {
+          "title": "Design – Adaptabilité, Technologie, Expérience",
+          "desc": "Nous développons des espaces modulaires et personnalisables qui s'adaptent aux tendances du marché et aux besoins changeants des utilisateurs. Nous intégrons l'intelligence artificielle, les simulations 3D et les outils numériques pour optimiser le design et créer des expériences résidentielles et commerciales de haute valeur, redéfinissant les standards de l'industrie immobilière."
+        },
+        {
+          "title": "Art – Conservation, Identité, Expérience",
+          "desc": "Nous fusionnons art et architecture à travers une conservation exclusive de pièces originales et de graphiques contemporains, en collaboration avec des artistes de renommée internationale. Chaque espace est conçu pour mettre en valeur les œuvres et générer une expérience immersive, donnant aux développements une identité unique, culturellement pertinente et visuellement puissante."
+        },
+        {
+          "title": "Réglementaire – Gestion Réglementaire Complète",
+          "desc": "Nous offrons une gestion experte des réglementations, licences et conformité légale pour les développements immobiliers et de construction. Nous assurons la viabilité juridique et réglementaire de chaque projet, atténuant les risques et accélérant les processus grâce à une approche stratégique mise à jour avec les cadres juridiques locaux et internationaux."
+        },
+        {
+          "title": "Construction – Technologique et Globale",
+          "desc": "Nous connectons un réseau mondial de constructeurs (BGP) qui garantit qualité et conformité accélérée. Nous intégrons automatisation, robotique et technologie BIM pour optimiser chaque étape du développement, réduisant les coûts, améliorant la précision et élevant les standards d'efficacité dans l'industrie de la construction."
+        },
+        {
+          "title": "Développement – Modèle Immobilier Disruptif",
+          "desc": "Nous révolutionnons le développement immobilier avec une stratégie d'hypercroissance basée sur des alliances mondiales, des technologies financières comme la blockchain et des modèles hybrides d'utilisation des sols. Nous démocratisons l'investissement grâce à des schémas de financement innovants—autofinancement, financement par dette et financement participatif—redéfinissant comment les projets sont construits, financés et mis à l'échelle internationalement."
+        },
+        {
+          "title": "Marketing – Données, Précision et Conversion",
+          "desc": "Nous implémentons l'intelligence de marché basée sur le big data et l'apprentissage automatique pour segmenter avec précision, prédire les opportunités et maximiser la rentabilité. Nous combinons des stratégies omnicanal—numériques et en personne—avec des algorithmes de ciblage avancés, accélérant les clôtures de ventes sur les marchés nationaux et internationaux."
+        },
+        {
+          "title": "Exploitation – Performance et Optimisation",
+          "desc": "Nous gérons des actifs immobiliers avec une plateforme centralisée et tropicalisée qui maximise la performance opérationnelle selon le secteur. Notre solution permet d'exploiter des propriétés résidentielles, commerciales, industrielles et touristiques avec une flexibilité multisectorielle, intégrant l'IoT et l'intelligence artificielle pour la maintenance prédictive et l'optimisation en temps réel."
+        }
+      ]
+    },
+    "contacto": {
+      "title": "Contact",
+      "address": "Torre Guttenberg – J. Rousseau 3, Anzures, Miguel Hidalgo, Mexico City, Mexique",
+      "phone": {
+        "label": "Téléphone",
+        "value": "+52 55 (86470143) - Réception"
+      },
+      "whatsapp": {
+        "label": "WhatsApp Business",
+        "value": "+52 55 (60553710) - Business WA"
+      },
+      "email": {
+        "label": "Email",
+        "value": "info@beyondsolutions.app"
+      },
+      "website": {
+        "label": "Site Web",
+        "value": "www.beyondsolutions.app"
+      },
+      "meeting": {
+        "text": "Cliquez ici pour planifier une réunion avec notre équipe",
+        "cta": "Planifier une réunion"
+      }
+    }
+  },
+  "footer": {
+    "brand": {
+      "name": "Beyond Solutions",
+      "tagline": "Développement immobilier intelligent"
+    },
+    "partnerships": {
+      "title": "Partenariats Stratégiques"
+    },
+    "copyright": "© 2025 Beyond Solutions. Tous droits réservés.",
+    "links": {
+      "contact": "Contact"
+    }
+  },
+  "accessibility": {
+    "back_to_top": "Retour en haut",
+    "navigation": "Navigation principale"
+  }
+} 

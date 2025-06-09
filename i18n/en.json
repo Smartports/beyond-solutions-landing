@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "locale": "en",
+    "name": "English",
+    "nativeName": "English",
+    "dir": "ltr"
+  },
+  "general": {
+    "title": "Beyond Solutions – Fiber 2025",
+    "description": "Beyond is a digital platform designed to strategically integrate and manage all elements that make up a world-class real estate development."
+  },
+  "nav": {
+    "brand": "Beyond Solutions",
+    "items": {
+      "about": "About Us",
+      "modelo": "Model",
+      "por_que": "Why Beyond?",
+      "sectores": "Sectors",
+      "capacidades": "Capabilities",
+      "contacto": "Contact"
+    },
+    "theme": {
+      "light": "Switch to light mode",
+      "dark": "Switch to dark mode"
+    },
+    "menu": {
+      "open": "Open navigation menu",
+      "close": "Close navigation menu"
+    }
+  },
+  "hero": {
+    "title": "Beyond is a digital platform designed to strategically integrate and manage all elements that make up a world-class real estate development.",
+    "subtitle": "Through solutions based on automation, artificial intelligence (AI), machine learning (ML), and advanced big data analysis.",
+    "cta": {
+      "primary": "Learn more",
+      "secondary": "Contact us"
+    }
+  },
+  "sections": {
+    "modelo": {
+      "title": "Model",
+      "intro": "The model encompasses the comprehensive orchestration of land, materials, architecture, design, art, regulations, construction, and development, with the aim of efficiently enabling the operation and commercialization of real estate assets nationally and internationally.",
+      "items": [
+        {
+          "title": "Land and Materials",
+          "desc": "Strategic identification of supplies based on the construction site, ensuring availability, efficiency, and optimal transport times."
+        },
+        {
+          "title": "Architecture, Design and Art",
+          "desc": "Incorporation of innovative architectural proposals with high-value design and art integration."
+        },
+        {
+          "title": "Regulatory and Legal",
+          "desc": "Comprehensive regulatory compliance allowing processes to be carried out in a timely manner, minimizing risks."
+        },
+        {
+          "title": "Construction and Development",
+          "desc": "Efficient execution through digitization and global collaboration with strategic partners, redefining standards in the real estate sector."
+        },
+        {
+          "title": "Marketing",
+          "desc": "Market strategies based on big data for precise segmentation and effective marketing in B2B and B2C schemes."
+        },
+        {
+          "title": "Operation",
+          "desc": "Professional administration and maintenance aimed at maximizing operational efficiency and profitability of real estate assets."
+        }
+      ]
+    },
+    "por_que": {
+      "title": "Why Beyond?",
+      "items": [
+        {
+          "title": "PURPOSEFUL DESIGN AND WELLBEING",
+          "desc": "Architecture, art, and materials that elevate daily life, creating spaces with meaning and connection to their surroundings."
+        },
+        {
+          "title": "TECHNOLOGY AND OPERATIONAL EFFICIENCY",
+          "desc": "Automation, data, and operational excellence that optimize processes, reduce costs, and improve quality at every stage of development."
+        },
+        {
+          "title": "SOCIAL AND ENVIRONMENTAL COMMITMENT",
+          "desc": "Responsible construction with positive impact, respecting labor and environmental standards, and promoting sustainability and equity."
+        }
+      ]
+    },
+    "sectores": {
+      "title": "Sectors",
+      "items": [
+        {
+          "title": "RESIDENTIAL",
+          "desc": "Exclusive and sustainable lifestyle, where design, technology, and art are integrated to provide unique experiences with quality and comfort."
+        },
+        {
+          "title": "RESTORATION AND RECONVERSION",
+          "desc": "High-end restoration that fuses advanced conservation and contemporary design, preserving historical value and elevating functionality."
+        },
+        {
+          "title": "EDUCATION, ART AND CULTURE",
+          "desc": "Spaces that promote education, art, and culture, combining modern architecture, technology, and design to foster creativity, learning, and artistic expression."
+        },
+        {
+          "title": "COMMERCIAL AND INDUSTRIAL",
+          "desc": "Dynamic environments that combine design, technology, and data to optimize user experience, profitability, and real estate performance."
+        }
+      ]
+    },
+    "capacidades": {
+      "title": "Capabilities",
+      "items": [
+        {
+          "title": "Land – Intelligent Acquisition",
+          "desc": "Through advanced big data analysis, derived parameters, and technology such as augmented reality and satellite views, we strategically identify and evaluate land globally. We consider factors such as land use, climate, topography, sustainability, and innovative materials to maximize the value of each development according to its geolocation."
+        },
+        {
+          "title": "Materials – Redefining the Supply Chain",
+          "desc": "We optimize the supply chain through advanced technology, real-time traceability, and selection of sustainable and high-performance materials. Our direct procurement strategy with manufacturers maximizes efficiency, reduces costs, and ensures quality."
+        },
+        {
+          "title": "Architecture – Avant-garde and High Impact",
+          "desc": "We design urban spaces that integrate disruptive modernism with functionality, aesthetics, and energy efficiency. Our developments interact intelligently with their environment, promoting sustainability and well-being. We comply with the highest international standards, obtaining certifications such as LEED, WELL, EDGE, and PASSIVE, which guarantees quality, environmental responsibility, and long-term value."
+        },
+        {
+          "title": "Design – Adaptability, Technology, Experience",
+          "desc": "We develop modular and customizable spaces that adapt to market trends and the changing needs of users. We integrate artificial intelligence, 3D simulations, and digital tools to optimize design and create high-value residential and commercial experiences, redefining standards in the real estate industry."
+        },
+        {
+          "title": "Art – Curation, Identity, Experience",
+          "desc": "We fuse art and architecture through exclusive curation of original pieces and contemporary graphics, in collaboration with internationally renowned artists. Each space is conceived to highlight the works and generate an immersive experience, giving developments a unique, culturally relevant, and visually powerful identity."
+        },
+        {
+          "title": "Regulatory – Comprehensive Regulatory Management",
+          "desc": "We offer expert management in regulations, licenses, and legal compliance for real estate and construction developments. We ensure the legal and regulatory viability of each project, mitigating risks and accelerating processes through a strategic approach that is updated with local and international legal frameworks."
+        },
+        {
+          "title": "Construction – Technological and Global",
+          "desc": "We connect a global network of builders (BGP) that guarantees quality and accelerated compliance. We integrate automation, robotics, and BIM technology to optimize each stage of development, reducing costs, improving precision, and raising efficiency standards in the construction industry."
+        },
+        {
+          "title": "Development – Disruptive Real Estate Model",
+          "desc": "We revolutionize real estate development with a hypergrowth strategy based on global alliances, financial technologies such as blockchain, and hybrid models of land use. We democratize investment through innovative financing schemes—self-funding, debt-funding, and crowdfunding—redefining how projects are built, financed, and scaled internationally."
+        },
+        {
+          "title": "Marketing – Data, Precision and Conversion",
+          "desc": "We implement market intelligence based on big data and machine learning to segment with precision, predict opportunities, and maximize profitability. We combine omnichannel strategies—digital and in-person—with advanced targeting algorithms, accelerating sales closures in national and international markets."
+        },
+        {
+          "title": "Operation – Performance and Optimization",
+          "desc": "We manage real estate assets with a centralized and tropicalized platform that maximizes operational performance according to the sector. Our solution allows operating residential, commercial, industrial, and tourist properties with multisectoral flexibility, integrating IoT and artificial intelligence for predictive maintenance and real-time optimization."
+        }
+      ]
+    },
+    "contacto": {
+      "title": "Contact",
+      "address": "Torre Guttenberg – J. Rousseau 3, Anzures, Miguel Hidalgo, Mexico City, Mexico",
+      "phone": {
+        "label": "Phone",
+        "value": "+52 55 (86470143) - Reception"
+      },
+      "whatsapp": {
+        "label": "WhatsApp Business",
+        "value": "+52 55 (60553710) - Business WA"
+      },
+      "email": {
+        "label": "Email",
+        "value": "info@beyondsolutions.app"
+      },
+      "website": {
+        "label": "Website",
+        "value": "www.beyondsolutions.app"
+      },
+      "meeting": {
+        "text": "Click here to schedule a meeting with our team",
+        "cta": "Schedule a meeting"
+      }
+    }
+  },
+  "footer": {
+    "brand": {
+      "name": "Beyond Solutions",
+      "tagline": "Intelligent real estate development"
+    },
+    "partnerships": {
+      "title": "Strategic Partnerships"
+    },
+    "copyright": "© 2025 Beyond Solutions. All rights reserved.",
+    "links": {
+      "contact": "Contact"
+    }
+  },
+  "accessibility": {
+    "back_to_top": "Back to top",
+    "navigation": "Main navigation"
+  }
+} 

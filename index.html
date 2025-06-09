@@ -8,6 +8,11 @@
   <link rel="icon" href="https://fav.farm/🏗️">
   <meta name="description" content="Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.">
 
+  <!-- i18n Scripts -->
+  <script src="./i18n/i18n.js"></script>
+  <script src="./i18n/language-selector.js"></script>
+  <link rel="stylesheet" href="./i18n/rtl.css">
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -45,31 +50,128 @@
 
   <!-- Alpine component -->
   <script>
+    // Initialize translation support before Alpine loads
+    function getMenuLabels() {
+      const labels = {
+        'es': {
+          'about': 'Sobre Nosotros',
+          'modelo': 'Modelo',
+          'por_que': '¿Por qué Beyond?',
+          'sectores': 'Sectores',
+          'capacidades': 'Capacidades',
+          'contacto': 'Contacto'
+        },
+        'en': {
+          'about': 'About Us',
+          'modelo': 'Model',
+          'por_que': 'Why Beyond?',
+          'sectores': 'Sectors',
+          'capacidades': 'Capabilities',
+          'contacto': 'Contact'
+        },
+        'fr': {
+          'about': 'À Propos',
+          'modelo': 'Modèle',
+          'por_que': 'Pourquoi Beyond?',
+          'sectores': 'Secteurs',
+          'capacidades': 'Capacités',
+          'contacto': 'Contact'
+        },
+        'de': {
+          'about': 'Über Uns',
+          'modelo': 'Modell',
+          'por_que': 'Warum Beyond?',
+          'sectores': 'Sektoren',
+          'capacidades': 'Fähigkeiten',
+          'contacto': 'Kontakt'
+        },
+        'it': {
+          'about': 'Chi Siamo',
+          'modelo': 'Modello',
+          'por_que': 'Perché Beyond?',
+          'sectores': 'Settori',
+          'capacidades': 'Capacità',
+          'contacto': 'Contatto'
+        },
+        'pt': {
+          'about': 'Sobre Nós',
+          'modelo': 'Modelo',
+          'por_que': 'Por que Beyond?',
+          'sectores': 'Setores',
+          'capacidades': 'Capacidades',
+          'contacto': 'Contato'
+        },
+        'zh': {
+          'about': '关于我们',
+          'modelo': '模型',
+          'por_que': '为什么选择 Beyond?',
+          'sectores': '行业领域',
+          'capacidades': '能力',
+          'contacto': '联系我们'
+        },
+        'ja': {
+          'about': '会社概要',
+          'modelo': 'モデル',
+          'por_que': 'なぜ Beyond?',
+          'sectores': '部門',
+          'capacidades': '能力',
+          'contacto': 'お問い合わせ'
+        },
+        'ru': {
+          'about': 'О Нас',
+          'modelo': 'Модель',
+          'por_que': 'Почему Beyond?',
+          'sectores': 'Секторы',
+          'capacidades': 'Возможности',
+          'contacto': 'Контакты'
+        },
+        'ar': {
+          'about': 'من نحن',
+          'modelo': 'النموذج',
+          'por_que': 'لماذا Beyond؟',
+          'sectores': 'القطاعات',
+          'capacidades': 'القدرات',
+          'contacto': 'اتصل بنا'
+        }
+      };
+      
+      // Default to Spanish if no locale detected
+      const currentLocale = localStorage.getItem('beyondLocale') || 'es';
+      return labels[currentLocale] || labels.es;
+    }
+    
     document.addEventListener('alpine:init', () => {
       Alpine.data('nav', () => ({
         open: false,
         theme: localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+        currentLabels: getMenuLabels(),
         items: [
-          { id: 'about', label: 'Sobre Nosotros', href: '#about' },
-          { id: 'modelo', label: 'Modelo', href: '#modelo' },
-          { id: 'por-que', label: '¿Por qué Beyond?', href: '#por-que' },
-          { id: 'sectores', label: 'Sectores', href: '#sectores' },
-          { id: 'capacidades', label: 'Capacidades', href: '#capacidades' },
-          { id: 'contacto', label: 'Contacto', href: '#contacto' }
+          { id: 'about', label: '', href: '#about' },
+          { id: 'modelo', label: '', href: '#modelo' },
+          { id: 'por_que', label: '', href: '#por-que' },
+          { id: 'sectores', label: '', href: '#sectores' },
+          { id: 'capacidades', label: '', href: '#capacidades' },
+          { id: 'contacto', label: '', href: '#contacto' }
         ],
         active: 'about',
         init() {
           this.applyTheme();
+          this.updateLabels();
           
           // Usar IntersectionObserver para seguimiento de secciones visibles
           const obs = new IntersectionObserver((entries) => {
             entries.forEach((e) => {
-              if (e.isIntersecting) this.active = e.target.id;
+              if (e.isIntersecting) {
+                const id = e.target.id === 'por-que' ? 'por_que' : e.target.id;
+                this.active = id;
+              }
             });
           }, { rootMargin: '-20% 0px -80% 0px' });
           
           this.items.forEach(i => {
-            const el = document.getElementById(i.id);
+            // Handle special case for por-que vs por_que
+            const elementId = i.id === 'por_que' ? 'por-que' : i.id;
+            const el = document.getElementById(elementId);
             if (el) obs.observe(el);
           });
           
@@ -79,11 +181,26 @@
               this.open = false;
             }
           });
+          
+          // Listen for language changes to update the UI
+          window.addEventListener('localeChanged', (event) => {
+            console.log('Locale changed to:', event.detail.locale);
+            // Update menu labels
+            this.updateLabels();
+          });
+        },
+        
+        // Update labels based on current locale
+        updateLabels() {
+          const labels = getMenuLabels();
+          this.items.forEach(item => {
+            item.label = labels[item.id] || item.id;
+          });
         },
         linkClass(id) {
           return this.active === id
-            ? 'text-primary-700 dark:text-primary-700 font-semibold'
-            : 'hover:text-primary-700 dark:hover:text-primary-700';
+            ? 'text-primary-700 dark:text-accent-100 font-semibold'
+            : 'hover:text-primary-700 dark:hover:text-accent-100';
         },
         toggleTheme() {
           this.theme = this.theme === 'dark' ? 'light' : 'dark';
@@ -145,22 +262,69 @@
   <!-- Header -->
   <header x-data="nav" x-init="init()" class="fixed inset-x-0 top-0 z-50 bg-white/80 dark:bg-primary-900/80 backdrop-blur shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-      <a href="#about" class="text-primary-700 dark:text-white font-bold text-lg" aria-label="Ir a la sección Sobre Nosotros">Beyond&nbsp;Solutions</a>
-      <nav class="hidden md:flex space-x-6" aria-label="Navegación principal">
+      <a href="#about" class="text-primary-700 dark:text-white font-bold text-lg" data-i18n-attr="aria-label:nav.items.about" data-i18n="nav.brand">Beyond&nbsp;Solutions</a>
+      <nav class="hidden md:flex space-x-6" data-i18n-attr="aria-label:accessibility.navigation">
         <template x-for="item in items" :key="item.id">
-          <a :href="item.href" :class="linkClass(item.id)" x-text="item.label" class="px-1 py-2 transition-colors" :aria-current="active === item.id ? 'page' : null"></a>
+          <a 
+            :href="item.href" 
+            :class="linkClass(item.id)" 
+            class="px-1 py-2 transition-colors" 
+            :aria-current="active === item.id ? 'page' : null"
+          >
+            <span x-text="item.label"></span>
+          </a>
         </template>
       </nav>
       <div class="flex items-center space-x-4">
-        <button @click="toggleTheme" :aria-label="theme==='dark'?'Activar modo claro':'Activar modo oscuro'" class="text-xl focus:outline-none focus:ring-2 focus:ring-primary-700 rounded-full p-1">
+        <!-- Language Selector -->
+        <div id="language-selector" x-data="languageSelector" class="relative" @keydown.escape="close()">
+          <button 
+            id="language-dropdown-toggle"
+            @click="toggle"
+            class="flex items-center gap-2 px-3 py-2 rounded bg-accent-50 dark:bg-primary-800 hover:bg-accent-100 dark:hover:bg-primary-700 transition-all focus:outline-none focus:ring-2 focus:ring-primary-700"
+            aria-haspopup="true"
+            :aria-expanded="open"
+            aria-controls="language-dropdown"
+          >
+            <span id="current-language" class="flex items-center gap-2">
+              <img src="https://flagcdn.com/w20/es.png" srcset="https://flagcdn.com/w40/es.png 2x" width="20" height="15" alt="Español" class="rounded-sm">
+              <span class="hidden sm:inline">Español</span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div 
+            id="language-dropdown"
+            x-show="open" 
+            x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="transform opacity-0 scale-95"
+            x-transition:enter-end="transform opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100"
+            x-transition:leave-end="transform opacity-0 scale-95"
+            class="absolute z-50 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-zinc-800 ring-1 ring-black ring-opacity-5 focus:outline-none p-2 space-y-1"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="language-dropdown-toggle"
+            x-cloak
+          >
+            <!-- Dropdown items will be populated by i18n.js -->
+          </div>
+        </div>
+        
+        <!-- Theme Toggle -->
+        <button @click="toggleTheme" :aria-label="theme==='dark'?'Activar modo claro':'Activar modo oscuro'" data-i18n-attr="aria-label:nav.theme.light,aria-label:nav.theme.dark" class="p-2 flex items-center justify-center bg-accent-50 dark:bg-primary-800 rounded-full shadow-soft hover:shadow-soft-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-700">
           <template x-if="theme==='dark'">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.752 15.002A9.718 9.718 0 0112.003 22 9.996 9.996 0 012 12C2 6.486 6.486 2 12.003 2c.499 0 .991.036 1.474.106a.75.75 0 01.223 1.393A7.496 7.496 0 0013.5 12c0 4.136 3.364 7.5 7.5 7.5.589 0 1.167-.06 1.725-.178a.75.75 0 01.997.78z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-accent-100" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.752 15.002A9.718 9.718 0 0112.003 22 9.996 9.996 0 012 12C2 6.486 6.486 2 12.003 2c.499 0 .991.036 1.474.106a.75.75 0 01.223 1.393A7.496 7.496 0 0013.5 12c0 4.136 3.364 7.5 7.5 7.5.589 0 1.167-.06 1.725-.178a.75.75 0 01.997.78z"/></svg>
           </template>
           <template x-if="theme==='light'">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-primary-700" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
           </template>
         </button>
-        <button @click="open=!open" class="md:hidden text-primary-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-700 rounded p-1" aria-expanded="false" :aria-expanded="open" aria-controls="mobile-menu" aria-label="Abrir menú de navegación">
+        
+        <!-- Mobile Menu Button -->
+        <button @click="open=!open" class="md:hidden text-primary-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-700 rounded p-1" aria-expanded="false" :aria-expanded="open" aria-controls="mobile-menu" data-i18n-attr="aria-label:nav.menu.open">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
@@ -168,7 +332,15 @@
     <!-- Mobile Nav -->
     <div id="mobile-menu" x-cloak x-show="open" x-transition class="md:hidden bg-white/95 dark:bg-primary-900/95 border-t py-4 px-6 space-y-4">
       <template x-for="item in items" :key="'mob-'+item.id">
-        <a :href="item.href" @click="open=false" x-text="item.label" class="block py-3 px-2 rounded hover:bg-accent-100 dark:hover:bg-primary-800 transition-colors" :class="active === item.id ? 'bg-accent-50 dark:bg-primary-800 font-semibold' : ''" :aria-current="active === item.id ? 'page' : null"></a>
+        <a 
+          :href="item.href" 
+          @click="open=false" 
+          class="block py-3 px-2 rounded hover:bg-accent-100 dark:hover:bg-primary-800 transition-colors" 
+          :class="active === item.id ? 'bg-accent-50 dark:bg-primary-800 font-semibold' : ''" 
+          :aria-current="active === item.id ? 'page' : null"
+        >
+          <span x-text="item.label"></span>
+        </a>
       </template>
     </div>
   </header>
@@ -179,14 +351,14 @@
     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20 dark:from-primary-900/80" aria-hidden="true"></div>
     <div class="relative py-20">
       <div class="max-w-5xl mx-auto px-6" data-aos="fade-up">
-        <h1 class="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.</h1>
-        <p class="text-lg md:text-xl">A través de soluciones basadas en automatización, inteligencia artificial (IA), aprendizaje automático (ML) y análisis avanzado de big data.</p>
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight" data-i18n="hero.title">Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.</h1>
+        <p class="text-lg md:text-xl" data-i18n="hero.subtitle">A través de soluciones basadas en automatización, inteligencia artificial (IA), aprendizaje automático (ML) y análisis avanzado de big data.</p>
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="#modelo" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-primary-700 hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-white/10">
+          <a href="#modelo" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-primary-700 hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-white/10" data-i18n="hero.cta.primary">
             Conocer más
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="#contacto" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-primary-700 bg-white hover:bg-accent-100 transition focus:outline-none focus:ring-2 focus:ring-primary-700">
+          <a href="#contacto" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-primary-700 bg-white hover:bg-accent-100 transition focus:outline-none focus:ring-2 focus:ring-primary-700" data-i18n="hero.cta.secondary">
             Contáctanos
           </a>
         </div>
@@ -198,20 +370,20 @@
     <!-- Modelo -->
     <section id="modelo" class="py-20 bg-accent-100 dark:bg-zinc-800">
       <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-2xl md:text-4xl font-bold text-center mb-16 section-heading" data-aos="fade-up">Modelo</h2>
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-16 section-heading" data-aos="fade-up" data-i18n="sections.modelo.title">Modelo</h2>
         <div class="grid gap-16 lg:grid-cols-2" data-aos="fade-up">
           <figure class="aspect-video lg:aspect-square overflow-hidden rounded-lg shadow-soft-lg order-last lg:order-first relative">
             <img loading="lazy" decoding="async" src="./img/modelo.jpg" alt="Modelo de desarrollo inmobiliario" class="w-full h-full object-cover dark:brightness-75 hover:scale-105 transition-transform duration-700">
           </figure>
           <div class="space-y-6 text-lg leading-relaxed">
-            <p>El modelo abarca la orquestación integral de terrenos, materiales, arquitectura, diseño, arte, normatividad, construcción y desarrollo, con el objetivo de habilitar de forma eficiente la operación y comercialización de activos inmobiliarios a nivel nacional e internacional.</p>
+            <p data-i18n="sections.modelo.intro">El modelo abarca la orquestación integral de terrenos, materiales, arquitectura, diseño, arte, normatividad, construcción y desarrollo, con el objetivo de habilitar de forma eficiente la operación y comercialización de activos inmobiliarios a nivel nacional e internacional.</p>
             <ul class="list-disc pl-6 space-y-2">
-              <li><strong>Terrenos y Materiales</strong><br>Identificación estratégica de suministros en función del sitio de construcción, garantizando disponibilidad, eficiencia y tiempos óptimos de transporte.</li>
-              <li><strong>Arquitectura, Diseño y Arte</strong><br>Incorporación de propuestas arquitectónicas innovadoras con diseño de alto valor e integración de arte.</li>
-              <li><strong>Regulatorio y Legal</strong><br>Cumplimiento regulatorio integral permitiendo realizar procesos en tiempo y forma, minizando riesgos.</li>
-              <li><strong>Contrucción y Desarrollo</strong><br>Ejecución eficiente mediante digitalización y colaboración global de socios estrategicos, redefiniendo los estándares del sector inmobiliario.</li>
-              <li><strong>Comercialización</strong><br>Estrategias de mercado basadas en big-data para una segmentación precisa y comercialización efectiva en esquemas B2B y B2C.</li>
-              <li><strong>Operación</strong><br>Administración y mantenimiento profesional orientado a maximizar la eficiencia operativa y la rentabilidad de los activos inmobiliarios.</li>
+              <li><strong data-i18n="sections.modelo.items.0.title">Terrenos y Materiales</strong><br><span data-i18n="sections.modelo.items.0.desc">Identificación estratégica de suministros en función del sitio de construcción, garantizando disponibilidad, eficiencia y tiempos óptimos de transporte.</span></li>
+              <li><strong data-i18n="sections.modelo.items.1.title">Arquitectura, Diseño y Arte</strong><br><span data-i18n="sections.modelo.items.1.desc">Incorporación de propuestas arquitectónicas innovadoras con diseño de alto valor e integración de arte.</span></li>
+              <li><strong data-i18n="sections.modelo.items.2.title">Regulatorio y Legal</strong><br><span data-i18n="sections.modelo.items.2.desc">Cumplimiento regulatorio integral permitiendo realizar procesos en tiempo y forma, minizando riesgos.</span></li>
+              <li><strong data-i18n="sections.modelo.items.3.title">Contrucción y Desarrollo</strong><br><span data-i18n="sections.modelo.items.3.desc">Ejecución eficiente mediante digitalización y colaboración global de socios estrategicos, redefiniendo los estándares del sector inmobiliario.</span></li>
+              <li><strong data-i18n="sections.modelo.items.4.title">Comercialización</strong><br><span data-i18n="sections.modelo.items.4.desc">Estrategias de mercado basadas en big-data para una segmentación precisa y comercialización efectiva en esquemas B2B y B2C.</span></li>
+              <li><strong data-i18n="sections.modelo.items.5.title">Operación</strong><br><span data-i18n="sections.modelo.items.5.desc">Administración y mantenimiento profesional orientado a maximizar la eficiencia operativa y la rentabilidad de los activos inmobiliarios.</span></li>
             </ul>
           </div>
         </div>
@@ -221,7 +393,7 @@
     <!-- Por qué Beyond -->
     <section id="por-que" class="py-20">
       <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-2xl md:text-4xl font-bold text-center mb-16 section-heading" data-aos="fade-up">¿Por qué Beyond?</h2>
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-16 section-heading" data-aos="fade-up" data-i18n="sections.por_que.title">¿Por qué Beyond?</h2>
         <div class="grid gap-8 md:grid-cols-3" data-aos="fade-up">
           <div class="space-y-4 p-8 bg-accent-50 dark:bg-zinc-800/50 rounded-xl shadow-soft transition-transform duration-300 hover:shadow-soft-lg hover:-translate-y-1">
             <div class="bg-primary-700 w-12 h-12 flex items-center justify-center rounded-lg text-white mb-4 shadow-soft">
@@ -229,8 +401,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
               </svg>
             </div>
-            <h3 class="font-semibold text-xl text-primary-900 dark:text-white">DISEÑO CON PROPÓSITO Y BIENESTAR</h3>
-            <p>Arquitectura, arte y materiales que elevan la vida diaria, creando espacios con sentido y conexión con su entorno.</p>
+            <h3 class="font-semibold text-xl text-primary-900 dark:text-white" data-i18n="sections.por_que.items.0.title">DISEÑO CON PROPÓSITO Y BIENESTAR</h3>
+            <p data-i18n="sections.por_que.items.0.desc">Arquitectura, arte y materiales que elevan la vida diaria, creando espacios con sentido y conexión con su entorno.</p>
           </div>
           <div class="space-y-4 p-8 bg-accent-50 dark:bg-zinc-800/50 rounded-xl shadow-soft transition-transform duration-300 hover:shadow-soft-lg hover:-translate-y-1">
             <div class="bg-primary-700 w-12 h-12 flex items-center justify-center rounded-lg text-white mb-4 shadow-soft">
@@ -238,8 +410,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
-            <h3 class="font-semibold text-xl text-primary-900 dark:text-white">TECNOLOGÍA Y EFICIENCIA OPERATIVA</h3>
-            <p>Automatización, data y excelencia operativa que optimizan procesos, reducen costos y mejoran la calidad en cada etapa del desarrollo.</p>
+            <h3 class="font-semibold text-xl text-primary-900 dark:text-white" data-i18n="sections.por_que.items.1.title">TECNOLOGÍA Y EFICIENCIA OPERATIVA</h3>
+            <p data-i18n="sections.por_que.items.1.desc">Automatización, data y excelencia operativa que optimizan procesos, reducen costos y mejoran la calidad en cada etapa del desarrollo.</p>
           </div>
           <div class="space-y-4 p-8 bg-accent-50 dark:bg-zinc-800/50 rounded-xl shadow-soft transition-transform duration-300 hover:shadow-soft-lg hover:-translate-y-1">
             <div class="bg-primary-700 w-12 h-12 flex items-center justify-center rounded-lg text-white mb-4 shadow-soft">
@@ -247,8 +419,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 class="font-semibold text-xl text-primary-900 dark:text-white">COMPROMISO SOCIAL Y AMBIENTAL</h3>
-            <p>Construcción responsable con impacto positivo, respetando normas laborales y ambientales, e impulsando sostenibilidad y equidad.</p>
+            <h3 class="font-semibold text-xl text-primary-900 dark:text-white" data-i18n="sections.por_que.items.2.title">COMPROMISO SOCIAL Y AMBIENTAL</h3>
+            <p data-i18n="sections.por_que.items.2.desc">Construcción responsable con impacto positivo, respetando normas laborales y ambientales, e impulsando sostenibilidad y equidad.</p>
           </div>
         </div>
       </div>
@@ -257,37 +429,37 @@
     <!-- Sectores -->
     <section id="sectores" class="py-20 bg-accent-100 dark:bg-zinc-800">
       <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Sectores</h2>
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up" data-i18n="sections.sectores.title">Sectores</h2>
         <div class="grid gap-16 lg:grid-cols-2" data-aos="fade-up">
           <div class="space-y-8">
             <div class="flex items-start gap-4">
-              <img src="./img/icon-residencial.png" alt="Icono Residencial" class="w-10 h-10 mt-1">
+              <img src="./img/icon-residencial.png" alt="Icono Residencial" class="w-10 h-10 mt-1" data-i18n-attr="alt:sections.sectores.items.0.title">
               <div>
-                <h3 class="font-semibold text-xl mb-2">RESIDENCIAL</h3>
-                <p>Estilo de vida exclusivo y sostenible, donde diseño, tecnología y arte se integran para brindar experiencias únicas con calidad y confort.</p>
+                <h3 class="font-semibold text-xl mb-2" data-i18n="sections.sectores.items.0.title">RESIDENCIAL</h3>
+                <p data-i18n="sections.sectores.items.0.desc">Estilo de vida exclusivo y sostenible, donde diseño, tecnología y arte se integran para brindar experiencias únicas con calidad y confort.</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
-              <img src="./img/icon-restore.png" alt="Icono Restauración" class="w-10 h-10 mt-1">
+              <img src="./img/icon-restore.png" alt="Icono Restauración" class="w-10 h-10 mt-1" data-i18n-attr="alt:sections.sectores.items.1.title">
               <div>
-                <h3 class="font-semibold text-xl mb-2">RESTAURACIÓN Y RECONVERSIÓN</h3>
-                <p>Restauración de alta gama que fusiona conservación avanzada y diseño contemporáneo, preservando el valor histórico y elevando la funcionalidad.</p>
+                <h3 class="font-semibold text-xl mb-2" data-i18n="sections.sectores.items.1.title">RESTAURACIÓN Y RECONVERSIÓN</h3>
+                <p data-i18n="sections.sectores.items.1.desc">Restauración de alta gama que fusiona conservación avanzada y diseño contemporáneo, preservando el valor histórico y elevando la funcionalidad.</p>
               </div>
             </div>
           </div>
           <div class="space-y-8">
             <div class="flex items-start gap-4">
-              <img src="./img/icon-brain.png" alt="Icono Educación" class="w-10 h-10 mt-1">
+              <img src="./img/icon-brain.png" alt="Icono Educación" class="w-10 h-10 mt-1" data-i18n-attr="alt:sections.sectores.items.2.title">
               <div>
-                <h3 class="font-semibold text-xl mb-2">EDUCACIÓN, ARTE Y CULTURA</h3>
-                <p>Espacios que impulsan la educación, el arte y la cultura, combinando arquitectura moderna, tecnología y diseño para fomentar la creatividad, el aprendizaje y la expresión artística.</p>
+                <h3 class="font-semibold text-xl mb-2" data-i18n="sections.sectores.items.2.title">EDUCACIÓN, ARTE Y CULTURA</h3>
+                <p data-i18n="sections.sectores.items.2.desc">Espacios que impulsan la educación, el arte y la cultura, combinando arquitectura moderna, tecnología y diseño para fomentar la creatividad, el aprendizaje y la expresión artística.</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
-              <img src="./img/icon-handshake.png" alt="Icono Comercial" class="w-10 h-10 mt-1">
+              <img src="./img/icon-handshake.png" alt="Icono Comercial" class="w-10 h-10 mt-1" data-i18n-attr="alt:sections.sectores.items.3.title">
               <div>
-                <h3 class="font-semibold text-xl mb-2">COMERCIAL E INDUSTRIAL</h3>
-                <p>Entornos dinámicos que combinan diseño, tecnología y datos para optimizar la experiencia del usuario, la rentabilidad y el desempeño inmobiliario.</p>
+                <h3 class="font-semibold text-xl mb-2" data-i18n="sections.sectores.items.3.title">COMERCIAL E INDUSTRIAL</h3>
+                <p data-i18n="sections.sectores.items.3.desc">Entornos dinámicos que combinan diseño, tecnología y datos para optimizar la experiencia del usuario, la rentabilidad y el desempeño inmobiliario.</p>
               </div>
             </div>
           </div>
@@ -298,106 +470,106 @@
     <!-- Capacidades -->
     <section id="capacidades" class="py-20">
       <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Capacidades</h2>
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up" data-i18n="sections.capacidades.title">Capacidades</h2>
         <div class="space-y-16" data-aos="fade-up">
           <!-- Terrenos -->
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
-              <img loading="lazy" decoding="async" src="./img/terrenos.jpg" alt="Terrenos - Adquisición Inteligente" class="w-full h-full object-cover dark:brightness-75">
+              <img loading="lazy" decoding="async" src="./img/terrenos.jpg" alt="Terrenos - Adquisición Inteligente" class="w-full h-full object-cover dark:brightness-75" data-i18n-attr="alt:sections.capacidades.items.0.title">
             </figure>
             <div class="space-y-3">
-              <h3 class="font-semibold text-2xl">Terrenos – Adquisión Inteligente</h3>
-              <p>Mediante el análisis avanzado de big data, parámetros derivados y tecnología como realidad aumentada y vistas satelitales, identificamos y evaluamos estratégicamente terrenos a nivel global. Consideramos factores como uso de suelo, clima, topografía, sostenibilidad y materiales innovadores para maximizar el valor de cada desarrollo según su geolocalización.</p>
+              <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.0.title">Terrenos – Adquisión Inteligente</h3>
+              <p data-i18n="sections.capacidades.items.0.desc">Mediante el análisis avanzado de big data, parámetros derivados y tecnología como realidad aumentada y vistas satelitales, identificamos y evaluamos estratégicamente terrenos a nivel global. Consideramos factores como uso de suelo, clima, topografía, sostenibilidad y materiales innovadores para maximizar el valor de cada desarrollo según su geolocalización.</p>
             </div>
           </div>
           <!-- Materiales -->
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
-              <img loading="lazy" decoding="async" src="./img/materiales.jpg" alt="Materiales - Redefiniendo la cadena de suministros" class="w-full h-full object-cover dark:brightness-75">
+              <img loading="lazy" decoding="async" src="./img/materiales.jpg" alt="Materiales - Redefiniendo la cadena de suministros" class="w-full h-full object-cover dark:brightness-75" data-i18n-attr="alt:sections.capacidades.items.1.title">
             </figure>
             <div class="space-y-3 lg:order-first">
-              <h3 class="font-semibold text-2xl">Materiales – Redefiniendo la cadena de suministros</h3>
-              <p>Optimizamos la cadena de suministro mediante tecnología avanzada, trazabilidad en tiempo real y selección de materiales sostenibles y de alto rendimiento. Nuestra estrategia de procurement directo con fabricantes maximiza eficiencia, reduce costos y garantiza calidad.</p>
+              <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.1.title">Materiales – Redefiniendo la cadena de suministros</h3>
+              <p data-i18n="sections.capacidades.items.1.desc">Optimizamos la cadena de suministro mediante tecnología avanzada, trazabilidad en tiempo real y selección de materiales sostenibles y de alto rendimiento. Nuestra estrategia de procurement directo con fabricantes maximiza eficiencia, reduce costos y garantiza calidad.</p>
             </div>
           </div>
           <!-- Arquitectura -->
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
-              <img loading="lazy" decoding="async" src="./img/arquitectura.jpg" alt="Arquitectura - Vanguardismo y Alto Impacto" class="w-full h-full object-cover dark:brightness-75">
+              <img loading="lazy" decoding="async" src="./img/arquitectura.jpg" alt="Arquitectura - Vanguardismo y Alto Impacto" class="w-full h-full object-cover dark:brightness-75" data-i18n-attr="alt:sections.capacidades.items.2.title">
             </figure>
             <div class="space-y-3">
-              <h3 class="font-semibold text-2xl">Arquitectura – Vanguardismo y Alto Impacto</h3>
-              <p>Diseñamos espacios urbanos que integran modernismo disruptivo con funcionalidad, estética y eficiencia energética. Nuestros desarrollos interactúan de forma inteligente con su entorno, promoviendo la sostenibilidad y el bienestar. Cumplimos con los más altos estándares internacionales, obteniendo certificaciones como LEED, WELL, EDGE y PASSIVE, lo que garantiza calidad, responsabilidad ambiental y valor a largo plazo.</p>
+              <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.2.title">Arquitectura – Vanguardismo y Alto Impacto</h3>
+              <p data-i18n="sections.capacidades.items.2.desc">Diseñamos espacios urbanos que integran modernismo disruptivo con funcionalidad, estética y eficiencia energética. Nuestros desarrollos interactúan de forma inteligente con su entorno, promoviendo la sostenibilidad y el bienestar. Cumplimos con los más altos estándares internacionales, obteniendo certificaciones como LEED, WELL, EDGE y PASSIVE, lo que garantiza calidad, responsabilidad ambiental y valor a largo plazo.</p>
             </div>
           </div>
           <!-- Diseño -->
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
-              <img loading="lazy" decoding="async" src="./img/design.jpg" alt="Diseño - Adaptabilidad, Tecnología, Experiencia" class="w-full h-full object-cover dark:brightness-75">
+              <img loading="lazy" decoding="async" src="./img/design.jpg" alt="Diseño - Adaptabilidad, Tecnología, Experiencia" class="w-full h-full object-cover dark:brightness-75" data-i18n-attr="alt:sections.capacidades.items.3.title">
             </figure>
             <div class="space-y-3 lg:order-first">
-              <h3 class="font-semibold text-2xl">Diseño – Adaptabilidad, Tecnología, Experiencia</h3>
-              <p>Desarrollamos espacios modulares y personalizables que se adaptan a las tendencias del mercado y a las necesidades cambiantes de los usuarios. Integramos inteligencia artificial, simulaciones 3D y herramientas digitales para optimizar el diseño y crear experiencias habitacionales y comerciales de alto valor, redefiniendo los estándares de la industria inmobiliaria.</p>
+              <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.3.title">Diseño – Adaptabilidad, Tecnología, Experiencia</h3>
+              <p data-i18n="sections.capacidades.items.3.desc">Desarrollamos espacios modulares y personalizables que se adaptan a las tendencias del mercado y a las necesidades cambiantes de los usuarios. Integramos inteligencia artificial, simulaciones 3D y herramientas digitales para optimizar el diseño y crear experiencias habitacionales y comerciales de alto valor, redefiniendo los estándares de la industria inmobiliaria.</p>
             </div>
           </div>
           <!-- Arte -->
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
-              <img loading="lazy" decoding="async" src="./img/art.jpg" alt="Arte - Curaduría, Identidad, Experiencia" class="w-full h-full object-cover dark:brightness-75">
+              <img loading="lazy" decoding="async" src="./img/art.jpg" alt="Arte - Curaduría, Identidad, Experiencia" class="w-full h-full object-cover dark:brightness-75" data-i18n-attr="alt:sections.capacidades.items.4.title">
             </figure>
             <div class="space-y-3">
-              <h3 class="font-semibold text-2xl">Arte – Curaduría, Identidad, Experiencia</h3>
-              <p>Fusionamos arte y arquitectura mediante una curaduría exclusiva de piezas originales y gráficas contemporáneas, en colaboración con artistas de renombre internacional. Cada espacio es concebido para resaltar las obras y generar una experiencia inmersiva, otorgando a los desarrollos una identidad única, culturalmente relevante y visualmente poderosa.</p>
+              <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.4.title">Arte – Curaduría, Identidad, Experiencia</h3>
+              <p data-i18n="sections.capacidades.items.4.desc">Fusionamos arte y arquitectura mediante una curaduría exclusiva de piezas originales y gráficas contemporáneas, en colaboración con artistas de renombre internacional. Cada espacio es concebido para resaltar las obras y generar una experiencia inmersiva, otorgando a los desarrollos una identidad única, culturalmente relevante y visualmente poderosa.</p>
             </div>
           </div>
           <!-- Regulatorio -->
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
-              <img loading="lazy" decoding="async" src="./img/regulations.jpg" alt="Regulatorio - Gestión Normativa Integral" class="w-full h-full object-cover dark:brightness-75">
+              <img loading="lazy" decoding="async" src="./img/regulations.jpg" alt="Regulatorio - Gestión Normativa Integral" class="w-full h-full object-cover dark:brightness-75" data-i18n-attr="alt:sections.capacidades.items.5.title">
             </figure>
             <div class="space-y-3 lg:order-first">
-              <h3 class="font-semibold text-2xl">Regulatorio – Gestión Normativa Integral</h3>
-              <p>Ofrecemos una gestión experta en normativas, licencias y cumplimiento legal para desarrollos inmobiliarios y de construcción. Aseguramos la viabilidad jurídica y regulatoria de cada proyecto, mitigando riesgos y acelerando procesos a través de un enfoque estratégico y actualizado con los marcos legales locales e internacionales.</p>
+              <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.5.title">Regulatorio – Gestión Normativa Integral</h3>
+              <p data-i18n="sections.capacidades.items.5.desc">Ofrecemos una gestión experta en normativas, licencias y cumplimiento legal para desarrollos inmobiliarios y de construcción. Aseguramos la viabilidad jurídica y regulatoria de cada proyecto, mitigando riesgos y acelerando procesos a través de un enfoque estratégico y actualizado con los marcos legales locales e internacionales.</p>
             </div>
           </div>
           <!-- Construcción -->
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
-              <img loading="lazy" decoding="async" src="./img/we-building.jpg" alt="Construcción - Tecnológica y Global" class="w-full h-full object-cover dark:brightness-75">
+              <img loading="lazy" decoding="async" src="./img/we-building.jpg" alt="Construcción - Tecnológica y Global" class="w-full h-full object-cover dark:brightness-75" data-i18n-attr="alt:sections.capacidades.items.6.title">
             </figure>
             <div class="space-y-3">
-              <h3 class="font-semibold text-2xl">Construcción – Tecnológica y Global</h3>
-              <p>Conectamos una red global de constructores (BGP) que garantiza calidad y cumplimiento acelerado. Integramos automatización, robótica y tecnología BIM para optimizar cada etapa del desarrollo, reduciendo costos, mejorando precisión y elevando los estándares de eficiencia en la industria de la construcción.</p>
+              <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.6.title">Construcción – Tecnológica y Global</h3>
+              <p data-i18n="sections.capacidades.items.6.desc">Conectamos una red global de constructores (BGP) que garantiza calidad y cumplimiento acelerado. Integramos automatización, robótica y tecnología BIM para optimizar cada etapa del desarrollo, reduciendo costos, mejorando precisión y elevando los estándares de eficiencia en la industria de la construcción.</p>
             </div>
           </div>
           <!-- Desarrollo -->
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
-              <img loading="lazy" decoding="async" src="./img/development.jpg" alt="Desarrollo - Modelo Inmobiliario Disruptor" class="w-full h-full object-cover dark:brightness-75">
+              <img loading="lazy" decoding="async" src="./img/development.jpg" alt="Desarrollo - Modelo Inmobiliario Disruptor" class="w-full h-full object-cover dark:brightness-75" data-i18n-attr="alt:sections.capacidades.items.7.title">
             </figure>
             <div class="space-y-3 lg:order-first">
-              <h3 class="font-semibold text-2xl">Desarrollo – Modelo Inmobiliario Disruptor</h3>
-              <p>Revolucionamos el desarrollo inmobiliario con una estrategia de hipercrecimiento basada en alianzas globales, tecnologías financieras como blockchain y modelos híbridos de uso del suelo. Democratizamos la inversión mediante esquemas innovadores de financiamiento —self-funding, debt-funding y crowdfunding—, redefiniendo cómo se construyen, financian y escalan los proyectos a nivel internacional.</p>
+              <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.7.title">Desarrollo – Modelo Inmobiliario Disruptor</h3>
+              <p data-i18n="sections.capacidades.items.7.desc">Revolucionamos el desarrollo inmobiliario con una estrategia de hipercrecimiento basada en alianzas globales, tecnologías financieras como blockchain y modelos híbridos de uso del suelo. Democratizamos la inversión mediante esquemas innovadores de financiamiento —self-funding, debt-funding y crowdfunding—, redefiniendo cómo se construyen, financian y escalan los proyectos a nivel internacional.</p>
             </div>
           </div>
           <!-- Comercialización -->
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
-              <img loading="lazy" decoding="async" src="./img/marketing.jpg" alt="Comercialización - Datos, Precisión y Conversión" class="w-full h-full object-cover dark:brightness-75">
+              <img loading="lazy" decoding="async" src="./img/marketing.jpg" alt="Comercialización - Datos, Precisión y Conversión" class="w-full h-full object-cover dark:brightness-75" data-i18n-attr="alt:sections.capacidades.items.8.title">
             </figure>
             <div class="space-y-3">
-              <h3 class="font-semibold text-2xl">Comercialización – Datos, Precisión y Conversión</h3>
-              <p>Implementamos inteligencia de mercado basada en big data y machine learning para segmentar con precisión, predecir oportunidades y maximizar rentabilidad. Combinamos estrategias omnicanal —digitales y presenciales— con algoritmos avanzados de targeting, acelerando el cierre de ventas en mercados nacionales e internacionales.</p>
+              <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.8.title">Comercialización – Datos, Precisión y Conversión</h3>
+              <p data-i18n="sections.capacidades.items.8.desc">Implementamos inteligencia de mercado basada en big data y machine learning para segmentar con precisión, predecir oportunidades y maximizar rentabilidad. Combinamos estrategias omnicanal —digitales y presenciales— con algoritmos avanzados de targeting, acelerando el cierre de ventas en mercados nacionales e internacionales.</p>
             </div>
           </div>
           <!-- Operación -->
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
-              <img loading="lazy" decoding="async" src="./img/operations.jpg" alt="Operación - Rendimiento y Optimización" class="w-full h-full object-cover dark:brightness-75">
+              <img loading="lazy" decoding="async" src="./img/operations.jpg" alt="Operación - Rendimiento y Optimización" class="w-full h-full object-cover dark:brightness-75" data-i18n-attr="alt:sections.capacidades.items.9.title">
             </figure>
             <div class="space-y-3 lg:order-first">
-              <h3 class="font-semibold text-2xl">Operación – Rendimiento y Optimización</h3>
-              <p>Gestionamos activos inmobiliarios con una plataforma centralizada y tropicalizada que maximiza el rendimiento operativo según el sector. Nuestra solución permite operar inmuebles residenciales, comerciales, industriales y turísticos con flexibilidad multisectorial, integrando IoT e inteligencia artificial para mantenimiento predictivo y optimización en tiempo real.</p>
+              <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.9.title">Operación – Rendimiento y Optimización</h3>
+              <p data-i18n="sections.capacidades.items.9.desc">Gestionamos activos inmobiliarios con una plataforma centralizada y tropicalizada que maximiza el rendimiento operativo según el sector. Nuestra solución permite operar inmuebles residenciales, comerciales, industriales y turísticos con flexibilidad multisectorial, integrando IoT e inteligencia artificial para mantenimiento predictivo y optimización en tiempo real.</p>
             </div>
           </div>
         </div>
@@ -407,14 +579,14 @@
     <!-- Contacto -->
     <section id="contacto" class="py-20 bg-accent-100 dark:bg-zinc-800">
       <div class="max-w-4xl mx-auto px-6" data-aos="fade-up">
-        <h2 class="text-2xl md:text-4xl font-bold text-center mb-8">Contacto</h2>
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-8" data-i18n="sections.contacto.title">Contacto</h2>
         <div class="bg-white dark:bg-zinc-900 rounded-lg shadow-lg overflow-hidden">
           <div class="relative h-48">
             <img src="./img/contact-us.jpg" alt="Nuestras oficinas en Torre Guttenberg" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
               <div class="flex items-center text-white">
                 <img src="./img/icon-maps.jpg" alt="" class="w-6 h-6 mr-3" aria-hidden="true">
-                <p>Torre Guttenberg – J. Rousseau 3, Anzures, Miguel Hidalgo, Ciudad de México, México</p>
+                <p data-i18n="sections.contacto.address">Torre Guttenberg – J. Rousseau 3, Anzures, Miguel Hidalgo, Ciudad de México, México</p>
               </div>
             </div>
           </div>
@@ -422,40 +594,40 @@
             <div class="flex items-center">
               <img src="./img/icon-phone.png" alt="" class="w-8 h-8 mr-4" aria-hidden="true">
               <div>
-                <p class="text-sm text-zinc-500 dark:text-zinc-400">Teléfono Fijo</p>
-                <a href="tel:+5215586470143" class="hover:text-primary-700 focus:outline-none focus:underline" aria-label="Llamar al teléfono fijo: +52 55 (86470143)">+52 55 (86470143) - Recepción</a>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400" data-i18n="sections.contacto.phone.label">Teléfono Fijo</p>
+                <a href="tel:+5215586470143" class="hover:text-primary-700 focus:outline-none focus:underline" aria-label="Llamar al teléfono fijo: +52 55 (86470143)" data-i18n="sections.contacto.phone.value" data-i18n-attr="aria-label:sections.contacto.phone.label">+52 55 (86470143) - Recepción</a>
               </div>
             </div>
             <div class="flex items-center">
               <img src="./img/icon-whatsapp.png" alt="" class="w-8 h-8 mr-4" aria-hidden="true">
               <div>
-                <p class="text-sm text-zinc-500 dark:text-zinc-400">WhatsApp Business</p>
-                <a href="https://api.whatsapp.com/send?phone=+525560553710&text=Hola%20Smartports,%20me%20gustar%C3%ADa%20optimizar%20mi%20cadena%20de%20suministro" target="_blank" rel="noopener" class="hover:text-primary-700 focus:outline-none focus:underline" aria-label="Contactar por WhatsApp: +52 55 (60553710)">+52 55 (60553710) - Business WA</a>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400" data-i18n="sections.contacto.whatsapp.label">WhatsApp Business</p>
+                <a href="https://api.whatsapp.com/send?phone=+525560553710&text=Hola%20Smartports,%20me%20gustar%C3%ADa%20optimizar%20mi%20cadena%20de%20suministro" target="_blank" rel="noopener" class="hover:text-primary-700 focus:outline-none focus:underline" aria-label="Contactar por WhatsApp: +52 55 (60553710)" data-i18n="sections.contacto.whatsapp.value" data-i18n-attr="aria-label:sections.contacto.whatsapp.label">+52 55 (60553710) - Business WA</a>
               </div>
 
             </div>
             <div class="flex items-center">
               <img src="./img/icon-mail.png" alt="" class="w-8 h-8 mr-4" aria-hidden="true">
               <div>
-                <p class="text-sm text-zinc-500 dark:text-zinc-400">Email</p>
-                <a href="mailto:info@beyondsolutions.app" class="hover:text-primary-700 focus:outline-none focus:underline">info@beyondsolutions.app</a>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400" data-i18n="sections.contacto.email.label">Email</p>
+                <a href="mailto:info@beyondsolutions.app" class="hover:text-primary-700 focus:outline-none focus:underline" data-i18n="sections.contacto.email.value">info@beyondsolutions.app</a>
               </div>
 
             </div>
             <div class="flex items-center">
               <img src="./img/smartports.png" alt="" class="w-8 h-8 mr-4" aria-hidden="true">
               <div>
-                <p class="text-sm text-zinc-500 dark:text-zinc-400">Sitio Web</p>
-                <a href="https://www.beyondsolutions.app" target="_blank" rel="noopener" class="hover:text-primary-700 focus:outline-none focus:underline">www.beyondsolutions.app</a>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400" data-i18n="sections.contacto.website.label">Sitio Web</p>
+                <a href="https://www.beyondsolutions.app" target="_blank" rel="noopener" class="hover:text-primary-700 focus:outline-none focus:underline" data-i18n="sections.contacto.website.value">www.beyondsolutions.app</a>
               </div>
             </div>
           </div>
           <div class="p-6 border-t border-zinc-200 dark:border-zinc-700 text-center">
             <div class="flex items-center justify-center mb-4">
               <img src="./img/icon-meets.png" alt="" class="w-8 h-8 mr-3" aria-hidden="true">
-              <p class="text-zinc-500 dark:text-zinc-400">Haz clic aquí para programar una reunión con nuestro equipo</p>
+              <p class="text-zinc-500 dark:text-zinc-400" data-i18n="sections.contacto.meeting.text">Haz clic aquí para programar una reunión con nuestro equipo</p>
             </div>
-            <a href="https://calendar.app.google/b5XhKmQwJNNpdhq79" target="_blank" rel="noopener" class="inline-block px-6 py-3 rounded-full bg-primary-700 text-white hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2">Agenda una reunión</a>
+            <a href="https://calendar.app.google/b5XhKmQwJNNpdhq79" target="_blank" rel="noopener" class="inline-block px-6 py-3 rounded-full bg-primary-700 text-white hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2" data-i18n="sections.contacto.meeting.cta">Agenda una reunión</a>
           </div>
         </div>
       </div>
@@ -467,12 +639,12 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="flex flex-col md:flex-row items-center justify-between mb-8">
         <div class="text-left mb-6 md:mb-0">
-          <h3 class="font-bold text-xl text-primary-700 dark:text-white">Beyond Solutions</h3>
-          <p class="text-sm text-zinc-500 dark:text-zinc-400">Desarrollo inmobiliario inteligente</p>
+          <h3 class="font-bold text-xl text-primary-700 dark:text-white" data-i18n="footer.brand.name">Beyond Solutions</h3>
+          <p class="text-sm text-zinc-500 dark:text-zinc-400" data-i18n="footer.brand.tagline">Desarrollo inmobiliario inteligente</p>
         </div>
       </div>
       <div class="mb-12 py-8 border-t border-b border-zinc-100 dark:border-zinc-800">
-        <h4 class="mb-8 text-sm uppercase text-zinc-500 dark:text-zinc-400 tracking-wider font-semibold">Alianzas estratégicas</h4>
+        <h4 class="mb-8 text-sm uppercase text-zinc-500 dark:text-zinc-400 tracking-wider font-semibold" data-i18n="footer.partnerships.title">Alianzas estratégicas</h4>
         <div class="flex flex-wrap justify-center gap-10 md:gap-16">
           <div class="flex items-center justify-center w-32 h-16">
             <img src="./img/logo-1.png" alt="Saint-Gobain" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
@@ -492,9 +664,9 @@
         </div>
       </div>
       <div class="flex flex-col md:flex-row items-center justify-between pt-4 text-sm text-zinc-500 dark:text-zinc-400">
-        <p>© 2025 Beyond Solutions. Todos los derechos reservados.</p>
+        <p data-i18n="footer.copyright">© 2025 Beyond Solutions. Todos los derechos reservados.</p>
         <div class="flex gap-6 mt-4 md:mt-0">
-          <a href="#contacto" class="hover:text-primary-700 dark:hover:text-primary-600 transition-colors duration-300 focus:outline-none focus:underline">Contacto</a>
+          <a href="#contacto" class="hover:text-primary-700 dark:hover:text-primary-600 transition-colors duration-300 focus:outline-none focus:underline" data-i18n="footer.links.contact">Contacto</a>
         </div>
       </div>
     </div>
@@ -504,7 +676,7 @@
   <link rel="preload" as="image" href="./img/main-cover.jpg">
 
   <!-- Back to top button -->
-  <button id="back-to-top" class="fixed bottom-6 right-6 p-3 rounded-full bg-primary-700 text-white shadow-lg opacity-0 transition-all duration-300 hover:bg-primary-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 z-50" aria-label="Volver arriba">
+  <button id="back-to-top" class="fixed bottom-6 right-6 p-3 rounded-full bg-primary-700 text-white shadow-lg opacity-0 transition-all duration-300 hover:bg-primary-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 z-50" data-i18n-attr="aria-label:accessibility.back_to_top" aria-label="Volver arriba">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
     </svg>
