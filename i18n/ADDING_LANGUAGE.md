@@ -6,7 +6,7 @@ Este documento detalla los pasos para añadir un nuevo idioma al sistema de inte
 
 ### 1. Crear el archivo de traducción
 
-1. Copia el archivo de base `/i18n/es.json` a un nuevo archivo con el código de idioma deseado:
+1. Copia el archivo de base `./i18n/es.json` a un nuevo archivo con el código de idioma deseado:
    ```
    cp i18n/es.json i18n/[codigo].json
    ```

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     // Inicializar el sistema de i18n
     const i18nInstance = await initI18n({
-      basePath: '/i18n',
+      basePath: './i18n',
       defaultLanguage: 'es',
       fallbackLanguage: 'en',
       debug: false // Cambiar a true para depuración

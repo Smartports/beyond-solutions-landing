@@ -1,11 +1,11 @@
 User-agent: *
-Allow: /
+Allow: ./
 
 # Directorios a los que se permite acceder
-Allow: /i18n/
-Allow: /js/
-Allow: /css/
-Allow: /img/
+Allow: ./i18n/
+Allow: ./js/
+Allow: ./css/
+Allow: ./img/
 
 # Archivo de sitemap
 Sitemap: https://smartports.github.io/beyond-solutions-landing/sitemap.xml 

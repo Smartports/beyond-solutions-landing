@@ -5,7 +5,7 @@
 
 // Configuración global
 const DEFAULT_OPTIONS = {
-  basePath: '/i18n',
+  basePath: './i18n',
   defaultLanguage: 'es',
   fallbackLanguage: 'en',
   supportedLanguages: [

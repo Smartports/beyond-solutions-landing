@@ -16,7 +16,7 @@ export function initLanguageSelector(options = {}) {
   // Configuración por defecto
   const settings = {
     containerSelector: '.language-selector',
-    flagsPath: '/i18n/flags/',
+    flagsPath: './i18n/flags/',
     ariaLabel: 'Seleccionar idioma',
     languages: [
       { code: 'es', name: 'Español', flag: 'es.svg' },

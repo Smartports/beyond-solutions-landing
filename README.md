@@ -44,10 +44,10 @@ To run this site locally:
 
 ## File Structure
 
-- `/i18n/` - Translation files and flag images
-- `/js/` - JavaScript modules including i18n system
-- `/css/` - Stylesheets
-- `/img/` - Image assets
+- `./i18n/` - Translation files and flag images
+- `./js/` - JavaScript modules including i18n system
+- `./css/` - Stylesheets
+- `./img/` - Image assets
 - `index.html` - Main HTML file
 - `404.html` - Custom 404 page with language redirection
 
