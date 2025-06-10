@@ -57,6 +57,13 @@
       "dir": "ltr"
     },
     {
+      "code": "ko",
+      "name": "Korean",
+      "nativeName": "한국어",
+      "flag": "flags/kr.svg",
+      "dir": "ltr"
+    },
+    {
       "code": "ru",
       "name": "Russian",
       "nativeName": "Русский",
@@ -69,6 +76,20 @@
       "nativeName": "العربية",
       "flag": "flags/ae.svg",
       "dir": "rtl"
+    },
+    {
+      "code": "sv",
+      "name": "Swedish",
+      "nativeName": "Svenska",
+      "flag": "flags/se.svg",
+      "dir": "ltr"
+    },
+    {
+      "code": "nl",
+      "name": "Dutch",
+      "nativeName": "Nederlands",
+      "flag": "flags/nl.svg",
+      "dir": "ltr"
     }
   ],
   "defaultLanguage": "en"
