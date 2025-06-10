@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#bf0a30"/>
+  <rect width="900" height="46.154" y="46.154" fill="#ffffff"/>
+  <rect width="900" height="46.154" y="138.462" fill="#ffffff"/>
+  <rect width="900" height="46.154" y="230.769" fill="#ffffff"/>
+  <rect width="900" height="46.154" y="323.077" fill="#ffffff"/>
+  <rect width="900" height="46.154" y="415.385" fill="#ffffff"/>
+  <rect width="900" height="46.154" y="507.692" fill="#ffffff"/>
+  <rect width="360" height="323.077" fill="#002868"/>
+  <g fill="#ffffff">
+    <g id="s5">
+      <g id="s4">
+        <g id="s3">
+          <g id="s2">
+            <path id="s1" d="M20,18.794l1.176,3.619h3.804l-3.078,2.237 1.176,3.619-3.078-2.237-3.078,2.237 1.176-3.619-3.078-2.237h3.804z"/>
+            <use href="#s1" x="40"/>
+            <use href="#s1" x="80"/>
+            <use href="#s1" x="120"/>
+            <use href="#s1" x="160"/>
+            <use href="#s1" x="200"/>
+            <use href="#s1" x="240"/>
+            <use href="#s1" x="280"/>
+            <use href="#s1" x="320"/>
+          </g>
+          <use href="#s2" y="40"/>
+          <use href="#s2" y="80"/>
+          <use href="#s2" y="120"/>
+        </g>
+        <use href="#s3" y="160"/>
+      </g>
+      <use href="#s4" y="200"/>
+    </g>
+    <use href="#s5" y="240"/>
+  </g>
+</svg> 
