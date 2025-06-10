@@ -188,6 +188,40 @@
         transition: none !important;
       }
     }
+    @media (max-width: 1069px) and (min-width: 768px) {
+      header>div>a {
+        max-width: min-content;
+      }
+    }
+    @media (max-width: 1180px) and (min-width: 768px) {
+      nav>a {
+        margin: 0 0.25em !important;
+      }
+      nav>a>span {
+        white-space: nowrap;
+      }
+    }
+    @media (max-width: 989px) and (min-width: 768px) {
+      nav>a>span {
+        font-size: 0.9em;
+      }
+    }
+    @media (max-width: 859px) and (min-width: 768px) {
+      header>div {
+        padding: 0 0.5rem !important;
+      }
+      #toggleTheme {
+        padding: 0.2em;
+        margin-left: 0.5em;
+      }
+      #toggleTheme>svg {
+        width: 1.5rem;
+        height: auto;
+      }
+      nav>a>span {
+        font-size: 0.85em;
+      }
+    }
   </style>
 </head>
 <body class="font-body antialiased leading-relaxed text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900">
@@ -214,7 +248,7 @@
         </div>
         
         <!-- Theme Toggle -->
-        <button @click="toggleTheme" :aria-label="theme==='dark'?'Activar modo claro':'Activar modo oscuro'" data-i18n-attr="aria-label:nav.theme.light,aria-label:nav.theme.dark" class="p-2 flex items-center justify-center bg-accent-50 dark:bg-primary-800 rounded-full shadow-soft hover:shadow-soft-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-700">
+        <button @click="toggleTheme" id="toggleTheme" :aria-label="theme==='dark'?'Activar modo claro':'Activar modo oscuro'" data-i18n-attr="aria-label:nav.theme.light,aria-label:nav.theme.dark" class="p-2 flex items-center justify-center bg-accent-50 dark:bg-primary-800 rounded-full shadow-soft hover:shadow-soft-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-700">
           <template x-if="theme==='dark'">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-accent-100" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.752 15.002A9.718 9.718 0 0112.003 22 9.996 9.996 0 012 12C2 6.486 6.486 2 12.003 2c.499 0 .991.036 1.474.106a.75.75 0 01.223 1.393A7.496 7.496 0 0013.5 12c0 4.136 3.364 7.5 7.5 7.5.589 0 1.167-.06 1.725-.178a.75.75 0 01.997.78z"/></svg>
           </template>

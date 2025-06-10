@@ -24,10 +24,22 @@
 #language-dropdown {
   transform-origin: top right;
   transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 80vh;
 }
 
 #language-dropdown:not(.hidden) {
   animation: fadeIn 0.15s ease-out forwards;
+}
+
+@media (max-width: 989px) and (min-width: 768px) {
+  #language-dropdown-toggle {
+    padding: 0.8em 0.6em;
+  }
+  #language-dropdown-toggle>span>span {
+    display: none;
+  }
 }
 
 @keyframes fadeIn {
