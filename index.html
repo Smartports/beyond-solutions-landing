@@ -12,45 +12,38 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="format-detection" content="telephone=no">
 
-  <!-- SEO mejorado -->
-  <link rel="canonical" href="https://smartports.github.io/beyond-solutions-landing/">
-  <meta property="og:title" content="Beyond Solutions – Fibra 2025">
-  <meta property="og:description" content="Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://smartports.github.io/beyond-solutions-landing/">
-  <meta property="og:image" content="https://smartports.github.io/beyond-solutions-landing/img/main-cover.jpg">
-  <meta name="x:card" content="summary_large_image">
-  <meta name="x:title" content="Beyond Solutions – Fibra 2025">
-  <meta name="x:description" content="Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.">
-  <meta name="x:image" content="https://smartports.github.io/beyond-solutions-landing/img/main-cover.jpg">
-
   <!-- Optimización para imágenes responsivas -->
   <meta http-equiv="Accept-CH" content="DPR, Width, Viewport-Width">
   <meta name="supported-color-schemes" content="light dark">
 
-  <!-- Preconnect to critical domains -->
+  <!-- Preconnect to critical domains - optimized -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-  <link rel="preconnect" href="https://unpkg.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
-  <!-- Preload hero image - most important for LCP -->
+
+  <!-- Preload hero image optimized - WebP only for LCP -->
   <link rel="preload" as="image" 
         href="./img/main-cover.webp" 
         media="(min-width: 1200px)"
+        type="image/webp"
         fetchpriority="high">
   <link rel="preload" as="image" 
         href="./img/main-cover-md.webp" 
         media="(min-width: 768px) and (max-width: 1199px)"
+        type="image/webp"
         fetchpriority="high">
   <link rel="preload" as="image" 
         href="./img/main-cover-sm.webp" 
         media="(min-width: 400px) and (max-width: 767px)"
+        type="image/webp"
         fetchpriority="high">
   <link rel="preload" as="image" 
         href="./img/main-cover-thumb.webp" 
         media="(max-width: 399px)"
+        type="image/webp"
         fetchpriority="high">
 
   <!-- Preload crítico de fuentes -->
@@ -198,6 +191,21 @@
   
   <!-- Script para optimizar carga de imágenes y rendimiento -->
   <script>document.addEventListener("DOMContentLoaded",()=>{if("undefined"!=typeof AOS&&AOS.init({once:!0,duration:600,offset:100,delay:0,disable:window.matchMedia("(prefers-reduced-motion: reduce)").matches}),"IntersectionObserver"in window){const o=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){const t="IMG"===e.target.tagName?e.target:e.target.querySelector("img");if(t&&t.dataset.src&&(t.src=t.dataset.src,t.removeAttribute("data-src")),"PICTURE"===e.target.tagName){const r=e.target.querySelectorAll("source");r.forEach(e=>{e.dataset.srcset&&(e.srcset=e.dataset.srcset,e.removeAttribute("data-srcset"))})}o.unobserve(e.target)}})},{root:null,rootMargin:"200px 0px",threshold:.01});document.querySelectorAll('img[loading="lazy"], picture:not([data-no-lazy])').forEach(e=>{o.observe(e)})}const e=document.getElementById("back-to-top");e&&(window.addEventListener("scroll",()=>{300<window.scrollY?e.classList.replace("opacity-0","opacity-100"):e.classList.replace("opacity-100","opacity-0")},{passive:!0}),e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}))});</script>
+
+  <!-- Page caching instructions -->
+  <meta http-equiv="Cache-Control" content="max-age=86400, public">
+  
+  <!-- Eco-friendly SEO mejorado -->
+  <link rel="canonical" href="https://smartports.github.io/beyond-solutions-landing/">
+  <meta property="og:title" content="Beyond Solutions – Fibra 2025">
+  <meta property="og:description" content="Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://smartports.github.io/beyond-solutions-landing/">
+  <meta property="og:image" content="https://smartports.github.io/beyond-solutions-landing/img/main-cover.webp">
+  <meta name="x:card" content="summary_large_image">
+  <meta name="x:title" content="Beyond Solutions – Fibra 2025">
+  <meta name="x:description" content="Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.">
+  <meta name="x:image" content="https://smartports.github.io/beyond-solutions-landing/img/main-cover.webp">
 </head>
 <body class="font-body antialiased leading-relaxed text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900">
   <!-- Header -->
@@ -397,17 +405,21 @@
         <div class="space-y-16" data-aos="fade-up">
           <!-- Terrenos -->
           <div class="grid lg:grid-cols-2 gap-10 items-center">
-            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
-              <picture>
-                <source media="(min-width: 1200px)" data-srcset="./img/terrenos.jpg" type="image/jpeg">
-                <source media="(min-width: 768px)" data-srcset="./img/terrenos-md.jpg" type="image/jpeg">
-                <source media="(min-width: 400px)" data-srcset="./img/terrenos-sm.jpg" type="image/jpeg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/terrenos-thumb.jpg" 
-                     alt="Terrenos - Adquisición Inteligente" 
-                     class="w-full h-full object-cover dark:brightness-75" 
-                     data-i18n-attr="alt:sections.capacidades.items.0.title">
-              </picture>
-            </figure>
+                          <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
+                <picture>
+                 <source media="(min-width: 1200px)" srcset="./img/terrenos.webp" type="image/webp">
+                 <source media="(min-width: 768px)" srcset="./img/terrenos-md.webp" type="image/webp">
+                 <source media="(min-width: 400px)" srcset="./img/terrenos-sm.webp" type="image/webp">
+                 <source media="(min-width: 1200px)" srcset="./img/terrenos.jpg" type="image/jpeg">
+                 <source media="(min-width: 768px)" srcset="./img/terrenos-md.jpg" type="image/jpeg">
+                 <source media="(min-width: 400px)" srcset="./img/terrenos-sm.jpg" type="image/jpeg">
+                  <img loading="lazy" decoding="async" width="800" height="600" src="./img/terrenos-thumb.webp" 
+                       alt="Terrenos - Adquisición Inteligente" 
+                       class="w-full h-full object-cover dark:brightness-75" 
+                       fetchpriority="low"
+                       data-i18n-attr="alt:sections.capacidades.items.0.title">
+                </picture>
+              </figure>
             <div class="space-y-3">
               <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.0.title">Terrenos – Adquisión Inteligente</h3>
               <p data-i18n="sections.capacidades.items.0.desc">Mediante el análisis avanzado de big data, parámetros derivados y tecnología como realidad aumentada y vistas satelitales, identificamos y evaluamos estratégicamente terrenos a nivel global. Consideramos factores como uso de suelo, clima, topografía, sostenibilidad y materiales innovadores para maximizar el valor de cada desarrollo según su geolocalización.</p>
@@ -417,12 +429,16 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/materiales.jpg">
-                <source media="(min-width: 768px)" srcset="./img/materiales-md.jpg">
-                <source media="(min-width: 400px)" srcset="./img/materiales-sm.jpg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/materiales-thumb.jpg" 
+                <source media="(min-width: 1200px)" srcset="./img/materiales.webp" type="image/webp">
+                <source media="(min-width: 768px)" srcset="./img/materiales-md.webp" type="image/webp">
+                <source media="(min-width: 400px)" srcset="./img/materiales-sm.webp" type="image/webp">
+                <source media="(min-width: 1200px)" srcset="./img/materiales.jpg" type="image/jpeg">
+                <source media="(min-width: 768px)" srcset="./img/materiales-md.jpg" type="image/jpeg">
+                <source media="(min-width: 400px)" srcset="./img/materiales-sm.jpg" type="image/jpeg">
+                <img loading="lazy" decoding="async" width="800" height="600" src="./img/materiales-thumb.webp" 
                      alt="Materiales - Redefiniendo la cadena de suministros" 
-                     class="w-full h-full object-cover dark:brightness-75" 
+                     class="w-full h-full object-cover dark:brightness-75"
+                     fetchpriority="low"
                      data-i18n-attr="alt:sections.capacidades.items.1.title">
               </picture>
             </figure>
@@ -435,12 +451,16 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/arquitectura.jpg">
-                <source media="(min-width: 768px)" srcset="./img/arquitectura-md.jpg">
-                <source media="(min-width: 400px)" srcset="./img/arquitectura-sm.jpg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/arquitectura-thumb.jpg" 
+                <source media="(min-width: 1200px)" srcset="./img/arquitectura.webp" type="image/webp">
+                <source media="(min-width: 768px)" srcset="./img/arquitectura-md.webp" type="image/webp">
+                <source media="(min-width: 400px)" srcset="./img/arquitectura-sm.webp" type="image/webp">
+                <source media="(min-width: 1200px)" srcset="./img/arquitectura.jpg" type="image/jpeg">
+                <source media="(min-width: 768px)" srcset="./img/arquitectura-md.jpg" type="image/jpeg">
+                <source media="(min-width: 400px)" srcset="./img/arquitectura-sm.jpg" type="image/jpeg">
+                <img loading="lazy" decoding="async" width="800" height="600" src="./img/arquitectura-thumb.webp" 
                      alt="Arquitectura - Vanguardismo y Alto Impacto" 
-                     class="w-full h-full object-cover dark:brightness-75" 
+                     class="w-full h-full object-cover dark:brightness-75"
+                     fetchpriority="low"
                      data-i18n-attr="alt:sections.capacidades.items.2.title">
               </picture>
             </figure>
@@ -453,12 +473,16 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/design.jpg">
-                <source media="(min-width: 768px)" srcset="./img/design-md.jpg">
-                <source media="(min-width: 400px)" srcset="./img/design-sm.jpg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/design-thumb.jpg" 
+                <source media="(min-width: 1200px)" srcset="./img/design.webp" type="image/webp">
+                <source media="(min-width: 768px)" srcset="./img/design-md.webp" type="image/webp">
+                <source media="(min-width: 400px)" srcset="./img/design-sm.webp" type="image/webp">
+                <source media="(min-width: 1200px)" srcset="./img/design.jpg" type="image/jpeg">
+                <source media="(min-width: 768px)" srcset="./img/design-md.jpg" type="image/jpeg">
+                <source media="(min-width: 400px)" srcset="./img/design-sm.jpg" type="image/jpeg">
+                <img loading="lazy" decoding="async" width="800" height="600" src="./img/design-thumb.webp" 
                      alt="Diseño - Adaptabilidad, Tecnología, Experiencia" 
                      class="w-full h-full object-cover dark:brightness-75" 
+                     fetchpriority="low"
                      data-i18n-attr="alt:sections.capacidades.items.3.title">
               </picture>
             </figure>
@@ -471,12 +495,16 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/art.jpg">
-                <source media="(min-width: 768px)" srcset="./img/art-md.jpg">
-                <source media="(min-width: 400px)" srcset="./img/art-sm.jpg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/art-thumb.jpg" 
+                <source media="(min-width: 1200px)" srcset="./img/art.webp" type="image/webp">
+                <source media="(min-width: 768px)" srcset="./img/art-md.webp" type="image/webp">
+                <source media="(min-width: 400px)" srcset="./img/art-sm.webp" type="image/webp">
+                <source media="(min-width: 1200px)" srcset="./img/art.jpg" type="image/jpeg">
+                <source media="(min-width: 768px)" srcset="./img/art-md.jpg" type="image/jpeg">
+                <source media="(min-width: 400px)" srcset="./img/art-sm.jpg" type="image/jpeg">
+                <img loading="lazy" decoding="async" width="800" height="600" src="./img/art-thumb.webp" 
                      alt="Arte - Curaduría, Identidad, Experiencia" 
-                     class="w-full h-full object-cover dark:brightness-75" 
+                     class="w-full h-full object-cover dark:brightness-75"
+                     fetchpriority="low"
                      data-i18n-attr="alt:sections.capacidades.items.4.title">
               </picture>
             </figure>
@@ -586,11 +614,15 @@
         <div class="bg-white dark:bg-zinc-900 rounded-lg shadow-lg overflow-hidden">
           <div class="relative h-48">
             <picture>
+              <source media="(min-width: 1200px)" data-srcset="./img/contact-us.webp" type="image/webp">
+              <source media="(min-width: 768px)" data-srcset="./img/contact-us-md.webp" type="image/webp">
+              <source media="(min-width: 400px)" data-srcset="./img/contact-us-sm.webp" type="image/webp">
               <source media="(min-width: 1200px)" data-srcset="./img/contact-us.jpg" type="image/jpeg">
               <source media="(min-width: 768px)" data-srcset="./img/contact-us-md.jpg" type="image/jpeg">
               <source media="(min-width: 400px)" data-srcset="./img/contact-us-sm.jpg" type="image/jpeg">
-              <img loading="lazy" decoding="async" width="1200" height="400" src="./img/contact-us-thumb.jpg" 
+              <img loading="lazy" decoding="async" width="1200" height="400" src="./img/contact-us-thumb.webp" 
                    alt="Nuestras oficinas en Torre Guttenberg" 
+                   fetchpriority="low"
                    class="w-full h-full object-cover">
             </picture>
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
@@ -655,24 +687,31 @@
         <h4 class="mb-8 text-sm uppercase text-zinc-500 dark:text-zinc-400 tracking-wider font-semibold" data-i18n="footer.partnerships.title">Alianzas estratégicas</h4>
         <div class="flex flex-wrap justify-center gap-10 md:gap-16">
           <div class="flex items-center justify-center w-32 h-16">
-            <img loading="lazy" src="./img/logo-1.png" width="128" height="64" alt="Saint-Gobain" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+            <img loading="lazy" src="./img/logo-1.webp" width="128" height="64" alt="Saint-Gobain" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
           </div>
           <div class="flex items-center justify-center w-32 h-16">
-            <img loading="lazy" src="./img/logo-2.png" width="128" height="64" alt="Holcim" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+            <img loading="lazy" src="./img/logo-2.webp" width="128" height="64" alt="Holcim" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
           </div>
           <div class="flex items-center justify-center w-32 h-16">
-            <img loading="lazy" src="./img/logo-3.png" width="128" height="64" alt="CNBM" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+            <img loading="lazy" src="./img/logo-3.webp" width="128" height="64" alt="CNBM" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
           </div>
           <div class="flex items-center justify-center w-32 h-16">
-            <img loading="lazy" src="./img/logo-4.png" width="128" height="64" alt="ArcelorMittal" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+            <img loading="lazy" src="./img/logo-4.webp" width="128" height="64" alt="ArcelorMittal" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
           </div>
           <div class="flex items-center justify-center w-32 h-16">
-            <img loading="lazy" src="./img/logo-5.png" width="128" height="64" alt="Cemex" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+            <img loading="lazy" src="./img/logo-5.webp" width="128" height="64" alt="Cemex" class="max-h-12 md:max-h-14 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
           </div>
         </div>
       </div>
+
       <div class="flex flex-col md:flex-row items-center justify-between pt-4 text-sm text-zinc-500 dark:text-zinc-400">
-        <p data-i18n="footer.copyright">© 2025 Beyond Solutions. Todos los derechos reservados.</p>
+        <div class="flex items-center">
+          <p data-i18n="footer.copyright">© 2025 Beyond Solutions. Todos los derechos reservados.</p>
+          <a href="https://www.websitecarbon.com/" target="_blank" rel="noopener noreferrer" class="ml-2 inline-flex items-center" title="Este sitio está optimizado para reducir su huella de carbono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-1"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+            <span class="text-xs">Eco-Friendly Website</span>
+          </a>
+        </div>
         <div class="flex gap-6 mt-4 md:mt-0">
           <a href="#contacto" class="hover:text-primary-700 dark:hover:text-primary-600 transition-colors duration-300 focus:outline-none focus:underline" data-i18n="footer.links.contact">Contacto</a>
         </div>

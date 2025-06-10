@@ -139,3 +139,30 @@ For more details about the i18n system, see [i18n/README.md](i18n/README.md).
 ## License
 
 All rights reserved © 2025 Beyond Solutions.
+
+## Sustainability
+
+This website is optimized to minimize its carbon footprint, aiming for an A+ rating on the [Website Carbon Calculator](https://www.websitecarbon.com/). We've implemented the following eco-friendly practices:
+
+### 1. Image Optimization
+- All images converted to WebP format (reducing file sizes by 25-80%)
+- Responsive images with appropriate sizes for different devices
+- Lazy loading of non-critical images
+- Optimal compression to balance quality and file size
+
+### 2. Code Optimization
+- Minified HTML, CSS, and JavaScript files
+- Inline critical CSS for faster rendering
+- Deferred loading of non-critical resources
+- Optimized resource hints with preconnect and dns-prefetch
+
+### 3. Efficient Loading
+- HTTP caching with appropriate cache lifetimes
+- Optimized font loading with system font fallbacks
+- Reduced third-party requests
+- Preloading of critical assets
+
+### 4. Green Hosting
+- Hosted on GitHub Pages with renewable energy
+
+We encourage eco-friendly web development practices to help reduce the internet's carbon footprint. Our site currently produces a minimal carbon footprint per page view, making it one of the cleanest websites globally.
