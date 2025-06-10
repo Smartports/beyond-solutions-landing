@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Frontend Patterns
+
+## UI Framework
+- [index.html](mdc:index.html) uses TailwindCSS for styling via CDN
+- Alpine.js for reactive UI components
+- AOS (Animate On Scroll) for scroll animations
+
+## Component Structure
+- Alpine.js components are defined with `x-data` attribute
+- Navigation component defined as `x-data="nav"`
+- Language selector as a standalone component
+- Theme toggle with light/dark mode support
+
+## Theme Management
+- Dark mode support via Tailwind's `dark:` variant
+- User preference stored in localStorage
+- System preference detection with `prefers-color-scheme` media query
+- Toggle button for manual user preference
+
+## Responsive Design
+- Mobile-first approach with responsive breakpoints
+- Mobile menu toggle for smaller screens
+- Responsive typography and spacing
+- Media queries for fine-tuning specific screen ranges
+
+## Performance Optimization
+- Lazy loading for non-critical images
+- Preloading critical images
+- Reduced animation for users with `prefers-reduced-motion`
+- Debounced event listeners for scroll/resize events
+- Efficient Alpine.js reactivity

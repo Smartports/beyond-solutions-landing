@@ -214,7 +214,7 @@ const i18n = {
         flag.srcset = `https://flagcdn.com/w40/${locale.flag}.png 2x`;
         flag.width = 20;
         flag.height = 15;
-        flag.alt = locale.name;
+        flag.alt = 'Flag of '+locale.name+' ('+locale.code+')';
         flag.className = 'rounded-sm';
         
         // Create label

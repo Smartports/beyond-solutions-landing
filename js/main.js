@@ -6,6 +6,11 @@
 import { initI18n, changeLanguage, t, isRTL } from './i18n.js';
 import { initLanguageSelector } from './language-selector.js';
 
+// Exponer funciones globalmente para que Alpine.js pueda usarlas
+window.t = t;
+window.changeLanguage = changeLanguage;
+window.isRTL = isRTL;
+
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -14,8 +19,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       basePath: './i18n',
       defaultLanguage: 'es',
       fallbackLanguage: 'en',
-      debug: false // Cambiar a true para depuración
+      debug: true // Habilitamos debug para ver posibles problemas
     });
+    
+    // Exponer la instancia i18n globalmente para Alpine.js
+    window.i18n = i18nInstance;
     
     // Inicializar el selector de idiomas
     initLanguageSelector();
@@ -25,6 +33,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Observador para elementos dinámicos que requieran traducción
     initMutationObserver();
+    
+    // Disparar evento global de i18n listo
+    window.dispatchEvent(new CustomEvent('i18n:ready'));
+    document.dispatchEvent(new CustomEvent('i18n:ready'));
     
     console.log('Beyond Solutions - Inicialización completada');
   } catch (error) {
@@ -37,7 +49,12 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 function initComponents() {
   // AOS (Animate on Scroll) debe reiniciarse después de cambios de idioma
-  document.addEventListener('i18n:languageChanged', () => {
+  document.addEventListener('i18n:languageChanged', (e) => {
+    // Disparar también un evento global para Alpine.js
+    window.dispatchEvent(new CustomEvent('i18n:languageChanged', { 
+      detail: e.detail 
+    }));
+    
     if (window.AOS) {
       window.AOS.refresh();
     }
@@ -81,7 +98,7 @@ function initMutationObserver() {
   });
 }
 
-// Exportar funciones para uso global
+// Exportar funciones para uso global si se importa como módulo
 export {
   initI18n,
   changeLanguage,

@@ -1,0 +1,42 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Internationalization System (i18n)
+
+The site uses a client-side i18n system that supports multiple languages using query parameters.
+
+## Key Components
+- [js/i18n.js](mdc:js/i18n.js) - Core i18n module
+- [js/language-selector.js](mdc:js/language-selector.js) - Language selector component
+- [i18n/es.json](mdc:i18n/es.json) - Spanish translation (default)
+- [i18n/en.json](mdc:i18n/en.json) - English translation (fallback)
+
+## Usage in HTML
+- Text translation: `data-i18n="key.path"`
+- Attribute translation: `data-i18n-attr="attr:key.path"`
+- HTML content translation: `data-i18n-html="key.path"`
+
+## JavaScript API
+```javascript
+// Initialize the i18n system
+const i18n = await initI18n(options);
+
+// Change the current language
+changeLanguage('fr');
+
+// Get a translation
+const text = t('hero.title');
+
+// Check if the current language is RTL
+const isRightToLeft = isRTL();
+```
+
+## Supported Languages
+The system supports 18 languages including Spanish (default), English (fallback), and right-to-left languages like Arabic.
+
+## SEO Integration
+- Language-based URL routes with query parameters (`?lang=code`)
+- Alternative language meta tags (`hreflang`)
+- Proper language redirects via the 404 page

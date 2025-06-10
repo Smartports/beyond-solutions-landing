@@ -92,7 +92,7 @@ function renderSelector(container, settings) {
       aria-label="${settings.ariaLabel}"
     >
       <span class="flex items-center gap-2">
-        <img src="${settings.flagsPath}${currentLanguage.flag}" width="20" height="15" alt="${currentLanguage.name}" class="rounded-sm">
+        <img src="${settings.flagsPath}${currentLanguage.flag}" width="20" height="15" alt="Flag of ${currentLanguage.name} (${currentLanguage.code})" class="rounded-sm">
         <span class="hidden sm:inline">${currentLanguage.name}</span>
       </span>
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

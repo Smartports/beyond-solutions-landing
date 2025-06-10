@@ -1,0 +1,45 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Development Guidelines
+
+## Code Preservation Mandate
+- Maintain strict backward compatibility for existing APIs/interfaces
+- Verify functionality through existing tests/usage analysis before considering deprecation
+- Preserve legacy patterns unless they create security risks/performance bottlenecks
+- Document hidden dependencies before making related changes
+
+## Creation Protocol
+- Implement 3-layer validation before new file creation:
+  1. Project-wide pattern search for similar implementations
+  2. Check existing utility modules/core services
+  3. Verify configuration files for extendable options
+- For duplicate logic patterns:
+  - Create shared abstractions instead of direct duplication
+  - Implement facade pattern when cross-component access needed
+
+## Modification Safeguards
+- Require 2-pass analysis before refactoring:
+  1. Architectural impact assessment
+  2. Call hierarchy verification
+- Maintain version history awareness:
+  - Check git blame for legacy code context
+  - Preserve deprecated interfaces with appropriate annotations
+
+## Security & Quality Enforcement
+- Apply OWASP Top 10 checks for web components
+- Implement automated resource cleanup patterns
+- Enforce strict null-checking with optional chaining/null-safe operators
+- Validate against common anti-patterns:
+  - Circular dependencies
+  - God objects
+  - Magic number/string usage
+
+## Documentation Protocol
+- Create change manifests detailing:
+  - Modified components
+  - Preservation justifications
+  - Alternative approaches considered
+- Maintain architecture decision records (ADRs) for significant changes

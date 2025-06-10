@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Structure Guide
+
+This project is a landing page for Beyond Solutions, a platform for real estate development integration and management.
+
+## Key Files
+- [index.html](mdc:index.html) - Main entry point with the landing page HTML structure
+- [js/main.js](mdc:js/main.js) - Main JavaScript file that initializes components
+- [js/i18n.js](mdc:js/i18n.js) - Internationalization system implementation
+
+## Directory Structure
+- `css/` - Contains stylesheets including language selector and RTL support
+- `i18n/` - Contains translation files and flag images for multilingual support
+- `img/` - Image assets for the landing page
+- `js/` - JavaScript modules for functionality
+
+## Configuration Files
+- [_config.yml](mdc:_config.yml) - Jekyll configuration for GitHub Pages
+- [robots.txt](mdc:robots.txt) - Search engine configuration
+- [sitemap.xml](mdc:sitemap.xml) - Site map for SEO
+
+## SEO and Accessibility
+The site is optimized for SEO with proper meta tags, hreflang annotations, and a comprehensive sitemap. Accessibility features include keyboard navigation, ARIA attributes, and proper color contrast.
