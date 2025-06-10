@@ -1,0 +1,154 @@
+# Configuración de idiomas para Beyond Solutions
+# Gestiona redirecciones y rutas basadas en idioma
+
+# Activar el módulo de reescritura
+RewriteEngine On
+
+# Forzar HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Detectar el idioma preferido del navegador para los visitantes nuevos
+# y redirigirlos a la versión correspondiente del sitio web
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(es) [NC]
+RewriteRule ^(.*)$ /es/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(en) [NC]
+RewriteRule ^(.*)$ /en/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(fr) [NC]
+RewriteRule ^(.*)$ /fr/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(de) [NC]
+RewriteRule ^(.*)$ /de/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(it) [NC]
+RewriteRule ^(.*)$ /it/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(pt) [NC]
+RewriteRule ^(.*)$ /pt/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(zh) [NC]
+RewriteRule ^(.*)$ /zh/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(ja) [NC]
+RewriteRule ^(.*)$ /ja/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(ko) [NC]
+RewriteRule ^(.*)$ /ko/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(ru) [NC]
+RewriteRule ^(.*)$ /ru/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(ar) [NC]
+RewriteRule ^(.*)$ /ar/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(sv) [NC]
+RewriteRule ^(.*)$ /sv/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{HTTP:Accept-Language} ^(nl) [NC]
+RewriteRule ^(.*)$ /nl/ [L,R=302]
+
+# Si no se detecta ningún idioma específico, redirigir a la versión en español por defecto
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteRule ^(.*)$ /es/ [L,R=302]
+
+# Asegurar que los directorios de idioma apunten al archivo index.html
+RewriteRule ^(es|en|fr|de|it|pt|zh|ja|ko|ru|ar|sv|nl)/?$ index.html [L]
+
+# Manejar solicitudes a archivos de idioma para servir el index.html apropiado
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(es|en|fr|de|it|pt|zh|ja|ko|ru|ar|sv|nl)/(.*)$ $2 [L]
+
+# Establecer las cabeceras correctas de Content-Language
+<FilesMatch "index\.html$">
+    RewriteCond %{REQUEST_URI} ^/es/ [OR]
+    RewriteCond %{REQUEST_URI} ^/es$
+    Header set Content-Language "es"
+
+    RewriteCond %{REQUEST_URI} ^/en/ [OR]
+    RewriteCond %{REQUEST_URI} ^/en$
+    Header set Content-Language "en"
+
+    RewriteCond %{REQUEST_URI} ^/fr/ [OR]
+    RewriteCond %{REQUEST_URI} ^/fr$
+    Header set Content-Language "fr"
+
+    RewriteCond %{REQUEST_URI} ^/de/ [OR]
+    RewriteCond %{REQUEST_URI} ^/de$
+    Header set Content-Language "de"
+
+    RewriteCond %{REQUEST_URI} ^/it/ [OR]
+    RewriteCond %{REQUEST_URI} ^/it$
+    Header set Content-Language "it"
+
+    RewriteCond %{REQUEST_URI} ^/pt/ [OR]
+    RewriteCond %{REQUEST_URI} ^/pt$
+    Header set Content-Language "pt"
+
+    RewriteCond %{REQUEST_URI} ^/zh/ [OR]
+    RewriteCond %{REQUEST_URI} ^/zh$
+    Header set Content-Language "zh"
+
+    RewriteCond %{REQUEST_URI} ^/ja/ [OR]
+    RewriteCond %{REQUEST_URI} ^/ja$
+    Header set Content-Language "ja"
+
+    RewriteCond %{REQUEST_URI} ^/ko/ [OR]
+    RewriteCond %{REQUEST_URI} ^/ko$
+    Header set Content-Language "ko"
+
+    RewriteCond %{REQUEST_URI} ^/ru/ [OR]
+    RewriteCond %{REQUEST_URI} ^/ru$
+    Header set Content-Language "ru"
+
+    RewriteCond %{REQUEST_URI} ^/ar/ [OR]
+    RewriteCond %{REQUEST_URI} ^/ar$
+    Header set Content-Language "ar"
+
+    RewriteCond %{REQUEST_URI} ^/sv/ [OR]
+    RewriteCond %{REQUEST_URI} ^/sv$
+    Header set Content-Language "sv"
+
+    RewriteCond %{REQUEST_URI} ^/nl/ [OR]
+    RewriteCond %{REQUEST_URI} ^/nl$
+    Header set Content-Language "nl"
+</FilesMatch>
+
+# Configurar el tipo MIME correcto para SVG
+AddType image/svg+xml .svg .svgz
+
+# Configuración de compresión y caché
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Imágenes
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  
+  # CSS, JavaScript
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  
+  # Archivos de idioma (JSON)
+  ExpiresByType application/json "access plus 1 day"
+</IfModule> 

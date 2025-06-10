@@ -1,0 +1,25 @@
+# Jekyll configuration for GitHub Pages
+baseurl: "/beyond-solutions-landing"
+url: "https://smartports.github.io"
+
+# Exclude files that don't need to be processed
+exclude:
+  - LICENSE
+  - README.md
+  - .gitignore
+
+# Configure static site
+include:
+  - _redirects
+  - 404.html
+
+# GitHub Pages defaults
+encoding: UTF-8
+timezone: UTC
+future: true
+jailed: false
+gfm_quirks: paragraph_end
+
+# Preserve languages files
+keep_files:
+  - i18n 

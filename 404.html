@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    (function() {
+      // Obtener la ruta solicitada
+      var path = window.location.pathname;
+      
+      // Comprobar si es una solicitud de idioma (ej: /es/, /en/)
+      var langMatch = path.match(/^\/beyond-solutions-landing\/([a-z]{2})\/?/);
+      
+      if (langMatch && langMatch[1]) {
+        // Es una solicitud de idioma, redirigir a la versión con parámetro de consulta
+        var lang = langMatch[1];
+        var redirectPath = '/beyond-solutions-landing/?lang=' + lang;
+        
+        // Preservar cualquier hash o parámetro de consulta adicional
+        var search = window.location.search;
+        if (search && search !== '?') {
+          // Si ya hay parámetros, agregar el parámetro de idioma
+          if (search.indexOf('lang=') === -1) {
+            redirectPath += (search.indexOf('?') === 0 ? search + '&lang=' + lang : '?' + search.substring(1) + '&lang=' + lang);
+          } else {
+            redirectPath += search;
+          }
+        }
+        
+        // Agregar hash si existe
+        var hash = window.location.hash;
+        if (hash) {
+          redirectPath += hash;
+        }
+        
+        // Redirigir
+        window.location.replace(redirectPath);
+      } else {
+        // No es una solicitud de idioma, redirigir a la página principal
+        window.location.replace('/beyond-solutions-landing/');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <h1>Redireccionando...</h1>
+  <p>Por favor espere mientras le redirigimos a la página correcta.</p>
+</body>
+</html> 

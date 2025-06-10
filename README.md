@@ -1,161 +1,152 @@
-# Beyond Solutions - Landing Page
+# Beyond Solutions Landing Page
 
-## Descripción
-Landing page de Beyond Solutions, una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial. A través de soluciones basadas en automatización, inteligencia artificial (IA), aprendizaje automático (ML) y análisis avanzado de big data.
+Landing page for Beyond Solutions, a platform designed to strategically integrate and manage all elements that make up a world-class real estate development.
 
-## Tecnologías Utilizadas
-- HTML5
-- TailwindCSS (via CDN)
-- Alpine.js (para interactividad)
-- AOS (Animate On Scroll)
-- Sistema multilenguaje personalizado (i18n)
-- Responsive Design
+## Multilanguage Support
 
-## Estructura del Proyecto
+This site features multilingual support using a client-side i18n system. Unlike traditional multilingual sites that use path-based routing (e.g., `/es/`, `/en/`), this implementation uses query parameters (e.g., `?lang=es`, `?lang=en`) which works better with GitHub Pages.
 
-### Archivos Principales
-- `index.html` - Página principal
-- `DESIGN_SYSTEM.md` - Documentación del sistema de diseño
-- `DECK_CONTEXT.md` - Contenido y estructura de la presentación
+## GitHub Pages Deployment
 
-### Sistema de Internacionalización (i18n)
-- `./i18n/` - Directorio principal del sistema multilenguaje
-  - `i18n.js` - Script principal del sistema
-  - `language-selector.js` - Componente Alpine.js para el selector de idiomas
-  - `rtl.css` - Estilos para idiomas de derecha a izquierda
-  - `config.json` - Configuración general del sistema i18n
-  - `es.json`, `en.json`, etc. - Archivos de traducción por idioma
-  - `README.md` - Documentación del sistema i18n
-  - `ADDING_LANGUAGE.md` - Guía para añadir nuevos idiomas
+This site is configured to be deployed on GitHub Pages. Key features:
 
-### Recursos
-- Imágenes de secciones (arquitectura.jpg, art.jpg, etc.)
-- Iconos para sectores y contacto (icon-*.png)
-- Logos de alianzas estratégicas (logo-*.png)
+1. **Query parameter-based language switching**: Uses `?lang=code` format instead of subdirectories
+2. **Automatic language detection**: Detects browser language and user preferences
+3. **404 redirect handling**: Custom 404 page handles old path-based language URLs
+4. **SEO friendly**: Proper `hreflang` annotations in the HTML
 
-## Características Principales
+## Local Development
 
-### Secciones
-1. **Hero/Sobre Nosotros** - Presentación de la empresa y su propósito
-2. **Modelo** - Descripción del modelo de negocio y sus componentes
-3. **¿Por qué Beyond?** - Ventajas diferenciales
-4. **Sectores** - Áreas de aplicación (Residencial, Restauración, Comercial, Educación)
-5. **Capacidades** - Detalle de capacidades en:
-   - Terrenos
-   - Materiales
-   - Arquitectura
-   - Diseño
-   - Arte
-   - Regulatorio
-   - Construcción
-   - Desarrollo
-   - Comercialización
-   - Operación
-6. **Contacto** - Información de contacto y formulario
-7. **Alianzas** - Logos de empresas aliadas en el sector
+To run this site locally:
 
-### Funcionalidades
-- Modo oscuro/claro (con persistencia en localStorage)
-- Navegación suave por anclajes
-- Animaciones al hacer scroll
-- Diseño completamente responsive
-- Soporte para prefers-reduced-motion
-- Botón "volver arriba"
-- **Sistema multilenguaje**:
-  - Detección automática del idioma del navegador
-  - Selector de idiomas con banderas
-  - Soporte para idiomas RTL (derecha a izquierda)
-  - Almacenamiento de preferencia de idioma en localStorage
-  - Fácil adición de nuevos idiomas mediante archivos JSON
+1. Clone the repository
+2. Serve the files using any static web server
+   ```
+   python -m http.server 8000
+   ```
+3. Navigate to `http://localhost:8000` in your browser
 
-## Sistema Multilenguaje
+## Available Languages
 
-### Características
-- **Detección automática**: El sistema detecta el idioma preferido del navegador del usuario
-- **Selector visual**: Selector de idiomas con banderas en el header
-- **Persistencia**: La selección de idioma se guarda en localStorage
-- **Extensible**: Fácil adición de nuevos idiomas mediante archivos JSON
-- **Soporte RTL**: Diseño adaptable para idiomas que se escriben de derecha a izquierda
-- **Internacionalización completa**: Todos los textos del sitio están disponibles para traducción
+- Spanish (es) - Default
+- English (en)
+- French (fr)
+- German (de)
+- Italian (it)
+- Portuguese (pt)
+- Chinese (zh)
+- Japanese (ja)
+- Korean (ko)
+- Russian (ru)
+- Arabic (ar) - RTL support
+- Swedish (sv)
+- Dutch (nl)
 
-### Idiomas Disponibles
-- Español (es) - Idioma predeterminado
-- Inglés (en)
-- *Más idiomas pueden ser añadidos fácilmente siguiendo la guía en `/i18n/ADDING_LANGUAGE.md`*
+## File Structure
 
-### Cómo Añadir un Nuevo Idioma
-Ver la guía detallada en `/i18n/ADDING_LANGUAGE.md`
+- `/i18n/` - Translation files and flag images
+- `/js/` - JavaScript modules including i18n system
+- `/css/` - Stylesheets
+- `/img/` - Image assets
+- `index.html` - Main HTML file
+- `404.html` - Custom 404 page with language redirection
 
-## Instalación y Despliegue
+## Características
+
+- Diseño responsive optimizado para todos los dispositivos
+- Tema claro/oscuro basado en preferencias del usuario
+- Sistema de internacionalización (i18n) completo con 13 idiomas
+- Rutas basadas en idioma para SEO (/es/, /en/, etc.)
+- Optimización para performance y accesibilidad
+
+## Estructura del proyecto
+
+```
+beyond-solutions-landing/
+├── css/                  # Estilos CSS
+│   ├── language-selector.css  # Estilos para el selector de idiomas
+│   └── rtl.css           # Estilos para idiomas RTL (derecha a izquierda)
+│
+├── i18n/                 # Archivos de internacionalización
+│   ├── flags/            # Banderas SVG para cada idioma
+│   ├── es.json           # Traducción en español (idioma por defecto)
+│   ├── en.json           # Traducción en inglés
+│   └── ...               # Otros archivos de idioma
+│
+├── img/                  # Imágenes e iconos
+│
+├── js/                   # JavaScript
+│   ├── i18n.js           # Módulo principal de internacionalización
+│   ├── language-selector.js  # Componente de selector de idiomas
+│   └── main.js           # Script principal
+│
+├── .htaccess             # Configuración para Apache (rutas y redirecciones)
+├── index.html            # Página principal
+├── robots.txt            # Configuración para motores de búsqueda
+└── sitemap.xml           # Mapa del sitio para SEO
+```
+
+## Sistema de Internacionalización
+
+El sistema de i18n permite mostrar el contenido en múltiples idiomas:
+
+- **Detección automática** del idioma preferido del usuario
+- **Rutas de URL basadas en idioma** (/es/, /en/, etc.)
+- **Soporte para idiomas RTL** (derecha a izquierda) como árabe
+- **Selector de idiomas** con banderas y nombres nativos
+- **Marcado de datos** con atributos HTML simples (data-i18n)
+
+### Idiomas soportados
+
+- 🇪🇸 Español (es) - idioma por defecto
+- 🇺🇸 Inglés (en) - idioma de respaldo
+- 🇫🇷 Francés (fr)
+- 🇩🇪 Alemán (de)
+- 🇮🇹 Italiano (it)
+- 🇵🇹 Portugués (pt)
+- 🇨🇳 Chino (zh)
+- 🇯🇵 Japonés (ja)
+- 🇰🇷 Coreano (ko)
+- 🇷🇺 Ruso (ru)
+- 🇦🇪 Árabe (ar) - RTL
+- 🇸🇪 Sueco (sv)
+- 🇳🇱 Holandés (nl)
+
+Para más detalles sobre el sistema de i18n, ver [i18n/README.md](i18n/README.md).
+
+## Desarrollo
 
 ### Requisitos
-No se requieren instalaciones especiales ya que todas las dependencias se cargan a través de CDN.
 
-### Desarrollo Local
-1. Clonar el repositorio:
-```bash
-git clone https://github.com/your-username/beyond-solutions-landing.git
-cd beyond-solutions-landing
-```
+- Servidor web (Apache recomendado para .htaccess)
+- No se requiere Node.js o procesamiento del lado del servidor
 
-2. Abrir el archivo index.html en el navegador:
-```bash
-# En macOS
-open index.html
+### Instalación local
 
-# En Windows
-start index.html
+1. Clone el repositorio:
+   ```
+   git clone https://github.com/your-username/beyond-solutions-landing.git
+   ```
 
-# En Linux
-xdg-open index.html
-```
+2. Configure su servidor web para apuntar al directorio del proyecto.
 
-### Despliegue
-La página puede ser desplegada en cualquier servidor web estático como:
-- GitHub Pages
-- Netlify
-- Vercel
-- Amazon S3
-- Firebase Hosting
+3. Acceda a la página a través de su servidor web local.
 
-## Sistema de Diseño
-El diseño de la página sigue los lineamientos del sistema de diseño documentado en `DESIGN_SYSTEM.md`, que incluye:
+## Optimización SEO
 
-- **Identidad y principios**:
-  - Claridad
-  - Futurismo discreto
-  - Accesibilidad
-  - Transparencia
-
-- **Paleta de colores oficial**:
-  - Primary-900: #192c64
-  - Primary-700: #243f8f
-  - Accent-300: #bdc5dd
-  - Accent-100: #e9ebf3
-
-- **Tipografía**:
-  - Display/Headers: Open Sauce One
-  - Body: Open Sauce One
-  - Auxiliar: Muli
-
-- **Componentes**:
-  - Botones primarios
-  - Tarjetas
-  - Banners CTA
-  - Formularios
+- Meta tags para cada idioma
+- Sitemap.xml con entradas para todos los idiomas
+- Configuración robots.txt
+- Cabeceras HTTP Content-Language
+- Enlaces rel="alternate" hreflang para indicar versiones alternativas en otros idiomas
 
 ## Accesibilidad
-- Contraste WCAG 2.1 AA mínimo
-- Navegación lógica por teclado
-- Soporte para prefers-reduced-motion
-- Uso apropiado de roles ARIA
-- Soporte para múltiples idiomas y contextos culturales
 
-## Contacto
-- **Email**: info@beyondsolutions.app
-- **Teléfono**: +52 55 8647 0143
-- **Dirección**: Torre Guttenberg – J. Rousseau 3, Anzures, Miguel Hidalgo, Ciudad de México, México
-- **Sitio Web**: www.beyondsolutions.app
+- Navegación por teclado completa
+- Atributos ARIA para mejorar la experiencia de lectores de pantalla
+- Contraste de color adecuado
+- Textos alternativos para imágenes
 
 ## Licencia
-© 2025 Beyond Solutions. Todos los derechos reservados. 
+
+Todos los derechos reservados © 2025 Beyond Solutions 

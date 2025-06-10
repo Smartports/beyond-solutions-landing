@@ -9,9 +9,30 @@
   <meta name="description" content="Beyond es una plataforma digital diseñada para integrar y gestionar estratégicamente todos los elementos que conforman un desarrollo inmobiliario de clase mundial.">
 
   <!-- i18n Scripts -->
-  <script src="./i18n/i18n.js"></script>
-  <script src="./i18n/language-selector.js"></script>
-  <link rel="stylesheet" href="./i18n/rtl.css">
+  <link rel="stylesheet" href="./css/language-selector.css">
+  <link rel="stylesheet" href="./css/rtl.css">
+  <script type="module" src="./js/main.js"></script>
+
+  <!-- Alternate language versions for SEO -->
+  <link rel="alternate" hreflang="es" href="https://smartports.github.io/beyond-solutions-landing/">
+  <link rel="alternate" hreflang="en" href="https://smartports.github.io/beyond-solutions-landing/?lang=en">
+  <link rel="alternate" hreflang="fr" href="https://smartports.github.io/beyond-solutions-landing/?lang=fr">
+  <link rel="alternate" hreflang="de" href="https://smartports.github.io/beyond-solutions-landing/?lang=de">
+  <link rel="alternate" hreflang="it" href="https://smartports.github.io/beyond-solutions-landing/?lang=it">
+  <link rel="alternate" hreflang="pt" href="https://smartports.github.io/beyond-solutions-landing/?lang=pt">
+  <link rel="alternate" hreflang="zh" href="https://smartports.github.io/beyond-solutions-landing/?lang=zh">
+  <link rel="alternate" hreflang="ja" href="https://smartports.github.io/beyond-solutions-landing/?lang=ja">
+  <link rel="alternate" hreflang="ko" href="https://smartports.github.io/beyond-solutions-landing/?lang=ko">
+  <link rel="alternate" hreflang="ru" href="https://smartports.github.io/beyond-solutions-landing/?lang=ru">
+  <link rel="alternate" hreflang="ar" href="https://smartports.github.io/beyond-solutions-landing/?lang=ar">
+  <link rel="alternate" hreflang="sv" href="https://smartports.github.io/beyond-solutions-landing/?lang=sv">
+  <link rel="alternate" hreflang="nl" href="https://smartports.github.io/beyond-solutions-landing/?lang=nl">
+  <link rel="alternate" hreflang="pl" href="https://smartports.github.io/beyond-solutions-landing/?lang=pl">
+  <link rel="alternate" hreflang="tr" href="https://smartports.github.io/beyond-solutions-landing/?lang=tr">
+  <link rel="alternate" hreflang="hi" href="https://smartports.github.io/beyond-solutions-landing/?lang=hi">
+  <link rel="alternate" hreflang="vi" href="https://smartports.github.io/beyond-solutions-landing/?lang=vi">
+  <link rel="alternate" hreflang="el" href="https://smartports.github.io/beyond-solutions-landing/?lang=el">
+  <link rel="alternate" hreflang="x-default" href="https://smartports.github.io/beyond-solutions-landing/">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -50,101 +71,11 @@
 
   <!-- Alpine component -->
   <script>
-    // Initialize translation support before Alpine loads
-    function getMenuLabels() {
-      const labels = {
-        'es': {
-          'about': 'Sobre Nosotros',
-          'modelo': 'Modelo',
-          'por_que': '¿Por qué Beyond?',
-          'sectores': 'Sectores',
-          'capacidades': 'Capacidades',
-          'contacto': 'Contacto'
-        },
-        'en': {
-          'about': 'About Us',
-          'modelo': 'Model',
-          'por_que': 'Why Beyond?',
-          'sectores': 'Sectors',
-          'capacidades': 'Capabilities',
-          'contacto': 'Contact'
-        },
-        'fr': {
-          'about': 'À Propos',
-          'modelo': 'Modèle',
-          'por_que': 'Pourquoi Beyond?',
-          'sectores': 'Secteurs',
-          'capacidades': 'Capacités',
-          'contacto': 'Contact'
-        },
-        'de': {
-          'about': 'Über Uns',
-          'modelo': 'Modell',
-          'por_que': 'Warum Beyond?',
-          'sectores': 'Sektoren',
-          'capacidades': 'Fähigkeiten',
-          'contacto': 'Kontakt'
-        },
-        'it': {
-          'about': 'Chi Siamo',
-          'modelo': 'Modello',
-          'por_que': 'Perché Beyond?',
-          'sectores': 'Settori',
-          'capacidades': 'Capacità',
-          'contacto': 'Contatto'
-        },
-        'pt': {
-          'about': 'Sobre Nós',
-          'modelo': 'Modelo',
-          'por_que': 'Por que Beyond?',
-          'sectores': 'Setores',
-          'capacidades': 'Capacidades',
-          'contacto': 'Contato'
-        },
-        'zh': {
-          'about': '关于我们',
-          'modelo': '模型',
-          'por_que': '为什么选择 Beyond?',
-          'sectores': '行业领域',
-          'capacidades': '能力',
-          'contacto': '联系我们'
-        },
-        'ja': {
-          'about': '会社概要',
-          'modelo': 'モデル',
-          'por_que': 'なぜ Beyond?',
-          'sectores': '部門',
-          'capacidades': '能力',
-          'contacto': 'お問い合わせ'
-        },
-        'ru': {
-          'about': 'О Нас',
-          'modelo': 'Модель',
-          'por_que': 'Почему Beyond?',
-          'sectores': 'Секторы',
-          'capacidades': 'Возможности',
-          'contacto': 'Контакты'
-        },
-        'ar': {
-          'about': 'من نحن',
-          'modelo': 'النموذج',
-          'por_que': 'لماذا Beyond؟',
-          'sectores': 'القطاعات',
-          'capacidades': 'القدرات',
-          'contacto': 'اتصل بنا'
-        }
-      };
-      
-      // Default to Spanish if no locale detected
-      const currentLocale = localStorage.getItem('beyondLocale') || 'es';
-      return labels[currentLocale] || labels.es;
-    }
-    
+    // Alpine components will now use the i18n system from main.js
     document.addEventListener('alpine:init', () => {
       Alpine.data('nav', () => ({
         open: false,
         theme: localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
-        currentLabels: getMenuLabels(),
         items: [
           { id: 'about', label: '', href: '#about' },
           { id: 'modelo', label: '', href: '#modelo' },
@@ -182,20 +113,21 @@
             }
           });
           
-          // Listen for language changes to update the UI
-          window.addEventListener('localeChanged', (event) => {
-            console.log('Locale changed to:', event.detail.locale);
+          // Listen for i18n events
+          document.addEventListener('i18n:languageChanged', (e) => {
             // Update menu labels
             this.updateLabels();
           });
         },
         
-        // Update labels based on current locale
+        // Update labels based on current locale using the i18n system
         updateLabels() {
-          const labels = getMenuLabels();
-          this.items.forEach(item => {
-            item.label = labels[item.id] || item.id;
-          });
+          // Los elementos ahora se actualizarán automáticamente con data-i18n
+          if (window.i18n && window.i18n.t) {
+            this.items.forEach(item => {
+              item.label = window.i18n.t(`nav.items.${item.id}`, {}, item.id);
+            });
+          }
         },
         linkClass(id) {
           return this.active === id
@@ -277,40 +209,8 @@
       </nav>
       <div class="flex items-center space-x-4">
         <!-- Language Selector -->
-        <div id="language-selector" x-data="languageSelector" class="relative" @keydown.escape="close()">
-          <button 
-            id="language-dropdown-toggle"
-            @click="toggle"
-            class="flex items-center gap-2 px-3 py-2 rounded bg-accent-50 dark:bg-primary-800 hover:bg-accent-100 dark:hover:bg-primary-700 transition-all focus:outline-none focus:ring-2 focus:ring-primary-700"
-            aria-haspopup="true"
-            :aria-expanded="open"
-            aria-controls="language-dropdown"
-          >
-            <span id="current-language" class="flex items-center gap-2">
-              <img src="https://flagcdn.com/w20/es.png" srcset="https://flagcdn.com/w40/es.png 2x" width="20" height="15" alt="Español" class="rounded-sm">
-              <span class="hidden sm:inline">Español</span>
-            </span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </button>
-          <div 
-            id="language-dropdown"
-            x-show="open" 
-            x-transition:enter="transition ease-out duration-100"
-            x-transition:enter-start="transform opacity-0 scale-95"
-            x-transition:enter-end="transform opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-75"
-            x-transition:leave-start="transform opacity-100 scale-100"
-            x-transition:leave-end="transform opacity-0 scale-95"
-            class="absolute z-50 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-zinc-800 ring-1 ring-black ring-opacity-5 focus:outline-none p-2 space-y-1"
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="language-dropdown-toggle"
-            x-cloak
-          >
-            <!-- Dropdown items will be populated by i18n.js -->
-          </div>
+        <div class="language-selector relative">
+          <!-- El contenido será generado por el componente LanguageSelector -->
         </div>
         
         <!-- Theme Toggle -->
@@ -711,6 +611,27 @@
         duration: 600,
         disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
       });
+    });
+
+    // Exponer la instancia i18n globalmente para que Alpine pueda acceder a ella
+    import('./js/i18n.js').then(module => {
+      // Inicializar la instancia i18n y exponerla globalmente
+      module.initI18n({
+        basePath: '/i18n',
+        defaultLanguage: 'es',
+        fallbackLanguage: 'en',
+        debug: false
+      }).then(instance => {
+        // Exponer la instancia y las funciones de utilidad globalmente
+        window.i18n = instance;
+        window.t = module.t;
+        window.changeLanguage = module.changeLanguage;
+        
+        // Disparar un evento para que Alpine actualice los labels
+        document.dispatchEvent(new CustomEvent('i18n:ready'));
+      });
+    }).catch(error => {
+      console.error('Error loading i18n module:', error);
     });
   </script>
 </body>
