@@ -1,0 +1,254 @@
+/**
+ * Estilos para el selector de idiomas
+ * Compatible con diseño responsive y temas claro/oscuro
+ */
+
+.language-selector {
+  position: relative;
+  display: inline-block;
+  z-index: 50;
+}
+
+.language-selector button:focus-visible {
+  outline: 2px solid #243f8f;
+  outline-offset: 2px;
+}
+
+.language-selector img {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+/* Animaciones */
+#language-dropdown {
+  transform-origin: top right;
+  transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+}
+
+#language-dropdown:not(.hidden) {
+  animation: fadeIn 0.15s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* RTL Support */
+html[dir="rtl"] .language-selector #language-dropdown {
+  transform-origin: top left;
+}
+
+/* Mejoras para accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  #language-dropdown,
+  .language-selector button {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Soporte para pantallas pequeñas */
+@media (max-width: 640px) {
+  #language-dropdown {
+    min-width: 180px;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .language-selector button:focus-visible {
+    outline-color: #bdc5dd;
+  }
+}
+
+.language-selector__button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--bg-surface, transparent);
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--text-primary, #333);
+  transition: all 0.2s ease;
+}
+
+.language-selector__button:hover,
+.language-selector__button:focus {
+  background-color: var(--bg-surface-hover, rgba(0, 0, 0, 0.05));
+  border-color: var(--border-color-hover, rgba(0, 0, 0, 0.2));
+}
+
+.language-selector__button::after {
+  content: '';
+  display: inline-block;
+  margin-left: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: solid var(--text-primary, #333);
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.language-selector.is-open .language-selector__button::after {
+  transform: rotate(-135deg);
+}
+
+.language-selector__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  min-width: 100%;
+  margin: 0.25rem 0 0;
+  padding: 0.5rem 0;
+  list-style: none;
+  background-color: var(--bg-surface, #fff);
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  z-index: 101;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.language-selector.is-open .language-selector__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.language-selector__dropdown li {
+  margin: 0;
+  padding: 0;
+}
+
+.language-selector__dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: var(--text-primary, #333);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: background-color 0.2s ease;
+}
+
+.language-selector__dropdown a:hover,
+.language-selector__dropdown a:focus {
+  background-color: var(--bg-surface-hover, rgba(0, 0, 0, 0.05));
+  outline: none;
+}
+
+.language-selector__flag {
+  width: 1.25rem;
+  height: 0.875rem;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.language-selector__code {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.language-selector__name {
+  font-size: 0.875rem;
+}
+
+/* Estilos RTL */
+html[dir="rtl"] .language-selector__button::after {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+html[dir="rtl"] .language-selector__dropdown {
+  left: auto;
+  right: 0;
+}
+
+/* Estilos para tema oscuro */
+.dark .language-selector__button,
+.dark-mode .language-selector__button {
+  background-color: var(--bg-surface-dark, rgba(255, 255, 255, 0.05));
+  border-color: var(--border-color-dark, rgba(255, 255, 255, 0.1));
+  color: var(--text-primary-dark, #fff);
+}
+
+.dark .language-selector__button::after,
+.dark-mode .language-selector__button::after {
+  border-color: var(--text-primary-dark, #fff);
+}
+
+.dark .language-selector__button:hover,
+.dark .language-selector__button:focus,
+.dark-mode .language-selector__button:hover,
+.dark-mode .language-selector__button:focus {
+  background-color: var(--bg-surface-hover-dark, rgba(255, 255, 255, 0.1));
+  border-color: var(--border-color-hover-dark, rgba(255, 255, 255, 0.2));
+}
+
+.dark .language-selector__dropdown,
+.dark-mode .language-selector__dropdown {
+  background-color: var(--bg-surface-dark, #222);
+  border-color: var(--border-color-dark, rgba(255, 255, 255, 0.1));
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.dark .language-selector__dropdown a,
+.dark-mode .language-selector__dropdown a {
+  color: var(--text-primary-dark, #fff);
+}
+
+.dark .language-selector__dropdown a:hover,
+.dark .language-selector__dropdown a:focus,
+.dark-mode .language-selector__dropdown a:hover,
+.dark-mode .language-selector__dropdown a:focus {
+  background-color: var(--bg-surface-hover-dark, rgba(255, 255, 255, 0.05));
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .language-selector__dropdown {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 50vh;
+    margin: 0;
+    border-radius: 0.5rem 0.5rem 0 0;
+    transform: translateY(100%);
+    z-index: 1050;
+  }
+
+  .language-selector.is-open .language-selector__dropdown {
+    transform: translateY(0);
+  }
+
+  .language-selector__dropdown a {
+    padding: 0.75rem 1rem;
+  }
+
+  .language-selector__name {
+    font-size: 1rem;
+  }
+} 
