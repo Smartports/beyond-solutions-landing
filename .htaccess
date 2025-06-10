@@ -1,15 +1,15 @@
-# Configuración de idiomas para Beyond Solutions
-# Gestiona redirecciones y rutas basadas en idioma
+# Language configuration for Beyond Solutions
+# Manages redirects and routes based on language
 
-# Activar el módulo de reescritura
+# Enable the rewrite module
 RewriteEngine On
 
-# Forzar HTTPS
+# Force HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Detectar el idioma preferido del navegador para los visitantes nuevos
-# y redirigirlos a la versión correspondiente del sitio web
+# Detect the browser's preferred language for new visitors
+# and redirect them to the corresponding version of the website
 RewriteCond %{REQUEST_URI} ^/?$
 RewriteCond %{HTTP:Accept-Language} ^(es) [NC]
 RewriteRule ^(.*)$ /es/ [L,R=302]
@@ -62,19 +62,19 @@ RewriteCond %{REQUEST_URI} ^/?$
 RewriteCond %{HTTP:Accept-Language} ^(nl) [NC]
 RewriteRule ^(.*)$ /nl/ [L,R=302]
 
-# Si no se detecta ningún idioma específico, redirigir a la versión en español por defecto
+# If no specific language is detected, redirect to the default Spanish version
 RewriteCond %{REQUEST_URI} ^/?$
 RewriteRule ^(.*)$ /es/ [L,R=302]
 
-# Asegurar que los directorios de idioma apunten al archivo index.html
+# Ensure that language directories point to the index.html file
 RewriteRule ^(es|en|fr|de|it|pt|zh|ja|ko|ru|ar|sv|nl)/?$ index.html [L]
 
-# Manejar solicitudes a archivos de idioma para servir el index.html apropiado
+# Handle requests to language files to serve the appropriate index.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(es|en|fr|de|it|pt|zh|ja|ko|ru|ar|sv|nl)/(.*)$ $2 [L]
 
-# Establecer las cabeceras correctas de Content-Language
+# Set the correct Content-Language headers
 <FilesMatch "index\.html$">
     RewriteCond %{REQUEST_URI} ^/es/ [OR]
     RewriteCond %{REQUEST_URI} ^/es$
@@ -129,10 +129,10 @@ RewriteRule ^(es|en|fr|de|it|pt|zh|ja|ko|ru|ar|sv|nl)/(.*)$ $2 [L]
     Header set Content-Language "nl"
 </FilesMatch>
 
-# Configurar el tipo MIME correcto para SVG
+# Set the correct MIME type for SVG
 AddType image/svg+xml .svg .svgz
 
-# Configuración de compresión y caché
+# Compression and cache configuration
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
 </IfModule>
@@ -140,7 +140,7 @@ AddType image/svg+xml .svg .svgz
 <IfModule mod_expires.c>
   ExpiresActive On
   
-  # Imágenes
+  # Images
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
   ExpiresByType image/svg+xml "access plus 1 year"
@@ -149,6 +149,6 @@ AddType image/svg+xml .svg .svgz
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
   
-  # Archivos de idioma (JSON)
+  # Language files (JSON)
   ExpiresByType application/json "access plus 1 day"
 </IfModule> 

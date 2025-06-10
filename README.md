@@ -26,22 +26,6 @@ To run this site locally:
    ```
 3. Navigate to `http://localhost:8000` in your browser
 
-## Available Languages
-
-- Spanish (es) - Default
-- English (en)
-- French (fr)
-- German (de)
-- Italian (it)
-- Portuguese (pt)
-- Chinese (zh)
-- Japanese (ja)
-- Korean (ko)
-- Russian (ru)
-- Arabic (ar) - RTL support
-- Swedish (sv)
-- Dutch (nl)
-
 ## File Structure
 
 - `./i18n/` - Translation files and flag images
@@ -51,102 +35,107 @@ To run this site locally:
 - `index.html` - Main HTML file
 - `404.html` - Custom 404 page with language redirection
 
-## Características
+## Features
 
-- Diseño responsive optimizado para todos los dispositivos
-- Tema claro/oscuro basado en preferencias del usuario
-- Sistema de internacionalización (i18n) completo con 13 idiomas
-- Rutas basadas en idioma para SEO (/es/, /en/, etc.)
-- Optimización para performance y accesibilidad
+- Responsive design optimized for all devices
+- Light/dark theme based on user preferences
+- Complete internationalization (i18n) system with 18 languages
+- Language-based routes for SEO (/es/, /en/, etc.)
+- Performance and accessibility optimization
 
-## Estructura del proyecto
+## Project Structure
 
 ```
 beyond-solutions-landing/
-├── css/                  # Estilos CSS
-│   ├── language-selector.css  # Estilos para el selector de idiomas
-│   └── rtl.css           # Estilos para idiomas RTL (derecha a izquierda)
+├── css/                  # CSS Styles
+│   ├── language-selector.css  # Styles for the language selector
+│   └── rtl.css           # Styles for RTL languages (right to left)
 │
-├── i18n/                 # Archivos de internacionalización
-│   ├── flags/            # Banderas SVG para cada idioma
-│   ├── es.json           # Traducción en español (idioma por defecto)
-│   ├── en.json           # Traducción en inglés
-│   └── ...               # Otros archivos de idioma
+├── i18n/                 # Internationalization files
+│   ├── flags/            # SVG flags for each language
+│   ├── es.json           # Spanish translation (default language)
+│   ├── en.json           # English translation
+│   └── ...               # Other language files
 │
-├── img/                  # Imágenes e iconos
+├── img/                  # Images and icons
 │
 ├── js/                   # JavaScript
-│   ├── i18n.js           # Módulo principal de internacionalización
-│   ├── language-selector.js  # Componente de selector de idiomas
-│   └── main.js           # Script principal
+│   ├── i18n.js           # Main internationalization module
+│   ├── language-selector.js  # Language selector component
+│   └── main.js           # Main script
 │
-├── .htaccess             # Configuración para Apache (rutas y redirecciones)
-├── index.html            # Página principal
-├── robots.txt            # Configuración para motores de búsqueda
-└── sitemap.xml           # Mapa del sitio para SEO
+├── .htaccess             # Apache configuration (routes and redirects)
+├── index.html            # Main page
+├── robots.txt            # Search engine configuration
+└── sitemap.xml           # Site map for SEO
 ```
 
-## Sistema de Internacionalización
+## Internationalization System
 
-El sistema de i18n permite mostrar el contenido en múltiples idiomas:
+The i18n system allows content to be displayed in multiple languages:
 
-- **Detección automática** del idioma preferido del usuario
-- **Rutas de URL basadas en idioma** (/es/, /en/, etc.)
-- **Soporte para idiomas RTL** (derecha a izquierda) como árabe
-- **Selector de idiomas** con banderas y nombres nativos
-- **Marcado de datos** con atributos HTML simples (data-i18n)
+- **Automatic detection** of the user's preferred language
+- **Language-based URL routes** (/es/, /en/, etc.)
+- **Support for RTL languages** (right to left) such as Arabic
+- **Language selector** with flags and native names
+- **Data markup** with simple HTML attributes (data-i18n)
 
-### Idiomas soportados
+### Supported Languages
 
-- 🇪🇸 Español (es) - idioma por defecto
-- 🇺🇸 Inglés (en) - idioma de respaldo
-- 🇫🇷 Francés (fr)
-- 🇩🇪 Alemán (de)
-- 🇮🇹 Italiano (it)
-- 🇵🇹 Portugués (pt)
-- 🇨🇳 Chino (zh)
-- 🇯🇵 Japonés (ja)
-- 🇰🇷 Coreano (ko)
-- 🇷🇺 Ruso (ru)
-- 🇦🇪 Árabe (ar) - RTL
-- 🇸🇪 Sueco (sv)
-- 🇳🇱 Holandés (nl)
+- 🇪🇸 Spanish (es) - default language
+- 🇺🇸 English (en) - fallback language
+- 🇫🇷 French (fr)
+- 🇩🇪 German (de)
+- 🇮🇹 Italian (it)
+- 🇵🇹 Portuguese (pt)
+- 🇨🇳 Chinese (zh)
+- 🇯🇵 Japanese (ja)
+- 🇰🇷 Korean (ko)
+- 🇷🇺 Russian (ru)
+- 🇸🇦 Arabic (ar) - RTL
+- 🇵🇱 Polish (pl)
+- 🇹🇷 Turkish (tr)
+- 🇸🇪 Swedish (sv)
+- 🇳🇱 Dutch (nl)
+- 🇮🇳 Hindi (hi)
+- 🇻🇳 Vietnamese (vi)
+- 🇬🇷 Greek (el)
 
-Para más detalles sobre el sistema de i18n, ver [i18n/README.md](i18n/README.md).
+For more details about the i18n system, see [i18n/README.md](i18n/README.md).
 
-## Desarrollo
+## Development
 
-### Requisitos
+### Requirements
 
-- Servidor web (Apache recomendado para .htaccess)
-- No se requiere Node.js o procesamiento del lado del servidor
+- Web server (Apache recommended for .htaccess)
+- No Node.js or server-side processing required
 
-### Instalación local
+### Local Installation
 
-1. Clone el repositorio:
+1. Clone the repository:
    ```
-   git clone https://github.com/your-username/beyond-solutions-landing.git
+   git clone https://github.com/Smartports/beyond-solutions-landing.git
    ```
 
-2. Configure su servidor web para apuntar al directorio del proyecto.
+2. Configure your web server to point to the project directory.
 
-3. Acceda a la página a través de su servidor web local.
+3. Access the page through your local web server.
 
-## Optimización SEO
+## SEO Optimization
 
-- Meta tags para cada idioma
-- Sitemap.xml con entradas para todos los idiomas
-- Configuración robots.txt
-- Cabeceras HTTP Content-Language
-- Enlaces rel="alternate" hreflang para indicar versiones alternativas en otros idiomas
+- Meta tags for each language
+- Sitemap.xml with entries for all languages
+- Robots.txt configuration
+- HTTP Content-Language headers
+- rel="alternate" hreflang links to indicate alternative versions in other languages
 
-## Accesibilidad
+## Accessibility
 
-- Navegación por teclado completa
-- Atributos ARIA para mejorar la experiencia de lectores de pantalla
-- Contraste de color adecuado
-- Textos alternativos para imágenes
+- Complete keyboard navigation
+- ARIA attributes to improve screen reader experience
+- Appropriate color contrast
+- Alternative texts for images
 
-## Licencia
+## License
 
-Todos los derechos reservados © 2025 Beyond Solutions 
+All rights reserved © 2025 Beyond Solutions.

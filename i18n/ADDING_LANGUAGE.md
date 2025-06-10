@@ -1,20 +1,20 @@
-# Guía para agregar un nuevo idioma al sitio
+# Guide to Adding a New Language to the Site
 
-Este documento detalla los pasos para añadir un nuevo idioma al sistema de internacionalización de Beyond Solutions.
+This document details the steps to add a new language to the Beyond Solutions internationalization system.
 
-## Pasos para añadir un nuevo idioma
+## Steps to Add a New Language
 
-### 1. Crear el archivo de traducción
+### 1. Create the Translation File
 
-1. Copia el archivo de base `./i18n/es.json` a un nuevo archivo con el código de idioma deseado:
+1. Copy the base file `./i18n/es.json` to a new file with the desired language code:
    ```
-   cp i18n/es.json i18n/[codigo].json
+   cp i18n/es.json i18n/[code].json
    ```
-   Donde `[codigo]` es el código ISO 639-1 de dos letras del idioma (ej: `fr` para francés).
+   Where `[code]` is the two-letter ISO 639-1 code for the language (e.g., `fr` for French).
 
-2. Edita el nuevo archivo JSON y traduce todos los valores. Asegúrate de mantener la estructura y las claves intactas.
+2. Edit the new JSON file and translate all values. Make sure to keep the structure and keys intact.
 
-3. Actualiza la sección `metadata` con la información correcta del idioma:
+3. Update the `metadata` section with the correct language information:
    ```json
    "metadata": {
      "locale": "fr",
@@ -24,14 +24,14 @@ Este documento detalla los pasos para añadir un nuevo idioma al sistema de inte
    }
    ```
    
-   - `locale`: Código ISO 639-1 del idioma
-   - `name`: Nombre del idioma en inglés
-   - `nativeName`: Nombre del idioma en su propio idioma
-   - `dir`: Dirección del texto ("ltr" para izquierda a derecha, "rtl" para derecha a izquierda)
+   - `locale`: ISO 639-1 code for the language
+   - `name`: Language name in English
+   - `nativeName`: Language name in its own language
+   - `dir`: Text direction ("ltr" for left-to-right, "rtl" for right-to-left)
 
-### 2. Agregar el idioma al archivo de configuración
+### 2. Add the Language to the Configuration File
 
-Edita el archivo `./i18n/config.json` y añade el nuevo idioma a la lista `availableLocales`:
+Edit the file `./i18n/config.json` and add the new language to the `availableLocales` list:
 
 ```json
 {
@@ -42,43 +42,43 @@ Edita el archivo `./i18n/config.json` y añade el nuevo idioma a la lista `avail
 }
 ```
 
-- `code`: Código ISO 639-1 del idioma
-- `name`: Nombre del idioma en inglés
-- `nativeName`: Nombre del idioma en su propio idioma
-- `flag`: Código de país ISO 3166-1 alpha-2 para la bandera
+- `code`: ISO 639-1 code for the language
+- `name`: Language name in English
+- `nativeName`: Language name in its own language
+- `flag`: ISO 3166-1 alpha-2 country code for the flag
 
-### 3. Probar el nuevo idioma
+### 3. Test the New Language
 
-1. Abre el sitio en un navegador
-2. Utiliza el selector de idiomas en el header para seleccionar el nuevo idioma
-3. Verifica que todas las traducciones se muestren correctamente
-4. Para idiomas RTL, comprueba que el diseño se ajuste adecuadamente
+1. Open the site in a browser
+2. Use the language selector in the header to select the new language
+3. Verify that all translations are displayed correctly
+4. For RTL languages, check that the layout adjusts properly
 
-## Consideraciones para idiomas RTL
+## Considerations for RTL Languages
 
-Para idiomas que se escriben de derecha a izquierda (RTL) como árabe (ar) o hebreo (he):
+For languages written from right to left (RTL) such as Arabic (ar) or Hebrew (he):
 
-1. Establece `"dir": "rtl"` en la sección `metadata` del archivo de traducción
-2. Asegúrate de añadir también `"dir": "rtl"` en el objeto del idioma en `config.json`
-3. Verifica que los estilos de RTL en `./i18n/rtl.css` funcionen correctamente con el nuevo idioma
+1. Set `"dir": "rtl"` in the `metadata` section of the translation file
+2. Make sure to also add `"dir": "rtl"` in the language object in `config.json`
+3. Verify that the RTL styles in `./i18n/rtl.css` work correctly with the new language
 
-## Códigos de idioma y banderas comunes
+## Common Language and Flag Codes
 
-| Idioma    | Código Idioma | Código Bandera |
-|-----------|---------------|----------------|
-| Español   | es            | es             |
-| Inglés    | en            | us/gb          |
-| Francés   | fr            | fr             |
-| Alemán    | de            | de             |
-| Italiano  | it            | it             |
-| Portugués | pt            | pt/br          |
-| Ruso      | ru            | ru             |
-| Chino     | zh            | cn             |
-| Japonés   | ja            | jp             |
-| Coreano   | ko            | kr             |
-| Árabe     | ar            | sa/ae          |
-| Hebreo    | he            | il             |
+| Language   | Language Code | Flag Code |
+|------------|--------------|-----------|
+| Spanish    | es           | es        |
+| English    | en           | us/gb     |
+| French     | fr           | fr        |
+| German     | de           | de        |
+| Italian    | it           | it        |
+| Portuguese | pt           | pt/br     |
+| Russian    | ru           | ru        |
+| Chinese    | zh           | cn        |
+| Japanese   | ja           | jp        |
+| Korean     | ko           | kr        |
+| Arabic     | ar           | sa/ae     |
+| Hebrew     | he           | il        |
 
-Para un listado completo de códigos ISO 639-1 (idiomas) y ISO 3166-1 alpha-2 (países), consulta:
-- [Lista de códigos ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-- [Lista de códigos ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) 
+For a complete list of ISO 639-1 (languages) and ISO 3166-1 alpha-2 (countries) codes, see:
+- [List of ISO 639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+- [List of ISO 3166-1 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) 

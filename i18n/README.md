@@ -1,28 +1,28 @@
-# Sistema de Internacionalización (i18n) - Beyond Solutions
+# Internationalization System (i18n) - Beyond Solutions
 
-Este directorio contiene los archivos necesarios para la internacionalización del sitio web de Beyond Solutions.
+This directory contains the necessary files for the internationalization of the Beyond Solutions website.
 
-## Estructura de archivos
+## File Structure
 
 ```
 i18n/
-├── flags/            # Banderas SVG para cada idioma
-│   ├── es.svg        # Español
-│   ├── en.svg        # Inglés
-│   ├── fr.svg        # Francés
-│   └── ...           # Otras banderas
+├── flags/            # SVG flags for each language
+│   ├── es.svg        # Spanish
+│   ├── en.svg        # English
+│   ├── fr.svg        # French
+│   └── ...           # Other flags
 │
-├── es.json           # Traducción en español (idioma por defecto)
-├── en.json           # Traducción en inglés
-├── fr.json           # Traducción en francés
-└── ...               # Otros archivos de idioma
+├── es.json           # Spanish translation (default language)
+├── en.json           # English translation
+├── fr.json           # French translation
+└── ...               # Other language files
 ```
 
-## Formatos de archivo
+## File Formats
 
-### Archivos de traducción (JSON)
+### Translation Files (JSON)
 
-Cada archivo de idioma es un archivo JSON con la siguiente estructura:
+Each language file is a JSON file with the following structure:
 
 ```json
 {
@@ -46,83 +46,88 @@ Cada archivo de idioma es un archivo JSON con la siguiente estructura:
 }
 ```
 
-## Uso en HTML
+## Usage in HTML
 
-### Traducción de texto
+### Text Translation
 
-Para traducir texto en el HTML, usa el atributo `data-i18n`:
-
-```html
-<h1 data-i18n="hero.title">Texto por defecto</h1>
-```
-
-### Traducción de atributos
-
-Para traducir atributos HTML, usa `data-i18n-attr`:
+To translate text in HTML, use the `data-i18n` attribute:
 
 ```html
-<a href="#" data-i18n-attr="aria-label:nav.menu.open">Enlace</a>
+<h1 data-i18n="hero.title">Default text</h1>
 ```
 
-Para múltiples atributos:
+### Attribute Translation
+
+To translate HTML attributes, use `data-i18n-attr`:
+
+```html
+<a href="#" data-i18n-attr="aria-label:nav.menu.open">Link</a>
+```
+
+For multiple attributes:
 
 ```html
 <img src="image.jpg" data-i18n-attr="alt:image.alt,title:image.title">
 ```
 
-### Traducción de HTML interno
+### Internal HTML Translation
 
-Para traducir HTML (no solo texto), usa `data-i18n-html`:
+To translate HTML (not just text), use `data-i18n-html`:
 
 ```html
-<div data-i18n-html="section.html">Contenido HTML</div>
+<div data-i18n-html="section.html">HTML Content</div>
 ```
 
-## Agregar un nuevo idioma
+## Adding a New Language
 
-1. Crear un archivo JSON con las traducciones en la carpeta `i18n/` (por ejemplo, `de.json` para alemán)
-2. Agregar la bandera correspondiente en formato SVG en `i18n/flags/` (por ejemplo, `de.svg`)
-3. Agregar el idioma en la configuración en `js/i18n.js` en el array `supportedLanguages`
+1. Create a JSON file with translations in the `i18n/` folder (e.g., `de.json` for German)
+2. Add the corresponding flag in SVG format in `i18n/flags/` (e.g., `de.svg`)
+3. Add the language in the configuration in `js/i18n.js` in the `supportedLanguages` array
 
-## Idiomas soportados
+## Supported Languages
 
-- 🇪🇸 Español (es) - idioma por defecto
-- 🇺🇸 Inglés (en) - idioma de respaldo
-- 🇫🇷 Francés (fr)
-- 🇩🇪 Alemán (de)
-- 🇮🇹 Italiano (it)
-- 🇵🇹 Portugués (pt)
-- 🇨🇳 Chino (zh)
-- 🇯🇵 Japonés (ja)
-- 🇰🇷 Coreano (ko)
-- 🇷🇺 Ruso (ru)
-- 🇦🇪 Árabe (ar) - idioma RTL (derecha a izquierda)
-- 🇸🇪 Sueco (sv)
-- 🇳🇱 Holandés (nl)
+- 🇪🇸 Spanish (es) - default language
+- 🇺🇸 English (en) - fallback language
+- 🇫🇷 French (fr)
+- 🇩🇪 German (de)
+- 🇮🇹 Italian (it)
+- 🇵🇹 Portuguese (pt)
+- 🇨🇳 Chinese (zh)
+- 🇯🇵 Japanese (ja)
+- 🇰🇷 Korean (ko)
+- 🇷🇺 Russian (ru)
+- 🇸🇦 Arabic (ar) - RTL
+- 🇵🇱 Polish (pl)
+- 🇹🇷 Turkish (tr)
+- 🇸🇪 Swedish (sv)
+- 🇳🇱 Dutch (nl)
+- 🇮🇳 Hindi (hi)
+- 🇻🇳 Vietnamese (vi)
+- 🇬🇷 Greek (el)
 
-## Configuración SEO
+## SEO Configuration
 
-El sistema de internacionalización está configurado para SEO con:
+The internationalization system is configured for SEO with:
 
-- Rutas basadas en idioma (por ejemplo, `/es/`, `/en/`)
-- Meta tags de idioma alternativo
-- Cabeceras HTTP `Content-Language`
-- Sitemap.xml con entradas para todos los idiomas
+- Language-based routes (e.g., `/es/`, `/en/`)
+- Alternative language meta tags
+- HTTP `Content-Language` headers
+- Sitemap.xml with entries for all languages
 
-## API JavaScript
+## JavaScript API
 
-El sistema expone las siguientes funciones:
+The system exposes the following functions:
 
 ```javascript
-// Inicializar el sistema i18n
+// Initialize the i18n system
 const i18n = await initI18n(options);
 
-// Cambiar el idioma actual
+// Change the current language
 changeLanguage('fr');
 
-// Obtener una traducción
+// Get a translation
 const text = t('hero.title');
 
-// Verificar si el idioma actual es RTL
+// Check if the current language is RTL
 const isRightToLeft = isRTL();
 ``` 
