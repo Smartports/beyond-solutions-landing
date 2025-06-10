@@ -1,9 +1,9 @@
 {
-  "metadata": {
-    "locale": "es",
+  "meta": {
     "name": "Español",
     "nativeName": "Español",
-    "dir": "ltr"
+    "dir": "ltr",
+    "code": "es"
   },
   "general": {
     "title": "Beyond Solutions – Fibra 2025",
@@ -24,8 +24,8 @@
       "dark": "Activar modo oscuro"
     },
     "menu": {
-      "open": "Abrir menú de navegación",
-      "close": "Cerrar menú de navegación"
+      "open": "Abrir menú",
+      "close": "Cerrar menú"
     }
   },
   "hero": {
@@ -189,7 +189,7 @@
     }
   },
   "accessibility": {
-    "back_to_top": "Volver arriba",
-    "navigation": "Navegación principal"
+    "navigation": "Navegación principal",
+    "back_to_top": "Volver arriba"
   }
 } 

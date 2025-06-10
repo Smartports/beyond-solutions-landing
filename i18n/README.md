@@ -1,92 +1,128 @@
-# Sistema de Internacionalización (i18n) para Beyond Solutions
+# Sistema de Internacionalización (i18n) - Beyond Solutions
 
-Este directorio contiene todos los recursos necesarios para el sistema multilenguaje de la landing page de Beyond Solutions.
+Este directorio contiene los archivos necesarios para la internacionalización del sitio web de Beyond Solutions.
 
 ## Estructura de archivos
 
 ```
 i18n/
-├── config.json          # Configuración general del sistema i18n
-├── i18n.js              # Script principal del sistema
-├── language-selector.js # Componente Alpine.js para el selector de idiomas
-├── rtl.css              # Estilos para idiomas de derecha a izquierda (RTL)
-├── README.md            # Este archivo
-├── flags/               # Directorio para banderas personalizadas (opcional)
-├── es.json              # Traducciones en español (idioma predeterminado)
-├── en.json              # Traducciones en inglés
-└── [locale].json        # Otros archivos de traducción
+├── flags/            # Banderas SVG para cada idioma
+│   ├── es.svg        # Español
+│   ├── en.svg        # Inglés
+│   ├── fr.svg        # Francés
+│   └── ...           # Otras banderas
+│
+├── es.json           # Traducción en español (idioma por defecto)
+├── en.json           # Traducción en inglés
+├── fr.json           # Traducción en francés
+└── ...               # Otros archivos de idioma
 ```
 
-## Cómo funciona
+## Formatos de archivo
 
-El sistema detecta automáticamente el idioma preferido del navegador del usuario. Si ese idioma no está disponible, se muestra el contenido en español (idioma predeterminado).
+### Archivos de traducción (JSON)
 
-Los usuarios pueden cambiar manualmente el idioma utilizando el selector de idiomas en el header. La selección se guarda en localStorage para futuras visitas.
+Cada archivo de idioma es un archivo JSON con la siguiente estructura:
 
-## Añadir un nuevo idioma
-
-Para añadir un nuevo idioma al sitio:
-
-1. Crea un nuevo archivo JSON en el directorio `i18n/` con el código de idioma como nombre (ej: `fr.json` para francés).
-2. Copia la estructura de `es.json` y traduce todos los valores al nuevo idioma.
-3. Asegúrate de que la sección `metadata` tenga la información correcta:
-   ```json
-   "metadata": {
-     "locale": "fr",
-     "name": "French",
-     "nativeName": "Français",
-     "dir": "ltr"
-   }
-   ```
-4. Añade el nuevo idioma al archivo `config.json` en la lista `availableLocales`:
-   ```json
-   {
-     "code": "fr",
-     "name": "French",
-     "nativeName": "Français",
-     "flag": "fr"
-   }
-   ```
-
-### Notas sobre los códigos de idioma y banderas
-
-- Usa códigos de idioma ISO 639-1 de dos letras (ej: `es`, `en`, `fr`).
-- Para las banderas, usa códigos de país ISO 3166-1 alpha-2 (ej: `es`, `us`, `fr`).
-- Para idiomas con múltiples países, elige la bandera más representativa (ej: `us` para inglés).
-- Para idiomas RTL (como árabe o hebreo), añade `"dir": "rtl"` en el objeto del idioma en `config.json`.
+```json
+{
+  "meta": {
+    "name": "Español",
+    "nativeName": "Español",
+    "dir": "ltr",
+    "code": "es"
+  },
+  "nav": {
+    "brand": "Beyond Solutions",
+    "items": {
+      "about": "Sobre Nosotros",
+      "modelo": "Modelo",
+      "por_que": "¿Por qué Beyond?",
+      ...
+    },
+    ...
+  },
+  ...
+}
+```
 
 ## Uso en HTML
 
-### Textos estáticos
+### Traducción de texto
 
-Para traducir texto estático, usa el atributo `data-i18n` con la clave de traducción:
-
-```html
-<h1 data-i18n="sections.modelo.title"></h1>
-```
-
-### Atributos
-
-Para traducir atributos (como title, placeholder, aria-label), usa el atributo `data-i18n-attr`:
+Para traducir texto en el HTML, usa el atributo `data-i18n`:
 
 ```html
-<a href="#" data-i18n-attr="title:nav.menu.close, aria-label:nav.menu.close">...</a>
+<h1 data-i18n="hero.title">Texto por defecto</h1>
 ```
 
-### Desde JavaScript
+### Traducción de atributos
 
-Para obtener traducciones programáticamente:
+Para traducir atributos HTML, usa `data-i18n-attr`:
+
+```html
+<a href="#" data-i18n-attr="aria-label:nav.menu.open">Enlace</a>
+```
+
+Para múltiples atributos:
+
+```html
+<img src="image.jpg" data-i18n-attr="alt:image.alt,title:image.title">
+```
+
+### Traducción de HTML interno
+
+Para traducir HTML (no solo texto), usa `data-i18n-html`:
+
+```html
+<div data-i18n-html="section.html">Contenido HTML</div>
+```
+
+## Agregar un nuevo idioma
+
+1. Crear un archivo JSON con las traducciones en la carpeta `i18n/` (por ejemplo, `de.json` para alemán)
+2. Agregar la bandera correspondiente en formato SVG en `i18n/flags/` (por ejemplo, `de.svg`)
+3. Agregar el idioma en la configuración en `js/i18n.js` en el array `supportedLanguages`
+
+## Idiomas soportados
+
+- 🇪🇸 Español (es) - idioma por defecto
+- 🇺🇸 Inglés (en) - idioma de respaldo
+- 🇫🇷 Francés (fr)
+- 🇩🇪 Alemán (de)
+- 🇮🇹 Italiano (it)
+- 🇵🇹 Portugués (pt)
+- 🇨🇳 Chino (zh)
+- 🇯🇵 Japonés (ja)
+- 🇰🇷 Coreano (ko)
+- 🇷🇺 Ruso (ru)
+- 🇦🇪 Árabe (ar) - idioma RTL (derecha a izquierda)
+- 🇸🇪 Sueco (sv)
+- 🇳🇱 Holandés (nl)
+
+## Configuración SEO
+
+El sistema de internacionalización está configurado para SEO con:
+
+- Rutas basadas en idioma (por ejemplo, `/es/`, `/en/`)
+- Meta tags de idioma alternativo
+- Cabeceras HTTP `Content-Language`
+- Sitemap.xml con entradas para todos los idiomas
+
+## API JavaScript
+
+El sistema expone las siguientes funciones:
 
 ```javascript
-const text = i18n.t('sections.contacto.title');
-```
+// Inicializar el sistema i18n
+const i18n = await initI18n(options);
 
-Con parámetros:
+// Cambiar el idioma actual
+changeLanguage('fr');
 
-```javascript
-const greeting = i18n.t('greeting', { name: 'Juan' }); // "Hola, Juan!"
-```
+// Obtener una traducción
+const text = t('hero.title');
 
-## Consideraciones de RTL
-
-Para idiomas de derecha a izquierda (RTL) como árabe o hebreo, los estilos se ajustan automáticamente cuando se selecciona un idioma RTL, utilizando las clases definidas en `rtl.css`. 
+// Verificar si el idioma actual es RTL
+const isRightToLeft = isRTL();
+``` 

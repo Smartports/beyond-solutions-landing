@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "locale": "vi",
+    "name": "Vietnamese",
+    "nativeName": "Tiếng Việt",
+    "dir": "ltr"
+  },
+  "general": {
+    "title": "Beyond Solutions – Fiber 2025",
+    "description": "Beyond là nền tảng kỹ thuật số được thiết kế để tích hợp và quản lý một cách chiến lược tất cả các yếu tố tạo nên một dự án phát triển bất động sản đẳng cấp thế giới."
+  },
+  "nav": {
+    "brand": "Beyond Solutions",
+    "items": {
+      "about": "Về Chúng Tôi",
+      "modelo": "Mô Hình",
+      "por_que": "Tại Sao Beyond?",
+      "sectores": "Lĩnh Vực",
+      "capacidades": "Năng Lực",
+      "contacto": "Liên Hệ"
+    },
+    "theme": {
+      "light": "Chuyển sang chế độ sáng",
+      "dark": "Chuyển sang chế độ tối"
+    },
+    "menu": {
+      "open": "Mở menu",
+      "close": "Đóng menu"
+    }
+  },
+  "hero": {
+    "title": "Beyond là nền tảng kỹ thuật số được thiết kế để tích hợp và quản lý một cách chiến lược tất cả các yếu tố tạo nên một dự án phát triển bất động sản đẳng cấp thế giới.",
+    "subtitle": "Thông qua các giải pháp dựa trên tự động hóa, trí tuệ nhân tạo (AI), học máy (ML), và phân tích dữ liệu lớn tiên tiến.",
+    "cta": {
+      "primary": "Tìm hiểu thêm",
+      "secondary": "Liên hệ với chúng tôi"
+    }
+  },
+  "sections": {
+    "modelo": {
+      "title": "Mô Hình",
+      "intro": "Mô hình bao gồm việc điều phối toàn diện đất đai, vật liệu, kiến trúc, thiết kế, nghệ thuật, quy định, xây dựng và phát triển, với mục tiêu cho phép vận hành và thương mại hóa hiệu quả tài sản bất động sản ở cấp quốc gia và quốc tế.",
+      "items": [
+        {
+          "title": "Đất Đai và Vật Liệu",
+          "desc": "Xác định chiến lược nguồn cung dựa trên địa điểm xây dựng, đảm bảo tính sẵn có, hiệu quả và thời gian vận chuyển tối ưu."
+        },
+        {
+          "title": "Kiến Trúc, Thiết Kế và Nghệ Thuật",
+          "desc": "Kết hợp các đề xuất kiến trúc sáng tạo với thiết kế giá trị cao và tích hợp nghệ thuật."
+        },
+        {
+          "title": "Quy Định và Pháp Lý",
+          "desc": "Tuân thủ quy định toàn diện cho phép các quy trình được thực hiện kịp thời, giảm thiểu rủi ro."
+        },
+        {
+          "title": "Xây Dựng và Phát Triển",
+          "desc": "Thực hiện hiệu quả thông qua số hóa và hợp tác toàn cầu của các đối tác chiến lược, định nghĩa lại tiêu chuẩn trong lĩnh vực bất động sản."
+        },
+        {
+          "title": "Tiếp Thị",
+          "desc": "Chiến lược thị trường dựa trên dữ liệu lớn để phân khúc chính xác và thương mại hóa hiệu quả trong các mô hình B2B và B2C."
+        },
+        {
+          "title": "Vận Hành",
+          "desc": "Quản trị và bảo trì chuyên nghiệp hướng đến tối đa hóa hiệu quả hoạt động và lợi nhuận của tài sản bất động sản."
+        }
+      ]
+    },
+    "por_que": {
+      "title": "Tại Sao Beyond?",
+      "items": [
+        {
+          "title": "THIẾT KẾ CÓ MỤC ĐÍCH VÀ SỨC KHỎE",
+          "desc": "Kiến trúc, nghệ thuật và vật liệu nâng cao cuộc sống hàng ngày, tạo ra không gian có ý nghĩa và kết nối với môi trường xung quanh."
+        },
+        {
+          "title": "CÔNG NGHỆ VÀ HIỆU QUẢ HOẠT ĐỘNG",
+          "desc": "Tự động hóa, dữ liệu và sự xuất sắc trong vận hành tối ưu hóa quy trình, giảm chi phí và cải thiện chất lượng ở mọi giai đoạn phát triển."
+        },
+        {
+          "title": "CAM KẾT XÃ HỘI VÀ MÔI TRƯỜNG",
+          "desc": "Xây dựng có trách nhiệm với tác động tích cực, tôn trọng tiêu chuẩn lao động và môi trường, và thúc đẩy tính bền vững và công bằng."
+        }
+      ]
+    },
+    "sectores": {
+      "title": "Lĩnh Vực",
+      "items": [
+        {
+          "title": "NHÀ Ở",
+          "desc": "Lối sống độc quyền và bền vững, nơi thiết kế, công nghệ và nghệ thuật hòa quyện để mang đến những trải nghiệm độc đáo với chất lượng và sự thoải mái."
+        },
+        {
+          "title": "PHỤC HỒI VÀ TÁI CHUYỂN ĐỔI",
+          "desc": "Phục hồi cao cấp kết hợp bảo tồn tiên tiến và thiết kế đương đại, bảo tồn giá trị lịch sử và nâng cao chức năng."
+        },
+        {
+          "title": "GIÁO DỤC, NGHỆ THUẬT VÀ VĂN HÓA",
+          "desc": "Không gian thúc đẩy giáo dục, nghệ thuật và văn hóa, kết hợp kiến trúc hiện đại, công nghệ và thiết kế để phát triển sáng tạo, học tập và biểu đạt nghệ thuật."
+        },
+        {
+          "title": "THƯƠNG MẠI VÀ CÔNG NGHIỆP",
+          "desc": "Môi trường năng động kết hợp thiết kế, công nghệ và dữ liệu để tối ưu hóa trải nghiệm người dùng, lợi nhuận và hiệu suất bất động sản."
+        }
+      ]
+    },
+    "capacidades": {
+      "title": "Năng Lực",
+      "items": [
+        {
+          "title": "Đất Đai – Thu Mua Thông Minh",
+          "desc": "Thông qua phân tích dữ liệu lớn nâng cao, các tham số phái sinh và công nghệ như thực tế ảo tăng cường và góc nhìn vệ tinh, chúng tôi xác định và đánh giá chiến lược đất đai trên toàn cầu. Chúng tôi xem xét các yếu tố như sử dụng đất, khí hậu, địa hình, tính bền vững và vật liệu đổi mới để tối đa hóa giá trị của mỗi dự án phát triển theo vị trí địa lý của nó."
+        },
+        {
+          "title": "Vật Liệu – Định Nghĩa Lại Chuỗi Cung Ứng",
+          "desc": "Chúng tôi tối ưu hóa chuỗi cung ứng thông qua công nghệ tiên tiến, khả năng truy xuất nguồn gốc thời gian thực và lựa chọn vật liệu bền vững và hiệu suất cao. Chiến lược mua sắm trực tiếp của chúng tôi với các nhà sản xuất tối đa hóa hiệu quả, giảm chi phí và đảm bảo chất lượng."
+        },
+        {
+          "title": "Kiến Trúc – Tiên Phong và Tác Động Cao",
+          "desc": "Chúng tôi thiết kế không gian đô thị kết hợp chủ nghĩa hiện đại đột phá với chức năng, thẩm mỹ và hiệu quả năng lượng. Các dự án phát triển của chúng tôi tương tác thông minh với môi trường của chúng, thúc đẩy tính bền vững và sức khỏe. Chúng tôi tuân thủ các tiêu chuẩn quốc tế cao nhất, đạt được các chứng nhận như LEED, WELL, EDGE và PASSIVE, đảm bảo chất lượng, trách nhiệm môi trường và giá trị lâu dài."
+        },
+        {
+          "title": "Thiết Kế – Khả Năng Thích Ứng, Công Nghệ, Trải Nghiệm",
+          "desc": "Chúng tôi phát triển không gian mô-đun và tùy chỉnh thích ứng với xu hướng thị trường và nhu cầu thay đổi của người dùng. Chúng tôi tích hợp trí tuệ nhân tạo, mô phỏng 3D và công cụ kỹ thuật số để tối ưu hóa thiết kế và tạo ra trải nghiệm nhà ở và thương mại giá trị cao, định nghĩa lại tiêu chuẩn trong ngành bất động sản."
+        },
+        {
+          "title": "Nghệ Thuật – Sưu Tầm, Bản Sắc, Trải Nghiệm",
+          "desc": "Chúng tôi kết hợp nghệ thuật và kiến trúc thông qua việc tuyển chọn độc quyền các tác phẩm gốc và đồ họa đương đại, hợp tác với các nghệ sĩ nổi tiếng quốc tế. Mỗi không gian được thiết kế để làm nổi bật các tác phẩm và tạo ra trải nghiệm đắm chìm, mang đến cho các dự án phát triển một bản sắc độc đáo, có liên quan về mặt văn hóa và mạnh mẽ về mặt thị giác."
+        },
+        {
+          "title": "Quy Định – Quản Lý Quy Định Toàn Diện",
+          "desc": "Chúng tôi cung cấp quản lý chuyên gia về quy định, giấy phép và tuân thủ pháp lý cho các dự án phát triển bất động sản và xây dựng. Chúng tôi đảm bảo tính khả thi về pháp lý và quy định của mỗi dự án, giảm thiểu rủi ro và đẩy nhanh quy trình thông qua cách tiếp cận chiến lược cập nhật với khung pháp lý địa phương và quốc tế."
+        },
+        {
+          "title": "Xây Dựng – Công Nghệ và Toàn Cầu",
+          "desc": "Chúng tôi kết nối mạng lưới toàn cầu các nhà xây dựng (BGP) đảm bảo chất lượng và tuân thủ nhanh chóng. Chúng tôi tích hợp tự động hóa, robot và công nghệ BIM để tối ưu hóa từng giai đoạn phát triển, giảm chi phí, cải thiện độ chính xác và nâng cao tiêu chuẩn hiệu quả trong ngành xây dựng."
+        },
+        {
+          "title": "Phát Triển – Mô Hình Bất Động Sản Đột Phá",
+          "desc": "Chúng tôi cách mạng hóa phát triển bất động sản với chiến lược tăng trưởng vượt bậc dựa trên liên minh toàn cầu, công nghệ tài chính như blockchain và mô hình sử dụng đất lai. Chúng tôi dân chủ hóa đầu tư thông qua các mô hình tài chính đổi mới—tự tài trợ, tài trợ nợ và gọi vốn cộng đồng—định nghĩa lại cách các dự án được xây dựng, tài trợ và mở rộng quy mô quốc tế."
+        },
+        {
+          "title": "Tiếp Thị – Dữ Liệu, Độ Chính Xác và Chuyển Đổi",
+          "desc": "Chúng tôi triển khai trí tuệ thị trường dựa trên dữ liệu lớn và học máy để phân khúc chính xác, dự đoán cơ hội và tối đa hóa lợi nhuận. Chúng tôi kết hợp chiến lược đa kênh—kỹ thuật số và trực tiếp—với thuật toán nhắm mục tiêu nâng cao, đẩy nhanh việc đóng giao dịch ở thị trường quốc gia và quốc tế."
+        },
+        {
+          "title": "Vận Hành – Hiệu Suất và Tối Ưu Hóa",
+          "desc": "Chúng tôi quản lý tài sản bất động sản với nền tảng tập trung và bản địa hóa tối đa hóa hiệu suất hoạt động theo lĩnh vực. Giải pháp của chúng tôi cho phép vận hành các tài sản nhà ở, thương mại, công nghiệp và du lịch với tính linh hoạt đa ngành, tích hợp IoT và trí tuệ nhân tạo để bảo trì dự đoán và tối ưu hóa thời gian thực."
+        }
+      ]
+    },
+    "contacto": {
+      "title": "Liên Hệ",
+      "address": "Torre Guttenberg – J. Rousseau 3, Anzures, Miguel Hidalgo, Thành phố Mexico, Mexico",
+      "phone": {
+        "label": "Điện thoại",
+        "value": "+52 55 (86470143) - Lễ tân"
+      },
+      "whatsapp": {
+        "label": "WhatsApp Business",
+        "value": "+52 55 (60553710) - Business WA"
+      },
+      "email": {
+        "label": "Email",
+        "value": "info@beyondsolutions.app"
+      },
+      "website": {
+        "label": "Trang web",
+        "value": "www.beyondsolutions.app"
+      },
+      "meeting": {
+        "text": "Nhấp vào đây để lên lịch cuộc họp với đội ngũ của chúng tôi",
+        "cta": "Lên lịch cuộc họp"
+      }
+    }
+  },
+  "footer": {
+    "brand": {
+      "name": "Beyond Solutions",
+      "tagline": "Phát triển bất động sản thông minh"
+    },
+    "partnerships": {
+      "title": "Liên minh chiến lược"
+    },
+    "copyright": "© 2025 Beyond Solutions. Tất cả các quyền được bảo lưu.",
+    "links": {
+      "contact": "Liên hệ"
+    }
+  },
+  "accessibility": {
+    "navigation": "Điều hướng chính",
+    "back_to_top": "Quay lại đầu trang"
+  }
+} 

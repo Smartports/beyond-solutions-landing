@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "locale": "nl",
+    "name": "Dutch",
+    "nativeName": "Nederlands",
+    "dir": "ltr"
+  },
+  "general": {
+    "title": "Beyond Solutions – Fibra 2025",
+    "description": "Beyond is een digitaal platform ontworpen om alle elementen die een vastgoedontwikkeling van wereldklasse vormen strategisch te integreren en te beheren."
+  },
+  "nav": {
+    "brand": "Beyond Solutions",
+    "items": {
+      "about": "Over ons",
+      "modelo": "Model",
+      "por_que": "Waarom Beyond?",
+      "sectores": "Sectoren",
+      "capacidades": "Capaciteiten",
+      "contacto": "Contact"
+    },
+    "theme": {
+      "light": "Overschakelen naar lichte modus",
+      "dark": "Overschakelen naar donkere modus"
+    },
+    "menu": {
+      "open": "Navigatiemenu openen",
+      "close": "Navigatiemenu sluiten"
+    }
+  },
+  "hero": {
+    "title": "Beyond is een digitaal platform ontworpen om alle elementen die een vastgoedontwikkeling van wereldklasse vormen strategisch te integreren en te beheren.",
+    "subtitle": "Via oplossingen gebaseerd op automatisering, kunstmatige intelligentie (AI), machine learning (ML) en geavanceerde big data-analyse.",
+    "cta": {
+      "primary": "Meer ontdekken",
+      "secondary": "Contact opnemen"
+    }
+  },
+  "sections": {
+    "modelo": {
+      "title": "Model",
+      "intro": "Het model omvat de volledige orkestratie van grond, materialen, architectuur, ontwerp, kunst, regelgeving, bouw en ontwikkeling, met als doel het effectief mogelijk maken van de exploitatie en commercialisering van vastgoedbezittingen op nationaal en internationaal niveau.",
+      "items": [
+        {
+          "title": "Grond en materialen",
+          "desc": "Strategische identificatie van leveringen op basis van de bouwlocatie, waarbij beschikbaarheid, efficiëntie en optimale transporttijden worden gegarandeerd."
+        },
+        {
+          "title": "Architectuur, ontwerp en kunst",
+          "desc": "Integratie van innovatieve architectonische voorstellen met hoogwaardige ontwerpen en artistieke integratie."
+        },
+        {
+          "title": "Regelgeving en juridisch",
+          "desc": "Uitgebreide naleving van regelgeving die tijdige uitvoering van processen mogelijk maakt met minimale risico's."
+        },
+        {
+          "title": "Bouw en ontwikkeling",
+          "desc": "Efficiënte uitvoering door digitalisering en wereldwijde samenwerking met strategische partners, waardoor normen in de vastgoedsector opnieuw worden gedefinieerd."
+        },
+        {
+          "title": "Marketing",
+          "desc": "Marktstrategieën gebaseerd op big data voor nauwkeurige segmentatie en effectieve marketing in B2B- en B2C-schema's."
+        },
+        {
+          "title": "Operatie",
+          "desc": "Professioneel beheer en onderhoud gericht op het maximaliseren van de operationele efficiëntie en winstgevendheid van vastgoedbezittingen."
+        }
+      ]
+    },
+    "por_que": {
+      "title": "Waarom Beyond?",
+      "items": [
+        {
+          "title": "DOELGERICHT ONTWERP EN WELZIJN",
+          "desc": "Architectuur, kunst en materialen die het dagelijks leven verheffen, ruimtes creëren met betekenis en verbinding met hun omgeving."
+        },
+        {
+          "title": "TECHNOLOGIE EN OPERATIONELE EFFICIËNTIE",
+          "desc": "Automatisering, gegevens en operationele uitmuntendheid die processen optimaliseren, kosten verlagen en de kwaliteit in elke ontwikkelingsfase verbeteren."
+        },
+        {
+          "title": "SOCIALE EN MILIEUVERBINTENIS",
+          "desc": "Verantwoorde bouw met positieve impact, respect voor arbeids- en milieunormen, en bevordering van duurzaamheid en billijkheid."
+        }
+      ]
+    },
+    "sectores": {
+      "title": "Sectoren",
+      "items": [
+        {
+          "title": "RESIDENTIEEL",
+          "desc": "Exclusieve en duurzame levensstijl, waar ontwerp, technologie en kunst worden geïntegreerd om unieke ervaringen te bieden met kwaliteit en comfort."
+        },
+        {
+          "title": "RESTAURATIE EN HERBESTEMMING",
+          "desc": "Hoogwaardige restauratie die geavanceerde conservering combineert met hedendaags ontwerp, historische waarde behoudt en functionaliteit verbetert."
+        },
+        {
+          "title": "ONDERWIJS, KUNST EN CULTUUR",
+          "desc": "Ruimtes die onderwijs, kunst en cultuur bevorderen, met een combinatie van moderne architectuur, technologie en ontwerp om creativiteit, leren en artistieke expressie te stimuleren."
+        },
+        {
+          "title": "COMMERCIEEL EN INDUSTRIEEL",
+          "desc": "Dynamische omgevingen die ontwerp, technologie en gegevens combineren om de gebruikerservaring, winstgevendheid en vastgoedprestaties te optimaliseren."
+        }
+      ]
+    },
+    "capacidades": {
+      "title": "Capaciteiten",
+      "items": [
+        {
+          "title": "Grond – Intelligente acquisitie",
+          "desc": "Door middel van geavanceerde big data-analyse, afgeleide parameters en technologie zoals augmented reality en satellietbeelden, identificeren en evalueren we strategisch grond wereldwijd. We houden rekening met factoren zoals landgebruik, klimaat, topografie, duurzaamheid en innovatieve materialen om de waarde van elke ontwikkeling te maximaliseren op basis van de geografische locatie."
+        },
+        {
+          "title": "Materialen – Herdefiniëren van de toeleveringsketen",
+          "desc": "We optimaliseren de toeleveringsketen door geavanceerde technologie, realtime traceerbaarheid en selectie van duurzame hoogwaardige materialen. Onze directe inkoopstrategie bij fabrikanten maximaliseert de efficiëntie, verlaagt kosten en waarborgt kwaliteit."
+        },
+        {
+          "title": "Architectuur – Vooruitstrevend en met grote impact",
+          "desc": "We ontwerpen stedelijke ruimtes die disruptief modernisme integreren met functionaliteit, esthetiek en energie-efficiëntie. Onze ontwikkelingen interacteren intelligent met hun omgeving, bevorderen duurzaamheid en welzijn. We voldoen aan de hoogste internationale normen, met certificeringen zoals LEED, WELL, EDGE en PASSIVE, die kwaliteit, milieuverantwoordelijkheid en langetermijnwaarde garanderen."
+        },
+        {
+          "title": "Ontwerp – Aanpasbaarheid, technologie, ervaring",
+          "desc": "We ontwikkelen modulaire en aanpasbare ruimtes die zich aanpassen aan markttrends en veranderende gebruikersbehoeften. We integreren kunstmatige intelligentie, 3D-simulaties en digitale tools om het ontwerp te optimaliseren en hoogwaardige residentiële en commerciële ervaringen te creëren, waardoor normen in de vastgoedsector opnieuw worden gedefinieerd."
+        },
+        {
+          "title": "Kunst – Curatie, identiteit, ervaring",
+          "desc": "We versmelten kunst en architectuur door exclusieve curatie van originele werken en hedendaagse grafische elementen, in samenwerking met internationaal erkende kunstenaars. Elke ruimte is ontworpen om de werken te accentueren en een meeslepende ervaring te genereren, waardoor ontwikkelingen een unieke, cultureel relevante en visueel krachtige identiteit krijgen."
+        },
+        {
+          "title": "Regelgeving – Integraal regelgevingsbeheer",
+          "desc": "We bieden deskundig beheer van regelgeving, vergunningen en juridische naleving voor vastgoed- en bouwontwikkeling. We zorgen voor de juridische en regelgevende haalbaarheid van elk project, beperken risico's en versnellen processen door een strategische aanpak die up-to-date is met lokale en internationale juridische kaders."
+        },
+        {
+          "title": "Bouw – Technologisch en mondiaal",
+          "desc": "We verbinden een wereldwijd netwerk van bouwers (BGP) dat versnelde kwaliteit en naleving garandeert. We integreren automatisering, robotica en BIM-technologie om elke ontwikkelingsfase te optimaliseren, kosten te verlagen, precisie te verbeteren en efficiëntienormen in de bouwsector te verhogen."
+        },
+        {
+          "title": "Ontwikkeling – Disruptief vastgoedmodel",
+          "desc": "We revolutioneren vastgoedontwikkeling met een hypergroei-strategie gebaseerd op mondiale allianties, financiële technologieën zoals blockchain en hybride landgebruiksmodellen. We democratiseren investeringen via innovatieve financieringsschema's—zelffinanciering, schuldfinanciering en crowdfunding—waardoor opnieuw wordt gedefinieerd hoe projecten internationaal worden gebouwd, gefinancierd en opgeschaald."
+        },
+        {
+          "title": "Marketing – Gegevens, precisie en conversie",
+          "desc": "We implementeren marktinformatie op basis van big data en machine learning om nauwkeurig te segmenteren, kansen te voorspellen en winstgevendheid te maximaliseren. We combineren omnichannel-strategieën—digitaal en persoonlijk—met geavanceerde targeting-algoritmen, waardoor verkoopafsluitingen op nationale en internationale markten worden versneld."
+        },
+        {
+          "title": "Operatie – Prestaties en optimalisatie",
+          "desc": "We beheren vastgoedbezittingen met een gecentraliseerd en gelokaliseerd platform dat operationele prestaties maximaliseert volgens sector. Onze oplossing maakt het mogelijk om residentiële, commerciële, industriële en toeristische eigendommen te exploiteren met multisectorale flexibiliteit, waarbij IoT en kunstmatige intelligentie worden geïntegreerd voor voorspellend onderhoud en realtime optimalisatie."
+        }
+      ]
+    },
+    "contacto": {
+      "title": "Contact",
+      "address": "Guttenberg Tower – J. Rousseau 3, Anzures, Miguel Hidalgo, Mexico-Stad, Mexico",
+      "phone": {
+        "label": "Telefoon",
+        "value": "+52 55 (86470143) - Receptie"
+      },
+      "whatsapp": {
+        "label": "WhatsApp Business",
+        "value": "+52 55 (60553710) - Business WA"
+      },
+      "email": {
+        "label": "E-mail",
+        "value": "info@beyondsolutions.app"
+      },
+      "website": {
+        "label": "Website",
+        "value": "www.beyondsolutions.app"
+      },
+      "meeting": {
+        "text": "Klik hier om een afspraak te plannen met ons team",
+        "cta": "Afspraak plannen"
+      }
+    }
+  },
+  "footer": {
+    "brand": {
+      "name": "Beyond Solutions",
+      "tagline": "Intelligente vastgoedontwikkeling"
+    },
+    "partnerships": {
+      "title": "Strategische partnerschappen"
+    },
+    "copyright": "© 2025 Beyond Solutions. Alle rechten voorbehouden.",
+    "links": {
+      "contact": "Contact"
+    }
+  },
+  "accessibility": {
+    "back_to_top": "Terug naar boven",
+    "navigation": "Hoofdnavigatie"
+  }
+} 

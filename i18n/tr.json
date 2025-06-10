@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "locale": "tr",
+    "name": "Turkish",
+    "nativeName": "Türkçe",
+    "dir": "ltr"
+  },
+  "general": {
+    "title": "Beyond Solutions – Fiber 2025",
+    "description": "Beyond, dünya standartlarında bir gayrimenkul geliştirmesini oluşturan tüm unsurları stratejik olarak entegre etmek ve yönetmek için tasarlanmış dijital bir platformdur."
+  },
+  "nav": {
+    "brand": "Beyond Solutions",
+    "items": {
+      "about": "Hakkımızda",
+      "modelo": "Model",
+      "por_que": "Neden Beyond?",
+      "sectores": "Sektörler",
+      "capacidades": "Yetenekler",
+      "contacto": "İletişim"
+    },
+    "theme": {
+      "light": "Aydınlık moda geç",
+      "dark": "Karanlık moda geç"
+    },
+    "menu": {
+      "open": "Menüyü aç",
+      "close": "Menüyü kapat"
+    }
+  },
+  "hero": {
+    "title": "Beyond, dünya standartlarında bir gayrimenkul geliştirmesini oluşturan tüm unsurları stratejik olarak entegre etmek ve yönetmek için tasarlanmış dijital bir platformdur.",
+    "subtitle": "Otomasyon, yapay zeka (AI), makine öğrenimi (ML) ve gelişmiş büyük veri analizine dayalı çözümler aracılığıyla.",
+    "cta": {
+      "primary": "Daha fazla bilgi",
+      "secondary": "Bize ulaşın"
+    }
+  },
+  "sections": {
+    "modelo": {
+      "title": "Model",
+      "intro": "Model, gayrimenkul varlıklarının ulusal ve uluslararası düzeyde verimli bir şekilde işletilmesini ve ticarileştirilmesini sağlama hedefiyle, arazi, malzeme, mimari, tasarım, sanat, düzenlemeler, inşaat ve geliştirmenin kapsamlı orkestrasını içerir.",
+      "items": [
+        {
+          "title": "Arazi ve Malzemeler",
+          "desc": "İnşaat sahasına dayalı kaynakların stratejik tanımlanması, bulunabilirlik, verimlilik ve optimal taşıma sürelerini sağlar."
+        },
+        {
+          "title": "Mimari, Tasarım ve Sanat",
+          "desc": "Yüksek değerli tasarım ve sanat entegrasyonu ile yenilikçi mimari önerilerin dahil edilmesi."
+        },
+        {
+          "title": "Düzenleyici ve Yasal",
+          "desc": "Süreçlerin zamanında yürütülmesine olanak tanıyan, riskleri en aza indiren kapsamlı düzenleyici uyum."
+        },
+        {
+          "title": "İnşaat ve Geliştirme",
+          "desc": "Dijitalleşme ve stratejik ortakların küresel işbirliği yoluyla verimli uygulama, gayrimenkul sektöründeki standartları yeniden tanımlar."
+        },
+        {
+          "title": "Pazarlama",
+          "desc": "B2B ve B2C şemalarında kesin segmentasyon ve etkili ticarileştirme için büyük veriye dayalı pazar stratejileri."
+        },
+        {
+          "title": "Operasyon",
+          "desc": "Gayrimenkul varlıklarının operasyonel verimliliğini ve karlılığını en üst düzeye çıkarmaya yönelik profesyonel yönetim ve bakım."
+        }
+      ]
+    },
+    "por_que": {
+      "title": "Neden Beyond?",
+      "items": [
+        {
+          "title": "AMACA YÖNELİK TASARIM VE İYİ OLUŞ",
+          "desc": "Günlük hayatı yükselten, çevreleriyle anlamlı ve bağlantılı alanlar yaratan mimari, sanat ve malzemeler."
+        },
+        {
+          "title": "TEKNOLOJİ VE OPERASYONEL VERİMLİLİK",
+          "desc": "Süreçleri optimize eden, maliyetleri azaltan ve geliştirmenin her aşamasında kaliteyi artıran otomasyon, veri ve operasyonel mükemmellik."
+        },
+        {
+          "title": "SOSYAL VE ÇEVRESEL TAAHHÜT",
+          "desc": "Olumlu etkiye sahip, işçilik ve çevre standartlarına saygılı, sürdürülebilirliği ve eşitliği teşvik eden sorumlu inşaat."
+        }
+      ]
+    },
+    "sectores": {
+      "title": "Sektörler",
+      "items": [
+        {
+          "title": "KONUT",
+          "desc": "Tasarım, teknoloji ve sanatın kalite ve konforla benzersiz deneyimler sunmak için bütünleştiği özel ve sürdürülebilir yaşam tarzı."
+        },
+        {
+          "title": "RESTORASYON VE YENİDEN DÖNÜŞÜM",
+          "desc": "İleri düzeyde koruma ve çağdaş tasarımı birleştiren, tarihi değeri koruyan ve işlevselliği artıran üst düzey restorasyon."
+        },
+        {
+          "title": "EĞİTİM, SANAT VE KÜLTÜR",
+          "desc": "Yaratıcılık, öğrenme ve sanatsal ifadeyi teşvik etmek için modern mimari, teknoloji ve tasarımı birleştiren, eğitim, sanat ve kültürü destekleyen alanlar."
+        },
+        {
+          "title": "TİCARİ VE ENDÜSTRİYEL",
+          "desc": "Kullanıcı deneyimini, karlılığı ve gayrimenkul performansını optimize etmek için tasarım, teknoloji ve veriyi birleştiren dinamik ortamlar."
+        }
+      ]
+    },
+    "capacidades": {
+      "title": "Yetenekler",
+      "items": [
+        {
+          "title": "Arazi – Akıllı Edinim",
+          "desc": "Gelişmiş büyük veri analizi, türetilmiş parametreler ve artırılmış gerçeklik ve uydu görünümleri gibi teknolojiler aracılığıyla, araziyi küresel olarak stratejik bir şekilde belirler ve değerlendiririz. Her bir geliştirmenin değerini coğrafi konumuna göre en üst düzeye çıkarmak için arazi kullanımı, iklim, topoğrafya, sürdürülebilirlik ve yenilikçi malzemeler gibi faktörleri dikkate alırız."
+        },
+        {
+          "title": "Malzemeler – Tedarik Zincirini Yeniden Tanımlama",
+          "desc": "Tedarik zincirini gelişmiş teknoloji, gerçek zamanlı izlenebilirlik ve sürdürülebilir ve yüksek performanslı malzemelerin seçimi ile optimize ediyoruz. Üreticilerle doğrudan tedarik stratejimiz verimliliği en üst düzeye çıkarır, maliyetleri azaltır ve kaliteyi sağlar."
+        },
+        {
+          "title": "Mimari – Öncü ve Yüksek Etkili",
+          "desc": "Yıkıcı modernizmi işlevsellik, estetik ve enerji verimliliği ile bütünleştiren kentsel alanlar tasarlıyoruz. Geliştirmelerimiz çevreleriyle akıllıca etkileşime girerek sürdürülebilirliği ve refahı teşvik eder. LEED, WELL, EDGE ve PASSIVE gibi sertifikalar elde ederek en yüksek uluslararası standartlara uyuyoruz, kalite, çevresel sorumluluk ve uzun vadeli değer garantisi sağlıyoruz."
+        },
+        {
+          "title": "Tasarım – Uyarlanabilirlik, Teknoloji, Deneyim",
+          "desc": "Pazar trendlerine ve değişen kullanıcı ihtiyaçlarına uyum sağlayan modüler ve özelleştirilebilir alanlar geliştiriyoruz. Tasarımı optimize etmek ve gayrimenkul sektöründeki standartları yeniden tanımlayan yüksek değerli konut ve ticari deneyimler yaratmak için yapay zeka, 3D simülasyonlar ve dijital araçları entegre ediyoruz."
+        },
+        {
+          "title": "Sanat – Kürasyon, Kimlik, Deneyim",
+          "desc": "Uluslararası üne sahip sanatçılarla işbirliği içinde orijinal parçalar ve çağdaş grafikler için özel kürasyon yoluyla sanat ve mimariyi birleştiriyoruz. Her alan, eserleri vurgulamak ve sürükleyici bir deneyim yaratmak için tasarlanmıştır, geliştirmelere benzersiz, kültürel olarak ilgili ve görsel olarak güçlü bir kimlik kazandırır."
+        },
+        {
+          "title": "Düzenleyici – Kapsamlı Düzenleme Yönetimi",
+          "desc": "Gayrimenkul ve inşaat geliştirmeleri için düzenlemeler, lisanslar ve yasal uyumluluk konularında uzman yönetim sunuyoruz. Her projenin yasal ve düzenleyici fizibilitesini sağlıyor, yerel ve uluslararası yasal çerçevelerle güncellenmiş stratejik bir yaklaşım aracılığıyla riskleri azaltıyor ve süreçleri hızlandırıyoruz."
+        },
+        {
+          "title": "İnşaat – Teknolojik ve Küresel",
+          "desc": "Kalite ve hızlandırılmış uyum garantisi veren küresel bir inşaatçı ağı (BGP) bağlıyoruz. Geliştirmenin her aşamasını optimize etmek, maliyetleri azaltmak, hassasiyeti artırmak ve inşaat sektöründeki verimlilik standartlarını yükseltmek için otomasyon, robotik ve BIM teknolojisini entegre ediyoruz."
+        },
+        {
+          "title": "Geliştirme – Yıkıcı Gayrimenkul Modeli",
+          "desc": "Küresel ittifaklar, blockchain gibi finansal teknolojiler ve hibrit arazi kullanım modellerine dayalı bir hiper büyüme stratejisiyle gayrimenkul geliştirmeyi devrimleştiriyoruz. Yenilikçi finansman şemaları—öz finansman, borç finansmanı ve kitle fonlaması—aracılığıyla yatırımı demokratikleştiriyoruz, projelerin nasıl inşa edildiğini, finanse edildiğini ve uluslararası ölçekte büyütüldüğünü yeniden tanımlıyoruz."
+        },
+        {
+          "title": "Pazarlama – Veri, Hassasiyet ve Dönüşüm",
+          "desc": "Hassasiyetle segmentlere ayırmak, fırsatları tahmin etmek ve karlılığı en üst düzeye çıkarmak için büyük veri ve makine öğrenimine dayalı pazar zekası uyguluyoruz. Ulusal ve uluslararası pazarlarda satış kapanışlarını hızlandıran gelişmiş hedefleme algoritmaları ile çok kanallı stratejileri—dijital ve yüz yüze—birleştiriyoruz."
+        },
+        {
+          "title": "Operasyon – Performans ve Optimizasyon",
+          "desc": "Sektöre göre operasyonel performansı en üst düzeye çıkaran merkezileştirilmiş ve yerelleştirilmiş bir platform ile gayrimenkul varlıklarını yönetiyoruz. Çözümümüz, öngörücü bakım ve gerçek zamanlı optimizasyon için IoT ve yapay zekayı entegre ederek çok sektörlü esneklikle konut, ticari, endüstriyel ve turistik mülklerin işletilmesine olanak tanır."
+        }
+      ]
+    },
+    "contacto": {
+      "title": "İletişim",
+      "address": "Torre Guttenberg – J. Rousseau 3, Anzures, Miguel Hidalgo, Mexico City, Meksika",
+      "phone": {
+        "label": "Telefon",
+        "value": "+52 55 (86470143) - Resepsiyon"
+      },
+      "whatsapp": {
+        "label": "WhatsApp Business",
+        "value": "+52 55 (60553710) - Business WA"
+      },
+      "email": {
+        "label": "E-posta",
+        "value": "info@beyondsolutions.app"
+      },
+      "website": {
+        "label": "Website",
+        "value": "www.beyondsolutions.app"
+      },
+      "meeting": {
+        "text": "Ekibimizle bir toplantı planlamak için buraya tıklayın",
+        "cta": "Toplantı planla"
+      }
+    }
+  },
+  "footer": {
+    "brand": {
+      "name": "Beyond Solutions",
+      "tagline": "Akıllı gayrimenkul geliştirme"
+    },
+    "partnerships": {
+      "title": "Stratejik ittifaklar"
+    },
+    "copyright": "© 2025 Beyond Solutions. Tüm hakları saklıdır.",
+    "links": {
+      "contact": "İletişim"
+    }
+  },
+  "accessibility": {
+    "navigation": "Ana navigasyon",
+    "back_to_top": "Başa dön"
+  }
+} 

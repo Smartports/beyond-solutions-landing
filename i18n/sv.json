@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "locale": "sv",
+    "name": "Swedish",
+    "nativeName": "Svenska",
+    "dir": "ltr"
+  },
+  "general": {
+    "title": "Beyond Solutions – Fibra 2025",
+    "description": "Beyond är en digital plattform utformad för att strategiskt integrera och hantera alla element som utgör en fastighetsutveckling i världsklass."
+  },
+  "nav": {
+    "brand": "Beyond Solutions",
+    "items": {
+      "about": "Om oss",
+      "modelo": "Modell",
+      "por_que": "Varför Beyond?",
+      "sectores": "Sektorer",
+      "capacidades": "Förmågor",
+      "contacto": "Kontakt"
+    },
+    "theme": {
+      "light": "Växla till ljust läge",
+      "dark": "Växla till mörkt läge"
+    },
+    "menu": {
+      "open": "Öppna navigationsmenyn",
+      "close": "Stäng navigationsmenyn"
+    }
+  },
+  "hero": {
+    "title": "Beyond är en digital plattform utformad för att strategiskt integrera och hantera alla element som utgör en fastighetsutveckling i världsklass.",
+    "subtitle": "Genom lösningar baserade på automatisering, artificiell intelligens (AI), maskininlärning (ML) och avancerad big data-analys.",
+    "cta": {
+      "primary": "Läs mer",
+      "secondary": "Kontakta oss"
+    }
+  },
+  "sections": {
+    "modelo": {
+      "title": "Modell",
+      "intro": "Modellen omfattar en komplett orkestrering av mark, material, arkitektur, design, konst, regelverk, konstruktion och utveckling, med målet att effektivt möjliggöra drift och kommersialisering av fastigheter både nationellt och internationellt.",
+      "items": [
+        {
+          "title": "Mark och material",
+          "desc": "Strategisk identifiering av leveranser baserat på byggplatsen, vilket säkerställer tillgänglighet, effektivitet och optimala transporttider."
+        },
+        {
+          "title": "Arkitektur, design och konst",
+          "desc": "Inkorporering av innovativa arkitektoniska förslag med högvärdig design och konstnärlig integration."
+        },
+        {
+          "title": "Regelverk och juridik",
+          "desc": "Omfattande regelefterlevnad som gör det möjligt att genomföra processer i rätt tid med minimal risk."
+        },
+        {
+          "title": "Konstruktion och utveckling",
+          "desc": "Effektivt genomförande genom digitalisering och globalt samarbete med strategiska partners, vilket omdefinierar standarder inom fastighetsbranschen."
+        },
+        {
+          "title": "Marknadsföring",
+          "desc": "Marknadsstrategier baserade på big data för precis segmentering och effektiv marknadsföring inom B2B- och B2C-system."
+        },
+        {
+          "title": "Drift",
+          "desc": "Professionell förvaltning och underhåll som syftar till att maximera driftseffektivitet och lönsamhet för fastigheter."
+        }
+      ]
+    },
+    "por_que": {
+      "title": "Varför Beyond?",
+      "items": [
+        {
+          "title": "AVSIKTLIG DESIGN OCH VÄLBEFINNANDE",
+          "desc": "Arkitektur, konst och material som förhöjer det dagliga livet, skapar utrymmen med mening och koppling till sin omgivning."
+        },
+        {
+          "title": "TEKNIK OCH OPERATIV EFFEKTIVITET",
+          "desc": "Automatisering, data och operativ excellens som optimerar processer, minskar kostnader och förbättrar kvaliteten i varje utvecklingsfas."
+        },
+        {
+          "title": "SOCIALT OCH MILJÖMÄSSIGT ÅTAGANDE",
+          "desc": "Ansvarsfull konstruktion med positiv påverkan, respekt för arbets- och miljöstandarder, och främjande av hållbarhet och rättvisa."
+        }
+      ]
+    },
+    "sectores": {
+      "title": "Sektorer",
+      "items": [
+        {
+          "title": "BOSTÄDER",
+          "desc": "Exklusiv och hållbar livsstil där design, teknik och konst integreras för att erbjuda unika upplevelser med kvalitet och komfort."
+        },
+        {
+          "title": "RESTAURERING OCH OMVANDLING",
+          "desc": "Högklassig restaurering som förenar avancerad konservering och samtida design, bevarar historiskt värde och förbättrar funktionalitet."
+        },
+        {
+          "title": "UTBILDNING, KONST OCH KULTUR",
+          "desc": "Utrymmen som främjar utbildning, konst och kultur, kombinerar modern arkitektur, teknik och design för att främja kreativitet, lärande och konstnärligt uttryck."
+        },
+        {
+          "title": "KOMMERSIELLT OCH INDUSTRIELLT",
+          "desc": "Dynamiska miljöer som kombinerar design, teknik och data för att optimera användarupplevelse, lönsamhet och fastighetsresultat."
+        }
+      ]
+    },
+    "capacidades": {
+      "title": "Förmågor",
+      "items": [
+        {
+          "title": "Mark – Intelligent förvärv",
+          "desc": "Genom avancerad big data-analys, härledda parametrar och teknik som förstärkt verklighet och satellitbilder, identifierar och utvärderar vi strategiskt mark globalt. Vi beaktar faktorer som markanvändning, klimat, topografi, hållbarhet och innovativa material för att maximera värdet av varje utveckling baserat på dess geografiska läge."
+        },
+        {
+          "title": "Material – Omdefiniera leveranskedjan",
+          "desc": "Vi optimerar leveranskedjan genom avancerad teknik, realtidsspårbarhet och val av hållbara högpresterande material. Vår direkta upphandlingsstrategi med tillverkare maximerar effektiviteten, minskar kostnader och säkerställer kvalitet."
+        },
+        {
+          "title": "Arkitektur – Banbrytande och med stor påverkan",
+          "desc": "Vi designar urbana utrymmen som integrerar omstörtande modernism med funktionalitet, estetik och energieffektivitet. Våra utvecklingar interagerar intelligent med sin miljö och främjar hållbarhet och välbefinnande. Vi följer högsta internationella standarder och erhåller certifieringar som LEED, WELL, EDGE och PASSIVE, vilket garanterar kvalitet, miljöansvar och långsiktigt värde."
+        },
+        {
+          "title": "Design – Anpassningsbarhet, teknik, upplevelse",
+          "desc": "Vi utvecklar modulära och anpassningsbara utrymmen som anpassar sig till marknadstrender och förändrade användarnas behov. Vi integrerar artificiell intelligens, 3D-simuleringar och digitala verktyg för att optimera design och skapa högvärdiga bostads- och kommersiella upplevelser, vilket omdefinierar standarder inom fastighetsbranschen."
+        },
+        {
+          "title": "Konst – Kuratering, identitet, upplevelse",
+          "desc": "Vi smälter samman konst och arkitektur genom exklusiv kuratering av originalverk och samtida grafik, i samarbete med internationellt erkända konstnärer. Varje utrymme är utformat för att framhäva verken och skapa en omslutande upplevelse, vilket ger utvecklingarna en unik, kulturellt relevant och visuellt kraftfull identitet."
+        },
+        {
+          "title": "Regelverk – Omfattande regelhantering",
+          "desc": "Vi erbjuder experthantering av föreskrifter, licenser och juridisk efterlevnad för fastighets- och byggnadsutveckling. Vi säkerställer den juridiska och regulatoriska genomförbarheten för varje projekt, mildrar risker och accelererar processer genom ett strategiskt tillvägagångssätt som är uppdaterat med lokala och internationella juridiska ramverk."
+        },
+        {
+          "title": "Konstruktion – Teknologisk och global",
+          "desc": "Vi kopplar samman ett globalt nätverk av byggare (BGP) som säkerställer accelererad kvalitet och efterlevnad. Vi integrerar automatisering, robotteknik och BIM-teknik för att optimera varje utvecklingsfas, minska kostnader, förbättra precision och höja effektivitetsstandarder inom byggbranschen."
+        },
+        {
+          "title": "Utveckling – Omstörtande fastighetsmodell",
+          "desc": "Vi revolutionerar fastighetsutveckling med en hyperväxtstrategi baserad på globala allianser, finansiella teknologier som blockchain och hybrida markanvändningsmodeller. Vi demokratiserar investeringar genom innovativa finansieringsscheman—självfinansiering, skuldfinansiering och crowdfunding—vilket omdefinierar hur projekt byggs, finansieras och skalas internationellt."
+        },
+        {
+          "title": "Marknadsföring – Data, precision och konvertering",
+          "desc": "Vi implementerar marknadsintelligens baserad på big data och maskininlärning för att segmentera med precision, förutse möjligheter och maximera lönsamhet. Vi kombinerar omnikanalstrategier—digitala och fysiska—med avancerade targeting-algoritmer, vilket accelererar försäljningsavslut på nationella och internationella marknader."
+        },
+        {
+          "title": "Drift – Prestanda och optimering",
+          "desc": "Vi hanterar fastigheter med en centraliserad och lokaliserad plattform som maximerar operativ prestanda enligt sektor. Vår lösning möjliggör drift av bostads-, kommersiella, industriella och turistfastigheter med multisektoriell flexibilitet, integrerar IoT och artificiell intelligens för prediktivt underhåll och realtidsoptimering."
+        }
+      ]
+    },
+    "contacto": {
+      "title": "Kontakt",
+      "address": "Guttenberg Tower – J. Rousseau 3, Anzures, Miguel Hidalgo, Mexico City, Mexiko",
+      "phone": {
+        "label": "Telefon",
+        "value": "+52 55 (86470143) - Reception"
+      },
+      "whatsapp": {
+        "label": "WhatsApp Business",
+        "value": "+52 55 (60553710) - Business WA"
+      },
+      "email": {
+        "label": "E-post",
+        "value": "info@beyondsolutions.app"
+      },
+      "website": {
+        "label": "Webbplats",
+        "value": "www.beyondsolutions.app"
+      },
+      "meeting": {
+        "text": "Klicka här för att schemalägga ett möte med vårt team",
+        "cta": "Boka ett möte"
+      }
+    }
+  },
+  "footer": {
+    "brand": {
+      "name": "Beyond Solutions",
+      "tagline": "Intelligent fastighetsutveckling"
+    },
+    "partnerships": {
+      "title": "Strategiska partnerskap"
+    },
+    "copyright": "© 2025 Beyond Solutions. Alla rättigheter förbehållna.",
+    "links": {
+      "contact": "Kontakt"
+    }
+  },
+  "accessibility": {
+    "back_to_top": "Tillbaka till toppen",
+    "navigation": "Huvudnavigering"
+  }
+} 
