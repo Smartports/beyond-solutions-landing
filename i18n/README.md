@@ -4,7 +4,7 @@ This directory contains the necessary files for the internationalization of the 
 
 ## File Structure
 
-```
+```bash
 i18n/
 ├── flags/            # SVG flags for each language
 │   ├── es.svg        # Spanish
@@ -130,4 +130,4 @@ const text = t('hero.title');
 
 // Check if the current language is RTL
 const isRightToLeft = isRTL();
-``` 
+```

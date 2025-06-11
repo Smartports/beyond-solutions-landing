@@ -1,3 +1,5 @@
+# Deck context
+
 Portada con CTA ( imagen: "./main-cover.jpg" )
 
 ⸻
@@ -137,7 +139,7 @@ Canales de contacto
 
 (icono: "./icon-phone.png")
 Telefono Fijo
-+52 55 (55555555) - Recepción 
++52 55 (55555555) - Recepción
 
 (icono: "./icon-whatsapp.png")
 Whatsapp Business
@@ -145,7 +147,7 @@ Whatsapp Business
 
 (icono: "./icon-mail.png")
 Email
-info@beyondsolutions.app
+<info@beyondsolutions.app>
 
 (icono: "./icon-meets.png")
 Haz clic aquí para programar una
@@ -153,7 +155,7 @@ reunión con nuestro equipo ()
 
 (icono: "./smartports.png")
 Sitio Web:
-www.beyondsolutons.app
+<www.beyondsolutons.app>
 
 (icono: "./icon-maps.jpg")
 Dirección Oficinas

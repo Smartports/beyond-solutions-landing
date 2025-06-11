@@ -68,7 +68,7 @@ Limit Muli to contextual aids ≤ 14 px (for example, card meta-data).
 - 12-column grid (grid-cols-12); fluid gutters (gap-x 4-6).
 - Spacing scale (Tailwind) → 2, 4, 6, 8, 12, 16, 24, 32, 48 px.
 
-```
+```bash
 ╭──────────────── 1200 px ────────────────╮
 │  col-1  col-2 … col-12                 │
 ╰─────────────────────────────────────────╯
@@ -137,6 +137,7 @@ Each real estate lifecycle stage from DECK_CONTEXT.md requires a specific icon s
 | ARIA | Use appropriate roles (role="button" on interactive spans). |
 
 ### Automated checks
+
 - axe-playwright in e2e.
 - Lighthouse-CI budget: A11y ≥ 90.
 
@@ -194,4 +195,4 @@ For major changes, record decisions in ADR and update this file.
 
 ---
 
-_Last updated: June 5, 2025_
+### Last updated: June 10, 2025

@@ -23,7 +23,6 @@
   <link rel="dns-prefetch" href="https://unpkg.com">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
-
   <!-- Preload hero image optimized - WebP only for LCP -->
   <link rel="preload" as="image" 
         href="./img/main-cover.webp" 
@@ -53,7 +52,7 @@
   <!-- Critical CSS inline para FCP y LCP instantáneo -->
   <style>
     /* Reset mínimo y estilos críticos para el primer viewport */
-    *,::after,::before{box-sizing:border-box;margin:0;padding:0}:root{--primary-color:#243f8f;--primary-dark:#192c64;--primary-light:#2f51b5;--accent-light:#f4f6fa;--accent-mid:#bdc5dd;--text-dark:#1f2937;--text-light:#e4e4e7;--bg-light:#fff;--bg-dark:#18181b;--shadow-soft:0 4px 20px -2px #0000000f;--shadow-soft-lg:0 10px 30px -3px #0000001a}html{scroll-behavior:smooth;font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:'Open Sans',system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.7;color:var(--text-dark);background-color:var(--bg-light);text-align:left}html.dark body{color:var(--text-light);background-color:var(--bg-dark)}[x-cloak]{display:none!important}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:700;line-height:1.3;color:inherit;letter-spacing:-.02em}img{max-width:100%;height:auto;vertical-align:middle;border-style:none}.fixed{position:fixed}.relative{position:relative}.absolute{position:absolute}.inset-0{top:0;right:0;bottom:0;left:0}.inset-x-0{left:0;right:0}.top-0{top:0}.z-50{z-index:50}.flex{display:flex}.inline-flex{display:inline-flex}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-between:center}.h-16{height:4rem}.h-full{height:100%}.w-full{width:100%}.max-w-8xl{max-width:85rem}.mx-auto{margin-left:auto;margin-right:auto}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.p-2{padding:.5rem}.p-1{padding:.25rem}.pt-24{padding-top:6rem}.pt-28{padding-top:7rem}.pb-16{padding-bottom:4rem}.py-20{padding-top:5rem;padding-bottom:5rem}.space-x-4{column-gap:1rem}.space-x-6{column-gap:1.5rem}.gap-2{gap:.5rem}.gap-4{gap:1rem}.rounded-full{border-radius:9999px}.rounded{border-radius:.25rem}.rounded-lg{border-radius:.5rem}.text-white{color:#fff}.bg-white\/80{background-color:#fffc}.bg-primary-700{background-color:var(--primary-color)}.bg-primary-900{background-color:var(--primary-dark)}.bg-white{background-color:#fff}.bg-accent-50{background-color:var(--accent-light)}.text-primary-700{color:var(--primary-color)}.text-lg{font-size:1.125rem}.text-3xl{font-size:1.875rem}.font-extrabold{font-weight:800}.font-bold{font-weight:700}.font-semibold{font-weight:600}.mb-6{margin-bottom:1.5rem}.mt-8{margin-top:2rem}.text-center{text-align:center}.tracking-tight{letter-spacing:-.025em}.object-cover{object-fit:cover}.shadow-sm{box-shadow:0 1px 2px 0 #0000000d}.backdrop-blur{backdrop-filter:blur(8px)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}
+    *,::after,::before{box-sizing:border-box;margin:0;padding:0}:root{--primary-color:#243f8f;--primary-dark:#192c64;--primary-light:#2f51b5;--accent-light:#f4f6fa;--accent-mid:#bdc5dd;--text-dark:#1f2937;--text-light:#e4e4e7;--bg-light:#fff;--bg-dark:#18181b;--shadow-soft:0 4px 20px -2px #0000000f;--shadow-soft-lg:0 10px 30px -3px #0000001a}html{scroll-behavior:smooth;font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:'Open Sans',system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.7;color:var(--text-dark);background-color:var(--bg-light);text-align:left}html.dark body{color:var(--text-light);background-color:var(--bg-dark)}[x-cloak]{display:none!important}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:700;line-height:1.3;color:inherit;letter-spacing:-.02em}img{max-width:100%;height:auto;vertical-align:middle;border-style:none}.fixed{position:fixed}.relative{position:relative}.absolute{position:absolute}.inset-0{top:0;right:0;bottom:0;left:0}.inset-x-0{left:0;right:0}.top-0{top:0}.z-50{z-index:50}.flex{display:flex}.inline-flex{display:inline-flex}.hidden{display:none}.items-center{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.justify-center{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.justify-between{justify-between:center}.h-16{height:4rem}.h-full{height:100%}.w-full{width:100%}.max-w-8xl{max-width:85rem}.mx-auto{margin-left:auto;margin-right:auto}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.p-2{padding:.5rem}.p-1{padding:.25rem}.pt-24{padding-top:6rem}.pt-28{padding-top:7rem}.pb-16{padding-bottom:4rem}.py-20{padding-top:5rem;padding-bottom:5rem}.space-x-4{column-gap:1rem}.space-x-6{column-gap:1.5rem}.gap-2{gap:.5rem}.gap-4{gap:1rem}.rounded-full{border-radius:9999px}.rounded{border-radius:.25rem}.rounded-lg{border-radius:.5rem}.text-white{color:#fff}.bg-white\/80{background-color:#fffc}.bg-primary-700{background-color:var(--primary-color)}.bg-primary-900{background-color:var(--primary-dark)}.bg-white{background-color:#fff}.bg-accent-50{background-color:var(--accent-light)}.text-primary-700{color:var(--primary-color)}.text-lg{font-size:1.125rem}.text-3xl{font-size:1.875rem}.font-extrabold{font-weight:800}.font-bold{font-weight:700}.font-semibold{font-weight:600}.mb-6{margin-bottom:1.5rem}.mt-8{margin-top:2rem}.text-center{text-align:center}.tracking-tight{letter-spacing:-.025em}.object-cover{object-fit:cover}.shadow-sm{box-shadow:0 1px 2px 0 #0000000d}.backdrop-blur{backdrop-filter:blur(8px)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}
     /* Estilos específicos para hero section */
     .hero-section{min-height:80vh;background-color:var(--primary-dark)}.dark .hero-section{background-color:var(--primary-dark)}.section-heading::after{content:'';display:block;width:60px;height:3px;background-color:var(--primary-color);margin:16px auto 0}.dark .section-heading::after{background-color:#fff}
     /* Media queries para responsive */
@@ -266,10 +265,10 @@
   <section id="about" class="relative pt-24 md:pt-28 pb-16 text-white hero-section">
     <div class="absolute inset-0 bg-center bg-cover" style="background-color: #192c64;" aria-hidden="true">
       <picture data-no-lazy>
-        <source media="(min-width: 1200px)" srcset="./img/main-cover.webp" width="1920" height="1080">
-        <source media="(min-width: 768px)" srcset="./img/main-cover-md.webp" width="1200" height="675">
-        <source media="(min-width: 400px)" srcset="./img/main-cover-sm.webp" width="768" height="432">
-        <img src="./img/main-cover-thumb.webp" alt="Beyond Solutions background" class="w-full h-full object-cover" width="400" height="225" fetchpriority="high">
+        <source media="(min-width: 1401px)" srcset="./img/main-cover.webp" width="1920" height="1080">
+        <source media="(min-width: 901px)" srcset="./img/main-cover-md.webp" width="1200" height="675">
+        <source media="(min-width: 401px)" srcset="./img/main-cover-sm.webp" width="768" height="432">
+        <img src="./img/main-cover-thumb.webp" alt="Beyond Solutions background" class="w-full h-full object-cover" width="400" height="267" fetchpriority="high">
       </picture>
     </div>
     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20 dark:from-primary-900/80" aria-hidden="true"></div>
@@ -298,10 +297,10 @@
         <div class="grid gap-16 lg:grid-cols-2" data-aos="fade-up">
           <figure class="aspect-video lg:aspect-square overflow-hidden rounded-lg shadow-soft-lg order-last lg:order-first relative">
             <picture>
-              <source media="(min-width: 1200px)" data-srcset="./img/modelo.webp" type="image/webp">
-              <source media="(min-width: 768px)" data-srcset="./img/modelo-md.webp" type="image/webp">
-              <source media="(min-width: 400px)" data-srcset="./img/modelo-sm.webp" type="image/webp">
-              <img loading="lazy" decoding="async" width="800" height="600" src="./img/modelo-thumb.webp" 
+              <source media="(min-width: 901px)" data-srcset="./img/modelo-md.webp" type="image/webp">
+              <source media="(min-width: 601px)" data-srcset="./img/modelo.webp" type="image/webp">
+              <source media="(min-width: 401px)" data-srcset="./img/modelo-sm.webp" type="image/webp">
+              <img loading="lazy" decoding="async" width="267" height="267" src="./img/modelo-thumb.webp" 
                    alt="Modelo de desarrollo inmobiliario" 
                    class="w-full h-full object-cover dark:brightness-75 hover:scale-105 transition-transform duration-700">
             </picture>
@@ -405,21 +404,14 @@
         <div class="space-y-16" data-aos="fade-up">
           <!-- Terrenos -->
           <div class="grid lg:grid-cols-2 gap-10 items-center">
-                          <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
-                <picture>
-                 <source media="(min-width: 1200px)" srcset="./img/terrenos.webp" type="image/webp">
-                 <source media="(min-width: 768px)" srcset="./img/terrenos-md.webp" type="image/webp">
-                 <source media="(min-width: 400px)" srcset="./img/terrenos-sm.webp" type="image/webp">
-                 <source media="(min-width: 1200px)" srcset="./img/terrenos.jpg" type="image/jpeg">
-                 <source media="(min-width: 768px)" srcset="./img/terrenos-md.jpg" type="image/jpeg">
-                 <source media="(min-width: 400px)" srcset="./img/terrenos-sm.jpg" type="image/jpeg">
-                  <img loading="lazy" decoding="async" width="800" height="600" src="./img/terrenos-thumb.webp" 
-                       alt="Terrenos - Adquisición Inteligente" 
-                       class="w-full h-full object-cover dark:brightness-75" 
-                       fetchpriority="low"
-                       data-i18n-attr="alt:sections.capacidades.items.0.title">
-                </picture>
-              </figure>
+            <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
+              <picture>
+                <source media="(min-width: 901px)" srcset="./img/terrenos-md.webp" type="image/webp">
+                <source media="(min-width: 601px)" srcset="./img/terrenos.webp" type="image/webp">
+                <source media="(min-width: 401px)" srcset="./img/terrenos-sm.webp" type="image/webp">
+                <img loading="lazy" decoding="async" width="200" height="134" src="./img/terrenos-thumb.webp" alt="Terrenos - Adquisición Inteligente" class="w-full h-full object-cover dark:brightness-75" fetchpriority="low" data-i18n-attr="alt:sections.capacidades.items.0.title">
+              </picture>
+            </figure>
             <div class="space-y-3">
               <h3 class="font-semibold text-2xl" data-i18n="sections.capacidades.items.0.title">Terrenos – Adquisión Inteligente</h3>
               <p data-i18n="sections.capacidades.items.0.desc">Mediante el análisis avanzado de big data, parámetros derivados y tecnología como realidad aumentada y vistas satelitales, identificamos y evaluamos estratégicamente terrenos a nivel global. Consideramos factores como uso de suelo, clima, topografía, sostenibilidad y materiales innovadores para maximizar el valor de cada desarrollo según su geolocalización.</p>
@@ -429,13 +421,10 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/materiales.webp" type="image/webp">
-                <source media="(min-width: 768px)" srcset="./img/materiales-md.webp" type="image/webp">
-                <source media="(min-width: 400px)" srcset="./img/materiales-sm.webp" type="image/webp">
-                <source media="(min-width: 1200px)" srcset="./img/materiales.jpg" type="image/jpeg">
-                <source media="(min-width: 768px)" srcset="./img/materiales-md.jpg" type="image/jpeg">
-                <source media="(min-width: 400px)" srcset="./img/materiales-sm.jpg" type="image/jpeg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/materiales-thumb.webp" 
+                <source media="(min-width: 901px)" srcset="./img/materiales-md.webp" type="image/webp">
+                <source media="(min-width: 601px)" srcset="./img/materiales.webp" type="image/webp">
+                <source media="(min-width: 401px)" srcset="./img/materiales-sm.webp" type="image/webp">
+                <img loading="lazy" decoding="async" width="200" height="134" src="./img/materiales-thumb.webp" 
                      alt="Materiales - Redefiniendo la cadena de suministros" 
                      class="w-full h-full object-cover dark:brightness-75"
                      fetchpriority="low"
@@ -451,13 +440,10 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/arquitectura.webp" type="image/webp">
-                <source media="(min-width: 768px)" srcset="./img/arquitectura-md.webp" type="image/webp">
-                <source media="(min-width: 400px)" srcset="./img/arquitectura-sm.webp" type="image/webp">
-                <source media="(min-width: 1200px)" srcset="./img/arquitectura.jpg" type="image/jpeg">
-                <source media="(min-width: 768px)" srcset="./img/arquitectura-md.jpg" type="image/jpeg">
-                <source media="(min-width: 400px)" srcset="./img/arquitectura-sm.jpg" type="image/jpeg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/arquitectura-thumb.webp" 
+                <source media="(min-width: 901px)" srcset="./img/arquitectura-md.webp" type="image/webp">
+                <source media="(min-width: 601px)" srcset="./img/arquitectura.webp" type="image/webp">
+                <source media="(min-width: 401px)" srcset="./img/arquitectura-sm.webp" type="image/webp">
+                <img loading="lazy" decoding="async" width="200" height="134" src="./img/arquitectura-thumb.webp" 
                      alt="Arquitectura - Vanguardismo y Alto Impacto" 
                      class="w-full h-full object-cover dark:brightness-75"
                      fetchpriority="low"
@@ -473,13 +459,10 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/design.webp" type="image/webp">
-                <source media="(min-width: 768px)" srcset="./img/design-md.webp" type="image/webp">
-                <source media="(min-width: 400px)" srcset="./img/design-sm.webp" type="image/webp">
-                <source media="(min-width: 1200px)" srcset="./img/design.jpg" type="image/jpeg">
-                <source media="(min-width: 768px)" srcset="./img/design-md.jpg" type="image/jpeg">
-                <source media="(min-width: 400px)" srcset="./img/design-sm.jpg" type="image/jpeg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/design-thumb.webp" 
+                <source media="(min-width: 901px)" srcset="./img/design-md.webp" type="image/webp">
+                <source media="(min-width: 601px)" srcset="./img/design.webp" type="image/webp">
+                <source media="(min-width: 401px)" srcset="./img/design-sm.webp" type="image/webp">
+                <img loading="lazy" decoding="async" width="200" height="134" src="./img/design-thumb.webp" 
                      alt="Diseño - Adaptabilidad, Tecnología, Experiencia" 
                      class="w-full h-full object-cover dark:brightness-75" 
                      fetchpriority="low"
@@ -495,13 +478,10 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/art.webp" type="image/webp">
-                <source media="(min-width: 768px)" srcset="./img/art-md.webp" type="image/webp">
-                <source media="(min-width: 400px)" srcset="./img/art-sm.webp" type="image/webp">
-                <source media="(min-width: 1200px)" srcset="./img/art.jpg" type="image/jpeg">
-                <source media="(min-width: 768px)" srcset="./img/art-md.jpg" type="image/jpeg">
-                <source media="(min-width: 400px)" srcset="./img/art-sm.jpg" type="image/jpeg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/art-thumb.webp" 
+                <source media="(min-width: 901px)" srcset="./img/art-md.webp" type="image/webp">
+                <source media="(min-width: 601px)" srcset="./img/art.webp" type="image/webp">
+                <source media="(min-width: 401px)" srcset="./img/art-sm.webp" type="image/webp">
+                <img loading="lazy" decoding="async" width="200" height="134" src="./img/art-thumb.webp" 
                      alt="Arte - Curaduría, Identidad, Experiencia" 
                      class="w-full h-full object-cover dark:brightness-75"
                      fetchpriority="low"
@@ -517,10 +497,10 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/regulations.jpg">
-                <source media="(min-width: 768px)" srcset="./img/regulations-md.jpg">
-                <source media="(min-width: 400px)" srcset="./img/regulations-sm.jpg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/regulations-thumb.jpg" 
+                <source media="(min-width: 901px)" srcset="./img/regulations-md.jpg">
+                <source media="(min-width: 601px)" srcset="./img/regulations.jpg">
+                <source media="(min-width: 401px)" srcset="./img/regulations-sm.jpg">
+                <img loading="lazy" decoding="async" width="200" height="134" src="./img/regulations-thumb.jpg" 
                      alt="Regulatorio - Gestión Normativa Integral" 
                      class="w-full h-full object-cover dark:brightness-75" 
                      data-i18n-attr="alt:sections.capacidades.items.5.title">
@@ -535,10 +515,10 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/we-building.jpg">
-                <source media="(min-width: 768px)" srcset="./img/we-building-md.jpg">
-                <source media="(min-width: 400px)" srcset="./img/we-building-sm.jpg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/we-building-thumb.jpg" 
+                <source media="(min-width: 901px)" srcset="./img/we-building-md.jpg">
+                <source media="(min-width: 601px)" srcset="./img/we-building.jpg">
+                <source media="(min-width: 401px)" srcset="./img/we-building-sm.jpg">
+                <img loading="lazy" decoding="async" width="200" height="134" src="./img/we-building-thumb.jpg" 
                      alt="Construcción - Tecnológica y Global" 
                      class="w-full h-full object-cover dark:brightness-75" 
                      data-i18n-attr="alt:sections.capacidades.items.6.title">
@@ -553,10 +533,10 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/development.jpg">
-                <source media="(min-width: 768px)" srcset="./img/development-md.jpg">
-                <source media="(min-width: 400px)" srcset="./img/development-sm.jpg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/development-thumb.jpg" 
+                <source media="(min-width: 901px)" srcset="./img/development-md.jpg">
+                <source media="(min-width: 601px)" srcset="./img/development.jpg">
+                <source media="(min-width: 401px)" srcset="./img/development-sm.jpg">
+                <img loading="lazy" decoding="async" width="200" height="134" src="./img/development-thumb.jpg" 
                      alt="Desarrollo - Modelo Inmobiliario Disruptor" 
                      class="w-full h-full object-cover dark:brightness-75" 
                      data-i18n-attr="alt:sections.capacidades.items.7.title">
@@ -571,10 +551,10 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/marketing.jpg">
-                <source media="(min-width: 768px)" srcset="./img/marketing-md.jpg">
-                <source media="(min-width: 400px)" srcset="./img/marketing-sm.jpg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/marketing-thumb.jpg" 
+                <source media="(min-width: 901px)" srcset="./img/marketing-md.jpg">
+                <source media="(min-width: 601px)" srcset="./img/marketing.jpg">
+                <source media="(min-width: 401px)" srcset="./img/marketing-sm.jpg">
+                <img loading="lazy" decoding="async" width="200" height="134" src="./img/marketing-thumb.jpg" 
                      alt="Comercialización - Datos, Precisión y Conversión" 
                      class="w-full h-full object-cover dark:brightness-75" 
                      data-i18n-attr="alt:sections.capacidades.items.8.title">
@@ -589,10 +569,10 @@
           <div class="grid lg:grid-cols-2 gap-10 items-center lg:flex-row-reverse">
             <figure class="aspect-video lg:aspect-[3/2] overflow-hidden rounded-lg shadow-lg lg:order-last">
               <picture>
-                <source media="(min-width: 1200px)" srcset="./img/operations.jpg">
-                <source media="(min-width: 768px)" srcset="./img/operations-md.jpg">
-                <source media="(min-width: 400px)" srcset="./img/operations-sm.jpg">
-                <img loading="lazy" decoding="async" width="800" height="600" src="./img/operations-thumb.jpg" 
+                <source media="(min-width: 901px)" srcset="./img/operations-md.jpg">
+                <source media="(min-width: 601px)" srcset="./img/operations.jpg">
+                <source media="(min-width: 401px)" srcset="./img/operations-sm.jpg">
+                <img loading="lazy" decoding="async" width="200" height="134" src="./img/operations-thumb.jpg" 
                      alt="Operación - Rendimiento y Optimización" 
                      class="w-full h-full object-cover dark:brightness-75" 
                      data-i18n-attr="alt:sections.capacidades.items.9.title">
@@ -614,13 +594,10 @@
         <div class="bg-white dark:bg-zinc-900 rounded-lg shadow-lg overflow-hidden">
           <div class="relative h-48">
             <picture>
-              <source media="(min-width: 1200px)" data-srcset="./img/contact-us.webp" type="image/webp">
-              <source media="(min-width: 768px)" data-srcset="./img/contact-us-md.webp" type="image/webp">
-              <source media="(min-width: 400px)" data-srcset="./img/contact-us-sm.webp" type="image/webp">
-              <source media="(min-width: 1200px)" data-srcset="./img/contact-us.jpg" type="image/jpeg">
-              <source media="(min-width: 768px)" data-srcset="./img/contact-us-md.jpg" type="image/jpeg">
-              <source media="(min-width: 400px)" data-srcset="./img/contact-us-sm.jpg" type="image/jpeg">
-              <img loading="lazy" decoding="async" width="1200" height="400" src="./img/contact-us-thumb.webp" 
+              <source media="(min-width: 1001px)" data-srcset="./img/contact-us-md.webp" type="image/webp">
+              <source media="(min-width: 721px)" data-srcset="./img/contact-us.webp" type="image/webp">
+              <source media="(min-width: 421px)" data-srcset="./img/contact-us-sm.webp" type="image/webp">
+              <img loading="lazy" decoding="async" width="420" height="95" src="./img/contact-us-thumb.webp" 
                    alt="Nuestras oficinas en Torre Guttenberg" 
                    fetchpriority="low"
                    class="w-full h-full object-cover">

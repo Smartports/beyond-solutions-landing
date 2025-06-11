@@ -7,14 +7,17 @@ This document details the steps to add a new language to the Beyond Solutions in
 ### 1. Create the Translation File
 
 1. Copy the base file `./i18n/es.json` to a new file with the desired language code:
-   ```
+
+   ```bash
    cp i18n/es.json i18n/[code].json
    ```
+
    Where `[code]` is the two-letter ISO 639-1 code for the language (e.g., `fr` for French).
 
 2. Edit the new JSON file and translate all values. Make sure to keep the structure and keys intact.
 
 3. Update the `metadata` section with the correct language information:
+
    ```json
    "metadata": {
      "locale": "fr",
@@ -23,7 +26,7 @@ This document details the steps to add a new language to the Beyond Solutions in
      "dir": "ltr"
    }
    ```
-   
+
    - `locale`: ISO 639-1 code for the language
    - `name`: Language name in English
    - `nativeName`: Language name in its own language
@@ -80,5 +83,6 @@ For languages written from right to left (RTL) such as Arabic (ar) or Hebrew (he
 | Hebrew     | he           | il        |
 
 For a complete list of ISO 639-1 (languages) and ISO 3166-1 alpha-2 (countries) codes, see:
+
 - [List of ISO 639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-- [List of ISO 3166-1 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) 
+- [List of ISO 3166-1 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
