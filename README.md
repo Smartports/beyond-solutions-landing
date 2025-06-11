@@ -139,10 +139,6 @@ For more details about the i18n system, see [i18n/README.md](i18n/README.md).
 - Appropriate color contrast
 - Alternative texts for images
 
-## License
-
-All rights reserved © 2025 Beyond Solutions.
-
 ## Sustainability
 
 This website is optimized to minimize its carbon footprint, aiming for an A+ rating on the [Website Carbon Calculator](https://www.websitecarbon.com/). We've implemented the following eco-friendly practices:
@@ -173,3 +169,19 @@ This website is optimized to minimize its carbon footprint, aiming for an A+ rat
 - Hosted on GitHub Pages with renewable energy
 
 We encourage eco-friendly web development practices to help reduce the internet's carbon footprint. Our site currently produces a minimal carbon footprint per page view, making it one of the cleanest websites globally.
+
+## Performance Results
+
+Below are the latest Google Lighthouse performance scores for this site, demonstrating our commitment to speed, accessibility, best practices, and SEO.
+
+### Desktop
+
+![Lighthouse Desktop Performance](desktop-performance.png)
+
+### Mobile
+
+![Lighthouse Mobile Performance](mobile-performance.png)
+
+## License
+
+All rights reserved © 2025 Beyond Solutions.
