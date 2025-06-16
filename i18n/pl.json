@@ -17,7 +17,8 @@
       "por_que": "Dlaczego Beyond?",
       "sectores": "Sektory",
       "capacidades": "Możliwości",
-      "contacto": "Kontakt"
+      "contacto": "Kontakt",
+      "calculadora": "Kalkulator"
     },
     "theme": {
       "light": "Przełącz na tryb jasny",
@@ -191,5 +192,154 @@
   "accessibility": {
     "navigation": "Główna nawigacja",
     "back_to_top": "Powrót na górę"
+  },
+  "calculator": {
+    "title": "Kalkulator budżetu nieruchomości",
+    "intro": "Postępuj zgodnie z krokami, aby oszacować budżet, marże i zysk z Twojego projektu deweloperskiego.",
+    "next": "Dalej",
+    "prev": "Poprzedni",
+    "reset": "Nowa symulacja",
+    "values": {
+      "scope": {
+        "patrimonial": "Majątkowy",
+        "inversion": "Inwestycyjny"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Własny",
+        "notown": "Obcy",
+        "remate": "Przetarg"
+      },
+      "status": {
+        "construccion": "Budowa",
+        "demolicion": "Rozbiórka",
+        "reconversion": "Rekonwersja"
+      },
+      "materialesLevel": {
+        "low": "Niski koszt",
+        "medium": "Średni koszt",
+        "high": "Wysoki koszt",
+        "custom": "Niestandardowy"
+      }
+    },
+    "step1": {
+      "title": "1. Rodzaj projektu i podmiot",
+      "scope": "Rodzaj projektu",
+      "scope.select": "Wybierz opcję",
+      "scope.patrimonial": "Majątkowy",
+      "scope.inversion": "Inwestycyjny",
+      "entity": "Podmiot",
+      "entity.select": "Wybierz opcję",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. Budżet i dane o gruncie",
+      "budget": "Całkowity budżet",
+      "budget.placeholder": "10,000,000",
+      "address": "Adres gruntu",
+      "address.placeholder": "Np. J Rousseu 3, Anzures, CDMX",
+      "type": "Rodzaj gruntu",
+      "type.select": "Wybierz rodzaj",
+      "type.own": "Własny",
+      "type.notown": "Obcy",
+      "type.remate": "Przetarg",
+      "status": "Status",
+      "status.select": "Wybierz status",
+      "status.construccion": "Budowa",
+      "status.demolicion": "Rozbiórka",
+      "status.reconversion": "Rekonwersja",
+      "surface": "Powierzchnia (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "Użytkowa powierzchnia konstrukcyjna (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "Przeznaczenie gruntu",
+      "use.select": "Wybierz przeznaczenie",
+      "use.defined": "H30/20/Z (Mam przeznaczenie)",
+      "use.undefined": "Nieokreślone (Załóż 0.6)",
+      "use.request": "Do zdefiniowania (Chcę złożyć wniosek)",
+      "characteristics": "Charakterystyka",
+      "characteristics.placeholder": "Chroniony, nie dotyczy..."
+    },
+    "step3": {
+      "title": "3. Podział kosztów",
+      "materialesLevel": "Poziom materiałów",
+      "materialesLevel.low": "Niski koszt",
+      "materialesLevel.medium": "Średni koszt",
+      "materialesLevel.high": "Wysoki koszt",
+      "materialesLevel.custom": "Niestandardowy",
+      "regulatorio": "Regulacyjne",
+      "materiales": "Materiały",
+      "construccion": "Budowa",
+      "arquitectura": "Architektura",
+      "diseno": "Projekt",
+      "arte": "Sztuka"
+    },
+    "step4": {
+      "title": "4. Wyniki i podsumowanie"
+    },
+    "tooltips": {
+      "budgetTotal": "Obejmuje grunt i budowę, z wyłączeniem kosztów regulacyjnych."
+    },
+    "export": {
+      "pdf": "Eksportuj PDF",
+      "csv": "Eksportuj CSV",
+      "wa": "Udostępnij na WhatsApp",
+      "email": "Udostępnij e-mailem"
+    },
+    "save": "Zapisz symulację",
+    "restore": "Przywróć symulację",
+    "feedback": {
+      "pdfSuccess": "PDF wygenerowano pomyślnie.",
+      "pdfError": "Błąd podczas eksportowania PDF.",
+      "csvSuccess": "CSV wygenerowano pomyślnie.",
+      "csvError": "Błąd podczas eksportowania CSV.",
+      "waSuccess": "Otwarto WhatsApp.",
+      "waError": "Błąd udostępniania na WhatsApp.",
+      "emailSuccess": "Otwarto klienta poczty e-mail.",
+      "emailError": "Błąd udostępniania przez e-mail.",
+      "saved": "Symulacja została zapisana.",
+      "saveError": "Błąd podczas zapisywania.",
+      "restored": "Symulacja została przywrócona.",
+      "restoreError": "Błąd podczas przywracania.",
+      "noSaved": "Brak zapisanej symulacji."
+    },
+    "errors": {
+      "scope": "Rodzaj projektu jest wymagany.",
+      "entity": "Podmiot jest wymagany.",
+      "budgetTotal": "Całkowity budżet jest wymagany.",
+      "address": "Adres jest wymagany.",
+      "type": "Rodzaj gruntu jest wymagany.",
+      "status": "Status jest wymagany.",
+      "surface": "Powierzchnia jest wymagana.",
+      "usableSurface": "Powierzchnia użytkowa jest wymagana.",
+      "percent": "Wartość procentowa jest wymagana."
+    },
+    "summary": {
+      "title": "Podsumowanie",
+      "scope": "Rodzaj projektu:",
+      "entity": "Podmiot:",
+      "budget": "Budżet:",
+      "address": "Adres:",
+      "surface": "Powierzchnia:",
+      "usableSurface": "Powierzchnia użytkowa:",
+      "use": "Przeznaczenie gruntu:"
+    },
+    "result": {
+      "totalCost": "Koszt całkowity:",
+      "totalSell": "Szacunkowa cena sprzedaży:",
+      "profit": "Zysk brutto:",
+      "m2Cost": "Koszt za m²:",
+      "m2Sell": "Cena sprzedaży za m²:"
+    },
+    "help": {
+      "title": "Potrzebujesz pomocy?",
+      "geofencing": "Przewodnik po geofencingu",
+      "normativity": "Regulacje i procedury CDMX",
+      "accessibility": "Dostępność internetowa (WCAG)"
+    }
   }
-} 
+}

@@ -17,7 +17,8 @@
       "por_que": "Beyond क्यों?",
       "sectores": "क्षेत्र",
       "capacidades": "क्षमताएँ",
-      "contacto": "संपर्क"
+      "contacto": "संपर्क",
+      "calculadora": "कैलकुलेटर"
     },
     "theme": {
       "light": "हल्के मोड पर स्विच करें",
@@ -191,5 +192,154 @@
   "accessibility": {
     "navigation": "मुख्य नेविगेशन",
     "back_to_top": "वापस शीर्ष पर"
+  },
+  "calculator": {
+    "title": "रियल एस्टेट बजट कैलकुलेटर",
+    "intro": "अपने रियल एस्टेट प्रोजेक्ट के बजट, मार्जिन और लाभ का अनुमान लगाने के लिए चरणों का पालन करें।",
+    "next": "अगला",
+    "prev": "पिछला",
+    "reset": "नई सिमुलेशन",
+    "step1": {
+      "title": "1. प्रोजेक्ट प्रकार और इकाई",
+      "scope": "प्रोजेक्ट प्रकार",
+      "scope.select": "एक विकल्प चुनें",
+      "scope.patrimonial": "पैत्रिक",
+      "scope.inversion": "निवेश",
+      "entity": "इकाई",
+      "entity.select": "एक विकल्प चुनें",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. बजट और भूमि डेटा",
+      "budget": "कुल बजट",
+      "budget.placeholder": "$10,000,000",
+      "address": "भूमि का पता",
+      "address.placeholder": "उदा.: J Rousseu 3, Anzures, CDMX",
+      "type": "भूमि का प्रकार",
+      "type.select": "एक प्रकार चुनें",
+      "type.own": "स्वयं की",
+      "type.notown": "स्वयं की नहीं",
+      "type.remate": "नीलामी",
+      "status": "स्थिति",
+      "status.select": "स्थिति चुनें",
+      "status.construccion": "निर्माण",
+      "status.demolicion": "विध्वंस",
+      "status.reconversion": "पुनर्विकास",
+      "surface": "क्षेत्रफल (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "निर्माण के लिए उपयोगी क्षेत्र (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "भूमि उपयोग",
+      "use.select": "उपयोग चुनें",
+      "use.defined": "H30/20/Z (मेरे पास उपयोग है)",
+      "use.undefined": "परिभाषित नहीं (0.6 मानें)",
+      "use.request": "परिभाषित नहीं (अनुरोध करना चाहता हूँ)",
+      "characteristics": "विशेषताएँ",
+      "characteristics.placeholder": "संरक्षित, लागू नहीं..."
+    },
+    "step3": {
+      "title": "3. लागत विवरण",
+      "materialesLevel": "सामग्री स्तर",
+      "materialesLevel.low": "Low Cost",
+      "materialesLevel.medium": "Medium Cost",
+      "materialesLevel.high": "High Cost",
+      "materialesLevel.custom": "Custom",
+      "regulatorio": "नियामक",
+      "materiales": "सामग्री",
+      "construccion": "निर्माण",
+      "arquitectura": "वास्तुकला",
+      "diseno": "डिज़ाइन",
+      "arte": "कला"
+    },
+    "step4": {
+      "title": "4. परिणाम और सारांश"
+    },
+    "tooltips": {
+      "budgetTotal": "भूमि और निर्माण शामिल है, नियामक शामिल नहीं।"
+    },
+    "export": {
+      "pdf": "PDF निर्यात करें",
+      "csv": "CSV निर्यात करें",
+      "wa": "WhatsApp साझा करें",
+      "email": "ईमेल साझा करें"
+    },
+    "save": "सिमुलेशन सहेजें",
+    "restore": "सिमुलेशन पुनर्स्थापित करें",
+    "feedback": {
+      "pdfSuccess": "PDF जनरेट किया गया।",
+      "pdfError": "PDF निर्यात त्रुटि।",
+      "csvSuccess": "CSV जनरेट किया गया।",
+      "csvError": "CSV निर्यात त्रुटि।",
+      "waSuccess": "WhatsApp खुला।",
+      "waError": "WhatsApp साझा त्रुटि।",
+      "emailSuccess": "ईमेल खुला।",
+      "emailError": "ईमेल साझा त्रुटि।",
+      "saved": "सिमुलेशन सहेजा गया।",
+      "saveError": "सहेजने में त्रुटि।",
+      "restored": "सिमुलेशन पुनर्स्थापित किया गया।",
+      "restoreError": "पुनर्स्थापना में त्रुटि।",
+      "noSaved": "कोई सहेजा गया सिमुलेशन नहीं।"
+    },
+    "errors": {
+      "scope": "प्रोजेक्ट प्रकार आवश्यक है।",
+      "entity": "इकाई आवश्यक है।",
+      "budgetTotal": "कुल बजट आवश्यक है।",
+      "address": "पता आवश्यक है।",
+      "type": "भूमि का प्रकार आवश्यक है।",
+      "status": "स्थिति आवश्यक है।",
+      "surface": "क्षेत्रफल आवश्यक है।",
+      "usableSurface": "उपयोगी क्षेत्र आवश्यक है।",
+      "percent": "प्रतिशत आवश्यक है।"
+    },
+    "summary": {
+      "title": "सारांश",
+      "scope": "प्रोजेक्ट प्रकार:",
+      "entity": "इकाई:",
+      "budget": "बजट:",
+      "address": "पता:",
+      "surface": "क्षेत्रफल:",
+      "usableSurface": "उपयोगी क्षेत्र:",
+      "use": "भूमि उपयोग:"
+    },
+    "result": {
+      "totalCost": "कुल लागत:",
+      "totalSell": "अनुमानित बिक्री मूल्य:",
+      "profit": "सकल लाभ:",
+      "m2Cost": "प्रति वर्ग मीटर लागत:",
+      "m2Sell": "प्रति वर्ग मीटर बिक्री मूल्य:"
+    },
+    "help": {
+      "title": "मदद चाहिए?",
+      "geofencing": "जियोफेंसिंग गाइड",
+      "normativity": "CDMX नियम और प्रक्रियाएँ",
+      "accessibility": "वेब एक्सेसिबिलिटी (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "पैतृक",
+        "inversion": "निवेश"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "अपना",
+        "notown": "पराया",
+        "remate": "नीलामी"
+      },
+      "status": {
+        "construccion": "निर्माण",
+        "demolicion": "विध्वंस",
+        "reconversion": "पुनर्विकास"
+      },
+      "materialesLevel": {
+        "low": "कम लागत",
+        "medium": "मध्यम लागत",
+        "high": "उच्च लागत",
+        "custom": "कस्टम"
+      }
+    }
   }
-} 
+}

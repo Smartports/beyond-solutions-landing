@@ -17,7 +17,8 @@
       "por_que": "Waarom Beyond?",
       "sectores": "Sectoren",
       "capacidades": "Capaciteiten",
-      "contacto": "Contact"
+      "contacto": "Contact",
+      "calculadora": "Rekenmachine"
     },
     "theme": {
       "light": "Overschakelen naar lichte modus",
@@ -191,5 +192,154 @@
   "accessibility": {
     "back_to_top": "Terug naar boven",
     "navigation": "Hoofdnavigatie"
+  },
+  "calculator": {
+    "title": "Vastgoedbudgetcalculator",
+    "intro": "Volg de stappen om het budget, de marges en de winst van uw vastgoedproject te schatten.",
+    "next": "Volgende",
+    "prev": "Vorige",
+    "reset": "Nieuwe simulatie",
+    "step1": {
+      "title": "1. Projecttype en entiteit",
+      "scope": "Projecttype",
+      "scope.select": "Selecteer een optie",
+      "scope.patrimonial": "Patrimoniaal",
+      "scope.inversion": "Investering",
+      "entity": "Entiteit",
+      "entity.select": "Selecteer een optie",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. Budget en Landgegevens",
+      "budget": "Totaal budget",
+      "budget.placeholder": "$10,000,000",
+      "address": "Adres van het land",
+      "address.placeholder": "Bijv.: J Rousseu 3, Anzures, CDMX",
+      "type": "Type land",
+      "type.select": "Selecteer een type",
+      "type.own": "Eigen",
+      "type.notown": "Niet eigen",
+      "type.remate": "Veiling",
+      "status": "Status",
+      "status.select": "Selecteer een status",
+      "status.construccion": "Constructie",
+      "status.demolicion": "Sloop",
+      "status.reconversion": "Herontwikkeling",
+      "surface": "Oppervlakte (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "Bruikbare bouwoppervlakte (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "Perceelgebruik",
+      "use.select": "Selecteer gebruik",
+      "use.defined": "H30/20/Z (Gebruik bekend)",
+      "use.undefined": "Niet gedefinieerd (Neem 0,6 aan)",
+      "use.request": "Niet gedefinieerd (Wil aanvragen)",
+      "characteristics": "Kenmerken",
+      "characteristics.placeholder": "Beschermd, Niet van toepassing..."
+    },
+    "step3": {
+      "title": "3. Kostenoverzicht",
+      "materialesLevel": "Materiaalniveau",
+      "materialesLevel.low": "Low Cost",
+      "materialesLevel.medium": "Medium Cost",
+      "materialesLevel.high": "High Cost",
+      "materialesLevel.custom": "Custom",
+      "regulatorio": "Regelgeving",
+      "materiales": "Materialen",
+      "construccion": "Constructie",
+      "arquitectura": "Architectuur",
+      "diseno": "Ontwerp",
+      "arte": "Kunst"
+    },
+    "step4": {
+      "title": "4. Resultaten en samenvatting"
+    },
+    "tooltips": {
+      "budgetTotal": "Inclusief perceel en bouw, exclusief regelgeving."
+    },
+    "export": {
+      "pdf": "PDF exporteren",
+      "csv": "CSV exporteren",
+      "wa": "WhatsApp delen",
+      "email": "E-mail delen"
+    },
+    "save": "Simulatie opslaan",
+    "restore": "Simulatie herstellen",
+    "feedback": {
+      "pdfSuccess": "PDF gegenereerd.",
+      "pdfError": "Fout bij exporteren PDF.",
+      "csvSuccess": "CSV gegenereerd.",
+      "csvError": "Fout bij exporteren CSV.",
+      "waSuccess": "WhatsApp geopend.",
+      "waError": "Fout bij delen via WhatsApp.",
+      "emailSuccess": "E-mail geopend.",
+      "emailError": "Fout bij delen via e-mail.",
+      "saved": "Simulatie opgeslagen.",
+      "saveError": "Fout bij opslaan.",
+      "restored": "Simulatie hersteld.",
+      "restoreError": "Fout bij herstellen.",
+      "noSaved": "Geen opgeslagen simulatie."
+    },
+    "errors": {
+      "scope": "Projecttype is verplicht.",
+      "entity": "Entiteit is verplicht.",
+      "budgetTotal": "Totaal budget is verplicht.",
+      "address": "Adres is verplicht.",
+      "type": "Type perceel is verplicht.",
+      "status": "Status is verplicht.",
+      "surface": "Oppervlakte is verplicht.",
+      "usableSurface": "Bruikbare oppervlakte is verplicht.",
+      "percent": "Percentage is verplicht."
+    },
+    "summary": {
+      "title": "Samenvatting",
+      "scope": "Projecttype:",
+      "entity": "Entiteit:",
+      "budget": "Budget:",
+      "address": "Adres:",
+      "surface": "Oppervlakte:",
+      "usableSurface": "Bruikbare oppervlakte:",
+      "use": "Perceelgebruik:"
+    },
+    "result": {
+      "totalCost": "Totale kosten:",
+      "totalSell": "Geschatte verkoopprijs:",
+      "profit": "Brutowinst:",
+      "m2Cost": "Kosten per m²:",
+      "m2Sell": "Verkoopprijs per m²:"
+    },
+    "help": {
+      "title": "Hulp nodig?",
+      "geofencing": "Geofencing-gids",
+      "normativity": "CDMX regelgeving en procedures",
+      "accessibility": "Webtoegankelijkheid (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "Patrimoniaal",
+        "inversion": "Investering"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Eigen",
+        "notown": "Niet eigen",
+        "remate": "Veiling"
+      },
+      "status": {
+        "construccion": "Constructie",
+        "demolicion": "Sloop",
+        "reconversion": "Herontwikkeling"
+      },
+      "materialesLevel": {
+        "low": "Lage kosten",
+        "medium": "Gemiddelde kosten",
+        "high": "Hoge kosten",
+        "custom": "Aangepast"
+      }
+    }
   }
-} 
+}
