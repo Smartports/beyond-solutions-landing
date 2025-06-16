@@ -83,7 +83,8 @@ document.addEventListener('alpine:init', () => {
 
   // Función para traducir atributos no reactivos (placeholders, options).
   updateAllTranslations() {
-    this.$nextTick(() => {
+    // Force a delay to ensure the DOM is fully rendered
+    setTimeout(() => {
         console.log('Updating translations for calculator step:', this.currentStep);
         const t = window.t;
         if (!t) return;
@@ -151,7 +152,7 @@ document.addEventListener('alpine:init', () => {
         if (window.i18n && window.i18n.translateNode) {
             window.i18n.translateNode(this.$el);
         }
-    });
+    }, 50);
   },
 
   results: {

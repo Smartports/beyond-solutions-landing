@@ -20,7 +20,6 @@
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" as="style">
   <link rel="preload" href="https://cdn.tailwindcss.com/3.4.16" as="script">
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" as="script">
-
   <script src="https://cdn.tailwindcss.com/3.4.16"></script>
   <script>tailwind.config={theme:{extend:{colors:{primary:{950:"#121f45",900:"#192c64",800:"#203679",700:"#243f8f",600:"#2f51b5"},accent:{500:"#8390be",300:"#bdc5dd",100:"#e9ebf3",50:"#f4f6fa"}},fontFamily:{display:['\"Open Sauce One\"',"sans-serif"],body:['\"Open Sauce One\"',"sans-serif"],aux:["Muli","sans-serif"]},boxShadow:{soft:"0 4px 20px -2px rgba(0, 0, 0, 0.06)","soft-lg":"0 10px 30px -3px rgba(0, 0, 0, 0.1)"},transitionProperty:{height:"height",spacing:"margin, padding"}}},darkMode:"class"};</script>
 
@@ -684,6 +683,10 @@
         min-height: 44px; /* Según recomendaciones de Apple para interfaces táctiles */
       }
     }
+
+    .z-1 {
+      z-index: 1;
+    }
   </style>
 </head>
 <body class="font-body antialiased leading-relaxed text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900">
@@ -742,11 +745,11 @@
   </header>
 
   <main class="pt-24 md:pt-28 pb-16 bg-accent-100 dark:bg-zinc-800 min-h-screen">
-    <div x-data="calculatorForm">
+    <div x-data="calculatorForm" x-effect="$watch('currentStep', () => $nextTick(() => updateAllTranslations()))"
       <div role="region" aria-label="Formulario de calculadora inmobiliaria" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8">
         <!-- Main Calculator Form -->
         <template x-if="$store.i18n.ready">
-          <section class="flex-1 calculator-container" aria-labelledby="calculator-title">
+          <section class="flex-1 calculator-container z-1" aria-labelledby="calculator-title">
             <h1 id="calculator-title" class="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-primary-700 dark:text-accent-100" data-i18n="calculator.title">Calculadora de Presupuesto Inmobiliario</h1>
             <p class="mb-8 text-lg md:text-xl text-zinc-700 dark:text-zinc-200" data-i18n="calculator.intro">Sigue los pasos para estimar el presupuesto, márgenes y utilidad de tu proyecto inmobiliario.</p>
             <!-- Stepper Indicator -->
@@ -761,14 +764,15 @@
                   :aria-current="currentStep===idx ? 'step' : false" 
                   @click="goToStep(idx)"
                   :aria-label="`Ir al paso ${idx + 1}: ${safeTranslate(`calculator.step${idx + 1}.title`)}`"
-                  :aria-selected="currentStep===idx">
+                  :aria-selected="currentStep===idx"
+                  x-effect="updateAllTranslations()">
                   <span class="text-accent-100 dark:text-accent-100" x-text="safeTranslate(`calculator.step${idx + 1}.title`)"></span>
                   <span class="sr-only" x-text="currentStep===idx ? '(paso actual)' : ''"></span>
                 </button>
               </template>
             </nav>
             <!-- Step Forms -->
-            <div aria-live="polite">
+            <div aria-live="polite" x-effect="updateAllTranslations()">
               <template x-if="currentStep===0">
                 <div data-aos="fade-up" role="form" aria-labelledby="step1-title">
                   <h2 id="step1-title" class="text-xl font-bold mb-4" data-i18n="calculator.step1.title">1. Tipo de Proyecto y Entidad</h2>
