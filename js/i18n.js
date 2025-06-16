@@ -73,7 +73,8 @@ export async function initI18n(customOptions = {}) {
     changeLanguage,
     getCurrentLanguage: () => currentLanguage,
     getSupportedLanguages: () => options.supportedLanguages,
-    isRTL: isRTL
+    isRTL: isRTL,
+    translateNode,
   };
 }
 
@@ -162,6 +163,71 @@ function updateTextDirection() {
 }
 
 /**
+ * Traduce un nodo del DOM y sus descendientes
+ * @param {Node} node - El nodo a traducir
+ */
+function translateNode(node) {
+  if (!node) return;
+
+  const elements = node.nodeType === 1 && node.matches('[data-i18n], [data-i18n-attr]')
+    ? [node, ...node.querySelectorAll('[data-i18n], [data-i18n-attr]')]
+    : node.querySelectorAll('[data-i18n], [data-i18n-attr]');
+
+  elements.forEach(el => {
+    const i18nKey = el.getAttribute('data-i18n');
+    if (i18nKey) {
+      el.textContent = t(i18nKey, {}, el.textContent);
+    }
+
+    const i18nAttr = el.getAttribute('data-i18n-attr');
+    if (i18nAttr) {
+      i18nAttr.split(',').forEach(pair => {
+        const [attr, key] = pair.trim().split(':');
+        if (attr && key) {
+          const translated = t(key, {}, el.getAttribute(attr) || '');
+          el.setAttribute(attr, translated);
+        }
+      });
+    }
+  });
+}
+
+/**
+ * Inicializa un MutationObserver para traducir elementos agregados dinámicamente
+ */
+function initMutationObserver() {
+  if (window.i18nObserver) {
+    window.i18nObserver.disconnect();
+  }
+
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            translateNode(node);
+          }
+        });
+      } else if (mutation.type === 'attributes' && (mutation.attributeName === 'data-i18n' || mutation.attributeName === 'data-i18n-attr')) {
+          translateNode(mutation.target);
+      }
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-i18n', 'data-i18n-attr']
+  });
+
+  window.i18nObserver = observer;
+  if (options.debug) {
+    console.log('[i18n] MutationObserver inicializado.');
+  }
+}
+
+/**
  * Cambia el idioma actual y actualiza la interfaz
  * @param {string} langCode - Código del idioma
  * @returns {Promise<boolean>} - Éxito o fracaso
@@ -183,6 +249,7 @@ export async function changeLanguage(langCode) {
     // Actualizar idioma actual
     const previousLanguage = currentLanguage;
     currentLanguage = langCode;
+    console.log(`[i18n] Language changed FROM ${previousLanguage} TO ${currentLanguage}. Storing in localStorage.`);
     
     // Guardar en localStorage
     localStorage.setItem(options.storageKey, langCode);
@@ -287,7 +354,12 @@ async function loadTranslations(langCode) {
  * @returns {string} - Texto traducido
  */
 export function t(key, params = {}, defaultValue = '') {
+  if (options.debug) {
+    console.log(`[i18n] t() called with key: "${key}", current language: ${currentLanguage}`);
+  }
+
   if (!currentLanguage || !translationsCache.has(currentLanguage)) {
+    console.warn(`[i18n] No translations loaded for "${currentLanguage}", returning default`);
     return defaultValue || key;
   }
   
@@ -302,7 +374,15 @@ export function t(key, params = {}, defaultValue = '') {
         value = value[k];
       } else {
         // Si no se encuentra la clave en el idioma actual, buscar en el fallback
+        if (options.debug) {
+          console.warn(`[i18n] Key part "${k}" not found in path "${key}" for language "${currentLanguage}"`);
+        }
+        
         if (currentLanguage !== options.fallbackLanguage && translationsCache.has(options.fallbackLanguage)) {
+          if (options.debug) {
+            console.log(`[i18n] Trying fallback language "${options.fallbackLanguage}" for key "${key}"`);
+          }
+          
           const fallbackTranslations = translationsCache.get(options.fallbackLanguage);
           let fallbackValue = fallbackTranslations;
           
@@ -310,12 +390,18 @@ export function t(key, params = {}, defaultValue = '') {
             if (fallbackValue && typeof fallbackValue === 'object' && k in fallbackValue) {
               fallbackValue = fallbackValue[k];
             } else {
+              if (options.debug) {
+                console.warn(`[i18n] Key "${key}" not found in fallback language "${options.fallbackLanguage}" either`);
+              }
               return defaultValue || key;
             }
           }
           
           value = fallbackValue;
         } else {
+          if (options.debug) {
+            console.warn(`[i18n] No fallback available for key "${key}"`);
+          }
           return defaultValue || key;
         }
       }
@@ -323,16 +409,24 @@ export function t(key, params = {}, defaultValue = '') {
     
     if (typeof value === 'string') {
       // Interpolación de parámetros {{param}}
-      return value.replace(/{{([^{}]*)}}/g, (matched, param) => {
+      const result = value.replace(/{{([^{}]*)}}/g, (matched, param) => {
         return params[param] !== undefined ? params[param] : matched;
       });
+      
+      if (options.debug) {
+        console.log(`[i18n] Translated "${key}" to "${result}"`);
+      }
+      
+      return result;
+    }
+    
+    if (options.debug) {
+      console.warn(`[i18n] Value for key "${key}" is not a string: ${typeof value}`);
     }
     
     return defaultValue || key;
   } catch (error) {
-    if (options.debug) {
-      console.error(`[i18n] Error traduciendo clave "${key}":`, error);
-    }
+    console.error(`[i18n] Error traduciendo clave "${key}":`, error);
     return defaultValue || key;
   }
 }
@@ -341,37 +435,7 @@ export function t(key, params = {}, defaultValue = '') {
  * Traduce todos los elementos de la página que contienen el atributo data-i18n
  */
 async function translatePageElements() {
-  // Elementos con atributo data-i18n
-  const elements = document.querySelectorAll('[data-i18n]');
-  elements.forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (key) {
-      el.textContent = t(key, {}, el.textContent);
-    }
-  });
-  
-  // Elementos con atributo data-i18n-attr (para atributos)
-  const attrElements = document.querySelectorAll('[data-i18n-attr]');
-  attrElements.forEach(el => {
-    const attrPairs = el.getAttribute('data-i18n-attr').split(',');
-    
-    attrPairs.forEach(pair => {
-      const [attr, key] = pair.trim().split(':');
-      if (attr && key) {
-        const translated = t(key, {}, el.getAttribute(attr) || '');
-        el.setAttribute(attr, translated);
-      }
-    });
-  });
-  
-  // Elementos con atributo data-i18n-html (para HTML interno)
-  const htmlElements = document.querySelectorAll('[data-i18n-html]');
-  htmlElements.forEach(el => {
-    const key = el.getAttribute('data-i18n-html');
-    if (key) {
-      el.innerHTML = t(key, {}, el.innerHTML);
-    }
-  });
+  translateNode(document.body);
 }
 
 // Exportar funciones y configuración

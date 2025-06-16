@@ -6,41 +6,63 @@
 import { initI18n, changeLanguage, t, isRTL } from './i18n.js';
 import { initLanguageSelector } from './language-selector.js';
 
-// Exponer funciones globalmente para que Alpine.js pueda usarlas
+// Expose functions globally for Alpine.js and inline scripts
 window.t = t;
 window.changeLanguage = changeLanguage;
 window.isRTL = isRTL;
+window.initLanguageSelector = initLanguageSelector;
+window.initComponents = initComponents;
+
+// Initialize the i18n state store for Alpine.js
+document.addEventListener('alpine:init', () => {
+    Alpine.store('i18n', {
+        ready: false,
+        revision: 0,
+        timestamp: Date.now()
+    });
+});
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    // Inicializar el sistema de i18n
+    console.log('DOM content loaded, initializing application...');
+
     const i18nInstance = await initI18n({
       basePath: './i18n',
       defaultLanguage: 'es',
       fallbackLanguage: 'en',
-      debug: true // Habilitamos debug para ver posibles problemas
+      debug: false
+    });
+
+    window.i18n = i18nInstance;
+
+    // Notify Alpine that i18n is ready.
+    Alpine.store('i18n', {
+      ready: true,
+      revision: (Alpine.store('i18n').revision || 0) + 1,
+      timestamp: Date.now()
     });
     
-    // Exponer la instancia i18n globalmente para Alpine.js
-    window.i18n = i18nInstance;
-    
-    // Inicializar el selector de idiomas
-    initLanguageSelector();
-    
-    // Inicializar componentes que dependan de i18n
-    initComponents();
-    
-    // Observador para elementos dinámicos que requieran traducción
-    initMutationObserver();
-    
-    // Disparar evento global de i18n listo
-    window.dispatchEvent(new CustomEvent('i18n:ready'));
-    document.dispatchEvent(new CustomEvent('i18n:ready'));
-    
-    console.log('Beyond Solutions - Inicialización completada');
+    // For index.html, initialize components directly.
+    // For calculator.html, initialization is handled by x-init.
+    if (document.querySelector('#about')) {
+      await Alpine.nextTick();
+      initLanguageSelector();
+      initComponents();
+    }
+
+    // Listen for subsequent language changes to trigger re-translation
+    document.addEventListener('i18n:languageChanged', () => {
+      Alpine.store('i18n', {
+        ready: true,
+        revision: (Alpine.store('i18n').revision || 0) + 1,
+        timestamp: Date.now()
+      });
+    });
+
+    console.log('Beyond Solutions - Initialization complete');
   } catch (error) {
-    console.error('Error durante la inicialización:', error);
+    console.error('Application initialization failed:', error);
   }
 });
 
@@ -48,54 +70,33 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Inicializa los componentes de la aplicación
  */
 function initComponents() {
-  // AOS (Animate on Scroll) debe reiniciarse después de cambios de idioma
-  document.addEventListener('i18n:languageChanged', (e) => {
-    // Disparar también un evento global para Alpine.js
-    window.dispatchEvent(new CustomEvent('i18n:languageChanged', { 
-      detail: e.detail 
-    }));
-    
+  // Initialize AOS (Animate on Scroll)
+  if (window.AOS) {
+    AOS.init({
+      once: true,
+      duration: 600,
+      offset: 100,
+      delay: 0,
+      disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    });
+  }
+
+  // Refresh AOS on language change because content dimensions might change
+  document.addEventListener('i18n:languageChanged', () => {
     if (window.AOS) {
       window.AOS.refresh();
     }
   });
-  
-  // Otros inicializadores de componentes pueden agregarse aquí
 }
 
 /**
  * Inicializa un observador de mutaciones para traducir elementos dinámicos
  */
 function initMutationObserver() {
-  // Observar cambios en el DOM para traducir elementos dinámicos
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-        mutation.addedNodes.forEach(node => {
-          // Verificar si el nodo es un elemento y tiene atributos data-i18n
-          if (node.nodeType === 1 && node.hasAttribute) {
-            if (node.hasAttribute('data-i18n')) {
-              const key = node.getAttribute('data-i18n');
-              node.textContent = t(key, {}, node.textContent);
-            }
-            
-            // Buscar elementos hijos con atributos data-i18n
-            const childElements = node.querySelectorAll('[data-i18n]');
-            childElements.forEach(el => {
-              const key = el.getAttribute('data-i18n');
-              el.textContent = t(key, {}, el.textContent);
-            });
-          }
-        });
-      }
-    });
-  });
-  
-  // Configurar el observador para observar todo el cuerpo del documento
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  // La lógica ahora está en i18n.js y se llama desde initI18n
+  if (options.debug) {
+      console.log("[main] initMutationObserver ya no es necesario aquí.");
+  }
 }
 
 // Exportar funciones para uso global si se importa como módulo
