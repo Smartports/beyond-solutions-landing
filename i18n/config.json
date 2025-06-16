@@ -97,6 +97,18 @@
       "name": "Greek",
       "nativeName": "Ελληνικά",
       "flag": "gr"
+    },
+    {
+      "code": "sv",
+      "name": "Swedish",
+      "nativeName": "Svenska",
+      "flag": "se"
+    },
+    {
+      "code": "nl",
+      "name": "Dutch",
+      "nativeName": "Nederlands",
+      "flag": "nl"
     }
   ]
 } 

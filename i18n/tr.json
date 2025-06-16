@@ -17,7 +17,8 @@
       "por_que": "Neden Beyond?",
       "sectores": "Sektörler",
       "capacidades": "Yetenekler",
-      "contacto": "İletişim"
+      "contacto": "İletişim",
+      "calculadora": "Hesap Makinesi"
     },
     "theme": {
       "light": "Aydınlık moda geç",
@@ -191,5 +192,154 @@
   "accessibility": {
     "navigation": "Ana navigasyon",
     "back_to_top": "Başa dön"
+  },
+  "calculator": {
+    "title": "Gayrimenkul Bütçe Hesaplayıcı",
+    "intro": "Gayrimenkul projenizin bütçesini, marjlarını ve kârını tahmin etmek için adımları izleyin.",
+    "next": "İleri",
+    "prev": "Geri",
+    "reset": "Yeni simülasyon",
+    "step1": {
+      "title": "1. Proje Türü ve Varlık",
+      "scope": "Proje türü",
+      "scope.select": "Bir seçenek seçin",
+      "scope.patrimonial": "Mülkiyet",
+      "scope.inversion": "Yatırım",
+      "entity": "Varlık",
+      "entity.select": "Bir seçenek seçin",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. Bütçe ve Arazi Verileri",
+      "budget": "Toplam bütçe",
+      "budget.placeholder": "$10,000,000",
+      "address": "Arazi adresi",
+      "address.placeholder": "Örn: J Rousseu 3, Anzures, CDMX",
+      "type": "Arazi tipi",
+      "type.select": "Bir tip seçin",
+      "type.own": "Kendi",
+      "type.notown": "Kendi değil",
+      "type.remate": "Açık artırma",
+      "status": "Durum",
+      "status.select": "Durum seçin",
+      "status.construccion": "İnşaat",
+      "status.demolicion": "Yıkım",
+      "status.reconversion": "Dönüşüm",
+      "surface": "Alan (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "Kullanılabilir inşaat alanı (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "Arsa kullanımı",
+      "use.select": "Kullanım seçin",
+      "use.defined": "H30/20/Z (Kullanımım var)",
+      "use.undefined": "Tanımsız (0.6 varsay)",
+      "use.request": "Tanımsız (Başvurmak istiyorum)",
+      "characteristics": "Özellikler",
+      "characteristics.placeholder": "Korunan, Uygulanamaz..."
+    },
+    "step3": {
+      "title": "3. Maliyet Dağılımı",
+      "materialesLevel": "Malzeme seviyesi",
+      "materialesLevel.low": "Low Cost",
+      "materialesLevel.medium": "Medium Cost",
+      "materialesLevel.high": "High Cost",
+      "materialesLevel.custom": "Custom",
+      "regulatorio": "Düzenleyici",
+      "materiales": "Malzemeler",
+      "construccion": "İnşaat",
+      "arquitectura": "Mimari",
+      "diseno": "Tasarım",
+      "arte": "Sanat"
+    },
+    "step4": {
+      "title": "4. Sonuçlar ve özet"
+    },
+    "tooltips": {
+      "budgetTotal": "Arsa ve inşaat dahil, düzenleyici hariç."
+    },
+    "export": {
+      "pdf": "PDF Dışa Aktar",
+      "csv": "CSV Dışa Aktar",
+      "wa": "WhatsApp ile Paylaş",
+      "email": "E-posta ile Paylaş"
+    },
+    "save": "Simülasyonu kaydet",
+    "restore": "Simülasyonu geri yükle",
+    "feedback": {
+      "pdfSuccess": "PDF oluşturuldu.",
+      "pdfError": "PDF dışa aktarım hatası.",
+      "csvSuccess": "CSV oluşturuldu.",
+      "csvError": "CSV dışa aktarım hatası.",
+      "waSuccess": "WhatsApp açıldı.",
+      "waError": "WhatsApp paylaşım hatası.",
+      "emailSuccess": "E-posta açıldı.",
+      "emailError": "E-posta paylaşım hatası.",
+      "saved": "Simülasyon kaydedildi.",
+      "saveError": "Kaydetme hatası.",
+      "restored": "Simülasyon geri yüklendi.",
+      "restoreError": "Geri yükleme hatası.",
+      "noSaved": "Kayıtlı simülasyon yok."
+    },
+    "errors": {
+      "scope": "Proje türü zorunludur.",
+      "entity": "Varlık zorunludur.",
+      "budgetTotal": "Toplam bütçe zorunludur.",
+      "address": "Adres zorunludur.",
+      "type": "Arsa türü zorunludur.",
+      "status": "Durum zorunludur.",
+      "surface": "Alan zorunludur.",
+      "usableSurface": "Kullanılabilir alan zorunludur.",
+      "percent": "Yüzde zorunludur."
+    },
+    "summary": {
+      "title": "Özet",
+      "scope": "Proje türü:",
+      "entity": "Varlık:",
+      "budget": "Bütçe:",
+      "address": "Adres:",
+      "surface": "Alan:",
+      "usableSurface": "Kullanılabilir alan:",
+      "use": "Arsa kullanımı:"
+    },
+    "result": {
+      "totalCost": "Toplam maliyet:",
+      "totalSell": "Tahmini satış fiyatı:",
+      "profit": "Brüt kâr:",
+      "m2Cost": "m² başına maliyet:",
+      "m2Sell": "m² başına satış fiyatı:"
+    },
+    "help": {
+      "title": "Yardıma mı ihtiyacınız var?",
+      "geofencing": "Coğrafi sınır kılavuzu",
+      "normativity": "CDMX yönetmelikleri ve prosedürleri",
+      "accessibility": "Web erişilebilirliği (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "Varlık",
+        "inversion": "Yatırım"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Kendi",
+        "notown": "Kendi değil",
+        "remate": "Açık artırma"
+      },
+      "status": {
+        "construccion": "İnşaat",
+        "demolicion": "Yıkım",
+        "reconversion": "Dönüşüm"
+      },
+      "materialesLevel": {
+        "low": "Düşük Maliyet",
+        "medium": "Orta Maliyet",
+        "high": "Yüksek Maliyet",
+        "custom": "Özel"
+      }
+    }
   }
-} 
+}

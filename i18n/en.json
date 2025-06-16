@@ -17,7 +17,8 @@
       "por_que": "Why Beyond?",
       "sectores": "Sectors",
       "capacidades": "Capabilities",
-      "contacto": "Contact"
+      "contacto": "Contact",
+      "calculadora": "Calculator"
     },
     "theme": {
       "light": "Switch to light mode",
@@ -191,5 +192,154 @@
   "accessibility": {
     "navigation": "Main navigation",
     "back_to_top": "Back to top"
+  },
+  "calculator": {
+    "title": "Real Estate Budget Calculator",
+    "intro": "Follow the steps to estimate the budget, margins, and profit of your real estate project.",
+    "next": "Next",
+    "prev": "Previous",
+    "values": {
+      "scope": {
+        "patrimonial": "Patrimonial",
+        "inversion": "Investment"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Owned",
+        "notown": "Not Owned",
+        "remate": "Foreclosure"
+      },
+      "status": {
+        "construccion": "Construction",
+        "demolicion": "Demolition",
+        "reconversion": "Reconversion"
+      },
+      "materialesLevel": {
+        "low": "Low Cost",
+        "medium": "Medium Cost",
+        "high": "High Cost",
+        "custom": "Custom"
+      }
+    },
+    "reset": "New simulation",
+    "step1": {
+      "title": "1. Project Type and Entity",
+      "scope": "Project type",
+      "scope.select": "Select an option",
+      "scope.patrimonial": "Patrimonial",
+      "scope.inversion": "Investment",
+      "entity": "Entity",
+      "entity.select": "Select an option",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. Budget and Land Data",
+      "budget": "Total budget",
+      "budget.placeholder": "$10,000,000",
+      "address": "Land address",
+      "address.placeholder": "E.g.: J Rousseu 3, Anzures, CDMX",
+      "type": "Land type",
+      "type.select": "Select a type",
+      "type.own": "Own",
+      "type.notown": "Not Own",
+      "type.remate": "Foreclosure",
+      "status": "Status",
+      "status.select": "Select a status",
+      "status.construccion": "Construction",
+      "status.demolicion": "Demolition",
+      "status.reconversion": "Reconversion",
+      "surface": "Surface (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "Usable construction surface (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "Land use",
+      "use.select": "Select use",
+      "use.defined": "H30/20/Z (I have the use)",
+      "use.undefined": "Not defined (Assume 0.6)",
+      "use.request": "Not defined (I want to request it)",
+      "characteristics": "Characteristics",
+      "characteristics.placeholder": "Protected, Not Applicable..."
+    },
+    "step3": {
+      "title": "3. Cost Breakdown",
+      "materialesLevel": "Material level",
+      "materialesLevel.low": "Low Cost",
+      "materialesLevel.medium": "Medium Cost",
+      "materialesLevel.high": "High Cost",
+      "materialesLevel.custom": "Custom",
+      "regulatorio": "Regulatory",
+      "materiales": "Materials",
+      "construccion": "Construction",
+      "arquitectura": "Architecture",
+      "diseno": "Design",
+      "arte": "Art"
+    },
+    "step4": {
+      "title": "4. Results and Summary"
+    },
+    "tooltips": {
+      "budgetTotal": "Includes land and construction, excludes regulatory."
+    },
+    "export": {
+      "pdf": "Export PDF",
+      "csv": "Export CSV",
+      "wa": "Share WhatsApp",
+      "email": "Share Email"
+    },
+    "save": "Save simulation",
+    "restore": "Restore simulation",
+    "feedback": {
+      "pdfSuccess": "PDF generated.",
+      "pdfError": "Error exporting PDF.",
+      "csvSuccess": "CSV generated.",
+      "csvError": "Error exporting CSV.",
+      "waSuccess": "WhatsApp opened.",
+      "waError": "Error sharing on WhatsApp.",
+      "emailSuccess": "Email opened.",
+      "emailError": "Error sharing by Email.",
+      "saved": "Simulation saved.",
+      "saveError": "Error saving.",
+      "restored": "Simulation restored.",
+      "restoreError": "Error restoring.",
+      "noSaved": "No saved simulation."
+    },
+    "errors": {
+      "scope": "Project type is required.",
+      "entity": "Entity is required.",
+      "budgetTotal": "Total budget is required.",
+      "address": "Address is required.",
+      "type": "Land type is required.",
+      "status": "Status is required.",
+      "surface": "Surface is required.",
+      "usableSurface": "Usable surface is required.",
+      "percent": "Percentage is required."
+    },
+    "summary": {
+      "title": "Summary",
+      "scope": "Project type:",
+      "entity": "Entity:",
+      "budget": "Budget:",
+      "address": "Address:",
+      "surface": "Surface:",
+      "usableSurface": "Usable surface:",
+      "use": "Land use:"
+    },
+    "result": {
+      "totalCost": "Total cost:",
+      "totalSell": "Estimated sale price:",
+      "profit": "Gross profit:",
+      "m2Cost": "Cost per m²:",
+      "m2Sell": "Sale price per m²:"
+    },
+    "help": {
+      "title": "Need help?",
+      "geofencing": "Geofencing guide",
+      "normativity": "CDMX regulations and procedures",
+      "accessibility": "Web accessibility (WCAG)"
+    }
   }
-} 
+}

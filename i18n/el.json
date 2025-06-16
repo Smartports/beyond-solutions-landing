@@ -17,7 +17,8 @@
       "por_que": "Γιατί Beyond;",
       "sectores": "Τομείς",
       "capacidades": "Δυνατότητες",
-      "contacto": "Επικοινωνία"
+      "contacto": "Επικοινωνία",
+      "calculadora": "Υπολογιστής"
     },
     "theme": {
       "light": "Αλλαγή σε φωτεινή λειτουργία",
@@ -191,5 +192,154 @@
   "accessibility": {
     "navigation": "Κύρια πλοήγηση",
     "back_to_top": "Επιστροφή στην κορυφή"
+  },
+  "calculator": {
+    "title": "Υπολογιστής προϋπολογισμού ακινήτων",
+    "intro": "Ακολουθήστε τα βήματα για να εκτιμήσετε τον προϋπολογισμό, τα περιθώρια και το κέρδος του έργου σας.",
+    "next": "Επόμενο",
+    "prev": "Προηγούμενο",
+    "reset": "Νέα προσομοίωση",
+    "step1": {
+      "title": "1. Τύπος έργου και οντότητα",
+      "scope": "Τύπος έργου",
+      "scope.select": "Επιλέξτε επιλογή",
+      "scope.patrimonial": "Κληρονομικό",
+      "scope.inversion": "Επενδυτικό",
+      "entity": "Οντότητα",
+      "entity.select": "Επιλέξτε επιλογή",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. Προϋπολογισμός και Δεδομένα Οικοπέδου",
+      "budget": "Συνολικός προϋπολογισμός",
+      "budget.placeholder": "$10,000,000",
+      "address": "Διεύθυνση οικοπέδου",
+      "address.placeholder": "π.χ.: J Rousseu 3, Anzures, CDMX",
+      "type": "Τύπος οικοπέδου",
+      "type.select": "Επιλέξτε τύπο",
+      "type.own": "Ιδιόκτητο",
+      "type.notown": "Μη ιδιόκτητο",
+      "type.remate": "Πλειστηριασμός",
+      "status": "Κατάσταση",
+      "status.select": "Επιλέξτε κατάσταση",
+      "status.construccion": "Κατασκευή",
+      "status.demolicion": "Κατεδάφιση",
+      "status.reconversion": "Μετατροπή",
+      "surface": "Επιφάνεια (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "Χρήσιμη επιφάνεια κατασκευής (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "Χρήση οικοπέδου",
+      "use.select": "Επιλέξτε χρήση",
+      "use.defined": "H30/20/Z (Έχω τη χρήση)",
+      "use.undefined": "Μη ορισμένο (Υποθέστε 0,6)",
+      "use.request": "Μη ορισμένο (Θέλω να το ζητήσω)",
+      "characteristics": "Χαρακτηριστικά",
+      "characteristics.placeholder": "Προστατευμένο, Μη εφαρμόσιμο..."
+    },
+    "step3": {
+      "title": "3. Κατανομή κόστους",
+      "materialesLevel": "Επίπεδο υλικών",
+      "materialesLevel.low": "Low Cost",
+      "materialesLevel.medium": "Medium Cost",
+      "materialesLevel.high": "High Cost",
+      "materialesLevel.custom": "Custom",
+      "regulatorio": "Κανονιστικό",
+      "materiales": "Υλικά",
+      "construccion": "Κατασκευή",
+      "arquitectura": "Αρχιτεκτονική",
+      "diseno": "Σχεδιασμός",
+      "arte": "Τέχνη"
+    },
+    "step4": {
+      "title": "4. Αποτελέσματα και σύνοψη"
+    },
+    "tooltips": {
+      "budgetTotal": "Περιλαμβάνει οικόπεδο και κατασκευή, εξαιρείται η ρύθμιση."
+    },
+    "export": {
+      "pdf": "Εξαγωγή PDF",
+      "csv": "Εξαγωγή CSV",
+      "wa": "Κοινή χρήση WhatsApp",
+      "email": "Κοινή χρήση Email"
+    },
+    "save": "Αποθήκευση προσομοίωσης",
+    "restore": "Επαναφορά προσομοίωσης",
+    "feedback": {
+      "pdfSuccess": "Το PDF δημιουργήθηκε.",
+      "pdfError": "Σφάλμα εξαγωγής PDF.",
+      "csvSuccess": "Το CSV δημιουργήθηκε.",
+      "csvError": "Σφάλμα εξαγωγής CSV.",
+      "waSuccess": "Το WhatsApp άνοιξε.",
+      "waError": "Σφάλμα κοινής χρήσης WhatsApp.",
+      "emailSuccess": "Το Email άνοιξε.",
+      "emailError": "Σφάλμα κοινής χρήσης Email.",
+      "saved": "Η προσομοίωση αποθηκεύτηκε.",
+      "saveError": "Σφάλμα αποθήκευσης.",
+      "restored": "Η προσομοίωση επαναφέρθηκε.",
+      "restoreError": "Σφάλμα επαναφοράς.",
+      "noSaved": "Δεν υπάρχει αποθηκευμένη προσομοίωση."
+    },
+    "errors": {
+      "scope": "Ο τύπος έργου είναι υποχρεωτικός.",
+      "entity": "Η οντότητα είναι υποχρεωτική.",
+      "budgetTotal": "Ο συνολικός προϋπολογισμός είναι υποχρεωτικός.",
+      "address": "Η διεύθυνση είναι υποχρεωτική.",
+      "type": "Ο τύπος οικοπέδου είναι υποχρεωτικός.",
+      "status": "Η κατάσταση είναι υποχρεωτική.",
+      "surface": "Η επιφάνεια είναι υποχρεωτική.",
+      "usableSurface": "Η χρήσιμη επιφάνεια είναι υποχρεωτική.",
+      "percent": "Το ποσοστό είναι υποχρεωτικό."
+    },
+    "summary": {
+      "title": "Σύνοψη",
+      "scope": "Τύπος έργου:",
+      "entity": "Οντότητα:",
+      "budget": "Προϋπολογισμός:",
+      "address": "Διεύθυνση:",
+      "surface": "Επιφάνεια:",
+      "usableSurface": "Χρήσιμη επιφάνεια:",
+      "use": "Χρήση οικοπέδου:"
+    },
+    "result": {
+      "totalCost": "Συνολικό κόστος:",
+      "totalSell": "Εκτιμώμενη τιμή πώλησης:",
+      "profit": "Μικτό κέρδος:",
+      "m2Cost": "Κόστος ανά τ.μ.:",
+      "m2Sell": "Τιμή πώλησης ανά τ.μ.:"
+    },
+    "help": {
+      "title": "Χρειάζεστε βοήθεια;",
+      "geofencing": "Οδηγός γεωπερίφραξης",
+      "normativity": "Κανονισμοί και διαδικασίες CDMX",
+      "accessibility": "Προσβασιμότητα ιστού (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "Περιουσιακό",
+        "inversion": "Επένδυση"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Ιδιόκτητο",
+        "notown": "Μη ιδιόκτητο",
+        "remate": "Πλειστηριασμός"
+      },
+      "status": {
+        "construccion": "Κατασκευή",
+        "demolicion": "Κατεδάφιση",
+        "reconversion": "Μετατροπή"
+      },
+      "materialesLevel": {
+        "low": "Χαμηλό Κόστος",
+        "medium": "Μεσαίο Κόστος",
+        "high": "Υψηλό Κόστος",
+        "custom": "Προσαρμοσμένο"
+      }
+    }
   }
-} 
+}

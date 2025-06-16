@@ -17,7 +17,8 @@
       "por_que": "Warum Beyond?",
       "sectores": "Sektoren",
       "capacidades": "Fähigkeiten",
-      "contacto": "Kontakt"
+      "contacto": "Kontakt",
+      "calculadora": "Rechner"
     },
     "theme": {
       "light": "Zum hellen Modus wechseln",
@@ -191,5 +192,154 @@
   "accessibility": {
     "back_to_top": "Zurück nach oben",
     "navigation": "Hauptnavigation"
+  },
+  "calculator": {
+    "title": "Immobilien-Budgetrechner",
+    "intro": "Folgen Sie den Schritten, um das Budget, die Margen und den Gewinn Ihres Immobilienprojekts zu schätzen.",
+    "next": "Weiter",
+    "prev": "Zurück",
+    "reset": "Neue Simulation",
+    "step1": {
+      "title": "1. Projekttyp und Entität",
+      "scope": "Projekttyp",
+      "scope.select": "Option auswählen",
+      "scope.patrimonial": "Patrimonial",
+      "scope.inversion": "Investition",
+      "entity": "Entität",
+      "entity.select": "Option auswählen",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. Budget und Grundstücksdaten",
+      "budget": "Gesamtbudget",
+      "budget.placeholder": "$10,000,000",
+      "address": "Grundstücksadresse",
+      "address.placeholder": "z.B.: J Rousseu 3, Anzures, CDMX",
+      "type": "Grundstückstyp",
+      "type.select": "Typ auswählen",
+      "type.own": "Eigen",
+      "type.notown": "Nicht Eigen",
+      "type.remate": "Zwangsversteigerung",
+      "status": "Status",
+      "status.select": "Status auswählen",
+      "status.construccion": "Bau",
+      "status.demolicion": "Abriss",
+      "status.reconversion": "Umnutzung",
+      "surface": "Fläche (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "Nutzbare Baufläche (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "Bodennutzung",
+      "use.select": "Nutzung auswählen",
+      "use.defined": "H30/20/Z (Ich habe die Nutzung)",
+      "use.undefined": "Nicht definiert (0.6 annehmen)",
+      "use.request": "Zu definieren (Ich möchte beantragen)",
+      "characteristics": "Eigenschaften",
+      "characteristics.placeholder": "Geschützt, Nicht anwendbar..."
+    },
+    "step3": {
+      "title": "3. Kostenaufschlüsselung",
+      "materialesLevel": "Materialniveau",
+      "materialesLevel.low": "Low Cost",
+      "materialesLevel.medium": "Medium Cost",
+      "materialesLevel.high": "High Cost",
+      "materialesLevel.custom": "Custom",
+      "regulatorio": "Regulativ",
+      "materiales": "Materialien",
+      "construccion": "Konstruktion",
+      "arquitectura": "Architektur",
+      "diseno": "Design",
+      "arte": "Kunst"
+    },
+    "step4": {
+      "title": "4. Ergebnisse und Zusammenfassung"
+    },
+    "tooltips": {
+      "budgetTotal": "Enthält Grundstück und Bau, ohne Regulierung."
+    },
+    "export": {
+      "pdf": "PDF exportieren",
+      "csv": "CSV exportieren",
+      "wa": "WhatsApp teilen",
+      "email": "E-Mail teilen"
+    },
+    "save": "Simulation speichern",
+    "restore": "Simulation wiederherstellen",
+    "feedback": {
+      "pdfSuccess": "PDF generiert.",
+      "pdfError": "Fehler beim Exportieren des PDFs.",
+      "csvSuccess": "CSV generiert.",
+      "csvError": "Fehler beim Exportieren der CSV.",
+      "waSuccess": "WhatsApp geöffnet.",
+      "waError": "Fehler beim Teilen auf WhatsApp.",
+      "emailSuccess": "E-Mail geöffnet.",
+      "emailError": "Fehler beim Teilen per E-Mail.",
+      "saved": "Simulation gespeichert.",
+      "saveError": "Fehler beim Speichern.",
+      "restored": "Simulation wiederhergestellt.",
+      "restoreError": "Fehler beim Wiederherstellen.",
+      "noSaved": "Keine gespeicherte Simulation."
+    },
+    "errors": {
+      "scope": "Projekttyp ist erforderlich.",
+      "entity": "Entität ist erforderlich.",
+      "budgetTotal": "Gesamtbudget ist erforderlich.",
+      "address": "Adresse ist erforderlich.",
+      "type": "Grundstückstyp ist erforderlich.",
+      "status": "Status ist erforderlich.",
+      "surface": "Fläche ist erforderlich.",
+      "usableSurface": "Nutzfläche ist erforderlich.",
+      "percent": "Prozentsatz ist erforderlich."
+    },
+    "summary": {
+      "title": "Zusammenfassung",
+      "scope": "Projekttyp:",
+      "entity": "Entität:",
+      "budget": "Budget:",
+      "address": "Adresse:",
+      "surface": "Fläche:",
+      "usableSurface": "Nutzfläche:",
+      "use": "Nutzung:"
+    },
+    "result": {
+      "totalCost": "Gesamtkosten:",
+      "totalSell": "Geschätzter Verkaufspreis:",
+      "profit": "Bruttogewinn:",
+      "m2Cost": "Kosten pro m²:",
+      "m2Sell": "Verkaufspreis pro m²:"
+    },
+    "help": {
+      "title": "Brauchen Sie Hilfe?",
+      "geofencing": "Geofencing-Anleitung",
+      "normativity": "CDMX Vorschriften und Verfahren",
+      "accessibility": "Web-Zugänglichkeit (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "Vermögensbildend",
+        "inversion": "Investition"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Eigenbesitz",
+        "notown": "Fremdbesitz",
+        "remate": "Zwangsversteigerung"
+      },
+      "status": {
+        "construccion": "Bau",
+        "demolicion": "Abriss",
+        "reconversion": "Umnutzung"
+      },
+      "materialesLevel": {
+        "low": "Niedrige Kosten",
+        "medium": "Mittlere Kosten",
+        "high": "Hohe Kosten",
+        "custom": "Benutzerdefiniert"
+      }
+    }
   }
-} 
+}
