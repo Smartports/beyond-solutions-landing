@@ -17,7 +17,8 @@
       "por_que": "为何选择 Beyond？",
       "sectores": "行业",
       "capacidades": "能力",
-      "contacto": "联系"
+      "contacto": "联系",
+      "calculadora": "计算器"
     },
     "theme": {
       "light": "切换至亮色模式",
@@ -191,5 +192,154 @@
   "accessibility": {
     "back_to_top": "返回顶部",
     "navigation": "主导航"
+  },
+  "calculator": {
+    "title": "房地产预算计算器",
+    "intro": "按照步骤估算您的房地产项目预算、利润率和收益。",
+    "next": "下一步",
+    "prev": "上一步",
+    "reset": "新模拟",
+    "step1": {
+      "title": "1. 项目类型和实体",
+      "scope": "项目类型",
+      "scope.select": "请选择",
+      "scope.patrimonial": "资产型",
+      "scope.inversion": "投资型",
+      "entity": "实体",
+      "entity.select": "请选择",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. 预算和土地数据",
+      "budget": "总预算",
+      "budget.placeholder": "$10,000,000",
+      "address": "土地地址",
+      "address.placeholder": "E.g.: J Rousseu 3, Anzures, CDMX",
+      "type": "土地类型",
+      "type.select": "请选择类型",
+      "type.own": "自有",
+      "type.notown": "非自有",
+      "type.remate": "拍卖",
+      "status": "状态",
+      "status.select": "请选择状态",
+      "status.construccion": "建设",
+      "status.demolicion": "拆除",
+      "status.reconversion": "改造",
+      "surface": "面积 (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "可用建筑面积 (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "土地用途",
+      "use.select": "请选择用途",
+      "use.defined": "H30/20/Z（我有用途）",
+      "use.undefined": "未定义（假设0.6）",
+      "use.request": "未定义（我想申请）",
+      "characteristics": "特征",
+      "characteristics.placeholder": "受保护，不适用..."
+    },
+    "step3": {
+      "title": "3. 成本明细",
+      "materialesLevel": "材料等级",
+      "materialesLevel.low": "低成本",
+      "materialesLevel.medium": "中等成本",
+      "materialesLevel.high": "高成本",
+      "materialesLevel.custom": "自定义",
+      "regulatorio": "监管",
+      "materiales": "材料",
+      "construccion": "建造",
+      "arquitectura": "建筑",
+      "diseno": "设计",
+      "arte": "艺术"
+    },
+    "step4": {
+      "title": "4. 结果与摘要"
+    },
+    "tooltips": {
+      "budgetTotal": "包含土地和建设，不含监管费用。"
+    },
+    "export": {
+      "pdf": "导出PDF",
+      "csv": "导出CSV",
+      "wa": "分享WhatsApp",
+      "email": "分享邮件"
+    },
+    "save": "保存模拟",
+    "restore": "恢复模拟",
+    "feedback": {
+      "pdfSuccess": "PDF已生成。",
+      "pdfError": "导出PDF出错。",
+      "csvSuccess": "CSV已生成。",
+      "csvError": "导出CSV出错。",
+      "waSuccess": "已打开WhatsApp。",
+      "waError": "WhatsApp分享出错。",
+      "emailSuccess": "已打开邮件。",
+      "emailError": "邮件分享出错。",
+      "saved": "模拟已保存。",
+      "saveError": "保存出错。",
+      "restored": "模拟已恢复。",
+      "restoreError": "恢复出错。",
+      "noSaved": "没有已保存的模拟。"
+    },
+    "errors": {
+      "scope": "项目类型为必填项。",
+      "entity": "实体为必填项。",
+      "budgetTotal": "总预算为必填项。",
+      "address": "地址为必填项。",
+      "type": "土地类型为必填项。",
+      "status": "状态为必填项。",
+      "surface": "面积为必填项。",
+      "usableSurface": "可用面积为必填项。",
+      "percent": "百分比为必填项。"
+    },
+    "summary": {
+      "title": "摘要",
+      "scope": "项目类型：",
+      "entity": "实体：",
+      "budget": "预算：",
+      "address": "地址：",
+      "surface": "面积：",
+      "usableSurface": "可用面积：",
+      "use": "土地用途："
+    },
+    "result": {
+      "totalCost": "总成本：",
+      "totalSell": "预计售价：",
+      "profit": "毛利润：",
+      "m2Cost": "每平方米成本：",
+      "m2Sell": "每平方米售价："
+    },
+    "help": {
+      "title": "需要帮助？",
+      "geofencing": "地理围栏指南",
+      "normativity": "CDMX法规与流程",
+      "accessibility": "网页无障碍 (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "Patrimonial",
+        "inversion": "Inversión"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Propio",
+        "notown": "No Propio",
+        "remate": "Remate"
+      },
+      "status": {
+        "construccion": "Construcción",
+        "demolicion": "Demolición",
+        "reconversion": "Reconversión"
+      },
+      "materialesLevel": {
+        "low": "Bajo Costo",
+        "medium": "Costo Medio",
+        "high": "Alto Costo",
+        "custom": "Personalizado"
+      }
+    }
   }
-} 
+}

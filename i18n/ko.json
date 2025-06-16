@@ -17,7 +17,8 @@
       "por_que": "왜 Beyond인가?",
       "sectores": "분야",
       "capacidades": "역량",
-      "contacto": "연락처"
+      "contacto": "연락처",
+      "calculadora": "계산기"
     },
     "theme": {
       "light": "라이트 모드로 전환",
@@ -191,5 +192,154 @@
   "accessibility": {
     "back_to_top": "맨 위로 돌아가기",
     "navigation": "주요 내비게이션"
+  },
+  "calculator": {
+    "title": "부동산 예산 계산기",
+    "intro": "단계를 따라 부동산 프로젝트의 예산, 마진 및 이익을 추정하세요.",
+    "next": "다음",
+    "prev": "이전",
+    "reset": "새 시뮬레이션",
+    "step1": {
+      "title": "1. 프로젝트 유형 및 엔터티",
+      "scope": "프로젝트 유형",
+      "scope.select": "옵션 선택",
+      "scope.patrimonial": "자산형",
+      "scope.inversion": "투자형",
+      "entity": "엔터티",
+      "entity.select": "옵션 선택",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. 예산 및 토지 데이터",
+      "budget": "총 예산",
+      "budget.placeholder": "$10,000,000",
+      "address": "토지 주소",
+      "address.placeholder": "예: J Rousseu 3, Anzures, CDMX",
+      "type": "토지 유형",
+      "type.select": "유형 선택",
+      "type.own": "자기 소유",
+      "type.notown": "비소유",
+      "type.remate": "경매",
+      "status": "상태",
+      "status.select": "상태 선택",
+      "status.construccion": "건설",
+      "status.demolicion": "철거",
+      "status.reconversion": "재개발",
+      "surface": "면적 (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "사용 가능한 건축 면적 (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "토지 용도",
+      "use.select": "용도 선택",
+      "use.defined": "H30/20/Z (용도 있음)",
+      "use.undefined": "정의되지 않음 (0.6 가정)",
+      "use.request": "정의되지 않음 (신청 원함)",
+      "characteristics": "특징",
+      "characteristics.placeholder": "보호됨, 해당 없음..."
+    },
+    "step3": {
+      "title": "3. 비용 내역",
+      "materialesLevel": "자재 수준",
+      "materialesLevel.low": "저가형",
+      "materialesLevel.medium": "중가형",
+      "materialesLevel.high": "고가형",
+      "materialesLevel.custom": "사용자 정의",
+      "regulatorio": "규제",
+      "materiales": "자재",
+      "construccion": "건설",
+      "arquitectura": "건축",
+      "diseno": "디자인",
+      "arte": "예술"
+    },
+    "step4": {
+      "title": "4. 결과 및 요약"
+    },
+    "tooltips": {
+      "budgetTotal": "토지 및 건설 포함, 규제 제외."
+    },
+    "export": {
+      "pdf": "PDF 내보내기",
+      "csv": "CSV 내보내기",
+      "wa": "WhatsApp 공유",
+      "email": "이메일 공유"
+    },
+    "save": "시뮬레이션 저장",
+    "restore": "시뮬레이션 복원",
+    "feedback": {
+      "pdfSuccess": "PDF가 생성되었습니다.",
+      "pdfError": "PDF 내보내기 오류.",
+      "csvSuccess": "CSV가 생성되었습니다.",
+      "csvError": "CSV 내보내기 오류.",
+      "waSuccess": "WhatsApp이 열렸습니다.",
+      "waError": "WhatsApp 공유 오류.",
+      "emailSuccess": "이메일이 열렸습니다.",
+      "emailError": "이메일 공유 오류.",
+      "saved": "시뮬레이션이 저장되었습니다.",
+      "saveError": "저장 오류.",
+      "restored": "시뮬레이션이 복원되었습니다.",
+      "restoreError": "복원 오류.",
+      "noSaved": "저장된 시뮬레이션이 없습니다."
+    },
+    "errors": {
+      "scope": "프로젝트 유형은 필수입니다.",
+      "entity": "엔터티는 필수입니다.",
+      "budgetTotal": "총 예산은 필수입니다.",
+      "address": "주소는 필수입니다.",
+      "type": "토지 유형은 필수입니다.",
+      "status": "상태는 필수입니다.",
+      "surface": "면적은 필수입니다.",
+      "usableSurface": "사용 가능한 면적은 필수입니다.",
+      "percent": "백분율은 필수입니다."
+    },
+    "summary": {
+      "title": "요약",
+      "scope": "프로젝트 유형:",
+      "entity": "엔터티:",
+      "budget": "예산:",
+      "address": "주소:",
+      "surface": "면적:",
+      "usableSurface": "사용 가능한 면적:",
+      "use": "토지 용도:"
+    },
+    "result": {
+      "totalCost": "총 비용:",
+      "totalSell": "예상 판매가:",
+      "profit": "총이익:",
+      "m2Cost": "m²당 비용:",
+      "m2Sell": "m²당 판매 가격:"
+    },
+    "help": {
+      "title": "도움이 필요하신가요?",
+      "geofencing": "지오펜싱 가이드",
+      "normativity": "CDMX 규정 및 절차",
+      "accessibility": "웹 접근성 (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "재산",
+        "inversion": "투자"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "소유",
+        "notown": "비소유",
+        "remate": "경매"
+      },
+      "status": {
+        "construccion": "건설",
+        "demolicion": "철거",
+        "reconversion": "재개발"
+      },
+      "materialesLevel": {
+        "low": "저비용",
+        "medium": "중간 비용",
+        "high": "고비용",
+        "custom": "맞춤"
+      }
+    }
   }
-} 
+}

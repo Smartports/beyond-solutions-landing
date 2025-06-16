@@ -17,7 +17,8 @@
       "por_que": "Por que Beyond?",
       "sectores": "Setores",
       "capacidades": "Capacidades",
-      "contacto": "Contato"
+      "contacto": "Contato",
+      "calculadora": "Calculadora"
     },
     "theme": {
       "light": "Mudar para modo claro",
@@ -191,5 +192,154 @@
   "accessibility": {
     "back_to_top": "Voltar ao topo",
     "navigation": "Navegação principal"
+  },
+  "calculator": {
+    "title": "Calculadora de orçamento imobiliário",
+    "intro": "Siga as etapas para estimar o orçamento, margens e lucro do seu projeto imobiliário.",
+    "next": "Próximo",
+    "prev": "Anterior",
+    "reset": "Nova simulação",
+    "step1": {
+      "title": "1. Tipo de projeto e entidade",
+      "scope": "Tipo de projeto",
+      "scope.select": "Selecione uma opção",
+      "scope.patrimonial": "Patrimonial",
+      "scope.inversion": "Investimento",
+      "entity": "Entidade",
+      "entity.select": "Selecione uma opção",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. Orçamento e Dados do Terreno",
+      "budget": "Orçamento total",
+      "budget.placeholder": "$10,000,000",
+      "address": "Endereço do terreno",
+      "address.placeholder": "Ex: J Rousseu 3, Anzures, CDMX",
+      "type": "Tipo de terreno",
+      "type.select": "Selecione um tipo",
+      "type.own": "Próprio",
+      "type.notown": "Não Próprio",
+      "type.remate": "Leilão",
+      "status": "Status",
+      "status.select": "Selecione um status",
+      "status.construccion": "Construção",
+      "status.demolicion": "Demolição",
+      "status.reconversion": "Reconversão",
+      "surface": "Superfície (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "Superfície útil de construção (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "Uso do solo",
+      "use.select": "Selecione o uso",
+      "use.defined": "H30/20/Z (Tenho o uso)",
+      "use.undefined": "Não definido (Assumir 0.6)",
+      "use.request": "Não definido (Quero solicitar)",
+      "characteristics": "Características",
+      "characteristics.placeholder": "Protegido, Não aplicável..."
+    },
+    "step3": {
+      "title": "3. Detalhamento de custos",
+      "materialesLevel": "Nível de materiais",
+      "materialesLevel.low": "Baixo Custo",
+      "materialesLevel.medium": "Custo Médio",
+      "materialesLevel.high": "Alto Custo",
+      "materialesLevel.custom": "Personalizado",
+      "regulatorio": "Regulatório",
+      "materiales": "Materiais",
+      "construccion": "Construção",
+      "arquitectura": "Arquitetura",
+      "diseno": "Design",
+      "arte": "Arte"
+    },
+    "step4": {
+      "title": "4. Resultados e resumo"
+    },
+    "tooltips": {
+      "budgetTotal": "Inclui terreno e construção, exclui regulatório."
+    },
+    "export": {
+      "pdf": "Exportar PDF",
+      "csv": "Exportar CSV",
+      "wa": "Compartilhar WhatsApp",
+      "email": "Compartilhar Email"
+    },
+    "save": "Salvar simulação",
+    "restore": "Restaurar simulação",
+    "feedback": {
+      "pdfSuccess": "PDF gerado.",
+      "pdfError": "Erro ao exportar PDF.",
+      "csvSuccess": "CSV gerado.",
+      "csvError": "Erro ao exportar CSV.",
+      "waSuccess": "WhatsApp aberto.",
+      "waError": "Erro ao compartilhar no WhatsApp.",
+      "emailSuccess": "Email aberto.",
+      "emailError": "Erro ao compartilhar por Email.",
+      "saved": "Simulação salva.",
+      "saveError": "Erro ao salvar.",
+      "restored": "Simulação restaurada.",
+      "restoreError": "Erro ao restaurar.",
+      "noSaved": "Nenhuma simulação salva."
+    },
+    "errors": {
+      "scope": "Tipo de projeto é obrigatório.",
+      "entity": "Entidade é obrigatória.",
+      "budgetTotal": "Orçamento total é obrigatório.",
+      "address": "Endereço é obrigatório.",
+      "type": "Tipo de terreno é obrigatório.",
+      "status": "Status é obrigatório.",
+      "surface": "Superfície é obrigatória.",
+      "usableSurface": "Superfície útil é obrigatória.",
+      "percent": "Percentual é obrigatório."
+    },
+    "summary": {
+      "title": "Resumo",
+      "scope": "Tipo de projeto:",
+      "entity": "Entidade:",
+      "budget": "Orçamento:",
+      "address": "Endereço:",
+      "surface": "Superfície:",
+      "usableSurface": "Superfície útil:",
+      "use": "Uso do solo:"
+    },
+    "result": {
+      "totalCost": "Custo total:",
+      "totalSell": "Preço de venda estimado:",
+      "profit": "Lucro bruto:",
+      "m2Cost": "Custo por m²:",
+      "m2Sell": "Preço de venda por m²:"
+    },
+    "help": {
+      "title": "Precisa de ajuda?",
+      "geofencing": "Guia de geofencing",
+      "normativity": "Normas e procedimentos CDMX",
+      "accessibility": "Acessibilidade web (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "Patrimonial",
+        "inversion": "Investimento"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Próprio",
+        "notown": "Não próprio",
+        "remate": "Leilão"
+      },
+      "status": {
+        "construccion": "Construção",
+        "demolicion": "Demolição",
+        "reconversion": "Reconversão"
+      },
+      "materialesLevel": {
+        "low": "Baixo custo",
+        "medium": "Custo médio",
+        "high": "Alto custo",
+        "custom": "Personalizado"
+      }
+    }
   }
-} 
+}

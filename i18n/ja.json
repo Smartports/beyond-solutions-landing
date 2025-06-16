@@ -17,7 +17,8 @@
       "por_que": "なぜBeyond？",
       "sectores": "セクター",
       "capacidades": "能力",
-      "contacto": "お問い合わせ"
+      "contacto": "お問い合わせ",
+      "calculadora": "計算機"
     },
     "theme": {
       "light": "ライトモードに切り替え",
@@ -191,5 +192,154 @@
   "accessibility": {
     "back_to_top": "トップに戻る",
     "navigation": "メインナビゲーション"
+  },
+  "calculator": {
+    "title": "不動産予算計算機",
+    "intro": "手順に従って不動産プロジェクトの予算、マージン、利益を見積もりましょう。",
+    "next": "次へ",
+    "prev": "前へ",
+    "reset": "新しいシミュレーション",
+    "step1": {
+      "title": "1. プロジェクトタイプとエンティティ",
+      "scope": "プロジェクトタイプ",
+      "scope.select": "オプションを選択",
+      "scope.patrimonial": "資産型",
+      "scope.inversion": "投資型",
+      "entity": "エンティティ",
+      "entity.select": "オプションを選択",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. 予算と土地データ",
+      "budget": "総予算",
+      "budget.placeholder": "$10,000,000",
+      "address": "土地の住所",
+      "address.placeholder": "例: J Rousseu 3, Anzures, CDMX",
+      "type": "土地の種類",
+      "type.select": "種類を選択",
+      "type.own": "自己所有",
+      "type.notown": "非自己所有",
+      "type.remate": "競売",
+      "status": "ステータス",
+      "status.select": "ステータスを選択",
+      "status.construccion": "建設",
+      "status.demolicion": "解体",
+      "status.reconversion": "再開発",
+      "surface": "面積 (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "有効建築面積 (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "土地利用",
+      "use.select": "利用を選択",
+      "use.defined": "H30/20/Z（用途あり）",
+      "use.undefined": "未定義（0.6と仮定）",
+      "use.request": "未定義（申請希望）",
+      "characteristics": "特徴",
+      "characteristics.placeholder": "保護、該当なし..."
+    },
+    "step3": {
+      "title": "3. コスト内訳",
+      "materialesLevel": "材料レベル",
+      "materialesLevel.low": "低コスト",
+      "materialesLevel.medium": "中コスト",
+      "materialesLevel.high": "高コスト",
+      "materialesLevel.custom": "カスタム",
+      "regulatorio": "規制",
+      "materiales": "材料",
+      "construccion": "建設",
+      "arquitectura": "建築",
+      "diseno": "デザイン",
+      "arte": "アート"
+    },
+    "step4": {
+      "title": "4. 結果とサマリー"
+    },
+    "tooltips": {
+      "budgetTotal": "土地と建設を含み、規制費用は含みません。"
+    },
+    "export": {
+      "pdf": "PDFエクスポート",
+      "csv": "CSVエクスポート",
+      "wa": "WhatsAppで共有",
+      "email": "メールで共有"
+    },
+    "save": "シミュレーションを保存",
+    "restore": "シミュレーションを復元",
+    "feedback": {
+      "pdfSuccess": "PDFが生成されました。",
+      "pdfError": "PDFエクスポートエラー。",
+      "csvSuccess": "CSVが生成されました。",
+      "csvError": "CSVエクスポートエラー。",
+      "waSuccess": "WhatsAppが開きました。",
+      "waError": "WhatsApp共有エラー。",
+      "emailSuccess": "メールが開きました。",
+      "emailError": "メール共有エラー。",
+      "saved": "シミュレーションが保存されました。",
+      "saveError": "保存エラー。",
+      "restored": "シミュレーションが復元されました。",
+      "restoreError": "復元エラー。",
+      "noSaved": "保存されたシミュレーションはありません。"
+    },
+    "errors": {
+      "scope": "プロジェクトタイプは必須です。",
+      "entity": "エンティティは必須です。",
+      "budgetTotal": "総予算は必須です。",
+      "address": "住所は必須です。",
+      "type": "土地の種類は必須です。",
+      "status": "ステータスは必須です。",
+      "surface": "面積は必須です。",
+      "usableSurface": "有効面積は必須です。",
+      "percent": "パーセンテージは必須です。"
+    },
+    "summary": {
+      "title": "サマリー",
+      "scope": "プロジェクトタイプ：",
+      "entity": "エンティティ：",
+      "budget": "予算：",
+      "address": "住所：",
+      "surface": "面積：",
+      "usableSurface": "有効面積：",
+      "use": "土地利用："
+    },
+    "result": {
+      "totalCost": "総コスト：",
+      "totalSell": "推定販売価格：",
+      "profit": "粗利益：",
+      "m2Cost": "m²あたりのコスト:",
+      "m2Sell": "m²あたりの販売価格:"
+    },
+    "help": {
+      "title": "ヘルプが必要ですか？",
+      "geofencing": "ジオフェンシングガイド",
+      "normativity": "CDMX規制と手続き",
+      "accessibility": "ウェブアクセシビリティ (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "財産",
+        "inversion": "投資"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "所有",
+        "notown": "非所有",
+        "remate": "競売"
+      },
+      "status": {
+        "construccion": "建設",
+        "demolicion": "解体",
+        "reconversion": "転換"
+      },
+      "materialesLevel": {
+        "low": "低コスト",
+        "medium": "中コスト",
+        "high": "高コスト",
+        "custom": "カスタム"
+      }
+    }
   }
-} 
+}

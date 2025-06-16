@@ -17,7 +17,8 @@
       "por_que": "لماذا بيوند؟",
       "sectores": "القطاعات",
       "capacidades": "القدرات",
-      "contacto": "اتصل بنا"
+      "contacto": "اتصل بنا",
+      "calculadora": "حاسبة"
     },
     "theme": {
       "light": "التبديل إلى الوضع الفاتح",
@@ -191,5 +192,154 @@
   "accessibility": {
     "back_to_top": "العودة إلى الأعلى",
     "navigation": "التنقل الرئيسي"
+  },
+  "calculator": {
+    "title": "حاسبة ميزانية العقارات",
+    "intro": "اتبع الخطوات لتقدير ميزانية مشروعك العقاري وهوامشه وأرباحه.",
+    "next": "التالي",
+    "prev": "السابق",
+    "reset": "محاكاة جديدة",
+    "step1": {
+      "title": "1. نوع المشروع والجهة",
+      "scope": "نوع المشروع",
+      "scope.select": "اختر خيارًا",
+      "scope.patrimonial": "ملكي",
+      "scope.inversion": "استثماري",
+      "entity": "الجهة",
+      "entity.select": "اختر خيارًا",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. الميزانية وبيانات الأرض",
+      "budget": "إجمالي الميزانية",
+      "address": "عنوان الأرض",
+      "type": "نوع الأرض",
+      "type.select": "اختر النوع",
+      "type.own": "ملك خاص",
+      "type.notown": "غير ملك خاص",
+      "type.remate": "مزاد",
+      "status": "الحالة",
+      "status.select": "اختر الحالة",
+      "status.construccion": "إنشاء",
+      "status.demolicion": "هدم",
+      "status.reconversion": "إعادة تأهيل",
+      "surface": "المساحة (م²)",
+      "surface.placeholder": "800",
+      "usableSurface": "مساحة البناء القابلة للاستخدام (م²)",
+      "usableSurface.placeholder": "480",
+      "use": "استخدام الأرض",
+      "use.select": "اختر الاستخدام",
+      "use.defined": "H30/20/Z (لدي الاستخدام)",
+      "use.undefined": "غير محدد (افترض 0.6)",
+      "use.request": "غير محدد (أرغب في التقديم)",
+      "characteristics": "الخصائص",
+      "characteristics.placeholder": "محمي، غير قابل للتطبيق...",
+      "budget.placeholder": "$10,000,000",
+      "address.placeholder": "مثال: J Rousseu 3, Anzures, CDMX"
+    },
+    "step3": {
+      "title": "3. توزيع التكاليف",
+      "materialesLevel": "مستوى المواد",
+      "materialesLevel.low": "منخفض التكلفة",
+      "materialesLevel.medium": "متوسط التكلفة",
+      "materialesLevel.high": "مرتفع التكلفة",
+      "materialesLevel.custom": "مخصص",
+      "regulatorio": "تنظيمي",
+      "materiales": "مواد",
+      "construccion": "بناء",
+      "arquitectura": "هندسة معمارية",
+      "diseno": "تصميم",
+      "arte": "فن"
+    },
+    "step4": {
+      "title": "4. النتائج والملخص"
+    },
+    "tooltips": {
+      "budgetTotal": "يشمل الأرض والبناء، لا يشمل التنظيم."
+    },
+    "export": {
+      "pdf": "تصدير PDF",
+      "csv": "تصدير CSV",
+      "wa": "مشاركة WhatsApp",
+      "email": "مشاركة البريد الإلكتروني"
+    },
+    "save": "حفظ المحاكاة",
+    "restore": "استعادة المحاكاة",
+    "feedback": {
+      "pdfSuccess": "تم إنشاء PDF.",
+      "pdfError": "خطأ في تصدير PDF.",
+      "csvSuccess": "تم إنشاء CSV.",
+      "csvError": "خطأ في تصدير CSV.",
+      "waSuccess": "تم فتح WhatsApp.",
+      "waError": "خطأ في مشاركة WhatsApp.",
+      "emailSuccess": "تم فتح البريد الإلكتروني.",
+      "emailError": "خطأ في مشاركة البريد الإلكتروني.",
+      "saved": "تم حفظ المحاكاة.",
+      "saveError": "خطأ في الحفظ.",
+      "restored": "تمت استعادة المحاكاة.",
+      "restoreError": "خطأ في الاستعادة.",
+      "noSaved": "لا توجد محاكاة محفوظة."
+    },
+    "errors": {
+      "scope": "نوع المشروع مطلوب.",
+      "entity": "الكيان مطلوب.",
+      "budgetTotal": "إجمالي الميزانية مطلوب.",
+      "address": "العنوان مطلوب.",
+      "type": "نوع الأرض مطلوب.",
+      "status": "الحالة مطلوبة.",
+      "surface": "المساحة مطلوبة.",
+      "usableSurface": "المساحة القابلة للاستخدام مطلوبة.",
+      "percent": "النسبة مطلوبة."
+    },
+    "summary": {
+      "title": "ملخص",
+      "scope": "نوع المشروع:",
+      "entity": "الكيان:",
+      "budget": "الميزانية:",
+      "address": "العنوان:",
+      "surface": "المساحة:",
+      "usableSurface": "المساحة القابلة للاستخدام:",
+      "use": "استخدام الأراضي:"
+    },
+    "help": {
+      "title": "هل تحتاج مساعدة؟",
+      "geofencing": "دليل التسييج الجغرافي",
+      "normativity": "التشريعات وإجراءات CDMX",
+      "accessibility": "إمكانية الوصول للويب (WCAG)"
+    },
+    "result": {
+      "totalCost": "التكلفة الإجمالية:",
+      "totalSell": "سعر البيع المقدر:",
+      "profit": "الربح الإجمالي:",
+      "m2Cost": "التكلفة لكل م²:",
+      "m2Sell": "سعر البيع لكل م²:"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "تراثي",
+        "inversion": "استثمار"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "مملوك",
+        "notown": "غير مملوك",
+        "remate": "بيع بالمزاد"
+      },
+      "status": {
+        "construccion": "بناء",
+        "demolicion": "هدم",
+        "reconversion": "إعادة تحويل"
+      },
+      "materialesLevel": {
+        "low": "تكلفة منخفضة",
+        "medium": "تكلفة متوسطة",
+        "high": "تكلفة عالية",
+        "custom": "مخصص"
+      }
+    }
   }
-} 
+}
