@@ -76,7 +76,16 @@ const i18n = {
   async setLocale(localeCode) {
     try {
       // Load translations
-      this.translations = await this.fetchJSON(`./i18n/${localeCode}.json`);
+      const translations = await this.fetchJSON(`./i18n/${localeCode}.json`);
+      
+      // If this is not the default locale, ensure consistency with the default locale
+      if (localeCode !== this.config.defaultLocale) {
+        const defaultTranslations = await this.getDefaultTranslations();
+        this.ensureTranslationConsistency(translations, defaultTranslations);
+      }
+      
+      // Set translations
+      this.translations = translations;
       
       // Set current locale
       this.currentLocale = localeCode;
@@ -101,8 +110,10 @@ const i18n = {
       // Update language selector
       this.updateLanguageSelector();
       
-      // Dispatch event for locale change
+      // Dispatch events for locale change
       window.dispatchEvent(new CustomEvent('localeChanged', { detail: { locale: localeCode }}));
+      window.dispatchEvent(new CustomEvent('i18n:languageChanged', { detail: { locale: localeCode }}));
+      document.dispatchEvent(new CustomEvent('i18n:languageChanged', { detail: { locale: localeCode }}));
       
     } catch (error) {
       console.error(`Failed to set locale ${localeCode}:`, error);
@@ -161,6 +172,12 @@ const i18n = {
       
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
         el.placeholder = translation;
+      } else if (el.tagName === 'OPTION') {
+        el.textContent = translation;
+        // Store the translated value for form processing
+        if (el.value && ['Patrimonial', 'Inversion', 'Propio', 'No Propio', 'Remate', 'Construcción', 'Demolición', 'Reconversión'].includes(el.value)) {
+          el.setAttribute('data-translated-value', translation);
+        }
       } else {
         el.textContent = translation;
       }
@@ -178,6 +195,19 @@ const i18n = {
       });
     });
     
+    // Translate all select options with dynamic data-i18n attributes
+    document.querySelectorAll('select').forEach(select => {
+      Array.from(select.options).forEach(option => {
+        const key = option.getAttribute('data-i18n');
+        if (key) {
+          const translation = this.t(key);
+          if (translation && translation !== key) {
+            option.textContent = translation;
+          }
+        }
+      });
+    });
+    
     // Update page title
     if (this.translations.general && this.translations.general.title) {
       document.title = this.translations.general.title;
@@ -188,6 +218,9 @@ const i18n = {
     if (metaDesc && this.translations.general && this.translations.general.description) {
       metaDesc.setAttribute('content', this.translations.general.description);
     }
+    
+    // Dispatch an event to notify Alpine.js components that translations are ready
+    document.dispatchEvent(new CustomEvent('i18n:ready', { detail: { locale: this.currentLocale }}));
   },
   
   /**
@@ -270,7 +303,58 @@ const i18n = {
         item.classList.remove('bg-accent-50', 'dark:bg-primary-800', 'font-semibold');
       }
     });
-  }
+  },
+  
+  /**
+   * Get default translations (lazy loaded)
+   * @returns {Promise<object>} Default translations
+   */
+  async getDefaultTranslations() {
+    if (!this._defaultTranslations) {
+      this._defaultTranslations = await this.fetchJSON(`./i18n/${this.config.defaultLocale}.json`);
+    }
+    return this._defaultTranslations;
+  },
+
+  /**
+   * Ensure translation object has all keys from the default translations
+   * @param {object} translations - Target translations to check
+   * @param {object} defaultTranslations - Default translations to compare against
+   */
+  ensureTranslationConsistency(translations, defaultTranslations) {
+  const ensureKeys = (target, source, path = '') => {
+    for (const key in source) {
+      const currentPath = path ? `${path}.${key}` : key;
+      
+      // If key doesn't exist in target, copy it from source
+      if (!(key in target)) {
+        console.warn(`Missing translation key: ${currentPath} in ${this.currentLocale}`);
+        target[key] = source[key];
+        continue;
+      }
+      
+      // If both are objects, recurse
+      if (
+        typeof source[key] === 'object' && 
+        source[key] !== null && 
+        !Array.isArray(source[key]) &&
+        typeof target[key] === 'object' && 
+        target[key] !== null && 
+        !Array.isArray(target[key])
+      ) {
+        ensureKeys(target[key], source[key], currentPath);
+      }
+      
+      // If types don't match, replace with source
+      if (typeof target[key] !== typeof source[key]) {
+        console.warn(`Type mismatch for key: ${currentPath} in ${this.currentLocale}`);
+        target[key] = source[key];
+      }
+    }
+  };
+  
+  ensureKeys(translations, defaultTranslations);
+}
 };
 
 // Initialize when DOM is loaded
