@@ -17,7 +17,8 @@
       "por_que": "Tại Sao Beyond?",
       "sectores": "Lĩnh Vực",
       "capacidades": "Năng Lực",
-      "contacto": "Liên Hệ"
+      "contacto": "Liên Hệ",
+      "calculadora": "Máy tính"
     },
     "theme": {
       "light": "Chuyển sang chế độ sáng",
@@ -191,5 +192,154 @@
   "accessibility": {
     "navigation": "Điều hướng chính",
     "back_to_top": "Quay lại đầu trang"
+  },
+  "calculator": {
+    "title": "Máy tính ngân sách bất động sản",
+    "intro": "Làm theo các bước để ước tính ngân sách, biên lợi nhuận và lợi nhuận của dự án bất động sản của bạn.",
+    "next": "Tiếp theo",
+    "prev": "Trước",
+    "reset": "Mô phỏng mới",
+    "step1": {
+      "title": "1. Loại dự án và thực thể",
+      "scope": "Loại dự án",
+      "scope.select": "Chọn một tùy chọn",
+      "scope.patrimonial": "Tài sản",
+      "scope.inversion": "Đầu tư",
+      "entity": "Thực thể",
+      "entity.select": "Chọn một tùy chọn",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. Ngân sách và Dữ liệu đất đai",
+      "budget": "Tổng ngân sách",
+      "budget.placeholder": "$10,000,000",
+      "address": "Địa chỉ đất",
+      "address.placeholder": "VD: J Rousseu 3, Anzures, CDMX",
+      "type": "Loại đất",
+      "type.select": "Chọn một loại",
+      "type.own": "Sở hữu",
+      "type.notown": "Không sở hữu",
+      "type.remate": "Phát mãi",
+      "status": "Trạng thái",
+      "status.select": "Chọn trạng thái",
+      "status.construccion": "Xây dựng",
+      "status.demolicion": "Phá dỡ",
+      "status.reconversion": "Chuyển đổi",
+      "surface": "Diện tích (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "Diện tích xây dựng sử dụng được (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "Mục đích sử dụng đất",
+      "use.select": "Chọn mục đích sử dụng",
+      "use.defined": "H30/20/Z (Tôi có mục đích sử dụng)",
+      "use.undefined": "Chưa xác định (Giả định 0.6)",
+      "use.request": "Chưa xác định (Muốn đăng ký)",
+      "characteristics": "Đặc điểm",
+      "characteristics.placeholder": "Được bảo vệ, Không áp dụng..."
+    },
+    "step3": {
+      "title": "3. Phân tích chi phí",
+      "materialesLevel": "Cấp độ vật liệu",
+      "materialesLevel.low": "Low Cost",
+      "materialesLevel.medium": "Medium Cost",
+      "materialesLevel.high": "High Cost",
+      "materialesLevel.custom": "Custom",
+      "regulatorio": "Quy định",
+      "materiales": "Vật liệu",
+      "construccion": "Xây dựng",
+      "arquitectura": "Kiến trúc",
+      "diseno": "Thiết kế",
+      "arte": "Nghệ thuật"
+    },
+    "step4": {
+      "title": "4. Kết quả và tóm tắt"
+    },
+    "tooltips": {
+      "budgetTotal": "Bao gồm đất và xây dựng, không bao gồm quy định."
+    },
+    "export": {
+      "pdf": "Xuất PDF",
+      "csv": "Xuất CSV",
+      "wa": "Chia sẻ WhatsApp",
+      "email": "Chia sẻ Email"
+    },
+    "save": "Lưu mô phỏng",
+    "restore": "Khôi phục mô phỏng",
+    "feedback": {
+      "pdfSuccess": "Đã tạo PDF.",
+      "pdfError": "Lỗi xuất PDF.",
+      "csvSuccess": "Đã tạo CSV.",
+      "csvError": "Lỗi xuất CSV.",
+      "waSuccess": "Đã mở WhatsApp.",
+      "waError": "Lỗi chia sẻ WhatsApp.",
+      "emailSuccess": "Đã mở Email.",
+      "emailError": "Lỗi chia sẻ Email.",
+      "saved": "Đã lưu mô phỏng.",
+      "saveError": "Lỗi lưu.",
+      "restored": "Đã khôi phục mô phỏng.",
+      "restoreError": "Lỗi khôi phục.",
+      "noSaved": "Không có mô phỏng đã lưu."
+    },
+    "errors": {
+      "scope": "Loại dự án là bắt buộc.",
+      "entity": "Thực thể là bắt buộc.",
+      "budgetTotal": "Tổng ngân sách là bắt buộc.",
+      "address": "Địa chỉ là bắt buộc.",
+      "type": "Loại đất là bắt buộc.",
+      "status": "Trạng thái là bắt buộc.",
+      "surface": "Diện tích là bắt buộc.",
+      "usableSurface": "Diện tích sử dụng là bắt buộc.",
+      "percent": "Phần trăm là bắt buộc."
+    },
+    "summary": {
+      "title": "Tóm tắt",
+      "scope": "Loại dự án:",
+      "entity": "Thực thể:",
+      "budget": "Ngân sách:",
+      "address": "Địa chỉ:",
+      "surface": "Diện tích:",
+      "usableSurface": "Diện tích sử dụng:",
+      "use": "Mục đích sử dụng đất:"
+    },
+    "result": {
+      "totalCost": "Tổng chi phí:",
+      "totalSell": "Giá bán ước tính:",
+      "profit": "Lợi nhuận gộp:",
+      "m2Cost": "Chi phí mỗi m²:",
+      "m2Sell": "Giá bán mỗi m²:"
+    },
+    "help": {
+      "title": "Cần giúp đỡ?",
+      "geofencing": "Hướng dẫn geofencing",
+      "normativity": "Quy định và thủ tục CDMX",
+      "accessibility": "Truy cập web (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "Tài sản",
+        "inversion": "Đầu tư"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Sở hữu",
+        "notown": "Không sở hữu",
+        "remate": "Phát mãi"
+      },
+      "status": {
+        "construccion": "Xây dựng",
+        "demolicion": "Phá dỡ",
+        "reconversion": "Chuyển đổi"
+      },
+      "materialesLevel": {
+        "low": "Chi phí thấp",
+        "medium": "Chi phí trung bình",
+        "high": "Chi phí cao",
+        "custom": "Tùy chỉnh"
+      }
+    }
   }
-} 
+}

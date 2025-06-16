@@ -17,7 +17,8 @@
       "por_que": "Почему Beyond?",
       "sectores": "Секторы",
       "capacidades": "Возможности",
-      "contacto": "Контакты"
+      "contacto": "Контакты",
+      "calculadora": "Калькулятор"
     },
     "theme": {
       "light": "Переключиться на светлый режим",
@@ -191,5 +192,154 @@
   "accessibility": {
     "back_to_top": "Вернуться наверх",
     "navigation": "Основная навигация"
+  },
+  "calculator": {
+    "title": "Калькулятор бюджета недвижимости",
+    "intro": "Следуйте шагам, чтобы оценить бюджет, маржу и прибыль вашего проекта недвижимости.",
+    "next": "Далее",
+    "prev": "Назад",
+    "reset": "Новая симуляция",
+    "step1": {
+      "title": "1. Тип проекта и субъект",
+      "scope": "Тип проекта",
+      "scope.select": "Выберите опцию",
+      "scope.patrimonial": "Патримониальный",
+      "scope.inversion": "Инвестиционный",
+      "entity": "Субъект",
+      "entity.select": "Выберите опцию",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. Бюджет и данные о земле",
+      "budget": "Общий бюджет",
+      "budget.placeholder": "$10,000,000",
+      "address": "Адрес участка",
+      "address.placeholder": "Пример: J Rousseu 3, Anzures, CDMX",
+      "type": "Тип земли",
+      "type.select": "Выберите тип",
+      "type.own": "Собственный",
+      "type.notown": "Не собственный",
+      "type.remate": "Аукцион",
+      "status": "Статус",
+      "status.select": "Выберите статус",
+      "status.construccion": "Строительство",
+      "status.demolicion": "Снос",
+      "status.reconversion": "Реконверсия",
+      "surface": "Площадь (м²)",
+      "surface.placeholder": "800",
+      "usableSurface": "Полезная строительная площадь (м²)",
+      "usableSurface.placeholder": "480",
+      "use": "Назначение участка",
+      "use.select": "Выберите назначение",
+      "use.defined": "H30/20/Z (Назначение есть)",
+      "use.undefined": "Не определено (предположить 0.6)",
+      "use.request": "Не определено (хочу запросить)",
+      "characteristics": "Характеристики",
+      "characteristics.placeholder": "Охраняется, не применяется..."
+    },
+    "step3": {
+      "title": "3. Структура затрат",
+      "materialesLevel": "Уровень материалов",
+      "materialesLevel.low": "Low Cost",
+      "materialesLevel.medium": "Medium Cost",
+      "materialesLevel.high": "High Cost",
+      "materialesLevel.custom": "Custom",
+      "regulatorio": "Регуляторные",
+      "materiales": "Материалы",
+      "construccion": "Строительство",
+      "arquitectura": "Архитектура",
+      "diseno": "Дизайн",
+      "arte": "Искусство"
+    },
+    "step4": {
+      "title": "4. Результаты и сводка"
+    },
+    "tooltips": {
+      "budgetTotal": "Включает участок и строительство, не включает регуляторные расходы."
+    },
+    "export": {
+      "pdf": "Экспорт PDF",
+      "csv": "Экспорт CSV",
+      "wa": "Поделиться WhatsApp",
+      "email": "Поделиться Email"
+    },
+    "save": "Сохранить симуляцию",
+    "restore": "Восстановить симуляцию",
+    "feedback": {
+      "pdfSuccess": "PDF создан.",
+      "pdfError": "Ошибка экспорта PDF.",
+      "csvSuccess": "CSV создан.",
+      "csvError": "Ошибка экспорта CSV.",
+      "waSuccess": "WhatsApp открыт.",
+      "waError": "Ошибка при отправке в WhatsApp.",
+      "emailSuccess": "Email открыт.",
+      "emailError": "Ошибка при отправке по Email.",
+      "saved": "Симуляция сохранена.",
+      "saveError": "Ошибка сохранения.",
+      "restored": "Симуляция восстановлена.",
+      "restoreError": "Ошибка восстановления.",
+      "noSaved": "Нет сохранённых симуляций."
+    },
+    "errors": {
+      "scope": "Тип проекта обязателен.",
+      "entity": "Субъект обязателен.",
+      "budgetTotal": "Общий бюджет обязателен.",
+      "address": "Адрес обязателен.",
+      "type": "Тип участка обязателен.",
+      "status": "Статус обязателен.",
+      "surface": "Площадь обязательна.",
+      "usableSurface": "Полезная площадь обязательна.",
+      "percent": "Процент обязателен."
+    },
+    "summary": {
+      "title": "Сводка",
+      "scope": "Тип проекта:",
+      "entity": "Субъект:",
+      "budget": "Бюджет:",
+      "address": "Адрес:",
+      "surface": "Площадь:",
+      "usableSurface": "Полезная площадь:",
+      "use": "Назначение участка:"
+    },
+    "result": {
+      "totalCost": "Общие затраты:",
+      "totalSell": "Оценочная цена продажи:",
+      "profit": "Валовая прибыль:",
+      "m2Cost": "Стоимость за м²:",
+      "m2Sell": "Цена продажи за м²:"
+    },
+    "help": {
+      "title": "Нужна помощь?",
+      "geofencing": "Геозонирование — руководство",
+      "normativity": "Нормативы и процедуры CDMX",
+      "accessibility": "Веб-доступность (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "Имущественный",
+        "inversion": "Инвестиции"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Собственный",
+        "notown": "Не собственный",
+        "remate": "Аукцион"
+      },
+      "status": {
+        "construccion": "Строительство",
+        "demolicion": "Снос",
+        "reconversion": "Реконструкция"
+      },
+      "materialesLevel": {
+        "low": "Низкая стоимость",
+        "medium": "Средняя стоимость",
+        "high": "Высокая стоимость",
+        "custom": "Пользовательский"
+      }
+    }
   }
-} 
+}

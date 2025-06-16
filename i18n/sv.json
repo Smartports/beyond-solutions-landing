@@ -17,7 +17,8 @@
       "por_que": "Varför Beyond?",
       "sectores": "Sektorer",
       "capacidades": "Förmågor",
-      "contacto": "Kontakt"
+      "contacto": "Kontakt",
+      "calculadora": "Kalkylator"
     },
     "theme": {
       "light": "Växla till ljust läge",
@@ -191,5 +192,154 @@
   "accessibility": {
     "back_to_top": "Tillbaka till toppen",
     "navigation": "Huvudnavigering"
+  },
+  "calculator": {
+    "title": "Fastighetsbudgetkalkylator",
+    "intro": "Följ stegen för att uppskatta budget, marginaler och vinst för ditt fastighetsprojekt.",
+    "next": "Nästa",
+    "prev": "Föregående",
+    "reset": "Ny simulering",
+    "step1": {
+      "title": "1. Projekttyp och enhet",
+      "scope": "Projekttyp",
+      "scope.select": "Välj ett alternativ",
+      "scope.patrimonial": "Kapital",
+      "scope.inversion": "Investering",
+      "entity": "Enhet",
+      "entity.select": "Välj ett alternativ",
+      "entity.b2b": "B2B",
+      "entity.b2c": "B2C"
+    },
+    "step2": {
+      "title": "2. Budget och Fastighetsdata",
+      "budget": "Total budget",
+      "budget.placeholder": "$10,000,000",
+      "address": "Fastighetens adress",
+      "address.placeholder": "Ex: J Rousseu 3, Anzures, CDMX",
+      "type": "Typ av fastighet",
+      "type.select": "Välj en typ",
+      "type.own": "Egen",
+      "type.notown": "Ej egen",
+      "type.remate": "Exekutiv auktion",
+      "status": "Status",
+      "status.select": "Välj status",
+      "status.construccion": "Byggnation",
+      "status.demolicion": "Rivning",
+      "status.reconversion": "Omvandling",
+      "surface": "Yta (m²)",
+      "surface.placeholder": "800",
+      "usableSurface": "Användbar byggyta (m²)",
+      "usableSurface.placeholder": "480",
+      "use": "Tomtens användning",
+      "use.select": "Välj användning",
+      "use.defined": "H30/20/Z (Jag har användningen)",
+      "use.undefined": "Ej definierad (Anta 0,6)",
+      "use.request": "Ej definierad (Jag vill ansöka)",
+      "characteristics": "Egenskaper",
+      "characteristics.placeholder": "Skyddad, Ej tillämplig..."
+    },
+    "step3": {
+      "title": "3. Kostnadsuppdelning",
+      "materialesLevel": "Materialnivå",
+      "materialesLevel.low": "Low Cost",
+      "materialesLevel.medium": "Medium Cost",
+      "materialesLevel.high": "High Cost",
+      "materialesLevel.custom": "Custom",
+      "regulatorio": "Reglerande",
+      "materiales": "Material",
+      "construccion": "Konstruktion",
+      "arquitectura": "Arkitektur",
+      "diseno": "Design",
+      "arte": "Konst"
+    },
+    "step4": {
+      "title": "4. Resultat och sammanfattning"
+    },
+    "tooltips": {
+      "budgetTotal": "Inkluderar tomt och byggnation, exkluderar reglering."
+    },
+    "export": {
+      "pdf": "Exportera PDF",
+      "csv": "Exportera CSV",
+      "wa": "Dela WhatsApp",
+      "email": "Dela Email"
+    },
+    "save": "Spara simulering",
+    "restore": "Återställ simulering",
+    "feedback": {
+      "pdfSuccess": "PDF genererad.",
+      "pdfError": "Fel vid export av PDF.",
+      "csvSuccess": "CSV genererad.",
+      "csvError": "Fel vid export av CSV.",
+      "waSuccess": "WhatsApp öppnad.",
+      "waError": "Fel vid delning på WhatsApp.",
+      "emailSuccess": "Email öppnad.",
+      "emailError": "Fel vid delning via Email.",
+      "saved": "Simulering sparad.",
+      "saveError": "Fel vid sparande.",
+      "restored": "Simulering återställd.",
+      "restoreError": "Fel vid återställning.",
+      "noSaved": "Ingen sparad simulering."
+    },
+    "errors": {
+      "scope": "Projekttyp krävs.",
+      "entity": "Enhet krävs.",
+      "budgetTotal": "Total budget krävs.",
+      "address": "Adress krävs.",
+      "type": "Tomttyp krävs.",
+      "status": "Status krävs.",
+      "surface": "Yta krävs.",
+      "usableSurface": "Användbar yta krävs.",
+      "percent": "Procent krävs."
+    },
+    "summary": {
+      "title": "Sammanfattning",
+      "scope": "Projekttyp:",
+      "entity": "Enhet:",
+      "budget": "Budget:",
+      "address": "Adress:",
+      "surface": "Yta:",
+      "usableSurface": "Användbar yta:",
+      "use": "Tomtens användning:"
+    },
+    "result": {
+      "totalCost": "Total kostnad:",
+      "totalSell": "Uppskattat försäljningspris:",
+      "profit": "Bruttovinst:",
+      "m2Cost": "Kostnad per m²:",
+      "m2Sell": "Försäljningspris per m²:"
+    },
+    "help": {
+      "title": "Behöver du hjälp?",
+      "geofencing": "Geofencing-guide",
+      "normativity": "CDMX regler och procedurer",
+      "accessibility": "Webbtillgänglighet (WCAG)"
+    },
+    "values": {
+      "scope": {
+        "patrimonial": "Förmögenhet",
+        "inversion": "Investering"
+      },
+      "entity": {
+        "b2b": "B2B",
+        "b2c": "B2C"
+      },
+      "type": {
+        "own": "Egen",
+        "notown": "Ej egen",
+        "remate": "Auktion"
+      },
+      "status": {
+        "construccion": "Konstruktion",
+        "demolicion": "Rivning",
+        "reconversion": "Ombyggnad"
+      },
+      "materialesLevel": {
+        "low": "Låg kostnad",
+        "medium": "Medelkostnad",
+        "high": "Hög kostnad",
+        "custom": "Anpassad"
+      }
+    }
   }
-} 
+}
