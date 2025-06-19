@@ -201,42 +201,65 @@
     "reset": "محاكاة جديدة",
     "step1": {
       "title": "1. نوع المشروع والجهة",
-      "scope": "نوع المشروع",
+      "scope": {
+        "select": "اختر خيارًا"
+      },
       "scope.select": "اختر خيارًا",
       "scope.patrimonial": "ملكي",
       "scope.inversion": "استثماري",
-      "entity": "الجهة",
+      "entity": {
+        "select": "اختر خيارًا"
+      },
       "entity.select": "اختر خيارًا",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "إلى الخطوة 2: الميزانية وبيانات الأرض"
     },
     "step2": {
       "title": "2. الميزانية وبيانات الأرض",
-      "budget": "إجمالي الميزانية",
-      "address": "عنوان الأرض",
-      "type": "نوع الأرض",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
+      "address": {
+        "placeholder": "مثال: شارع الملك فهد 123، الرياض"
+      },
+      "type": {
+        "select": "اختر النوع"
+      },
       "type.select": "اختر النوع",
       "type.own": "ملك خاص",
       "type.notown": "غير ملك خاص",
       "type.remate": "مزاد",
-      "status": "الحالة",
+      "status": {
+        "select": "اختر الحالة"
+      },
       "status.select": "اختر الحالة",
       "status.construccion": "إنشاء",
       "status.demolicion": "هدم",
       "status.reconversion": "إعادة تأهيل",
-      "surface": "المساحة (م²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "مساحة البناء القابلة للاستخدام (م²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "استخدام الأرض",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "اختر الاستخدام",
       "use.defined": "H30/20/Z (لدي الاستخدام)",
       "use.undefined": "غير محدد (افترض 0.6)",
       "use.request": "غير محدد (أرغب في التقديم)",
-      "characteristics": "الخصائص",
+      "characteristics": {
+        "placeholder": "محمي، غير قابل للتطبيق..."
+      },
       "characteristics.placeholder": "محمي، غير قابل للتطبيق...",
       "budget.placeholder": "$10,000,000",
-      "address.placeholder": "مثال: J Rousseu 3, Anzures, CDMX"
+      "address.placeholder": "مثال: شارع الملك فهد 123، الرياض",
+      "prev_description": "إلى الخطوة 1: نوع المشروع والجهة",
+      "next_description": "إلى الخطوة 3: توزيع التكاليف"
     },
     "step3": {
       "title": "3. توزيع التكاليف",
@@ -250,13 +273,19 @@
       "construccion": "بناء",
       "arquitectura": "هندسة معمارية",
       "diseno": "تصميم",
-      "arte": "فن"
+      "arte": "فن",
+      "prev_description": "إلى الخطوة 2: الميزانية وبيانات الأرض",
+      "next_description": "إلى الخطوة 4: النتائج والملخص"
     },
     "step4": {
-      "title": "4. النتائج والملخص"
+      "title": "4. النتائج والملخص",
+      "prev_description": "إلى الخطوة 3: توزيع التكاليف",
+      "reset_description": "إعادة تعيين النموذج"
     },
     "tooltips": {
-      "budgetTotal": "يشمل الأرض والبناء، لا يشمل التنظيم."
+      "budgetTotal": "يشمل الأرض والبناء، لا يشمل التنظيم.",
+      "usableSurface": "المساحة القابلة للاستخدام للبناء وفقًا لاستخدام الأرض.",
+      "materialesLevel": "يحدد نطاق جودة وتكلفة المواد."
     },
     "export": {
       "pdf": "تصدير PDF",
@@ -300,7 +329,9 @@
       "address": "العنوان:",
       "surface": "المساحة:",
       "usableSurface": "المساحة القابلة للاستخدام:",
-      "use": "استخدام الأراضي:"
+      "use": "استخدام الأراضي:",
+      "type": "نوع الأرض:",
+      "status": "الحالة:"
     },
     "help": {
       "title": "هل تحتاج مساعدة؟",
@@ -340,6 +371,15 @@
         "high": "تكلفة عالية",
         "custom": "مخصص"
       }
+    },
+    "form": {
+      "required_field": "هذا الحقل مطلوب للمتابعة",
+      "budget_description": "إجمالي ميزانية المشروع بما في ذلك الأرض",
+      "address_description": "الموقع الكامل للأرض",
+      "type_description": "اختر فئة الأرض",
+      "status_description": "الحالة الحالية للأرض",
+      "surface_description": "المساحة الإجمالية للأرض بالمتر المربع",
+      "usableSurface_description": "المساحة التي يمكن البناء عليها"
     }
   }
 }

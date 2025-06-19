@@ -198,6 +198,9 @@
     "intro": "Follow the steps to estimate the budget, margins, and profit of your real estate project.",
     "next": "Next",
     "prev": "Previous",
+    "reset": "New simulation",
+    "save": "Save simulation",
+    "restore": "Restore simulation",
     "values": {
       "scope": {
         "patrimonial": "Patrimonial",
@@ -224,116 +227,136 @@
         "custom": "Custom"
       }
     },
-    "reset": "New simulation",
+    "form": {
+      "required_field": "This field is required to continue",
+      "budget_description": "Total project budget including land",
+      "address_description": "Complete location of the land",
+      "type_description": "Select the land category",
+      "status_description": "Current status of the land",
+      "surface_description": "Total area of the land in square meters",
+      "usableSurface_description": "Surface that can be built upon"
+    },
     "step1": {
       "title": "1. Project Type and Entity",
-      "scope": "Project type",
+      "scope": {
+        "select": "Select an option"
+      },
       "scope.select": "Select an option",
-      "scope.patrimonial": "Patrimonial",
-      "scope.inversion": "Investment",
-      "entity": "Entity",
+      "entity": {
+        "select": "Select an option"
+      },
       "entity.select": "Select an option",
-      "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "nav_description": "to step 2: Budget and Land Data"
     },
     "step2": {
       "title": "2. Budget and Land Data",
-      "budget": "Total budget",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "Land address",
-      "address.placeholder": "E.g.: J Rousseu 3, Anzures, CDMX",
-      "type": "Land type",
+      "address": {
+        "placeholder": "E.g.: 123 Main St, New York, NY 10001"
+      },
+      "address.placeholder": "E.g.: 123 Main St, New York, NY 10001",
+      "type": {
+        "select": "Select a type"
+      },
       "type.select": "Select a type",
-      "type.own": "Own",
-      "type.notown": "Not Own",
-      "type.remate": "Foreclosure",
-      "status": "Status",
+      "status": {
+        "select": "Select a status"
+      },
       "status.select": "Select a status",
-      "status.construccion": "Construction",
-      "status.demolicion": "Demolition",
-      "status.reconversion": "Reconversion",
-      "surface": "Surface (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Usable construction surface (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Land use",
-      "use.select": "Select use",
-      "use.defined": "H30/20/Z (I have the use)",
-      "use.undefined": "Not defined (Assume 0.6)",
-      "use.request": "Not defined (I want to request it)",
-      "characteristics": "Characteristics",
-      "characteristics.placeholder": "Protected, Not Applicable..."
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
+      "use.placeholder": "H30/20/Z",
+      "characteristics": {
+        "placeholder": "Protected, Not Applicable..."
+      },
+      "characteristics.placeholder": "Protected, Not Applicable...",
+      "prev_description": "to step 1: Project Type and Entity",
+      "next_description": "to step 3: Cost Breakdown"
     },
     "step3": {
       "title": "3. Cost Breakdown",
       "materialesLevel": "Material level",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
       "regulatorio": "Regulatory",
       "materiales": "Materials",
       "construccion": "Construction",
       "arquitectura": "Architecture",
       "diseno": "Design",
-      "arte": "Art"
+      "arte": "Art",
+      "prev_description": "to step 2: Budget and Land Data",
+      "next_description": "to step 4: Results and Summary"
     },
     "step4": {
-      "title": "4. Results and Summary"
+      "title": "4. Results and Summary",
+      "prev_description": "to step 3: Cost Breakdown",
+      "reset_description": "reset form"
+    },
+    "errors": {
+      "scope": "Project type is required",
+      "entity": "Entity is required",
+      "budgetTotal": "Total budget is required",
+      "address": "Address is required",
+      "type": "Land type is required",
+      "status": "Status is required",
+      "surface": "Surface area is required",
+      "usableSurface": "Usable surface is required",
+      "percent": "Percentage is required"
     },
     "tooltips": {
-      "budgetTotal": "Includes land and construction, excludes regulatory."
+      "budgetTotal": "Includes land and construction, without regulatory costs.",
+      "usableSurface": "Usable area for building according to land use.",
+      "materialesLevel": "Defines the range of quality and cost of materials."
     },
-    "export": {
-      "pdf": "Export PDF",
-      "csv": "Export CSV",
-      "wa": "Share WhatsApp",
-      "email": "Share Email"
-    },
-    "save": "Save simulation",
-    "restore": "Restore simulation",
     "feedback": {
-      "pdfSuccess": "PDF generated.",
+      "pdfSuccess": "PDF successfully generated.",
       "pdfError": "Error exporting PDF.",
-      "csvSuccess": "CSV generated.",
+      "csvSuccess": "CSV successfully generated.",
       "csvError": "Error exporting CSV.",
-      "waSuccess": "WhatsApp opened.",
+      "waSuccess": "Shared on WhatsApp.",
       "waError": "Error sharing on WhatsApp.",
       "emailSuccess": "Email opened.",
       "emailError": "Error sharing by Email.",
       "saved": "Simulation saved.",
-      "saveError": "Error saving.",
+      "saveError": "Error saving simulation.",
       "restored": "Simulation restored.",
-      "restoreError": "Error restoring.",
-      "noSaved": "No saved simulation."
+      "restoreError": "Error restoring simulation.",
+      "noSaved": "No saved simulation found."
     },
-    "errors": {
-      "scope": "Project type is required.",
-      "entity": "Entity is required.",
-      "budgetTotal": "Total budget is required.",
-      "address": "Address is required.",
-      "type": "Land type is required.",
-      "status": "Status is required.",
-      "surface": "Surface is required.",
-      "usableSurface": "Usable surface is required.",
-      "percent": "Percentage is required."
-    },
-    "summary": {
-      "title": "Summary",
-      "scope": "Project type:",
-      "entity": "Entity:",
-      "budget": "Budget:",
-      "address": "Address:",
-      "surface": "Surface:",
-      "usableSurface": "Usable surface:",
-      "use": "Land use:"
+    "export": {
+      "pdf": "Export PDF",
+      "csv": "Export CSV",
+      "wa": "Share on WhatsApp",
+      "email": "Share by Email"
     },
     "result": {
       "totalCost": "Total cost:",
-      "totalSell": "Estimated sale price:",
+      "totalSell": "Estimated selling price:",
       "profit": "Gross profit:",
       "m2Cost": "Cost per m²:",
-      "m2Sell": "Sale price per m²:"
+      "m2Sell": "Selling price per m²:"
+    },
+    "summary": {
+      "title": "Summary",
+      "scope": "Project type",
+      "entity": "Entity",
+      "budget": "Budget",
+      "address": "Address",
+      "surface": "Surface area",
+      "usableSurface": "Usable surface",
+      "use": "Land use",
+      "type": "Land type",
+      "status": "Status"
     },
     "help": {
       "title": "Need help?",

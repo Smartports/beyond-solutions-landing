@@ -201,62 +201,91 @@
     "reset": "नई सिमुलेशन",
     "step1": {
       "title": "1. प्रोजेक्ट प्रकार और इकाई",
-      "scope": "प्रोजेक्ट प्रकार",
+      "scope": {
+        "select": "एक विकल्प चुनें"
+      },
       "scope.select": "एक विकल्प चुनें",
       "scope.patrimonial": "पैत्रिक",
       "scope.inversion": "निवेश",
-      "entity": "इकाई",
+      "entity": {
+        "select": "एक विकल्प चुनें"
+      },
       "entity.select": "एक विकल्प चुनें",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "चरण 2 पर: बजट और भूमि डेटा"
     },
     "step2": {
       "title": "2. बजट और भूमि डेटा",
-      "budget": "कुल बजट",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "भूमि का पता",
-      "address.placeholder": "उदा.: J Rousseu 3, Anzures, CDMX",
-      "type": "भूमि का प्रकार",
+      "address": {
+        "placeholder": "उदा.: सेक्टर 18, गुड़गांव, हरियाणा"
+      },
+      "address.placeholder": "उदा.: सेक्टर 18, गुड़गांव, हरियाणा",
+      "type": {
+        "select": "एक प्रकार चुनें"
+      },
       "type.select": "एक प्रकार चुनें",
       "type.own": "स्वयं की",
       "type.notown": "स्वयं की नहीं",
       "type.remate": "नीलामी",
-      "status": "स्थिति",
+      "status": {
+        "select": "स्थिति चुनें"
+      },
       "status.select": "स्थिति चुनें",
       "status.construccion": "निर्माण",
       "status.demolicion": "विध्वंस",
       "status.reconversion": "पुनर्विकास",
-      "surface": "क्षेत्रफल (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "निर्माण के लिए उपयोगी क्षेत्र (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "भूमि उपयोग",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "उपयोग चुनें",
       "use.defined": "H30/20/Z (मेरे पास उपयोग है)",
       "use.undefined": "परिभाषित नहीं (0.6 मानें)",
       "use.request": "परिभाषित नहीं (अनुरोध करना चाहता हूँ)",
-      "characteristics": "विशेषताएँ",
-      "characteristics.placeholder": "संरक्षित, लागू नहीं..."
+      "characteristics": {
+        "placeholder": "संरक्षित, लागू नहीं..."
+      },
+      "characteristics.placeholder": "संरक्षित, लागू नहीं...",
+      "prev_description": "चरण 1 पर: प्रोजेक्ट प्रकार और इकाई",
+      "next_description": "चरण 3 पर: लागत विवरण"
     },
     "step3": {
       "title": "3. लागत विवरण",
       "materialesLevel": "सामग्री स्तर",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
+      "materialesLevel.low": "कम लागत",
+      "materialesLevel.medium": "मध्यम लागत",
+      "materialesLevel.high": "उच्च लागत",
+      "materialesLevel.custom": "कस्टम",
       "regulatorio": "नियामक",
       "materiales": "सामग्री",
       "construccion": "निर्माण",
       "arquitectura": "वास्तुकला",
       "diseno": "डिज़ाइन",
-      "arte": "कला"
+      "arte": "कला",
+      "prev_description": "चरण 2 पर: बजट और भूमि डेटा",
+      "next_description": "चरण 4 पर: परिणाम और सारांश"
     },
     "step4": {
-      "title": "4. परिणाम और सारांश"
+      "title": "4. परिणाम और सारांश",
+      "prev_description": "चरण 3 पर: लागत विवरण",
+      "reset_description": "फॉर्म रीसेट करें"
     },
     "tooltips": {
-      "budgetTotal": "भूमि और निर्माण शामिल है, नियामक शामिल नहीं।"
+      "budgetTotal": "भूमि और निर्माण शामिल है, नियामक शामिल नहीं।",
+      "usableSurface": "भूमि उपयोग के अनुसार निर्माण के लिए उपयोगी क्षेत्र।",
+      "materialesLevel": "सामग्री की गुणवत्ता और लागत की श्रेणी को परिभाषित करता है।"
     },
     "export": {
       "pdf": "PDF निर्यात करें",
@@ -300,7 +329,9 @@
       "address": "पता:",
       "surface": "क्षेत्रफल:",
       "usableSurface": "उपयोगी क्षेत्र:",
-      "use": "भूमि उपयोग:"
+      "use": "भूमि उपयोग:",
+      "type": "भूमि का प्रकार:",
+      "status": "स्थिति:"
     },
     "result": {
       "totalCost": "कुल लागत:",
@@ -340,6 +371,15 @@
         "high": "उच्च लागत",
         "custom": "कस्टम"
       }
+    },
+    "form": {
+      "required_field": "आगे बढ़ने के लिए यह फ़ील्ड आवश्यक है",
+      "budget_description": "भूमि सहित कुल परियोजना बजट",
+      "address_description": "भूमि का पूरा स्थान",
+      "type_description": "भूमि की श्रेणी चुनें",
+      "status_description": "भूमि की वर्तमान स्थिति",
+      "surface_description": "वर्ग मीटर में भूमि का कुल क्षेत्रफल",
+      "usableSurface_description": "निर्माण के लिए उपयोगी सतह"
     }
   }
 }

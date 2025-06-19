@@ -227,62 +227,92 @@
     },
     "step1": {
       "title": "1. Tipo de proyecto y entidad",
-      "scope": "Tipo de proyecto",
+      "scope": {
+        "select": "Selecciona una opción"
+      },
       "scope.select": "Selecciona una opción",
       "scope.patrimonial": "Patrimonial",
       "scope.inversion": "Inversión",
-      "entity": "Entidad",
+      "entity": {
+        "select": "Selecciona una opción"
+      },
       "entity.select": "Selecciona una opción",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "al paso 2: Presupuesto y datos del terreno"
     },
     "step2": {
       "title": "2. Presupuesto y datos del terreno",
-      "budget": "Presupuesto total",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "Dirección del terreno",
+      "address": {
+        "placeholder": "Ej: J Rousseu 3, Anzures, CDMX"
+      },
       "address.placeholder": "Ej: J Rousseu 3, Anzures, CDMX",
-      "type": "Tipo de terreno",
+      "type": {
+        "select": "Selecciona un tipo"
+      },
       "type.select": "Selecciona un tipo",
       "type.own": "Propio",
       "type.notown": "No Propio",
       "type.remate": "Remate",
-      "status": "Estatus",
+      "status": {
+        "select": "Selecciona un estatus"
+      },
       "status.select": "Selecciona un estatus",
       "status.construccion": "Construcción",
       "status.demolicion": "Demolición",
       "status.reconversion": "Reconversión",
-      "surface": "Superficie (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Superficie útil de construcción (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Uso de suelo",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "Selecciona uso",
       "use.defined": "H30/20/Z (Tengo el uso)",
       "use.undefined": "Por definir (Supón 0.6)",
       "use.request": "Por definir (Quiero solicitarlo)",
-      "characteristics": "Características",
-      "characteristics.placeholder": "Protegido, No Aplica..."
+      "use.placeholder": "H30/20/Z",
+      "characteristics": {
+        "placeholder": "Protegido, No aplica..."
+      },
+      "characteristics.placeholder": "Protegido, No aplica...",
+      "prev_description": "al paso 1: Tipo de proyecto y entidad",
+      "next_description": "al paso 3: Desglose de costos"
     },
     "step3": {
       "title": "3. Desglose de costos",
       "materialesLevel": "Nivel de materiales",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
+      "materialesLevel.low": "Bajo Costo",
+      "materialesLevel.medium": "Costo Medio",
+      "materialesLevel.high": "Alto Costo",
+      "materialesLevel.custom": "Personalizado",
       "regulatorio": "Regulatorio",
       "materiales": "Materiales",
       "construccion": "Construcción",
       "arquitectura": "Arquitectura",
       "diseno": "Diseño",
-      "arte": "Arte"
+      "arte": "Arte",
+      "prev_description": "al paso 2: Presupuesto y datos del terreno",
+      "next_description": "al paso 4: Resultados y resumen"
     },
     "step4": {
-      "title": "4. Resultados y resumen"
+      "title": "4. Resultados y resumen",
+      "prev_description": "al paso 3: Desglose de costos",
+      "reset_description": "reiniciar formulario"
     },
     "tooltips": {
-      "budgetTotal": "Incluye terreno y construcción, excluye regulatorio."
+      "budgetTotal": "Incluye terreno y construcción, excluye regulatorio.",
+      "usableSurface": "Área útil para construcción según el uso de suelo.",
+      "materialesLevel": "Define el rango de calidad y costo de los materiales."
     },
     "export": {
       "pdf": "Exportar PDF",
@@ -326,7 +356,9 @@
       "address": "Dirección:",
       "surface": "Superficie:",
       "usableSurface": "Superficie útil:",
-      "use": "Uso de suelo:"
+      "use": "Uso de suelo:",
+      "type": "Tipo de terreno:",
+      "status": "Estatus:"
     },
     "result": {
       "totalCost": "Costo total:",
@@ -340,6 +372,15 @@
       "geofencing": "Guía de geocercado",
       "normativity": "Normatividad y trámites CDMX",
       "accessibility": "Accesibilidad web (WCAG)"
+    },
+    "form": {
+      "required_field": "Este campo es obligatorio para continuar",
+      "budget_description": "Presupuesto total del proyecto incluyendo terreno",
+      "address_description": "Ubicación completa del terreno",
+      "type_description": "Selecciona la categoría del terreno",
+      "status_description": "Estado actual del terreno",
+      "surface_description": "Área total del terreno en metros cuadrados",
+      "usableSurface_description": "Superficie que puede ser construida"
     }
   }
-} 
+}
