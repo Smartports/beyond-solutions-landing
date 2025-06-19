@@ -201,62 +201,91 @@
     "reset": "Nuova simulazione",
     "step1": {
       "title": "1. Tipo di progetto ed entità",
-      "scope": "Tipo di progetto",
+      "scope": {
+        "select": "Seleziona un'opzione"
+      },
       "scope.select": "Seleziona un'opzione",
       "scope.patrimonial": "Patrimoniale",
       "scope.inversion": "Investimento",
-      "entity": "Entità",
+      "entity": {
+        "select": "Seleziona un'opzione"
+      },
       "entity.select": "Seleziona un'opzione",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "al passaggio 2: Budget e Dati del Terreno"
     },
     "step2": {
       "title": "2. Budget e Dati del Terreno",
-      "budget": "Budget totale",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "Indirizzo del terreno",
-      "address.placeholder": "Es: J Rousseu 3, Anzures, CDMX",
-      "type": "Tipo di terreno",
+      "address": {
+        "placeholder": "Es: Via Roma 123, Milano"
+      },
+      "address.placeholder": "Es: Via Roma 123, Milano",
+      "type": {
+        "select": "Seleziona un tipo"
+      },
       "type.select": "Seleziona un tipo",
       "type.own": "Proprio",
       "type.notown": "Non Proprio",
       "type.remate": "Pignoramento",
-      "status": "Stato",
+      "status": {
+        "select": "Seleziona uno stato"
+      },
       "status.select": "Seleziona uno stato",
       "status.construccion": "Costruzione",
       "status.demolicion": "Demolizione",
       "status.reconversion": "Riconversione",
-      "surface": "Superficie (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Superficie utile di costruzione (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Uso del suolo",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "Seleziona uso",
       "use.defined": "H30/20/Z (Ho l'uso)",
       "use.undefined": "Non definito (Supponi 0.6)",
       "use.request": "Non definito (Voglio richiederlo)",
-      "characteristics": "Caratteristiche",
-      "characteristics.placeholder": "Protetto, Non applicabile..."
+      "characteristics": {
+        "placeholder": "Protetto, Non applicabile..."
+      },
+      "characteristics.placeholder": "Protetto, Non applicabile...",
+      "prev_description": "al passaggio 1: Tipo di progetto ed entità",
+      "next_description": "al passaggio 3: Ripartizione dei costi"
     },
     "step3": {
       "title": "3. Ripartizione dei costi",
       "materialesLevel": "Livello materiali",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
+      "materialesLevel.low": "Basso costo",
+      "materialesLevel.medium": "Costo medio",
+      "materialesLevel.high": "Costo alto",
+      "materialesLevel.custom": "Personalizzato",
       "regulatorio": "Normativo",
       "materiales": "Materiali",
       "construccion": "Costruzione",
       "arquitectura": "Architettura",
       "diseno": "Design",
-      "arte": "Arte"
+      "arte": "Arte",
+      "prev_description": "al passaggio 2: Budget e Dati del Terreno",
+      "next_description": "al passaggio 4: Risultati e riepilogo"
     },
     "step4": {
-      "title": "4. Risultati e riepilogo"
+      "title": "4. Risultati e riepilogo",
+      "prev_description": "al passaggio 3: Ripartizione dei costi",
+      "reset_description": "reimposta modulo"
     },
     "tooltips": {
-      "budgetTotal": "Include terreno e costruzione, esclude regolamentazione."
+      "budgetTotal": "Include terreno e costruzione, esclude regolamentazione.",
+      "usableSurface": "Area edificabile secondo l'uso del suolo.",
+      "materialesLevel": "Definisce la gamma di qualità e costo dei materiali."
     },
     "export": {
       "pdf": "Esporta PDF",
@@ -300,7 +329,9 @@
       "address": "Indirizzo:",
       "surface": "Superficie:",
       "usableSurface": "Superficie utile:",
-      "use": "Uso del suolo:"
+      "use": "Uso del suolo:",
+      "type": "Tipo di terreno:",
+      "status": "Stato:"
     },
     "result": {
       "totalCost": "Costo totale:",
@@ -340,6 +371,15 @@
         "high": "Costo alto",
         "custom": "Personalizzato"
       }
+    },
+    "form": {
+      "required_field": "Questo campo è obbligatorio per continuare",
+      "budget_description": "Budget totale del progetto incluso il terreno",
+      "address_description": "Posizione completa del terreno",
+      "type_description": "Seleziona la categoria del terreno",
+      "status_description": "Stato attuale del terreno",
+      "surface_description": "Area totale del terreno in metri quadrati",
+      "usableSurface_description": "Superficie edificabile"
     }
   }
 }

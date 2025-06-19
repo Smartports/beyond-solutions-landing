@@ -227,42 +227,65 @@
     },
     "step1": {
       "title": "1. Rodzaj projektu i podmiot",
-      "scope": "Rodzaj projektu",
+      "scope": {
+        "select": "Wybierz opcję"
+      },
       "scope.select": "Wybierz opcję",
       "scope.patrimonial": "Majątkowy",
       "scope.inversion": "Inwestycyjny",
-      "entity": "Podmiot",
+      "entity": {
+        "select": "Wybierz opcję"
+      },
       "entity.select": "Wybierz opcję",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "do kroku 2: Budżet i dane o gruncie"
     },
     "step2": {
       "title": "2. Budżet i dane o gruncie",
-      "budget": "Całkowity budżet",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "10,000,000",
-      "address": "Adres gruntu",
-      "address.placeholder": "Np. J Rousseu 3, Anzures, CDMX",
-      "type": "Rodzaj gruntu",
+      "address": {
+        "placeholder": "Np.: ul. Marszałkowska 100, Warszawa"
+      },
+      "address.placeholder": "Np.: ul. Marszałkowska 100, Warszawa",
+      "type": {
+        "select": "Wybierz rodzaj"
+      },
       "type.select": "Wybierz rodzaj",
       "type.own": "Własny",
       "type.notown": "Obcy",
       "type.remate": "Przetarg",
-      "status": "Status",
+      "status": {
+        "select": "Wybierz status"
+      },
       "status.select": "Wybierz status",
       "status.construccion": "Budowa",
       "status.demolicion": "Rozbiórka",
       "status.reconversion": "Rekonwersja",
-      "surface": "Powierzchnia (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Użytkowa powierzchnia konstrukcyjna (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Przeznaczenie gruntu",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "Wybierz przeznaczenie",
       "use.defined": "H30/20/Z (Mam przeznaczenie)",
       "use.undefined": "Nieokreślone (Załóż 0.6)",
       "use.request": "Do zdefiniowania (Chcę złożyć wniosek)",
-      "characteristics": "Charakterystyka",
-      "characteristics.placeholder": "Chroniony, nie dotyczy..."
+      "characteristics": {
+        "placeholder": "Chroniony, nie dotyczy..."
+      },
+      "characteristics.placeholder": "Chroniony, nie dotyczy...",
+      "prev_description": "do kroku 1: Rodzaj projektu i podmiot",
+      "next_description": "do kroku 3: Podział kosztów"
     },
     "step3": {
       "title": "3. Podział kosztów",
@@ -276,13 +299,19 @@
       "construccion": "Budowa",
       "arquitectura": "Architektura",
       "diseno": "Projekt",
-      "arte": "Sztuka"
+      "arte": "Sztuka",
+      "prev_description": "do kroku 2: Budżet i dane o gruncie",
+      "next_description": "do kroku 4: Wyniki i podsumowanie"
     },
     "step4": {
-      "title": "4. Wyniki i podsumowanie"
+      "title": "4. Wyniki i podsumowanie",
+      "prev_description": "do kroku 3: Podział kosztów",
+      "reset_description": "zresetuj formularz"
     },
     "tooltips": {
-      "budgetTotal": "Obejmuje grunt i budowę, z wyłączeniem kosztów regulacyjnych."
+      "budgetTotal": "Obejmuje grunt i budowę, z wyłączeniem kosztów regulacyjnych.",
+      "usableSurface": "Powierzchnia użytkowa do zabudowy zgodnie z przeznaczeniem gruntu.",
+      "materialesLevel": "Określa zakres jakości i kosztów materiałów."
     },
     "export": {
       "pdf": "Eksportuj PDF",
@@ -326,7 +355,9 @@
       "address": "Adres:",
       "surface": "Powierzchnia:",
       "usableSurface": "Powierzchnia użytkowa:",
-      "use": "Przeznaczenie gruntu:"
+      "use": "Przeznaczenie gruntu:",
+      "type": "Rodzaj gruntu:",
+      "status": "Status:"
     },
     "result": {
       "totalCost": "Koszt całkowity:",
@@ -340,6 +371,15 @@
       "geofencing": "Przewodnik po geofencingu",
       "normativity": "Regulacje i procedury CDMX",
       "accessibility": "Dostępność internetowa (WCAG)"
+    },
+    "form": {
+      "required_field": "To pole jest wymagane, aby kontynuować",
+      "budget_description": "Całkowity budżet projektu wraz z gruntem",
+      "address_description": "Pełna lokalizacja gruntu",
+      "type_description": "Wybierz kategorię gruntu",
+      "status_description": "Aktualny status gruntu",
+      "surface_description": "Całkowita powierzchnia gruntu w metrach kwadratowych",
+      "usableSurface_description": "Powierzchnia, która może zostać zabudowana"
     }
   }
 }

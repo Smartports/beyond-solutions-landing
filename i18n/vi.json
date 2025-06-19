@@ -201,62 +201,91 @@
     "reset": "Mô phỏng mới",
     "step1": {
       "title": "1. Loại dự án và thực thể",
-      "scope": "Loại dự án",
+      "scope": {
+        "select": "Chọn một tùy chọn"
+      },
       "scope.select": "Chọn một tùy chọn",
       "scope.patrimonial": "Tài sản",
       "scope.inversion": "Đầu tư",
-      "entity": "Thực thể",
+      "entity": {
+        "select": "Chọn một tùy chọn"
+      },
       "entity.select": "Chọn một tùy chọn",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "Đến bước 2: Ngân sách và Dữ liệu đất đai"
     },
     "step2": {
       "title": "2. Ngân sách và Dữ liệu đất đai",
-      "budget": "Tổng ngân sách",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "Địa chỉ đất",
-      "address.placeholder": "VD: J Rousseu 3, Anzures, CDMX",
-      "type": "Loại đất",
+      "address": {
+        "placeholder": "Ví dụ: 123 Nguyễn Huệ, Quận 1, TP.HCM"
+      },
+      "address.placeholder": "Ví dụ: 123 Nguyễn Huệ, Quận 1, TP.HCM",
+      "type": {
+        "select": "Chọn một loại"
+      },
       "type.select": "Chọn một loại",
       "type.own": "Sở hữu",
       "type.notown": "Không sở hữu",
       "type.remate": "Phát mãi",
-      "status": "Trạng thái",
+      "status": {
+        "select": "Chọn một trạng thái"
+      },
       "status.select": "Chọn trạng thái",
       "status.construccion": "Xây dựng",
       "status.demolicion": "Phá dỡ",
       "status.reconversion": "Chuyển đổi",
-      "surface": "Diện tích (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Diện tích xây dựng sử dụng được (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Mục đích sử dụng đất",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "Chọn mục đích sử dụng",
       "use.defined": "H30/20/Z (Tôi có mục đích sử dụng)",
       "use.undefined": "Chưa xác định (Giả định 0.6)",
       "use.request": "Chưa xác định (Muốn đăng ký)",
-      "characteristics": "Đặc điểm",
-      "characteristics.placeholder": "Được bảo vệ, Không áp dụng..."
+      "characteristics": {
+        "placeholder": "Được bảo vệ, Không áp dụng..."
+      },
+      "characteristics.placeholder": "Được bảo vệ, Không áp dụng...",
+      "prev_description": "Quay lại bước 1: Loại dự án và thực thể",
+      "next_description": "Đến bước 3: Phân tích chi phí"
     },
     "step3": {
       "title": "3. Phân tích chi phí",
       "materialesLevel": "Cấp độ vật liệu",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
+      "materialesLevel.low": "Chi phí thấp",
+      "materialesLevel.medium": "Chi phí trung bình",
+      "materialesLevel.high": "Chi phí cao",
+      "materialesLevel.custom": "Tùy chỉnh",
       "regulatorio": "Quy định",
       "materiales": "Vật liệu",
       "construccion": "Xây dựng",
       "arquitectura": "Kiến trúc",
       "diseno": "Thiết kế",
-      "arte": "Nghệ thuật"
+      "arte": "Nghệ thuật",
+      "prev_description": "Quay lại bước 2: Ngân sách và Dữ liệu đất đai",
+      "next_description": "Đến bước 4: Kết quả và tóm tắt"
     },
     "step4": {
-      "title": "4. Kết quả và tóm tắt"
+      "title": "4. Kết quả và tóm tắt",
+      "prev_description": "Quay lại bước 3: Phân tích chi phí",
+      "reset_description": "Đặt lại biểu mẫu"
     },
     "tooltips": {
-      "budgetTotal": "Bao gồm đất và xây dựng, không bao gồm quy định."
+      "budgetTotal": "Bao gồm đất và xây dựng, không bao gồm quy định.",
+      "usableSurface": "Diện tích sử dụng được để xây dựng theo quy định sử dụng đất.",
+      "materialesLevel": "Xác định phạm vi chất lượng và chi phí của vật liệu."
     },
     "export": {
       "pdf": "Xuất PDF",
@@ -300,7 +329,9 @@
       "address": "Địa chỉ:",
       "surface": "Diện tích:",
       "usableSurface": "Diện tích sử dụng:",
-      "use": "Mục đích sử dụng đất:"
+      "use": "Mục đích sử dụng đất:",
+      "type": "Loại đất:",
+      "status": "Trạng thái:"
     },
     "result": {
       "totalCost": "Tổng chi phí:",
@@ -340,6 +371,15 @@
         "high": "Chi phí cao",
         "custom": "Tùy chỉnh"
       }
+    },
+    "form": {
+      "required_field": "Trường này là bắt buộc để tiếp tục",
+      "budget_description": "Tổng ngân sách dự án bao gồm đất",
+      "address_description": "Vị trí đầy đủ của đất",
+      "type_description": "Chọn loại đất",
+      "status_description": "Trạng thái hiện tại của đất",
+      "surface_description": "Tổng diện tích đất tính bằng mét vuông",
+      "usableSurface_description": "Diện tích có thể xây dựng"
     }
   }
 }

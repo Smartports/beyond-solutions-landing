@@ -201,42 +201,65 @@
     "reset": "新しいシミュレーション",
     "step1": {
       "title": "1. プロジェクトタイプとエンティティ",
-      "scope": "プロジェクトタイプ",
+      "scope": {
+        "select": "オプションを選択"
+      },
       "scope.select": "オプションを選択",
       "scope.patrimonial": "資産型",
       "scope.inversion": "投資型",
-      "entity": "エンティティ",
+      "entity": {
+        "select": "オプションを選択"
+      },
       "entity.select": "オプションを選択",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "ステップ2へ: 予算と土地データ"
     },
     "step2": {
       "title": "2. 予算と土地データ",
-      "budget": "総予算",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "土地の住所",
-      "address.placeholder": "例: J Rousseu 3, Anzures, CDMX",
-      "type": "土地の種類",
+      "address": {
+        "placeholder": "例: 東京都港区赤坂1-2-3"
+      },
+      "address.placeholder": "例: 東京都港区赤坂1-2-3",
+      "type": {
+        "select": "種類を選択"
+      },
       "type.select": "種類を選択",
       "type.own": "自己所有",
       "type.notown": "非自己所有",
       "type.remate": "競売",
-      "status": "ステータス",
+      "status": {
+        "select": "ステータスを選択"
+      },
       "status.select": "ステータスを選択",
       "status.construccion": "建設",
       "status.demolicion": "解体",
       "status.reconversion": "再開発",
-      "surface": "面積 (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "有効建築面積 (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "土地利用",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "利用を選択",
       "use.defined": "H30/20/Z（用途あり）",
       "use.undefined": "未定義（0.6と仮定）",
       "use.request": "未定義（申請希望）",
-      "characteristics": "特徴",
-      "characteristics.placeholder": "保護、該当なし..."
+      "characteristics": {
+        "placeholder": "保護、該当なし..."
+      },
+      "characteristics.placeholder": "保護、該当なし...",
+      "prev_description": "ステップ1へ: プロジェクトタイプとエンティティ",
+      "next_description": "ステップ3へ: コスト内訳"
     },
     "step3": {
       "title": "3. コスト内訳",
@@ -250,13 +273,19 @@
       "construccion": "建設",
       "arquitectura": "建築",
       "diseno": "デザイン",
-      "arte": "アート"
+      "arte": "アート",
+      "prev_description": "ステップ2へ: 予算と土地データ",
+      "next_description": "ステップ4へ: 結果とサマリー"
     },
     "step4": {
-      "title": "4. 結果とサマリー"
+      "title": "4. 結果とサマリー",
+      "prev_description": "ステップ3へ: コスト内訳",
+      "reset_description": "フォームをリセット"
     },
     "tooltips": {
-      "budgetTotal": "土地と建設を含み、規制費用は含みません。"
+      "budgetTotal": "土地と建設を含み、規制費用は含みません。",
+      "usableSurface": "土地利用に基づく建築可能面積。",
+      "materialesLevel": "材料の品質とコストの範囲を定義します。"
     },
     "export": {
       "pdf": "PDFエクスポート",
@@ -300,7 +329,9 @@
       "address": "住所：",
       "surface": "面積：",
       "usableSurface": "有効面積：",
-      "use": "土地利用："
+      "use": "土地利用：",
+      "type": "土地の種類:",
+      "status": "ステータス:"
     },
     "result": {
       "totalCost": "総コスト：",
@@ -340,6 +371,15 @@
         "high": "高コスト",
         "custom": "カスタム"
       }
+    },
+    "form": {
+      "required_field": "続行するにはこのフィールドが必要です",
+      "budget_description": "土地を含む総プロジェクト予算",
+      "address_description": "土地の完全な所在地",
+      "type_description": "土地のカテゴリを選択",
+      "status_description": "土地の現在の状態",
+      "surface_description": "土地の総面積（平方メートル）",
+      "usableSurface_description": "建築可能な面積"
     }
   }
 }
