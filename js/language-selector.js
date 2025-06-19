@@ -48,6 +48,8 @@ export function initLanguageSelector(options = {}) {
     return;
   }
   
+  console.log('[language-selector] Initializing language selector');
+  
   // Renderizar el selector
   renderSelector(container, settings);
   
@@ -56,14 +58,33 @@ export function initLanguageSelector(options = {}) {
   
   // Actualizar el selector cuando cambie el idioma
   document.addEventListener('i18n:languageChanged', (e) => {
-    updateSelectedLanguage(container, e.detail.language, settings);
+    console.log(`[language-selector] Language changed event received with language: ${e.detail?.newLanguage}`);
+    updateSelectedLanguage(container, e.detail?.newLanguage || window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale'), settings);
   });
+  
+  // Also handle the i18n:ready event
+  document.addEventListener('i18n:ready', (e) => {
+    console.log('[language-selector] i18n:ready event received');
+    const currentLang = window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'es';
+    updateSelectedLanguage(container, currentLang, settings);
+  });
+  
+  // Force update the selected language on initialization
+  setTimeout(() => {
+    const currentLang = window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'es';
+    console.log(`[language-selector] Force updating language selector to: ${currentLang}`);
+    updateSelectedLanguage(container, currentLang, settings);
+  }, 500);
   
   return {
     getContainer: () => container,
     updateLanguages: (languages) => {
       settings.languages = languages;
       renderSelector(container, settings);
+    },
+    refreshLanguage: () => {
+      const currentLang = window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'es';
+      updateSelectedLanguage(container, currentLang, settings);
     }
   };
 }
@@ -75,7 +96,12 @@ export function initLanguageSelector(options = {}) {
  */
 function renderSelector(container, settings) {
   // Determinar el idioma actual
-  const currentLang = localStorage.getItem('beyondLocale') || document.documentElement.lang || 'es';
+  const currentLang = window.i18n?.getCurrentLanguage?.() || 
+                     localStorage.getItem('beyondLocale') || 
+                     document.documentElement.lang || 
+                     'es';
+  
+  console.log(`[language-selector] Rendering selector with current language: ${currentLang}`);
   
   // Encontrar los datos del idioma actual
   const currentLanguage = settings.languages.find(lang => lang.code === currentLang) || 
@@ -85,7 +111,7 @@ function renderSelector(container, settings) {
   container.innerHTML = `
     <button 
       id="language-dropdown-toggle"
-      class="flex items-center gap-2 px-3 py-2 rounded bg-accent-50 dark:bg-primary-800 hover:bg-accent-100 dark:hover:bg-primary-700 transition-all focus:outline-none focus:ring-2 focus:ring-primary-700"
+      class="flex items-center gap-2 px-3 py-2 rounded bg-gray-50 dark:bg-primary-800 hover:bg-gray-100 dark:hover:bg-primary-700 transition-all focus:outline-none focus:ring-2 focus:ring-primary-700"
       aria-haspopup="true"
       aria-expanded="false"
       aria-controls="language-dropdown"
@@ -101,7 +127,7 @@ function renderSelector(container, settings) {
     </button>
     <div 
       id="language-dropdown"
-      class="absolute z-50 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-zinc-800 ring-1 ring-black ring-opacity-5 focus:outline-none p-2 space-y-1 hidden"
+      class="absolute z-50 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-primary-900 ring-1 ring-black ring-opacity-5 focus:outline-none p-2 space-y-1 hidden"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="language-dropdown-toggle"
@@ -111,7 +137,7 @@ function renderSelector(container, settings) {
           <li>
             <button 
               type="button"
-              class="w-full text-left px-4 py-2 text-sm rounded-md flex items-center gap-2 ${lang.code === currentLang ? 'bg-accent-100 dark:bg-primary-800 font-medium' : 'hover:bg-accent-50 dark:hover:bg-primary-900'}"
+              class="w-full text-left px-4 py-2 text-sm rounded-md flex items-center gap-2 ${lang.code === currentLang ? 'bg-primary-100 dark:bg-primary-800 font-medium' : 'hover:bg-gray-50 dark:hover:bg-primary-800'}"
               role="menuitem"
               data-lang="${lang.code}"
               aria-current="${lang.code === currentLang ? 'true' : 'false'}"
@@ -151,11 +177,97 @@ function setupEventListeners(container, settings) {
   });
   
   // Cambiar de idioma al hacer clic en una opción
-  dropdown.addEventListener('click', (e) => {
+  dropdown.addEventListener('click', async (e) => {
     const langButton = e.target.closest('[data-lang]');
     if (langButton) {
       const langCode = langButton.getAttribute('data-lang');
-      changeLanguage(langCode);
+      console.log(`[language-selector] Language change requested to: ${langCode}`);
+      
+      try {
+        // Show loading indicator
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.id = 'language-loading-indicator';
+        loadingIndicator.className = 'fixed top-0 left-0 w-full h-1 bg-primary-700 dark:bg-primary-500';
+        loadingIndicator.style.cssText = 'z-index: 9999; animation: language-loading 2s infinite linear;';
+        document.body.appendChild(loadingIndicator);
+        
+        // Add animation style if not exists
+        if (!document.querySelector('#language-loading-style')) {
+          const style = document.createElement('style');
+          style.id = 'language-loading-style';
+          style.textContent = `
+            @keyframes language-loading {
+              0% { width: 0; }
+              50% { width: 50%; }
+              100% { width: 100%; }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        // Attempt to change language
+        await changeLanguage(langCode);
+        
+        // Ensure translations are loaded
+        if (window.preloadAllTranslations) {
+          console.log('[language-selector] Calling preloadAllTranslations');
+          await window.preloadAllTranslations();
+        }
+        
+        // Manually trigger translation updates
+        if (window.updateCalculatorTranslations) {
+          console.log('[language-selector] Calling updateCalculatorTranslations');
+          window.updateCalculatorTranslations();
+        }
+        
+        // Trigger direct fixes if available
+        if (window.directFixTranslations) {
+          console.log('[language-selector] Calling directFixTranslations');
+          window.directFixTranslations();
+        }
+        
+        // Update Alpine store if available
+        if (window.Alpine?.store) {
+          try {
+            const i18nStore = window.Alpine.store('i18n');
+            if (i18nStore) {
+              i18nStore.revision = (i18nStore.revision || 0) + 1;
+              i18nStore.timestamp = Date.now();
+              console.log('[language-selector] Updated Alpine i18n store');
+            }
+          } catch (e) {
+            console.warn('[language-selector] Error updating Alpine store:', e);
+          }
+        }
+        
+        // Dispatch custom event for other components
+        const event = new CustomEvent('language:changed', {
+          detail: { langCode, timestamp: Date.now() }
+        });
+        document.dispatchEvent(event);
+        
+        // Remove loading indicator after a delay
+        setTimeout(() => {
+          const indicator = document.getElementById('language-loading-indicator');
+          if (indicator) {
+            indicator.style.width = '100%';
+            indicator.style.opacity = '0';
+            setTimeout(() => indicator.remove(), 300);
+          }
+        }, 500);
+      } catch (error) {
+        console.error('[language-selector] Error changing language:', error);
+        
+        // Fallback: store the selection in localStorage and reload the page with the lang parameter
+        try {
+          localStorage.setItem('beyondLocale', langCode);
+          const url = new URL(window.location.href);
+          url.searchParams.set('lang', langCode);
+          window.location.href = url.toString();
+        } catch (e) {
+          console.error('[language-selector] Fallback failed:', e);
+        }
+      }
       
       // Cerrar el menú desplegable
       toggle.setAttribute('aria-expanded', 'false');
@@ -213,23 +325,35 @@ function updateSelectedLanguage(container, langCode, settings) {
   
   if (!toggle || !languageItems.length) return;
   
+  console.log(`[language-selector] Updating selected language to: ${langCode}`);
+  
   // Encontrar los datos del idioma seleccionado
   const selectedLang = settings.languages.find(lang => lang.code === langCode);
-  if (!selectedLang) return;
+  if (!selectedLang) {
+    console.warn(`[language-selector] Language ${langCode} not found in settings`);
+    return;
+  }
   
   // Actualizar el botón principal
   const toggleImg = toggle.querySelector('img');
   const toggleText = toggle.querySelector('span.sm\\:inline');
   
-  if (toggleImg) toggleImg.src = `${settings.flagsPath}${selectedLang.flag}`;
-  if (toggleImg) toggleImg.alt = selectedLang.name;
-  if (toggleText) toggleText.textContent = selectedLang.name;
+  if (toggleImg) {
+    toggleImg.src = `${settings.flagsPath}${selectedLang.flag}`;
+    toggleImg.alt = `Flag of ${selectedLang.name} (${selectedLang.code})`;
+    console.log(`[language-selector] Updated flag image to: ${toggleImg.src}`);
+  }
+  
+  if (toggleText) {
+    toggleText.textContent = selectedLang.name;
+    console.log(`[language-selector] Updated language name to: ${selectedLang.name}`);
+  }
   
   // Actualizar los elementos del menú
   languageItems.forEach(item => {
     const isSelected = item.getAttribute('data-lang') === langCode;
     item.setAttribute('aria-current', isSelected ? 'true' : 'false');
-    item.classList.toggle('bg-accent-100', isSelected);
+    item.classList.toggle('bg-primary-100', isSelected);
     item.classList.toggle('dark:bg-primary-800', isSelected);
     item.classList.toggle('font-medium', isSelected);
   });
