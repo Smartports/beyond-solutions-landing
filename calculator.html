@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="light dark">
   <title>Beyond Solutions – Fibra 2025</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E🏗️%3C/text%3E%3C/svg%3E" type="image/svg+xml">
   <meta name="description" content="Calculadora de presupuesto inmobiliario Beyond Solutions.">
-  <meta name="theme-color" content="#243f8f">
+  <meta name="theme-color" content="#334b4e">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="format-detection" content="telephone=no">
@@ -20,29 +20,320 @@
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" as="style">
   <link rel="preload" href="https://cdn.tailwindcss.com/3.4.16" as="script">
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" as="script">
+  
+  <!-- Early i18n initialization to prevent null language warnings -->
+  <script type="module">
+    // Create a global variable to track i18n initialization
+    window.i18nInitializing = true;
+    window.i18nFullyInitialized = false;
+    
+    // Pre-initialize with default language
+    try {
+      const storedLang = localStorage.getItem('beyondLocale') || 'es';
+      console.log('[early-init] Pre-initializing i18n with language:', storedLang);
+      
+      // Set up placeholders until real i18n loads
+      if (!window.i18n) {
+        window.i18n = {
+          t: function(key, params, defaultValue) { 
+            // Silent fallback during initialization
+            return defaultValue || key; 
+          },
+          getCurrentLanguage: function() { 
+            return storedLang; 
+          },
+          changeLanguage: function(lang) { 
+            console.log(`[early-init] Language change requested to ${lang} (will be handled by real i18n)`); 
+            return Promise.resolve(lang);
+          }
+        };
+      }
+      
+      // Set up a dummy t function that will be replaced by the real one
+      if (!window.t) {
+        window.t = function(key, params, defaultValue) {
+          if (window.i18n && typeof window.i18n.t === 'function') {
+            return window.i18n.t(key, params, defaultValue);
+          }
+          // Silent fallback during initialization
+          return defaultValue || key;
+        };
+      }
+    } catch (e) {
+      console.error('[early-init] Error pre-initializing i18n:', e);
+    }
+  </script>
+  
   <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-  <script>tailwind.config={theme:{extend:{colors:{primary:{950:"#121f45",900:"#192c64",800:"#203679",700:"#243f8f",600:"#2f51b5"},accent:{500:"#8390be",300:"#bdc5dd",100:"#e9ebf3",50:"#f4f6fa"}},fontFamily:{display:['\"Open Sauce One\"',"sans-serif"],body:['\"Open Sauce One\"',"sans-serif"],aux:["Muli","sans-serif"]},boxShadow:{soft:"0 4px 20px -2px rgba(0, 0, 0, 0.06)","soft-lg":"0 10px 30px -3px rgba(0, 0, 0, 0.1)"},transitionProperty:{height:"height",spacing:"margin, padding"}}},darkMode:"class"};</script>
+  <script>tailwind.config={theme:{extend:{colors:{primary:{950:"#192525",900:"#243b44",800:"#334b4e",700:"#54676d",600:"#68767c"},accent:{500:"#8c8f92",300:"#adb3b7",200:"#b1aaa0",100:"#b9c6cd",50:"#bac4c3"}},fontFamily:{display:['\"Open Sauce One\"',"sans-serif"],body:['\"Open Sauce One\"',"sans-serif"],aux:["Muli","sans-serif"]},boxShadow:{soft:"0 4px 20px -2px rgba(0, 0, 0, 0.06)","soft-lg":"0 10px 30px -3px rgba(0, 0, 0, 0.1)"},transitionProperty:{height:"height",spacing:"margin, padding"}}},darkMode:"class"};</script>
 
+  <link rel="stylesheet" href="./css/colors.css">
   <link rel="stylesheet" href="./css/language-selector.css">
   <link rel="stylesheet" href="./css/rtl.css" media="print" onload="this.media='all'">
   <script type="module" src="./js/main.js"></script>
+
+  <!-- Translation fix script -->
+  <script>
+    // Emergency translation fix for calculator
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('[emergency-fix] Setting up translation fix');
+      
+      // Function to directly fix translations when language changes
+      window.directFixTranslations = function() {
+        console.log('[emergency-fix] Applying direct translation fixes');
+        
+        // Get current language
+        const currentLang = window.i18n?.getCurrentLanguage?.() || 
+                          localStorage.getItem('beyondLocale') || 
+                          'es';
+        
+        console.log(`[emergency-fix] Current language: ${currentLang}`);
+        
+        // Direct translation function that doesn't rely on i18n system
+        function translateFn(key, defaultValue) {
+          try {
+            // Try using window.t first
+            if (typeof window.t === 'function') {
+              return window.t(key, {}, defaultValue);
+            }
+            
+            // Fallback to direct translation
+            return defaultValue;
+          } catch (e) {
+            console.warn(`[emergency-fix] Error translating ${key}:`, e);
+            return defaultValue;
+          }
+        }
+        
+        // Fix critical labels for step 1
+        const step1Labels = {
+          'calculator.step1.scope': {
+            'es': 'Tipo de Proyecto',
+            'en': 'Project Type',
+            'fr': 'Type de Projet',
+            'de': 'Projekttyp',
+            'it': 'Tipo di Progetto',
+            'pt': 'Tipo de Projeto',
+            'zh': '项目类型',
+            'ja': 'プロジェクトタイプ',
+            'ko': '프로젝트 유형',
+            'ru': 'Тип проекта',
+            'ar': 'نوع المشروع',
+            'default': 'Project Type'
+          },
+          'calculator.step1.entity': {
+            'es': 'Entidad',
+            'en': 'Entity',
+            'fr': 'Entité',
+            'de': 'Entität',
+            'it': 'Entità',
+            'pt': 'Entidade',
+            'zh': '实体',
+            'ja': 'エンティティ',
+            'ko': '엔티티',
+            'ru': 'Организация',
+            'ar': 'كيان',
+            'default': 'Entity'
+          }
+        };
+        
+        // Fix critical labels for step 2
+        const step2Labels = {
+          'calculator.step2.budget': {
+            'es': 'Presupuesto total',
+            'en': 'Total Budget',
+            'fr': 'Budget total',
+            'de': 'Gesamtbudget',
+            'it': 'Budget totale',
+            'pt': 'Orçamento total',
+            'zh': '总预算',
+            'ja': '総予算',
+            'ko': '총 예산',
+            'ru': 'Общий бюджет',
+            'ar': 'الميزانية الإجمالية',
+            'default': 'Total Budget'
+          },
+          'calculator.step2.type': {
+            'es': 'Tipo de terreno',
+            'en': 'Land Type',
+            'fr': 'Type de terrain',
+            'de': 'Grundstückstyp',
+            'it': 'Tipo di terreno',
+            'pt': 'Tipo de terreno',
+            'zh': '土地类型',
+            'ja': '土地タイプ',
+            'ko': '토지 유형',
+            'ru': 'Тип земельного участка',
+            'ar': 'نوع الأرض',
+            'default': 'Land Type'
+          },
+          'calculator.step2.status': {
+            'es': 'Estatus',
+            'en': 'Status',
+            'fr': 'Statut',
+            'de': 'Status',
+            'it': 'Stato',
+            'pt': 'Status',
+            'zh': '状态',
+            'ja': 'ステータス',
+            'ko': '상태',
+            'ru': 'Статус',
+            'ar': 'الحالة',
+            'default': 'Status'
+          },
+          'calculator.step2.characteristics': {
+            'es': 'Características',
+            'en': 'Characteristics',
+            'fr': 'Caractéristiques',
+            'de': 'Eigenschaften',
+            'it': 'Caratteristiche',
+            'pt': 'Características',
+            'zh': '特征',
+            'ja': '特性',
+            'ko': '특성',
+            'ru': 'Характеристики',
+            'ar': 'خصائص',
+            'default': 'Characteristics'
+          }
+        };
+        
+        // Apply translations to step 1 labels
+        Object.entries(step1Labels).forEach(([key, translations]) => {
+          const value = translations[currentLang] || translations['default'];
+          const label = document.querySelector(`label[data-i18n="${key}"]`);
+          if (label) {
+            label.textContent = translateFn(key, value);
+          }
+        });
+        
+        // Apply translations to step 2 labels
+        Object.entries(step2Labels).forEach(([key, translations]) => {
+          const value = translations[currentLang] || translations['default'];
+          const label = document.querySelector(`label[data-i18n="${key}"]`);
+          if (label) {
+            label.textContent = translateFn(key, value);
+          }
+        });
+        
+        // Fix summary section labels
+        const summaryLabels = [
+          'calculator.summary.scope',
+          'calculator.summary.entity',
+          'calculator.summary.budget',
+          'calculator.summary.address',
+          'calculator.summary.surface',
+          'calculator.summary.usableSurface',
+          'calculator.summary.use',
+          'calculator.summary.type',
+          'calculator.summary.status'
+        ];
+        
+        summaryLabels.forEach(key => {
+          const label = document.querySelector(`[data-i18n="${key}"]`);
+          if (label) {
+            // Try to get translation from step labels first
+            let value;
+            if (key.includes('scope')) {
+              value = step1Labels['calculator.step1.scope']?.[currentLang] || step1Labels['calculator.step1.scope']?.default;
+            } else if (key.includes('entity')) {
+              value = step1Labels['calculator.step1.entity']?.[currentLang] || step1Labels['calculator.step1.entity']?.default;
+            } else if (key.includes('budget')) {
+              value = step2Labels['calculator.step2.budget']?.[currentLang] || step2Labels['calculator.step2.budget']?.default;
+            } else if (key.includes('type')) {
+              value = step2Labels['calculator.step2.type']?.[currentLang] || step2Labels['calculator.step2.type']?.default;
+            } else if (key.includes('status')) {
+              value = step2Labels['calculator.step2.status']?.[currentLang] || step2Labels['calculator.step2.status']?.default;
+            }
+            
+            if (value) {
+              label.textContent = translateFn(key, value);
+            }
+          }
+        });
+      }
+      
+      // Apply fixes when language changes
+      document.addEventListener('i18n:languageChanged', function() {
+        console.log('[emergency-fix] Language changed, applying fixes');
+        setTimeout(directFixTranslations, 300);
+      });
+      
+      // Also apply fixes on page load
+      setTimeout(directFixTranslations, 1000);
+      
+      // And when Alpine initializes
+      document.addEventListener('alpine:initialized', function() {
+        setTimeout(directFixTranslations, 500);
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      // Create i18n store if it doesn't exist
+      Alpine.store('i18n', {
+        ready: false,
+        revision: 0,
+        timestamp: Date.now()
+      });
+      
+      // Add global t() function for Alpine.js
+      Alpine.magic('t', () => {
+        return (key, defaultValue) => {
+          // If passed a default value directly, use it
+          if (typeof defaultValue === 'string') {
+            return window.t ? window.t(key, {}, defaultValue) : defaultValue;
+          }
+          
+          // Otherwise, look for an i18n context from the HTML element
+          let node = document.querySelector(`[data-i18n="${key}"]`);
+          const elementDefault = node?.textContent || key;
+          
+          // Get translation using available function
+          let translation;
+          if (window.i18n && typeof window.i18n.t === 'function') {
+            translation = window.i18n.t(key, {}, elementDefault);
+          } else if (window.t) {
+            translation = window.t(key, {}, elementDefault);
+          } else {
+            translation = elementDefault;
+          }
+          
+          // If translation is the same as the key, it might mean translation failed
+          if (translation === key && key.includes('.')) {
+            // Try to extract a meaningful fallback from the key
+            const lastPart = key.split('.').pop();
+            if (lastPart) {
+              // Capitalize first letter and replace underscores/hyphens with spaces
+              const fallback = lastPart.charAt(0).toUpperCase() + 
+                              lastPart.slice(1).replace(/[_-]/g, ' ');
+              return fallback;
+            }
+          }
+          
+          return translation;
+        };
+      });
+    });
+  </script>
+
   <style>
     /* Mejoras de accesibilidad */
     .form-input:focus,
     .form-select:focus {
-      outline: 2px solid #2f51b5;
-      box-shadow: 0 0 0 2px rgba(47, 81, 181, 0.25);
+      outline: 2px solid #334b4e;
+      box-shadow: 0 0 0 2px rgba(51, 75, 78, 0.25);
     }
     
     .dark .form-input:focus,
     .dark .form-select:focus {
-      outline: 2px solid #8390be;
-      box-shadow: 0 0 0 2px rgba(131, 144, 190, 0.25);
+      outline: 2px solid #adb3b7;
+      box-shadow: 0 0 0 2px rgba(173, 179, 183, 0.25);
     }
     
     /* Mejoras de contraste */
-    .dark .text-zinc-200 { color: #e2e8f0; } /* Más claro que el original */
-    .dark .text-zinc-400 { color: #cbd5e1; } /* Más claro que el original */
+    .dark .text-zinc-200 { color: #cccfcf; } /* Texto claro para dark mode */
+    .dark .text-zinc-400 { color: #b9c6cd; } /* Texto secundario para dark mode */
     
     /* Indicadores de error más accesibles */
     .error-message {
@@ -62,12 +353,12 @@
     
     /* Focus visible mejorado */
     *:focus-visible {
-      outline: 2px solid #2f51b5;
+      outline: 2px solid #334b4e;
       outline-offset: 2px;
     }
     
     .dark *:focus-visible {
-      outline: 2px solid #8390be;
+      outline: 2px solid #adb3b7;
     }
 
     /* Mejor contraste para tooltips */
@@ -235,18 +526,18 @@
     
     .form-input:focus,
     .form-select:focus {
-      border-color: #2f51b5;
-      outline: 2px solid #2f51b5;
+      border-color: #334b4e;
+      outline: 2px solid #334b4e;
       outline-offset: 0px;
-      box-shadow: 0 0 0 2px rgba(47, 81, 181, 0.25);
+      box-shadow: 0 0 0 2px rgba(51, 75, 78, 0.25);
     }
     
     .dark .form-input:focus,
     .dark .form-select:focus {
-      border-color: #8390be;
-      outline: 2px solid #8390be;
+      border-color: #adb3b7;
+      outline: 2px solid #adb3b7;
       outline-offset: 0px;
-      box-shadow: 0 0 0 2px rgba(131, 144, 190, 0.25);
+      box-shadow: 0 0 0 2px rgba(173, 179, 183, 0.25);
     }
     
     /* Mejorar visualización de inputs con tipo number */
@@ -322,8 +613,48 @@
   <script type="module" defer src="./js/calculator.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script>
-    // Registra el script para cargar AOS de manera más eficiente
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('[calculator.html] DOM content loaded, initializing components');
+      console.log('[calculator.html] Current i18n state:', {
+        i18nAvailable: typeof window.i18n !== 'undefined',
+        tFunctionAvailable: typeof window.t === 'function',
+        currentLanguage: window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'unknown',
+        documentReady: document.readyState
+      });
+      
+      // Ensure we have a default language if none is set yet
+      const ensureLanguage = () => {
+        // Check if i18n is available but has a null language
+        if (window.i18n && window.i18n.getCurrentLanguage && !window.i18n.getCurrentLanguage()) {
+          // Try to get language from localStorage
+          let lang = localStorage.getItem('beyondLocale');
+          
+          if (!lang) {
+            // Try to get from URL
+            const urlLang = new URLSearchParams(window.location.search).get('lang');
+            if (urlLang) lang = urlLang;
+          }
+          
+          if (!lang) {
+            // Use browser language or default to 'es'
+            lang = navigator.language.split('-')[0] || 'es';
+          }
+          
+          console.log(`[calculator.html] Setting default language: ${lang}`);
+          
+          // Try to change language if function is available
+          if (window.i18n.changeLanguage) {
+            window.i18n.changeLanguage(lang)
+              .then(() => console.log(`[calculator.html] Language set to ${lang}`))
+              .catch(e => console.error(`[calculator.html] Error setting language: ${e}`));
+          }
+        }
+      };
+      
+      // Call immediately and again after a delay to ensure we catch late initialization
+      ensureLanguage();
+      setTimeout(ensureLanguage, 500);
+      
       // Verificar preferencia de movimiento reducido
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       
@@ -341,38 +672,108 @@
       }
       
       // Configurar calculadora
-      console.log('DOM content loaded in calculator.html');
+      console.log('[calculator.html] Setting up calculator');
       
       // Initialize language selector for calculator.html
       if (typeof window.initLanguageSelector === 'function') {
-        console.log('Initializing language selector in calculator.html');
-        window.initLanguageSelector();
+        console.log('[calculator.html] Initializing language selector');
+        try {
+          window.initLanguageSelector();
+          console.log('[calculator.html] Language selector initialized successfully');
+        } catch (e) {
+          console.error('[calculator.html] Error initializing language selector:', e);
+        }
       } else {
-        console.warn('Language selector initialization function not available');
+        console.warn('[calculator.html] Language selector initialization function not available');
+        // Schedule retry
+        setTimeout(() => {
+          if (typeof window.initLanguageSelector === 'function') {
+            console.log('[calculator.html] Retry initializing language selector');
+            try {
+              window.initLanguageSelector();
+            } catch (e) {
+              console.error('[calculator.html] Error in retry initialization:', e);
+            }
+          }
+        }, 1000);
       }
       
-      // Make sure Alpine has access to t() function
+      // Make sure Alpine has access to t() function and set fallback if needed
       if (!window.t) {
-        console.error('window.t is not defined!');
-        window.t = function(key) {
-          console.log(`Fallback t() called with key: ${key}`);
-          return key;
+        console.error('[calculator.html] window.t is not defined!');
+        
+        // Provide fallback for debugging purposes
+        window.t = function(key, params = {}, defaultValue = '') {
+          console.warn(`[calculator.html] Fallback t() called with key: ${key} (i18n not initialized)`);
+          // Try to use Alpine's store if available
+          const alpineStore = window.Alpine?.store?.('i18n');
+          if (alpineStore) alpineStore.timestamp = Date.now(); // Force reactivity update
+          return defaultValue || key;
         };
+      } else {
+        console.log('[calculator.html] window.t function is available');
       }
       
       // Wait for Alpine and i18n to be ready
+      console.log('[calculator.html] Setting up delay for i18n:ready event');
       setTimeout(() => {
-        console.log('Dispatching i18n:ready event from calculator.html');
-        document.dispatchEvent(new CustomEvent('i18n:ready'));
+        console.log('[calculator.html] Dispatching i18n:ready event', {
+          i18nAvailable: typeof window.i18n !== 'undefined',
+          tFunctionAvailable: typeof window.t === 'function',
+          currentLanguage: window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'unknown'
+        });
+        
+        // Final language check before dispatching ready event
+        ensureLanguage();
+        
+        document.dispatchEvent(new CustomEvent('i18n:ready', {
+          detail: {
+            i18nAvailable: typeof window.i18n !== 'undefined',
+            currentLanguage: window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'unknown'
+          }
+        }));
         
         // Force update of select options
         if (typeof window.updateCalculatorTranslations === 'function') {
-          console.log('Calling updateCalculatorTranslations()');
-          window.updateCalculatorTranslations();
+          console.log('[calculator.html] Calling updateCalculatorTranslations()');
+          try {
+            window.updateCalculatorTranslations();
+            console.log('[calculator.html] Calculator translations updated');
+          } catch (e) {
+            console.error('[calculator.html] Error updating calculator translations:', e);
+          }
         } else {
-          console.log('updateCalculatorTranslations not available');
+          console.log('[calculator.html] updateCalculatorTranslations not available');
         }
       }, 1000);
+      
+      // Add special event listener to handle critical translations after language changes
+      document.addEventListener('i18n:languageChanged', () => {
+        console.log('[calculator.html] Language changed event detected');
+        
+        // Direct access to forceUpdateCriticalTranslations if Alpine component exists
+        setTimeout(() => {
+          if (window.Alpine) {
+            try {
+              // Get calculator component instance if available
+              const calculatorForm = document.querySelector('[x-data="calculatorForm"]')?.__x?.data;
+              
+              if (calculatorForm && typeof calculatorForm.forceUpdateCriticalTranslations === 'function') {
+                console.log('[calculator.html] Directly calling forceUpdateCriticalTranslations()');
+                calculatorForm.forceUpdateCriticalTranslations();
+                
+                // Apply multiple times with delays to ensure all elements get translated
+                setTimeout(() => {
+                  calculatorForm.forceUpdateCriticalTranslations();
+                  setTimeout(() => calculatorForm.forceUpdateCriticalTranslations(), 300);
+                }, 150);
+              }
+            } catch (e) {
+              console.error('[calculator.html] Error applying direct translations:', e);
+            }
+          }
+        }, 50);
+      });
     });
   </script>
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
@@ -406,10 +807,10 @@
   <style>
     [x-cloak]{display:none!important}
     .step-indicator[aria-current="step"]{font-weight:700;color:var(--primary-color)}
-    .step-indicator[aria-selected="false"]>span{color:rgb(36 63 143 / var(--tw-text-opacity, 1))}
-    .dark .step-indicator[aria-selected="false"]>span{color:rgb(233 235 243 / var(--tw-text-opacity, 1))}
+    .step-indicator[aria-selected="false"]>span{color:rgb(51 75 78 / var(--tw-text-opacity, 1))}
+    .dark .step-indicator[aria-selected="false"]>span{color:rgb(186 196 195 / var(--tw-text-opacity, 1))}
     @keyframes stepFade {
-      0% { box-shadow: 0 0 0 0 #243f8f33; }
+      0% { box-shadow: 0 0 0 0 #334b4e33; }
       100% { box-shadow: 0 0 0 8px transparent; }
     }
     .animate-step {
@@ -421,17 +822,32 @@
       // Add global t() function for Alpine.js
       Alpine.magic('t', () => {
         return (key) => {
-          console.log(`Alpine.magic t() called with key: ${key}`);
+          console.log(`Alpine.magic t() called with key: "${key}"`);
+          
+          // Get language for debugging
+          const currentLanguage = window.i18n?.getCurrentLanguage?.() || 
+                                localStorage.getItem('beyondLocale') || 
+                                'unknown';
           
           let result = key;
           if (window.i18n && typeof window.i18n.t === 'function') {
-            result = window.i18n.t(key);
-            console.log(`i18n.t result: ${result}`);
+            try {
+              result = window.i18n.t(key);
+              console.log(`i18n.t result for [${key}]: "${result}" (language: ${currentLanguage})`);
+            } catch (error) {
+              console.error(`Error in i18n.t() for key "${key}"`, error);
+              result = key;
+            }
           } else if (window.t && typeof window.t === 'function') {
-            result = window.t(key);
-            console.log(`window.t result: ${result}`);
+            try {
+              result = window.t(key);
+              console.log(`window.t result for [${key}]: "${result}" (language: ${currentLanguage})`);
+            } catch (error) {
+              console.error(`Error in window.t() for key "${key}"`, error);
+              result = key;
+            }
           } else {
-            console.warn(`No translation function available for key: ${key}`);
+            console.warn(`No translation function available for key: "${key}" (language: ${currentLanguage})`);
           }
           
           return result;
@@ -441,6 +857,12 @@
       // Ensure Alpine.js has access to the translations
       document.addEventListener('i18n:ready', () => {
         console.log('i18n:ready event received in Alpine.js');
+        console.log('Current language state:', {
+          currentLang: window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'unknown',
+          i18nAvailable: !!window.i18n,
+          tFunctionAvailable: typeof window.i18n?.t === 'function' || typeof window.t === 'function',
+          translationKeys: window.i18n ? 'available' : 'unavailable'
+        });
         
         // Force Alpine.js to update all components
         Alpine.store('i18n', {
@@ -452,7 +874,11 @@
       
       // Listen for language changes to update Alpine store
       const updateI18nStore = () => {
-        console.log('Language changed, updating Alpine i18n store');
+        console.log('Language changed, updating Alpine i18n store', {
+          language: window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'unknown',
+          timestamp: new Date().toISOString()
+        });
+        
         Alpine.store('i18n', {
           ready: true,
           revision: (Alpine.store('i18n').revision || 0) + 1,
@@ -476,6 +902,7 @@
           { id: 'contacto', label: 'Contacto', href: 'index.html#contacto' }
         ],
         active: 'calculadora',
+        i18nReady: false,
         init() {
           this.applyTheme();
           // IntersectionObserver optimizado para seguimiento de secciones (solo relevante en index, pero no afecta aquí)
@@ -485,36 +912,61 @@
           // Suscribirse al evento global de cambio de idioma
           window.addEventListener('i18n:languageChanged', this.handleLanguageChange.bind(this));
           document.addEventListener('i18n:languageChanged', this.handleLanguageChange.bind(this));
-          document.addEventListener('i18n:ready', this.handleLanguageChange.bind(this));
-          this.updateLabelsImmediate();
-          setTimeout(() => this.updateLabelsImmediate(), 500);
+          
+          // Wait for i18n to be ready before updating labels
+          document.addEventListener('i18n:ready', () => {
+            console.log('[nav] i18n:ready event received, updating labels');
+            this.i18nReady = true;
+            this.updateLabelsImmediate();
+          });
+          
+          // If translations are already available, update immediately
+          if (typeof window.i18n !== 'undefined' && window.i18n.getCurrentLanguage && window.i18n.getCurrentLanguage()) {
+            console.log('[nav] i18n is already available, updating labels immediately');
+            this.i18nReady = true;
+            this.updateLabelsImmediate();
+          } else {
+            console.log('[nav] i18n not ready yet, will update labels when ready');
+            // Initialize with default labels, will update when i18n is ready
+          }
         },
         handleLanguageChange(event) {
+          console.log('[nav] Language changed, updating labels');
+          this.i18nReady = true;
           this.updateLabelsImmediate();
         },
         updateLabelsImmediate() {
-          if (typeof window.i18n !== 'undefined' && typeof window.i18n.t === 'function') {
-            this.items.forEach(item => {
-              const key = `nav.items.${item.id}`;
-              const translation = window.i18n.t(key);
-              if (translation && translation !== key) {
-                item.label = translation;
-              }
-            });
-          } else if (typeof window.t === 'function') {
-            this.items.forEach(item => {
-              const key = `nav.items.${item.id}`;
-              const translation = window.t(key);
-              if (translation && translation !== key) {
-                item.label = translation;
-              }
-            });
+          // Only attempt translations if i18n is ready
+          if (!this.i18nReady) {
+            console.log('[nav] Skipping translation update - i18n not ready yet');
+            return;
           }
+          
+          const translateFn = (typeof window.i18n !== 'undefined' && typeof window.i18n.t === 'function') 
+            ? window.i18n.t 
+            : (typeof window.t === 'function' ? window.t : null);
+          
+          if (!translateFn) {
+            console.warn('[nav] No translation function available');
+            return;
+          }
+          
+          this.items.forEach(item => {
+            const key = `nav.items.${item.id}`;
+            try {
+              const translation = translateFn(key);
+              if (translation && translation !== key) {
+                item.label = translation;
+              }
+            } catch (e) {
+              console.error(`[nav] Error translating key ${key}:`, e);
+            }
+          });
         },
         linkClass(id) {
           return this.active === id
-            ? 'text-primary-700 dark:text-accent-100 font-semibold'
-            : 'hover:text-primary-700 dark:hover:text-accent-100';
+            ? 'text-primary-800 dark:text-accent-50 font-semibold'
+            : 'hover:text-primary-800 dark:hover:text-accent-50';
         },
         toggleTheme() {
           this.theme = this.theme === 'dark' ? 'light' : 'dark';
@@ -693,7 +1145,7 @@
   <!-- Header/Nav -->
   <header x-data="nav" x-init="init()" class="fixed inset-x-0 top-0 z-50 bg-white/80 dark:bg-primary-900/80 backdrop-blur shadow-sm">
     <div class="mx-auto px-4 sm:px-6 lg:px-4 flex items-center justify-between h-16">
-      <a href="index.html#about" class="text-primary-700 dark:text-white font-bold text-lg md:text-base lg:text-lg flex-shrink-1" data-i18n-attr="aria-label:nav.items.about" data-i18n="nav.brand">Beyond&nbsp;Solutions</a>
+      <a href="index.html#about" class="text-primary-800 dark:text-white font-bold text-lg md:text-base lg:text-lg flex-shrink-1" data-i18n-attr="aria-label:nav.items.about" data-i18n="nav.brand">Beyond&nbsp;Solutions</a>
       <template x-if="$store.i18n.ready">
         <nav class="desktop-nav hidden md:flex space-x-6 overflow-hidden flex-1 justify-center" data-i18n-attr="aria-label:accessibility.navigation">
           <template x-for="item in items" :key="item.id">
@@ -712,16 +1164,20 @@
         <!-- Language Selector -->
         <div class="language-selector relative flex-shrink-0" style="min-width: 60px; min-height: 40px;"></div>
         <!-- Theme Toggle -->
-        <button @click="toggleTheme" id="toggleTheme" :aria-label="theme==='dark'?t('nav.theme.light'):t('nav.theme.dark')" data-i18n-attr="aria-label:nav.theme.light,aria-label:nav.theme.dark" class="p-2 flex items-center justify-center bg-accent-50 dark:bg-primary-800 rounded-full shadow-soft hover:shadow-soft-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-700">
+        <button @click="toggleTheme" id="toggleTheme" 
+          :aria-label="theme==='dark' 
+            ? $t('nav.theme.light', 'Cambiar a modo claro') 
+            : $t('nav.theme.dark', 'Cambiar a modo oscuro')" 
+          class="p-2 flex items-center justify-center bg-accent-50 dark:bg-primary-800 rounded-full shadow-soft hover:shadow-soft-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-800">
           <template x-if="theme==='dark'">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-accent-100" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.752 15.002A9.718 9.718 0 0112.003 22 9.996 9.996 0 012 12C2 6.486 6.486 2 12.003 2c.499 0 .991.036 1.474.106a.75.75 0 01.223 1.393A7.496 7.496 0 0013.5 12c0 4.136 3.364 7.5 7.5 7.5.589 0 1.167-.06 1.725-.178a.75.75 0 01.997.78z"/></svg>
           </template>
           <template x-if="theme==='light'">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-primary-700" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-primary-800" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
           </template>
         </button>
         <!-- Mobile Menu Button -->
-        <button @click="open=!open" class="mobile-menu-button text-primary-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-700 rounded p-1 md:hidden" aria-expanded="false" :aria-expanded="open" aria-controls="mobile-menu" data-i18n-attr="aria-label:nav.menu.open">
+        <button @click="open=!open" class="mobile-menu-button text-primary-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-800 rounded p-1 md:hidden" aria-expanded="false" :aria-expanded="open" aria-controls="mobile-menu" data-i18n-attr="aria-label:nav.menu.open">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
@@ -745,21 +1201,38 @@
   </header>
 
   <main class="pt-24 md:pt-28 pb-16 bg-accent-100 dark:bg-zinc-800 min-h-screen">
-    <div x-data="calculatorForm" x-effect="$watch('currentStep', () => $nextTick(() => updateAllTranslations()))"
+                <div x-data="calculatorForm" 
+         x-init="$watch('currentStep', () => $nextTick(() => { updateAllTranslations(); forceUpdateCriticalTranslations(); })); 
+                $watch('$store.i18n.revision', () => { 
+                  console.log('i18n store revision changed, updating translations'); 
+                  updateAllTranslations(); 
+                  forceUpdateCriticalTranslations(); 
+                })"
+         @i18n:languageChanged.window="() => { 
+             console.log('Language changed event caught in calculator'); 
+             // Call the language change handler which applies multiple updates with delays
+             if (typeof languageChangedHandler === 'function') {
+               languageChangedHandler();
+             } else {
+               updateAllTranslations(); 
+               forceUpdateCriticalTranslations();
+             }
+          }"
+      >
       <div role="region" aria-label="Formulario de calculadora inmobiliaria" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8">
         <!-- Main Calculator Form -->
         <template x-if="$store.i18n.ready">
           <section class="flex-1 calculator-container z-1" aria-labelledby="calculator-title">
-            <h1 id="calculator-title" class="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-primary-700 dark:text-accent-100" data-i18n="calculator.title">Calculadora de Presupuesto Inmobiliario</h1>
+            <h1 id="calculator-title" class="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-primary-800 dark:text-accent-50" data-i18n="calculator.title">Calculadora de Presupuesto Inmobiliario</h1>
             <p class="mb-8 text-lg md:text-xl text-zinc-700 dark:text-zinc-200" data-i18n="calculator.intro">Sigue los pasos para estimar el presupuesto, márgenes y utilidad de tu proyecto inmobiliario.</p>
             <!-- Stepper Indicator -->
             <nav class="flex items-center gap-4 mb-8" aria-label="Progreso de la calculadora">
               <template x-for="(step, idx) in steps" :key="step.id">
                 <button type="button" 
-                  class="step-indicator flex items-center gap-2 px-3 py-2 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800" 
+                  class="step-indicator flex items-center gap-2 px-3 py-2 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800" 
                   :class="{
-                    'bg-primary-700 text-white': currentStep===idx, 
-                    'bg-accent-50 dark:bg-primary-800 text-primary-700 dark:text-accent-100 hover:bg-accent-100 dark:hover:bg-primary-700': currentStep!==idx
+                    'bg-primary-800 text-white': currentStep===idx, 
+                    'bg-accent-50 dark:bg-primary-800 text-primary-800 dark:text-accent-50 hover:bg-accent-100 dark:hover:bg-primary-700': currentStep!==idx
                   }" 
                   :aria-current="currentStep===idx ? 'step' : false" 
                   @click="goToStep(idx)"
@@ -785,7 +1258,7 @@
                       <option value="inversion" data-i18n="calculator.values.scope.inversion">Inversión</option>
                     </select>
                     <p x-show="errors.scope" id="scope-error" class="mt-1 error-message text-sm" x-text="errors.scope" role="alert" aria-live="assertive"></p>
-                    <p class="mt-1 text-xs form-input-info" id="scope-description">Este campo es obligatorio para continuar</p>
+                    <p class="mt-1 text-xs form-input-info" id="scope-description" data-i18n="calculator.form.required_field">Este campo es obligatorio para continuar</p>
                   </div>
                   <div class="mb-4">
                     <label class="block mb-2 font-semibold form-label" for="entity" data-i18n="calculator.step1.entity">Entidad</label>
@@ -795,11 +1268,11 @@
                       <option value="b2c" data-i18n="calculator.values.entity.b2c">B2C</option>
                     </select>
                     <p x-show="errors.entity" id="entity-error" class="mt-1 error-message text-sm" x-text="errors.entity" role="alert" aria-live="assertive"></p>
-                    <p class="mt-1 text-xs form-input-info" id="entity-description">Este campo es obligatorio para continuar</p>
+                    <p class="mt-1 text-xs form-input-info" id="entity-description" data-i18n="calculator.form.required_field">Este campo es obligatorio para continuar</p>
                   </div>
                   <!-- Actualizar botón de navegación con clases responsivas -->
                   <div class="flex justify-end mt-8">
-                    <button type="button" class="px-6 py-3 rounded-full bg-primary-700 text-white font-semibold hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 touchable-element btn-mobile-friendly sm:w-auto" @click="nextStep" :disabled="!form.scope || !form.entity" :class="{'opacity-50 cursor-not-allowed': !form.scope || !form.entity}">
+                    <button type="button" class="px-6 py-3 rounded-full bg-primary-800 text-white font-semibold hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 touchable-element btn-mobile-friendly sm:w-auto" @click="nextStep" :disabled="!form.scope || !form.entity" :class="{'opacity-50 cursor-not-allowed': !form.scope || !form.entity}">
                       <span data-i18n="calculator.next">Siguiente</span>
                       <span class="sr-only" data-i18n="calculator.step1.nav_description">al paso 2: Presupuesto y Datos del Terreno</span>
                     </button>
@@ -822,13 +1295,13 @@
                     <div x-ref="budgetTooltip" class="hidden tooltip absolute z-50 left-full ml-2 top-0 w-64 p-2 rounded shadow text-xs sm:tooltip-mobile" role="tooltip" id="budget-tooltip" data-i18n="calculator.tooltips.budgetTotal">Incluye terreno y construcción, sin regulatorio.</div>
                     <input id="budgetTotal" type="number" min="0" class="w-full rounded border px-3 py-2 form-input" x-model.number="form.budgetTotal" data-i18n-attr="aria-label:calculator.step2.budget,placeholder:calculator.step2.budget.placeholder" placeholder="$10,000,000" :aria-invalid="errors.budgetTotal ? 'true' : 'false'" aria-describedby="budgetTotal-error" />
                     <p x-show="errors.budgetTotal" id="budgetTotal-error" class="mt-1 error-message text-sm" x-text="errors.budgetTotal" role="alert" aria-live="assertive"></p>
-                    <p class="mt-1 text-xs form-input-info" id="budgetTotal-description">Presupuesto total del proyecto incluyendo terreno</p>
+                    <p class="mt-1 text-xs form-input-info" id="budgetTotal-description" data-i18n="calculator.form.budget_description">Presupuesto total del proyecto incluyendo terreno</p>
                   </div>
                   <div class="mb-4">
                     <label class="block mb-2 font-semibold form-label" for="address" data-i18n="calculator.step2.address" data-i18n-attr="placeholder:calculator.step2.address.placeholder">Dirección del terreno</label>
                     <input id="address" type="text" class="w-full rounded border px-3 py-2 form-input" x-model="form.land.address" data-i18n-attr="aria-label:calculator.step2.address,placeholder:calculator.step2.address.placeholder" placeholder="Ej: J Rousseu 3, Anzures, CDMX" :aria-invalid="errors.address ? 'true' : 'false'" aria-describedby="address-error" />
                     <p x-show="errors.address" id="address-error" class="mt-1 error-message text-sm" x-text="errors.address" role="alert" aria-live="assertive"></p>
-                    <p class="mt-1 text-xs form-input-info" id="address-description">Ubicación completa del terreno</p>
+                    <p class="mt-1 text-xs form-input-info" id="address-description" data-i18n="calculator.form.address_description">Ubicación completa del terreno</p>
                   </div>
                   <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 grid-tablet-fix">
                     <div>
@@ -840,7 +1313,7 @@
                         <option value="remate" data-i18n="calculator.values.type.remate">Remate</option>
                       </select>
                       <p x-show="errors.type" id="type-error" class="mt-1 error-message text-sm" x-text="errors.type" role="alert" aria-live="assertive"></p>
-                      <p class="mt-1 text-xs form-input-info" id="type-description">Seleccione la categoría del terreno</p>
+                      <p class="mt-1 text-xs form-input-info" id="type-description" data-i18n="calculator.form.type_description">Seleccione la categoría del terreno</p>
                     </div>
                     <div>
                       <label class="block mb-2 font-semibold form-label" for="landStatus" data-i18n="calculator.step2.status">Estatus</label>
@@ -851,7 +1324,7 @@
                         <option value="reconversion" data-i18n="calculator.values.status.reconversion">Reconversión</option>
                       </select>
                       <p x-show="errors.status" id="status-error" class="mt-1 error-message text-sm" x-text="errors.status" role="alert" aria-live="assertive"></p>
-                      <p class="mt-1 text-xs form-input-info" id="status-description">Estado actual del terreno</p>
+                      <p class="mt-1 text-xs form-input-info" id="status-description" data-i18n="calculator.form.status_description">Estado actual del terreno</p>
                     </div>
                   </div>
                   <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 grid-tablet-fix">
@@ -859,13 +1332,13 @@
                       <label class="block mb-2 font-semibold form-label" for="surface" data-i18n="calculator.step2.surface" data-i18n-attr="placeholder:calculator.step2.surface.placeholder">Superficie (m²)</label>
                       <input id="surface" type="number" min="0" class="w-full rounded border px-3 py-2 form-input" x-model.number="form.land.surface" data-i18n-attr="aria-label:calculator.step2.surface,placeholder:calculator.step2.surface.placeholder" placeholder="800" :aria-invalid="errors.surface ? 'true' : 'false'" aria-describedby="surface-error" />
                       <p x-show="errors.surface" id="surface-error" class="mt-1 error-message text-sm" x-text="errors.surface" role="alert" aria-live="assertive"></p>
-                      <p class="mt-1 text-xs form-input-info" id="surface-description">Área total del terreno en metros cuadrados</p>
+                      <p class="mt-1 text-xs form-input-info" id="surface-description" data-i18n="calculator.form.surface_description">Área total del terreno en metros cuadrados</p>
                     </div>
                     <div>
                       <label class="block mb-2 font-semibold form-label" for="usableSurface" data-i18n="calculator.step2.usableSurface" data-i18n-attr="placeholder:calculator.step2.usableSurface.placeholder">Superficie útil de construcción (m²)</label>
                       <input id="usableSurface" type="number" min="0" class="w-full rounded border px-3 py-2 form-input" x-model.number="form.land.usableSurface" data-i18n-attr="aria-label:calculator.step2.usableSurface,placeholder:calculator.step2.usableSurface.placeholder" placeholder="480" :aria-invalid="errors.usableSurface ? 'true' : 'false'" aria-describedby="usableSurface-error" />
                       <p x-show="errors.usableSurface" id="usableSurface-error" class="mt-1 error-message text-sm" x-text="errors.usableSurface" role="alert" aria-live="assertive"></p>
-                      <p class="mt-1 text-xs form-input-info" id="usableSurface-description">Superficie que puede ser construida</p>
+                      <p class="mt-1 text-xs form-input-info" id="usableSurface-description" data-i18n="calculator.form.usableSurface_description">Superficie que puede ser construida</p>
                     </div>
                   </div>
                   <div class="mb-4">
@@ -878,11 +1351,11 @@
                   </div>
                   <!-- Actualizar botones de navegación en el resto de pasos -->
                   <div class="flex justify-between mt-8 flex-col sm:flex-row gap-2 sm:gap-0">
-                    <button type="button" class="px-6 py-3 rounded-full bg-accent-50 dark:bg-primary-800 text-primary-900 dark:text-accent-100 font-semibold hover:bg-accent-100 dark:hover:bg-primary-700 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 btn-secondary touchable-element btn-mobile-friendly sm:w-auto order-2 sm:order-1" @click="prevStep">
+                    <button type="button" class="px-6 py-3 rounded-full bg-accent-50 dark:bg-primary-800 text-primary-900 dark:text-accent-50 font-semibold hover:bg-accent-100 dark:hover:bg-primary-700 transition focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 btn-secondary touchable-element btn-mobile-friendly sm:w-auto order-2 sm:order-1" @click="prevStep">
                       <span data-i18n="calculator.prev">Anterior</span>
                       <span class="sr-only" data-i18n="calculator.step2.prev_description">al paso 1: Tipo de Proyecto y Entidad</span>
                     </button>
-                    <button type="button" class="px-6 py-3 rounded-full bg-primary-700 text-white font-semibold hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 touchable-element btn-mobile-friendly sm:w-auto order-1 sm:order-2" @click="nextStep" :disabled="!form.budgetTotal || !form.land.address || !form.land.type || !form.land.status || !form.land.surface || !form.land.usableSurface" :class="{'opacity-50 cursor-not-allowed': !form.budgetTotal || !form.land.address || !form.land.type || !form.land.status || !form.land.surface || !form.land.usableSurface}">
+                    <button type="button" class="px-6 py-3 rounded-full bg-primary-800 text-white font-semibold hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 touchable-element btn-mobile-friendly sm:w-auto order-1 sm:order-2" @click="nextStep" :disabled="!form.budgetTotal || !form.land.address || !form.land.type || !form.land.status || !form.land.surface || !form.land.usableSurface" :class="{'opacity-50 cursor-not-allowed': !form.budgetTotal || !form.land.address || !form.land.type || !form.land.status || !form.land.surface || !form.land.usableSurface}">
                       <span data-i18n="calculator.next">Siguiente</span>
                       <span class="sr-only" data-i18n="calculator.step2.next_description">al paso 3: Desglose de Costos</span>
                     </button>
@@ -914,11 +1387,11 @@
                   </div>
                   <!-- Actualizar botones de navegación en el resto de pasos -->
                   <div class="flex justify-between mt-8 flex-col sm:flex-row gap-2 sm:gap-0">
-                    <button type="button" class="px-6 py-3 rounded-full bg-accent-50 dark:bg-primary-800 text-primary-900 dark:text-accent-100 font-semibold hover:bg-accent-100 dark:hover:bg-primary-700 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 btn-secondary touchable-element btn-mobile-friendly sm:w-auto order-2 sm:order-1" @click="prevStep">
+                    <button type="button" class="px-6 py-3 rounded-full bg-accent-50 dark:bg-primary-800 text-primary-900 dark:text-accent-50 font-semibold hover:bg-accent-100 dark:hover:bg-primary-700 transition focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 btn-secondary touchable-element btn-mobile-friendly sm:w-auto order-2 sm:order-1" @click="prevStep">
                       <span data-i18n="calculator.prev">Anterior</span>
                       <span class="sr-only" data-i18n="calculator.step3.prev_description">al paso 2: Presupuesto y Datos del Terreno</span>
                     </button>
-                    <button type="button" class="px-6 py-3 rounded-full bg-primary-700 text-white font-semibold hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 touchable-element btn-mobile-friendly sm:w-auto order-1 sm:order-2" @click="nextStep">
+                    <button type="button" class="px-6 py-3 rounded-full bg-primary-800 text-white font-semibold hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 touchable-element btn-mobile-friendly sm:w-auto order-1 sm:order-2" @click="nextStep">
                       <span data-i18n="calculator.next">Siguiente</span>
                       <span class="sr-only" data-i18n="calculator.step3.next_description">al paso 4: Resultados y Resumen</span>
                     </button>
@@ -954,7 +1427,7 @@
                     </ul>
                   </div>
                   <div class="flex flex-wrap gap-4 flex-col sm:flex-row">
-                    <button type="button" class="px-6 py-3 rounded-full bg-primary-700 text-white font-semibold hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 flex items-center touchable-element justify-center sm:justify-start" @click="exportPDF">
+                    <button type="button" class="px-6 py-3 rounded-full bg-primary-800 text-white font-semibold hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 flex items-center touchable-element justify-center sm:justify-start" @click="exportPDF">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
@@ -981,13 +1454,13 @@
                   </div>
                   <!-- Restaurar botones de guardar/restaurar simulación -->
                   <div class="flex flex-wrap gap-4 mt-4">
-                    <button type="button" class="px-6 py-3 rounded-full bg-accent-50 dark:bg-primary-800 text-primary-900 dark:text-accent-100 font-semibold hover:bg-accent-100 dark:hover:bg-primary-700 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 flex items-center touchable-element justify-center sm:justify-start" @click="saveSimulation">
+                    <button type="button" class="px-6 py-3 rounded-full bg-accent-50 dark:bg-primary-800 text-primary-900 dark:text-accent-50 font-semibold hover:bg-accent-100 dark:hover:bg-primary-700 transition focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 flex items-center touchable-element justify-center sm:justify-start" @click="saveSimulation">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                       </svg>
                       <span data-i18n="calculator.save">Guardar simulación</span>
                     </button>
-                    <button type="button" class="px-6 py-3 rounded-full bg-accent-50 dark:bg-primary-800 text-primary-900 dark:text-accent-100 font-semibold hover:bg-accent-100 dark:hover:bg-primary-700 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 flex items-center touchable-element justify-center sm:justify-start" @click="restoreSimulation">
+                    <button type="button" class="px-6 py-3 rounded-full bg-accent-50 dark:bg-primary-800 text-primary-900 dark:text-accent-50 font-semibold hover:bg-accent-100 dark:hover:bg-primary-700 transition focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 flex items-center touchable-element justify-center sm:justify-start" @click="restoreSimulation">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                       </svg>
@@ -996,11 +1469,11 @@
                   </div>
                   <!-- Actualizar botones del paso 4 -->
                   <div class="flex justify-between mt-8 flex-col sm:flex-row gap-2 sm:gap-0">
-                    <button type="button" class="px-6 py-3 rounded-full bg-accent-50 dark:bg-primary-800 text-primary-900 dark:text-accent-100 font-semibold hover:bg-accent-100 dark:hover:bg-primary-700 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 btn-secondary touchable-element btn-mobile-friendly sm:w-auto order-2 sm:order-1" @click="prevStep">
+                    <button type="button" class="px-6 py-3 rounded-full bg-accent-50 dark:bg-primary-800 text-primary-900 dark:text-accent-50 font-semibold hover:bg-accent-100 dark:hover:bg-primary-700 transition focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 btn-secondary touchable-element btn-mobile-friendly sm:w-auto order-2 sm:order-1" @click="prevStep">
                       <span data-i18n="calculator.prev">Anterior</span>
                       <span class="sr-only" data-i18n="calculator.step4.prev_description">al paso 3: Desglose de Costos</span>
                     </button>
-                    <button type="button" class="px-6 py-3 rounded-full bg-primary-700 text-white font-semibold hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 touchable-element btn-mobile-friendly sm:w-auto order-1 sm:order-2" @click="resetForm">
+                    <button type="button" class="px-6 py-3 rounded-full bg-primary-800 text-white font-semibold hover:bg-primary-900 transition focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 touchable-element btn-mobile-friendly sm:w-auto order-1 sm:order-2" @click="resetForm">
                       <span data-i18n="calculator.reset">Nueva simulación</span>
                       <span class="sr-only" data-i18n="calculator.step4.reset_description">reiniciar formulario</span>
                     </button>
@@ -1011,7 +1484,7 @@
           </section>
         </template>
         <!-- Sidebar Summary (sticky on desktop) -->
-        <aside class="w-full lg:w-96 flex-shrink-0" role="complementary" aria-labelledby="summary-title">
+        <aside class="w-full lg:w-96 flex-shrink-0 summary-container" role="complementary" aria-labelledby="summary-title" x-effect="$watch('$store.i18n.revision', () => updateAllTranslations())">
           <div class="sticky top-28 bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-6 mb-8" data-aos="fade-left">
             <h3 id="summary-title" class="text-lg font-bold mb-4 text-gray-900 dark:text-accent-100" data-i18n="calculator.summary.title">Resumen</h3>
             <ul class="space-y-2">
@@ -1026,14 +1499,6 @@
               <li x-show="form.land.status"><span class="font-semibold text-gray-800 dark:text-gray-200" data-i18n="calculator.summary.status">Estatus</span>: <span class="text-gray-900 dark:text-gray-100" x-text="form.land.status ? safeTranslate(`calculator.values.status.${form.land.status}`) : ''"></span></li>
             </ul>
           </div>
-          <!--div class="bg-accent-50 dark:bg-primary-800 rounded-lg shadow p-4 text-sm text-zinc-700 dark:text-zinc-200" data-aos="fade-left">
-            <h4 class="font-semibold mb-2" data-i18n="calculator.help.title">¿Necesitas ayuda?</h4>
-            <ul class="list-disc pl-5 space-y-1">
-              <li class="text-zinc-800 dark:text-zinc-200" data-i18n="calculator.help.geofencing"><a href="https://developers.google.com/location-context/geofencing" target="_blank" rel="noopener" class="text-primary-700 dark:text-primary-300 underline hover:text-primary-900 dark:hover:text-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800">Guía de georreferenciación</a></li>
-              <li class="text-zinc-800 dark:text-zinc-200" data-i18n="calculator.help.normativity"><a href="KNOWLEDGE%20BASE.md" target="_blank" rel="noopener" class="text-primary-700 dark:text-primary-300 underline hover:text-primary-900 dark:hover:text-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800">Normatividad y trámites CDMX</a></li>
-              <li class="text-zinc-800 dark:text-zinc-200" data-i18n="calculator.help.accessibility"><a href="https://www.w3.org/WAI/standards-guidelines/" target="_blank" rel="noopener" class="text-primary-700 dark:text-primary-300 underline hover:text-primary-900 dark:hover:text-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 dark:focus:ring-offset-zinc-800">Accesibilidad web (WCAG)</a></li>
-            </ul>
-          </div-->
         </aside>
       </div>
       <!-- Área de feedback accesible -->
@@ -1065,14 +1530,14 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="flex flex-col md:flex-row items-center justify-between mb-8">
         <div class="text-left mb-6 md:mb-0">
-          <h3 class="font-bold text-xl text-primary-700 dark:text-white" data-i18n="footer.brand.name">Beyond Solutions</h3>
+          <h3 class="font-bold text-xl text-primary-800 dark:text-white" data-i18n="footer.brand.name">Beyond Solutions</h3>
           <p class="text-sm text-zinc-500 dark:text-zinc-400" data-i18n="footer.brand.tagline">Desarrollo inmobiliario inteligente</p>
         </div>
       </div>
       <div class="flex flex-col md:flex-row items-center justify-between pt-4 text-sm text-zinc-500 dark:text-zinc-400">
         <div class="flex items-center"><p data-i18n="footer.copyright">© 2025 Beyond Solutions. Todos los derechos reservados.</p></div>
         <div class="flex gap-6 mt-4 md:mt-0 items-center">
-          <a href="index.html#contacto" class="hover:text-primary-700 dark:hover:text-primary-600 transition-colors duration-300 focus:outline-none focus:underline" data-i18n="footer.links.contact">Contacto</a>
+          <a href="index.html#contacto" class="hover:text-primary-800 dark:hover:text-primary-700 transition-colors duration-300 focus:outline-none focus:underline" data-i18n="footer.links.contact">Contacto</a>
           <div id="wcb" class="carbonbadge wcb-d flex items-center"></div>
         </div>
       </div>
@@ -1089,7 +1554,868 @@
         carbonScript.defer = true;
         document.body.appendChild(carbonScript);
       }
+      
+      // Ensure translations are applied after the page is fully loaded
+      setTimeout(function() {
+        try {
+          const calculatorForm = document.querySelector('[x-data="calculatorForm"]')?.__x?.data;
+          if (calculatorForm && typeof calculatorForm.forceUpdateCriticalTranslations === 'function') {
+            console.log('[calculator] Applying translations after page load');
+            calculatorForm.forceUpdateCriticalTranslations();
+          }
+        } catch (e) {
+          console.error('[calculator] Error applying translations:', e);
+        }
+      }, 500);
     });
   </script>
-</body>
+  
+  <!-- Direct fix for problematic translation elements -->
+  <script>
+    // Apply a direct fix for specific problematic elements
+    function directFixTranslations() {
+      console.log('[direct-fix] Applying direct fix for specific translation elements');
+      
+      // Get translation function
+      let translateFn;
+      if (window.i18n && typeof window.i18n.t === 'function') {
+        translateFn = (key) => window.i18n.t(key);
+      } else if (typeof window.t === 'function') {
+        translateFn = (key) => window.t(key);
+      } else {
+        console.error('[direct-fix] No translation function available!');
+        return;
+      }
+      
+      // List of problematic elements with their selectors and translation keys
+      const directFixes = [
+        // Summary elements
+        { selector: '.summary-container li span[data-i18n="calculator.summary.scope"]', key: 'calculator.summary.scope' },
+        { selector: '.summary-container li span[data-i18n="calculator.summary.entity"]', key: 'calculator.summary.entity' },
+        
+        // Form descriptions
+        { selector: '#budgetTotal-description', key: 'calculator.form.budget_description' },
+        
+        // Step 2 elements
+        { selector: 'label[for="landType"], label[for="type"]', key: 'calculator.step2.type' },
+        { selector: 'label[for="status"]', key: 'calculator.step2.status' },
+        { selector: 'label[for="surface"]', key: 'calculator.step2.surface' },
+        { selector: 'label[for="usableSurface"]', key: 'calculator.step2.usableSurface' },
+        { selector: 'label[for="characteristics"]', key: 'calculator.step2.characteristics' },
+        
+        // Also try by direct data-i18n attributes
+        { selector: '[data-i18n="calculator.summary.scope"]', key: 'calculator.summary.scope' },
+        { selector: '[data-i18n="calculator.summary.entity"]', key: 'calculator.summary.entity' },
+        { selector: '[data-i18n="calculator.form.budget_description"]', key: 'calculator.form.budget_description' },
+        { selector: '[data-i18n="calculator.step2.type"]', key: 'calculator.step2.type' },
+        { selector: '[data-i18n="calculator.step2.status"]', key: 'calculator.step2.status' },
+        { selector: '[data-i18n="calculator.step2.surface"]', key: 'calculator.step2.surface' },
+        { selector: '[data-i18n="calculator.step2.usableSurface"]', key: 'calculator.step2.usableSurface' },
+        { selector: '[data-i18n="calculator.step2.characteristics"]', key: 'calculator.step2.characteristics' }
+      ];
+      
+      // Apply each fix
+      directFixes.forEach(fix => {
+        try {
+          const elements = document.querySelectorAll(fix.selector);
+          if (elements.length === 0) {
+            // Silent fail - don't log anything to keep console clean
+            return;
+          }
+          
+          // Get translation
+          const translation = translateFn(fix.key);
+          
+          // Apply to all matching elements
+          elements.forEach(el => {
+            // Only update if we have a valid translation and it's different from the key
+            if (translation && translation !== fix.key && el.textContent.includes('calculator.')) {
+              el.textContent = translation;
+              // Silent success - don't log anything to keep console clean
+              // console.log(`[direct-fix] Fixed element: ${el.tagName} with translation: ${translation}`);
+            } else if (el.textContent.includes('calculator.')) {
+              // Extract a readable fallback from the key
+              const parts = fix.key.split('.');
+              const lastPart = parts[parts.length - 1];
+              const fallback = lastPart.charAt(0).toUpperCase() + lastPart.slice(1).replace(/([A-Z])/g, ' $1').trim();
+              el.textContent = fallback;
+              // Silent fallback - don't log anything to keep console clean
+              // console.log(`[direct-fix] Applied fallback for ${fix.key}: ${fallback}`);
+            }
+          });
+        } catch (error) {
+          console.error(`[direct-fix] Error fixing ${fix.selector}:`, error);
+        }
+      });
+      
+      // Handle placeholders separately
+      try {
+        const addressInput = document.querySelector('input#address');
+        if (addressInput) {
+          const placeholderKey = 'calculator.step2.address.placeholder';
+          const translation = translateFn(placeholderKey);
+          if (translation && translation !== placeholderKey) {
+            addressInput.placeholder = translation;
+            // Silent success - don't log anything to keep console clean
+          }
+        }
+      } catch (error) {
+        console.error('[direct-fix] Error fixing address placeholder:', error);
+      }
+    }
+    
+    // Apply fix at various points to ensure it catches all scenarios
+    document.addEventListener('DOMContentLoaded', function() {
+      // First attempt after DOM is loaded
+      setTimeout(directFixTranslations, 500);
+      
+      // Second attempt after a longer delay
+      setTimeout(directFixTranslations, 1000);
+    });
+    
+    // Also apply when language changes
+    document.addEventListener('i18n:languageChanged', function() {
+      console.log('[direct-fix] Language changed, applying fixes');
+      
+      // Apply fix multiple times with delays
+      setTimeout(directFixTranslations, 100);
+      setTimeout(directFixTranslations, 500);
+      setTimeout(directFixTranslations, 1000);
+    });
+    
+    // Also apply when i18n is ready
+    document.addEventListener('i18n:ready', function() {
+      console.log('[direct-fix] i18n ready, applying fixes');
+      
+      // Apply fix multiple times with delays
+      setTimeout(directFixTranslations, 100);
+      setTimeout(directFixTranslations, 500);
+    });
+    
+    // Apply immediately if possible
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      directFixTranslations();
+    }
+  </script>
+  
+  <!-- Enhanced step navigation translation fix -->
+  <script>
+    // Monitor step changes and ensure translations are applied
+    document.addEventListener('DOMContentLoaded', function() {
+      // Silent initialization - don't log to keep console clean
+      // console.log('[step-monitor] Setting up step navigation monitor');
+      
+      // Watch for step changes by monitoring the step indicators
+      const stepIndicators = document.querySelectorAll('.step-indicator');
+      
+      // Create a MutationObserver to watch for aria-current changes
+      const stepObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'aria-current') {
+            const currentStep = Array.from(stepIndicators).findIndex(
+              indicator => indicator.getAttribute('aria-current') === 'step'
+            );
+            
+            if (currentStep !== -1) {
+              // Silent step change - don't log to keep console clean
+              // console.log(`[step-monitor] Detected step change to step ${currentStep + 1}`);
+              
+              // Apply translations with multiple attempts
+              applyStepTranslations(currentStep);
+            }
+          }
+        });
+      });
+      
+      // Start observing all step indicators
+      stepIndicators.forEach(function(indicator) {
+        stepObserver.observe(indicator, { attributes: true });
+      });
+      
+      // Function to apply translations for a specific step
+      function applyStepTranslations(stepIndex) {
+        // Silent translation application - don't log to keep console clean
+        // console.log(`[step-monitor] Applying translations for step ${stepIndex + 1}`);
+        
+        // Get translation function
+        let translateFn;
+        if (window.i18n && typeof window.i18n.t === 'function') {
+          translateFn = (key) => window.i18n.t(key);
+        } else if (typeof window.t === 'function') {
+          translateFn = (key) => window.t(key);
+        } else {
+          console.error('[step-monitor] No translation function available!');
+          return;
+        }
+        
+        // Apply translations based on the current step
+        if (stepIndex === 0) { // Step 1
+          // Step 1 specific elements
+          const step1Elements = [
+            { selector: 'label[for="scope"]', key: 'calculator.step1.scope' },
+            { selector: 'label[for="entity"]', key: 'calculator.step1.entity' },
+            { selector: '#scope-description', key: 'calculator.form.required_field' },
+            { selector: '#entity-description', key: 'calculator.form.required_field' },
+            { selector: '[data-i18n="calculator.step1.title"]', key: 'calculator.step1.title' }
+          ];
+          
+          // Apply translations to step 1 elements
+          applyTranslationsToElements(step1Elements, translateFn);
+          
+          // Also handle select options
+          translateSelectOptions('scope', 'calculator.step1.scope.select', 'calculator.values.scope.', translateFn);
+          translateSelectOptions('entity', 'calculator.step1.entity.select', 'calculator.values.entity.', translateFn);
+          
+        } else if (stepIndex === 1) { // Step 2
+          // Step 2 specific elements
+          const step2Elements = [
+            { selector: 'label[for="budgetTotal"]', key: 'calculator.step2.budget' },
+            { selector: 'label[for="address"]', key: 'calculator.step2.address' },
+            { selector: 'label[for="landType"], label[for="type"]', key: 'calculator.step2.type' },
+            { selector: 'label[for="status"]', key: 'calculator.step2.status' },
+            { selector: 'label[for="surface"]', key: 'calculator.step2.surface' },
+            { selector: 'label[for="usableSurface"]', key: 'calculator.step2.usableSurface' },
+            { selector: 'label[for="use"]', key: 'calculator.step2.use' },
+            { selector: 'label[for="characteristics"]', key: 'calculator.step2.characteristics' },
+            { selector: '#budgetTotal-description', key: 'calculator.form.budget_description' },
+            { selector: '#address-description', key: 'calculator.form.address_description' },
+            { selector: '#type-description', key: 'calculator.form.type_description' },
+            { selector: '#status-description', key: 'calculator.form.status_description' },
+            { selector: '#surface-description', key: 'calculator.form.surface_description' },
+            { selector: '#usableSurface-description', key: 'calculator.form.usableSurface_description' },
+            { selector: '[data-i18n="calculator.step2.title"]', key: 'calculator.step2.title' }
+          ];
+          
+          // Apply translations to step 2 elements
+          applyTranslationsToElements(step2Elements, translateFn);
+          
+          // Also handle select options
+          translateSelectOptions('type', 'calculator.step2.type.select', 'calculator.values.type.', translateFn);
+          translateSelectOptions('status', 'calculator.step2.status.select', 'calculator.values.status.', translateFn);
+          
+          // Handle placeholders
+          const placeholders = {
+            'address': 'calculator.step2.address.placeholder',
+            'budgetTotal': 'calculator.step2.budget.placeholder',
+            'surface': 'calculator.step2.surface.placeholder',
+            'usableSurface': 'calculator.step2.usableSurface.placeholder',
+            'use': 'calculator.step2.use.placeholder',
+            'characteristics': 'calculator.step2.characteristics.placeholder'
+          };
+          
+          Object.entries(placeholders).forEach(([id, key]) => {
+            const input = document.getElementById(id);
+            if (input) {
+              const translation = translateFn(key);
+              if (translation && translation !== key) {
+                input.placeholder = translation;
+              }
+            }
+          });
+        }
+        
+        // Always update summary elements
+        const summaryElements = [
+          { selector: '.summary-container li span[data-i18n="calculator.summary.scope"]', key: 'calculator.summary.scope' },
+          { selector: '.summary-container li span[data-i18n="calculator.summary.entity"]', key: 'calculator.summary.entity' },
+          { selector: '.summary-container li span[data-i18n="calculator.summary.budget"]', key: 'calculator.summary.budget' },
+          { selector: '.summary-container li span[data-i18n="calculator.summary.address"]', key: 'calculator.summary.address' },
+          { selector: '.summary-container li span[data-i18n="calculator.summary.surface"]', key: 'calculator.summary.surface' },
+          { selector: '.summary-container li span[data-i18n="calculator.summary.usableSurface"]', key: 'calculator.summary.usableSurface' },
+          { selector: '.summary-container li span[data-i18n="calculator.summary.use"]', key: 'calculator.summary.use' },
+          { selector: '.summary-container li span[data-i18n="calculator.summary.type"]', key: 'calculator.summary.type' },
+          { selector: '.summary-container li span[data-i18n="calculator.summary.status"]', key: 'calculator.summary.status' }
+        ];
+        
+        applyTranslationsToElements(summaryElements, translateFn);
+      }
+      
+      // Helper function to apply translations to a list of elements
+      function applyTranslationsToElements(elements, translateFn) {
+        elements.forEach(item => {
+          try {
+            const elements = document.querySelectorAll(item.selector);
+            if (elements.length === 0) {
+              return;
+            }
+            
+            // Get translation
+            const translation = translateFn(item.key);
+            
+            // Apply to all matching elements
+            elements.forEach(el => {
+              if (translation && translation !== item.key) {
+                el.textContent = translation;
+              }
+            });
+          } catch (error) {
+            // Silent error handling - don't log to keep console clean
+            // console.error(`[step-monitor] Error translating ${item.selector}:`, error);
+          }
+        });
+      }
+      
+      // Helper function to translate select options
+      function translateSelectOptions(selectId, emptyOptionKey, valuePrefix, translateFn) {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+        
+        select.querySelectorAll('option').forEach(option => {
+          const value = option.value;
+          if (!value) {
+            const translation = translateFn(emptyOptionKey);
+            if (translation) option.textContent = translation;
+          } else {
+            const translation = translateFn(`${valuePrefix}${value}`);
+            if (translation) option.textContent = translation;
+          }
+        });
+      }
+      
+      // Try to apply translations for the initial step
+      setTimeout(function() {
+        const currentStep = Array.from(stepIndicators).findIndex(
+          indicator => indicator.getAttribute('aria-current') === 'step'
+        );
+        
+        if (currentStep !== -1) {
+          applyStepTranslations(currentStep);
+        }
+      }, 1000);
+      
+      // Also apply translations when language changes
+      document.addEventListener('i18n:languageChanged', function() {
+        const currentStep = Array.from(stepIndicators).findIndex(
+          indicator => indicator.getAttribute('aria-current') === 'step'
+        );
+        
+        if (currentStep !== -1) {
+          // Apply multiple times with delays to ensure they stick
+          setTimeout(() => applyStepTranslations(currentStep), 100);
+          setTimeout(() => applyStepTranslations(currentStep), 500);
+          setTimeout(() => applyStepTranslations(currentStep), 1000);
+        }
+      });
+    });
+  </script>
+  
+  <!-- Special fix for step 1 and step 2 translations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Define the problematic elements with their translation keys
+      const problematicElements = {
+        // Step 1 elements
+        'scope': {
+          selector: 'label[for="scope"]',
+          key: 'calculator.step1.scope',
+          defaultText: 'Project type'
+        },
+        'entity': {
+          selector: 'label[for="entity"]',
+          key: 'calculator.step1.entity',
+          defaultText: 'Entity'
+        },
+        
+        // Step 2 elements
+        'budget': {
+          selector: 'label[for="budgetTotal"]',
+          key: 'calculator.step2.budget',
+          defaultText: 'Budget'
+        },
+        'address': {
+          selector: 'label[for="address"]',
+          key: 'calculator.step2.address',
+          defaultText: 'Address'
+        },
+        'type': {
+          selector: 'label[for="type"]',
+          key: 'calculator.step2.type',
+          defaultText: 'Land type'
+        },
+        'status': {
+          selector: 'label[for="status"]',
+          key: 'calculator.step2.status',
+          defaultText: 'Status'
+        },
+        'surface': {
+          selector: 'label[for="surface"]',
+          key: 'calculator.step2.surface',
+          defaultText: 'Surface area'
+        },
+        'usableSurface': {
+          selector: 'label[for="usableSurface"]',
+          key: 'calculator.step2.usableSurface',
+          defaultText: 'Usable surface'
+        },
+        'use': {
+          selector: 'label[for="use"]',
+          key: 'calculator.step2.use',
+          defaultText: 'Land use'
+        },
+        'characteristics': {
+          selector: 'label[for="characteristics"]',
+          key: 'calculator.step2.characteristics',
+          defaultText: 'Characteristics'
+        }
+      };
+      
+      // Function to apply translations to problematic elements
+      function fixProblematicElements() {
+        // Get translation function
+        let translateFn;
+        if (window.i18n && typeof window.i18n.t === 'function') {
+          translateFn = (key, defaultValue) => window.i18n.t(key, {}, defaultValue);
+        } else if (typeof window.t === 'function') {
+          translateFn = (key, defaultValue) => window.t(key, {}, defaultValue);
+        } else {
+          return; // No translation function available
+        }
+        
+        // Get current language
+        const currentLanguage = window.i18n?.getCurrentLanguage?.() || 
+                              localStorage.getItem('beyondLocale') || 
+                              document.documentElement.lang || 
+                              'es';
+        
+        // Apply translations to each problematic element
+        Object.values(problematicElements).forEach(item => {
+          const elements = document.querySelectorAll(item.selector);
+          if (elements.length === 0) return;
+          
+          // Get translation with fallback
+          const translation = translateFn(item.key, item.defaultText);
+          
+          // Apply to all matching elements
+          elements.forEach(el => {
+            // Only update if the element contains a translation key or has default text
+            if (el.textContent.includes('calculator.') || 
+                el.textContent.trim() === '' || 
+                el.textContent === item.defaultText) {
+              el.textContent = translation;
+            }
+          });
+        });
+      }
+      
+      // Watch for step navigation changes
+      const stepButtons = document.querySelectorAll('.step-indicator');
+      
+      // Apply fix when any step button is clicked
+      stepButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Apply multiple times with delays
+          setTimeout(fixProblematicElements, 100);
+          setTimeout(fixProblematicElements, 300);
+          setTimeout(fixProblematicElements, 500);
+        });
+      });
+      
+      // Also watch for Next/Previous button clicks
+      document.addEventListener('click', function(event) {
+        // Check if the clicked element is a navigation button
+        if (event.target.closest('button') && 
+            (event.target.textContent.includes('Siguiente') || 
+             event.target.textContent.includes('Next') || 
+             event.target.textContent.includes('Anterior') || 
+             event.target.textContent.includes('Previous'))) {
+          // Apply multiple times with delays
+          setTimeout(fixProblematicElements, 100);
+          setTimeout(fixProblematicElements, 300);
+          setTimeout(fixProblematicElements, 500);
+        }
+      });
+      
+      // Apply when language changes
+      document.addEventListener('i18n:languageChanged', function() {
+        // Apply multiple times with delays
+        setTimeout(fixProblematicElements, 100);
+        setTimeout(fixProblematicElements, 300);
+        setTimeout(fixProblematicElements, 500);
+        setTimeout(fixProblematicElements, 1000);
+      });
+      
+      // Apply on page load
+      setTimeout(fixProblematicElements, 500);
+      setTimeout(fixProblematicElements, 1000);
+      setTimeout(fixProblematicElements, 2000);
+    });
+  </script>
+  
+  <!-- Universal translation fix for all 18 languages -->
+  <script>
+    (function() {
+      // List of all supported language codes from i18n/config.json
+      const supportedLanguages = [
+        'es', 'en', 'fr', 'de', 'it', 'pt', 'zh', 'ja', 'ko', 'ru',
+        'ar', 'pl', 'tr', 'hi', 'vi', 'el', 'sv', 'nl'
+      ];
+      
+      // Map of problematic keys that need special handling
+      const problematicKeys = {
+        // Step 1 elements
+        'step1_scope': 'calculator.step1.scope',
+        'step1_entity': 'calculator.step1.entity',
+        'step1_scope_select': 'calculator.step1.scope.select',
+        'step1_entity_select': 'calculator.step1.entity.select',
+        
+        // Step 2 elements - the most problematic ones
+        'step2_budget': 'calculator.step2.budget',
+        'step2_address': 'calculator.step2.address',
+        'step2_type': 'calculator.step2.type',
+        'step2_status': 'calculator.step2.status',
+        'step2_surface': 'calculator.step2.surface',
+        'step2_usableSurface': 'calculator.step2.usableSurface',
+        'step2_use': 'calculator.step2.use',
+        'step2_characteristics': 'calculator.step2.characteristics',
+        'step2_type_select': 'calculator.step2.type.select',
+        'step2_status_select': 'calculator.step2.status.select'
+      };
+      
+      // Universal fallbacks for all languages
+      const universalFallbacks = {
+        'step1_scope': 'Project type',
+        'step1_entity': 'Entity',
+        'step1_scope_select': 'Select an option',
+        'step1_entity_select': 'Select an option',
+        'step2_budget': 'Budget',
+        'step2_address': 'Address',
+        'step2_type': 'Land type',
+        'step2_status': 'Status',
+        'step2_surface': 'Surface area',
+        'step2_usableSurface': 'Usable surface area',
+        'step2_use': 'Land use',
+        'step2_characteristics': 'Characteristics',
+        'step2_type_select': 'Select an option',
+        'step2_status_select': 'Select an option'
+      };
+      
+      // Mapping of elements to their problematic keys
+      const elementSelectors = {
+        'step1_scope': '#step1 .form-group:nth-child(1) label',
+        'step1_entity': '#step1 .form-group:nth-child(2) label',
+        'step1_scope_select': '#step1 select[name="scope"] option:first-child',
+        'step1_entity_select': '#step1 select[name="entity"] option:first-child',
+        'step2_budget': '#step2 .form-group:nth-child(1) label',
+        'step2_address': '#step2 .form-group:nth-child(2) label',
+        'step2_type': '#step2 .form-group:nth-child(3) label',
+        'step2_status': '#step2 .form-group:nth-child(4) label',
+        'step2_surface': '#step2 .form-group:nth-child(5) label',
+        'step2_usableSurface': '#step2 .form-group:nth-child(6) label',
+        'step2_use': '#step2 .form-group:nth-child(7) label',
+        'step2_characteristics': '#step2 .form-group:nth-child(8) label',
+        'step2_type_select': '#step2 select[name="type"] option:first-child',
+        'step2_status_select': '#step2 select[name="status"] option:first-child'
+      };
+      
+      /**
+       * Fix problematic elements with proper translations
+       * This function applies multiple translation attempts to ensure all languages work
+       */
+      function fixProblematicElements() {
+        console.log('[universal-fix] Applying universal translation fix');
+        
+        // Get current language
+        const currentLang = window.i18n?.getCurrentLanguage() || 
+                          localStorage.getItem('beyondLocale') || 
+                          document.documentElement.lang || 
+                          'es';
+                          
+        console.log(`[universal-fix] Current language: ${currentLang}`);
+        
+        // Force translations cache refresh if needed
+        if (window.i18n && typeof window.i18n.ensureAllLanguagesSupport === 'function') {
+          window.i18n.ensureAllLanguagesSupport().catch(e => {
+            console.warn('[universal-fix] Error ensuring language support:', e);
+          });
+        }
+        
+        // Process each problematic element
+        Object.entries(elementSelectors).forEach(([key, selector]) => {
+          const element = document.querySelector(selector);
+          if (!element) {
+            console.log(`[universal-fix] Element not found: ${selector}`);
+            return;
+          }
+          
+          // Get translation key
+          const translationKey = problematicKeys[key];
+          if (!translationKey) return;
+          
+          // Try multiple translation approaches
+          let translation = null;
+          
+          // 1. Try direct translation using i18n.t
+          if (window.i18n && typeof window.i18n.t === 'function') {
+            translation = window.i18n.t(translationKey);
+            if (translation && translation !== translationKey && !translation.includes('[') && !translation.includes(']')) {
+              console.log(`[universal-fix] Found translation via i18n.t for ${key}: ${translation}`);
+            } else {
+              translation = null;
+            }
+          }
+          
+          // 2. Try using global t function
+          if (!translation && window.t) {
+            translation = window.t(translationKey);
+            if (translation && translation !== translationKey && !translation.includes('[') && !translation.includes(']')) {
+              console.log(`[universal-fix] Found translation via window.t for ${key}: ${translation}`);
+            } else {
+              translation = null;
+            }
+          }
+          
+          // 3. Try using Alpine $t magic
+          if (!translation && window.Alpine) {
+            try {
+              const alpineContext = Alpine.evaluate(el => el.$t(translationKey), element);
+              if (alpineContext && alpineContext !== translationKey && !alpineContext.includes('[') && !alpineContext.includes(']')) {
+                translation = alpineContext;
+                console.log(`[universal-fix] Found translation via Alpine $t for ${key}: ${translation}`);
+              }
+            } catch (e) {
+              // Alpine might not be ready yet
+            }
+          }
+          
+          // 4. Try to find the translation in data attributes
+          if (!translation) {
+            const dataElement = document.querySelector(`[data-i18n="${translationKey}"]`);
+            if (dataElement) {
+              translation = dataElement.textContent;
+              if (translation && !translation.includes('[') && !translation.includes(']')) {
+                console.log(`[universal-fix] Found translation via data-i18n for ${key}: ${translation}`);
+              } else {
+                translation = null;
+              }
+            }
+          }
+          
+          // 5. Try to access translations directly from cache
+          if (!translation && window.i18n && window.i18n.translationsCache) {
+            try {
+              const cache = window.i18n.translationsCache;
+              const lang = window.i18n.getCurrentLanguage();
+              
+              if (cache.has(lang)) {
+                const translations = cache.get(lang);
+                const parts = translationKey.split('.');
+                let value = translations;
+                
+                // Navigate through the object
+                let found = true;
+                for (const part of parts) {
+                  if (value && typeof value === 'object' && part in value) {
+                    value = value[part];
+                  } else {
+                    found = false;
+                    break;
+                  }
+                }
+                
+                if (found && typeof value === 'string' && !value.includes('[') && !value.includes(']')) {
+                  translation = value;
+                  console.log(`[universal-fix] Found translation via direct cache access for ${key}: ${translation}`);
+                }
+              }
+            } catch (e) {
+              console.warn('[universal-fix] Error accessing translations cache:', e);
+            }
+          }
+          
+          // 6. Try language-specific hardcoded values for critical fields
+          if (!translation) {
+            // Define language-specific values for the most critical fields
+            const languageSpecificValues = {
+              'en': {
+                'step1_scope': 'Project type',
+                'step1_entity': 'Entity',
+                'step2_budget': 'Budget',
+                'step2_address': 'Address',
+                'step2_type': 'Land type',
+                'step2_status': 'Status',
+                'step2_surface': 'Surface area',
+                'step2_usableSurface': 'Usable surface area',
+                'step2_use': 'Land use',
+                'step2_characteristics': 'Characteristics'
+              },
+              'es': {
+                'step1_scope': 'Tipo de proyecto',
+                'step1_entity': 'Entidad',
+                'step2_budget': 'Presupuesto',
+                'step2_address': 'Dirección',
+                'step2_type': 'Tipo de terreno',
+                'step2_status': 'Estatus',
+                'step2_surface': 'Superficie',
+                'step2_usableSurface': 'Superficie útil',
+                'step2_use': 'Uso de suelo',
+                'step2_characteristics': 'Características'
+              },
+              'fr': {
+                'step1_scope': 'Type de projet',
+                'step1_entity': 'Entité',
+                'step2_budget': 'Budget',
+                'step2_address': 'Adresse',
+                'step2_type': 'Type de terrain',
+                'step2_status': 'Statut',
+                'step2_surface': 'Surface',
+                'step2_usableSurface': 'Surface utilisable',
+                'step2_use': 'Utilisation du sol',
+                'step2_characteristics': 'Caractéristiques'
+              }
+            };
+            
+            // Try to get language-specific value
+            if (languageSpecificValues[currentLang] && languageSpecificValues[currentLang][key]) {
+              translation = languageSpecificValues[currentLang][key];
+              console.log(`[universal-fix] Using language-specific value for ${key}: ${translation}`);
+            }
+          }
+          
+          // 7. If all else fails, use universal fallback
+          if (!translation) {
+            translation = universalFallbacks[key];
+            console.log(`[universal-fix] Using universal fallback for ${key}: ${translation}`);
+          }
+          
+          // Apply the translation
+          if (translation) {
+            console.log(`[universal-fix] Setting ${selector} to "${translation}"`);
+            element.textContent = translation;
+            
+            // Also set data-i18n attribute to help other systems
+            if (!element.hasAttribute('data-i18n')) {
+              element.setAttribute('data-i18n', translationKey);
+            }
+          }
+        });
+        
+        // Also fix placeholders
+        const placeholderSelectors = {
+          'step2_address_placeholder': '#step2 input[name="address"]',
+          'step2_surface_placeholder': '#step2 input[name="surface"]',
+          'step2_usableSurface_placeholder': '#step2 input[name="usableSurface"]',
+          'step2_use_placeholder': '#step2 input[name="use"]',
+          'step2_characteristics_placeholder': '#step2 textarea[name="characteristics"]'
+        };
+        
+        const placeholderKeys = {
+          'step2_address_placeholder': 'calculator.step2.address.placeholder',
+          'step2_surface_placeholder': 'calculator.step2.surface.placeholder',
+          'step2_usableSurface_placeholder': 'calculator.step2.usableSurface.placeholder',
+          'step2_use_placeholder': 'calculator.step2.use.placeholder',
+          'step2_characteristics_placeholder': 'calculator.step2.characteristics.placeholder'
+        };
+        
+        const placeholderFallbacks = {
+          'step2_address_placeholder': 'Enter address',
+          'step2_surface_placeholder': 'Enter surface area',
+          'step2_usableSurface_placeholder': 'Enter usable surface',
+          'step2_use_placeholder': 'Enter land use',
+          'step2_characteristics_placeholder': 'Enter characteristics'
+        };
+        
+        Object.entries(placeholderSelectors).forEach(([key, selector]) => {
+          const element = document.querySelector(selector);
+          if (!element) return;
+          
+          const translationKey = placeholderKeys[key];
+          if (!translationKey) return;
+          
+          // Try to get translation
+          let translation = null;
+          
+          // Try i18n.t
+          if (window.i18n && typeof window.i18n.t === 'function') {
+            translation = window.i18n.t(translationKey);
+            if (translation && translation !== translationKey && !translation.includes('[') && !translation.includes(']')) {
+              console.log(`[universal-fix] Found placeholder translation via i18n.t for ${key}: ${translation}`);
+            } else {
+              translation = null;
+            }
+          }
+          
+          // Try window.t
+          if (!translation && window.t) {
+            translation = window.t(translationKey);
+            if (translation && translation !== translationKey && !translation.includes('[') && !translation.includes(']')) {
+              console.log(`[universal-fix] Found placeholder translation via window.t for ${key}: ${translation}`);
+            } else {
+              translation = null;
+            }
+          }
+          
+          // Use fallback if needed
+          if (!translation) {
+            translation = placeholderFallbacks[key];
+            console.log(`[universal-fix] Using fallback placeholder for ${key}: ${translation}`);
+          }
+          
+          // Apply placeholder
+          if (translation) {
+            console.log(`[universal-fix] Setting placeholder for ${selector} to "${translation}"`);
+            element.placeholder = translation;
+            
+            // Also set data-i18n-placeholder attribute
+            if (!element.hasAttribute('data-i18n-placeholder')) {
+              element.setAttribute('data-i18n-placeholder', translationKey);
+            }
+          }
+        });
+      }
+      
+      // Run the fix on page load
+      document.addEventListener('DOMContentLoaded', () => {
+        console.log('[universal-fix] DOM loaded, scheduling fixes');
+        
+        // Apply fixes with increasing delays to ensure they work
+        [100, 300, 500, 1000].forEach(delay => {
+          setTimeout(fixProblematicElements, delay);
+        });
+      });
+      
+      // Listen for language changes
+      document.addEventListener('i18n:languageChanged', (event) => {
+        console.log('[universal-fix] Language changed event detected', event.detail);
+        
+        // Apply fixes with increasing delays after language change
+        [100, 300, 500, 1000].forEach(delay => {
+          setTimeout(fixProblematicElements, delay);
+        });
+      });
+      
+      // Listen for step changes
+      ['nextStep', 'prevStep', 'goToStep'].forEach(stepFunction => {
+        // Monitor the original function
+        const originalFunction = window[stepFunction];
+        if (typeof originalFunction === 'function') {
+          window[stepFunction] = function(...args) {
+            // Call the original function
+            const result = originalFunction.apply(this, args);
+            
+            // Apply fixes after step change
+            console.log(`[universal-fix] Step change via ${stepFunction}, applying fixes`);
+            [100, 300, 500].forEach(delay => {
+              setTimeout(fixProblematicElements, delay);
+            });
+            
+            return result;
+          };
+        }
+      });
+      
+             // Special handling for direct step navigation via hash
+       window.addEventListener('hashchange', () => {
+         console.log('[universal-fix] Hash changed, applying fixes');
+         [100, 300, 500].forEach(delay => {
+           setTimeout(fixProblematicElements, delay);
+         });
+       });
+       
+       // Export the fix function globally for debugging
+       window.fixCalculatorTranslations = fixProblematicElements;
+       
+       console.log('[universal-fix] Universal translation fix initialized for all 18 languages');
+     })();
+   </script>
+  </body>
 </html> 

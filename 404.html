@@ -2,7 +2,61 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="theme-color" content="#334b4e">
   <title>Redirecting...</title>
+  <style>
+    body {
+      font-family: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f8f9fa;
+      color: #192525;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #334b4e;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    p {
+      margin-bottom: 20px;
+      max-width: 500px;
+    }
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #adb3b7;
+      border-bottom-color: #334b4e;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+      margin-top: 20px;
+    }
+    @keyframes rotation {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #192525;
+        color: #cccfcf;
+      }
+      h1 {
+        color: #bac4c3;
+      }
+      .loader {
+        border-color: #54676d;
+        border-bottom-color: #bac4c3;
+      }
+    }
+  </style>
   <script>
     (function() {
       // Obtener la ruta solicitada
@@ -45,5 +99,6 @@
 <body>
   <h1>Redireccionando...</h1>
   <p>Por favor espere mientras le redirigimos a la página correcta.</p>
+  <span class="loader"></span>
 </body>
 </html> 
