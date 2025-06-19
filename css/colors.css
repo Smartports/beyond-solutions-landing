@@ -1,0 +1,68 @@
+/**
+ * Beyond Solutions Color Palette
+ * This file defines the color variables used throughout the site
+ */
+
+:root {
+  /* Primary color scale */
+  --color-primary-900: #192525;
+  --color-primary-800: #243b44;
+  --color-primary-700: #334b4e;
+  --color-primary-600: #54676d;
+  --color-primary-500: #68767c;
+  --color-primary-400: #8c8f92;
+  --color-primary-300: #adb3b7;
+  --color-primary-200: #bac4c3;
+  --color-primary-100: #cccfcf;
+  
+  /* Accent colors */
+  --color-accent: #b1aaa0;
+  --color-accent-light: #b9c6cd;
+  --color-secondary: #525853;
+  
+  /* Functional colors */
+  --color-text-dark: var(--color-primary-900);
+  --color-text-light: var(--color-primary-100);
+  --color-background-light: #ffffff;
+  --color-background-dark: var(--color-primary-900);
+  
+  /* UI element colors */
+  --color-border: var(--color-primary-300);
+  --color-focus-ring: var(--color-primary-700);
+  --color-button-primary: var(--color-primary-700);
+  --color-button-hover: var(--color-primary-800);
+  --color-button-active: var(--color-primary-600);
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text-primary: var(--color-primary-100);
+    --color-background: var(--color-primary-900);
+    --color-border: var(--color-primary-600);
+    --color-focus-ring: var(--color-primary-200);
+  }
+}
+
+/* CSS Custom Properties for Tailwind classes */
+:root {
+  --bg-surface: #ffffff;
+  --bg-surface-hover: var(--color-primary-200);
+  --text-primary: var(--color-primary-900);
+  --border-color: var(--color-primary-300);
+  --border-color-hover: var(--color-primary-700);
+}
+
+.dark, .dark-mode {
+  --bg-surface: var(--color-primary-800);
+  --bg-surface-hover: var(--color-primary-700);
+  --text-primary: var(--color-primary-100);
+  --border-color: var(--color-primary-600);
+  --border-color-hover: var(--color-primary-500);
+  
+  --bg-surface-dark: var(--color-primary-800);
+  --bg-surface-hover-dark: var(--color-primary-700);
+  --text-primary-dark: var(--color-primary-100);
+  --border-color-dark: var(--color-primary-600);
+  --border-color-hover-dark: var(--color-primary-500);
+} 

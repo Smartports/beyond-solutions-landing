@@ -131,6 +131,19 @@ html[dir="rtl"] .section-heading::after {
   margin-right: auto;
 }
 
+/* Support for the new color palette */
+html[dir="rtl"] .border-primary-600 {
+  border-color: #334b4e;
+}
+
+html[dir="rtl"] .bg-primary-600 {
+  background-color: #334b4e;
+}
+
+html[dir="rtl"] .bg-primary-700 {
+  background-color: #243b44;
+}
+
 /* Soporte para secciones con iconos o características */
 html[dir="rtl"] .flex.items-start.gap-4 {
   flex-direction: row-reverse;

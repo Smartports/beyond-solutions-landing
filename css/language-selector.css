@@ -10,7 +10,7 @@
 }
 
 .language-selector button:focus-visible {
-  outline: 2px solid #243f8f;
+  outline: 2px solid #334b4e;
   outline-offset: 2px;
 }
 
@@ -77,7 +77,7 @@ html[dir="rtl"] .language-selector #language-dropdown {
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .language-selector button:focus-visible {
-    outline-color: #bdc5dd;
+    outline-color: #bac4c3;
   }
 }
 
@@ -91,14 +91,14 @@ html[dir="rtl"] .language-selector #language-dropdown {
   border-radius: 0.25rem;
   cursor: pointer;
   font-size: 0.875rem;
-  color: var(--text-primary, #333);
+  color: var(--text-primary, #192525);
   transition: all 0.2s ease;
 }
 
 .language-selector__button:hover,
 .language-selector__button:focus {
   background-color: var(--bg-surface-hover, rgba(0, 0, 0, 0.05));
-  border-color: var(--border-color-hover, rgba(0, 0, 0, 0.2));
+  border-color: var(--border-color-hover, #334b4e);
 }
 
 .language-selector__button::after {
@@ -107,7 +107,7 @@ html[dir="rtl"] .language-selector #language-dropdown {
   margin-left: 0.5rem;
   width: 0.5rem;
   height: 0.5rem;
-  border: solid var(--text-primary, #333);
+  border: solid var(--text-primary, #192525);
   border-width: 0 1.5px 1.5px 0;
   transform: rotate(45deg);
   transition: transform 0.2s ease;
@@ -127,7 +127,7 @@ html[dir="rtl"] .language-selector #language-dropdown {
   padding: 0.5rem 0;
   list-style: none;
   background-color: var(--bg-surface, #fff);
-  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+  border: 1px solid var(--border-color, #adb3b7);
   border-radius: 0.25rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   opacity: 0;
@@ -155,7 +155,7 @@ html[dir="rtl"] .language-selector #language-dropdown {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  color: var(--text-primary, #333);
+  color: var(--text-primary, #192525);
   text-decoration: none;
   font-size: 0.875rem;
   transition: background-color 0.2s ease;
@@ -163,7 +163,7 @@ html[dir="rtl"] .language-selector #language-dropdown {
 
 .language-selector__dropdown a:hover,
 .language-selector__dropdown a:focus {
-  background-color: var(--bg-surface-hover, rgba(0, 0, 0, 0.05));
+  background-color: var(--bg-surface-hover, #bac4c3);
   outline: none;
 }
 
@@ -199,41 +199,41 @@ html[dir="rtl"] .language-selector__dropdown {
 /* Estilos para tema oscuro */
 .dark .language-selector__button,
 .dark-mode .language-selector__button {
-  background-color: var(--bg-surface-dark, rgba(255, 255, 255, 0.05));
-  border-color: var(--border-color-dark, rgba(255, 255, 255, 0.1));
-  color: var(--text-primary-dark, #fff);
+  background-color: var(--bg-surface-dark, #243b44);
+  border-color: var(--border-color-dark, #54676d);
+  color: var(--text-primary-dark, #cccfcf);
 }
 
 .dark .language-selector__button::after,
 .dark-mode .language-selector__button::after {
-  border-color: var(--text-primary-dark, #fff);
+  border-color: var(--text-primary-dark, #cccfcf);
 }
 
 .dark .language-selector__button:hover,
 .dark .language-selector__button:focus,
 .dark-mode .language-selector__button:hover,
 .dark-mode .language-selector__button:focus {
-  background-color: var(--bg-surface-hover-dark, rgba(255, 255, 255, 0.1));
-  border-color: var(--border-color-hover-dark, rgba(255, 255, 255, 0.2));
+  background-color: var(--bg-surface-hover-dark, #334b4e);
+  border-color: var(--border-color-hover-dark, #68767c);
 }
 
 .dark .language-selector__dropdown,
 .dark-mode .language-selector__dropdown {
-  background-color: var(--bg-surface-dark, #222);
-  border-color: var(--border-color-dark, rgba(255, 255, 255, 0.1));
+  background-color: var(--bg-surface-dark, #243b44);
+  border-color: var(--border-color-dark, #54676d);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .dark .language-selector__dropdown a,
 .dark-mode .language-selector__dropdown a {
-  color: var(--text-primary-dark, #fff);
+  color: var(--text-primary-dark, #cccfcf);
 }
 
 .dark .language-selector__dropdown a:hover,
 .dark .language-selector__dropdown a:focus,
 .dark-mode .language-selector__dropdown a:hover,
 .dark-mode .language-selector__dropdown a:focus {
-  background-color: var(--bg-surface-hover-dark, rgba(255, 255, 255, 0.05));
+  background-color: var(--bg-surface-hover-dark, #334b4e);
 }
 
 /* Estilos responsive */
