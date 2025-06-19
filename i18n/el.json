@@ -201,62 +201,91 @@
     "reset": "Νέα προσομοίωση",
     "step1": {
       "title": "1. Τύπος έργου και οντότητα",
-      "scope": "Τύπος έργου",
+      "scope": {
+        "select": "Επιλέξτε επιλογή"
+      },
       "scope.select": "Επιλέξτε επιλογή",
       "scope.patrimonial": "Κληρονομικό",
       "scope.inversion": "Επενδυτικό",
-      "entity": "Οντότητα",
+      "entity": {
+        "select": "Επιλέξτε επιλογή"
+      },
       "entity.select": "Επιλέξτε επιλογή",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "στο βήμα 2: Προϋπολογισμός και Δεδομένα Οικοπέδου"
     },
     "step2": {
       "title": "2. Προϋπολογισμός και Δεδομένα Οικοπέδου",
-      "budget": "Συνολικός προϋπολογισμός",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "Διεύθυνση οικοπέδου",
-      "address.placeholder": "π.χ.: J Rousseu 3, Anzures, CDMX",
-      "type": "Τύπος οικοπέδου",
+      "address": {
+        "placeholder": "π.χ.: Λεωφόρος Αλεξάνδρας 15, Αθήνα"
+      },
+      "address.placeholder": "π.χ.: Λεωφόρος Αλεξάνδρας 15, Αθήνα",
+      "type": {
+        "select": "Επιλέξτε τύπο"
+      },
       "type.select": "Επιλέξτε τύπο",
       "type.own": "Ιδιόκτητο",
       "type.notown": "Μη ιδιόκτητο",
       "type.remate": "Πλειστηριασμός",
-      "status": "Κατάσταση",
+      "status": {
+        "select": "Επιλέξτε κατάσταση"
+      },
       "status.select": "Επιλέξτε κατάσταση",
       "status.construccion": "Κατασκευή",
       "status.demolicion": "Κατεδάφιση",
       "status.reconversion": "Μετατροπή",
-      "surface": "Επιφάνεια (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Χρήσιμη επιφάνεια κατασκευής (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Χρήση οικοπέδου",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "Επιλέξτε χρήση",
       "use.defined": "H30/20/Z (Έχω τη χρήση)",
       "use.undefined": "Μη ορισμένο (Υποθέστε 0,6)",
       "use.request": "Μη ορισμένο (Θέλω να το ζητήσω)",
-      "characteristics": "Χαρακτηριστικά",
-      "characteristics.placeholder": "Προστατευμένο, Μη εφαρμόσιμο..."
+      "characteristics": {
+        "placeholder": "Προστατεύεται, Δεν ισχύει..."
+      },
+      "characteristics.placeholder": "Προστατευμένο, Μη εφαρμόσιμο...",
+      "prev_description": "στο βήμα 1: Τύπος έργου και οντότητα",
+      "next_description": "στο βήμα 3: Κατανομή κόστους"
     },
     "step3": {
       "title": "3. Κατανομή κόστους",
       "materialesLevel": "Επίπεδο υλικών",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
+      "materialesLevel.low": "Χαμηλό Κόστος",
+      "materialesLevel.medium": "Μεσαίο Κόστος",
+      "materialesLevel.high": "Υψηλό Κόστος",
+      "materialesLevel.custom": "Προσαρμοσμένο",
       "regulatorio": "Κανονιστικό",
       "materiales": "Υλικά",
       "construccion": "Κατασκευή",
       "arquitectura": "Αρχιτεκτονική",
       "diseno": "Σχεδιασμός",
-      "arte": "Τέχνη"
+      "arte": "Τέχνη",
+      "prev_description": "στο βήμα 2: Προϋπολογισμός και Δεδομένα Οικοπέδου",
+      "next_description": "στο βήμα 4: Αποτελέσματα και σύνοψη"
     },
     "step4": {
-      "title": "4. Αποτελέσματα και σύνοψη"
+      "title": "4. Αποτελέσματα και σύνοψη",
+      "prev_description": "στο βήμα 3: Κατανομή κόστους",
+      "reset_description": "επαναφορά φόρμας"
     },
     "tooltips": {
-      "budgetTotal": "Περιλαμβάνει οικόπεδο και κατασκευή, εξαιρείται η ρύθμιση."
+      "budgetTotal": "Περιλαμβάνει οικόπεδο και κατασκευή, εξαιρείται η ρύθμιση.",
+      "usableSurface": "Χρησιμοποιήσιμη περιοχή για κατασκευή σύμφωνα με τη χρήση γης.",
+      "materialesLevel": "Καθορίζει το εύρος ποιότητας και κόστους των υλικών."
     },
     "export": {
       "pdf": "Εξαγωγή PDF",
@@ -300,7 +329,9 @@
       "address": "Διεύθυνση:",
       "surface": "Επιφάνεια:",
       "usableSurface": "Χρήσιμη επιφάνεια:",
-      "use": "Χρήση οικοπέδου:"
+      "use": "Χρήση οικοπέδου:",
+      "type": "Τύπος οικοπέδου:",
+      "status": "Κατάσταση:"
     },
     "result": {
       "totalCost": "Συνολικό κόστος:",
@@ -340,6 +371,15 @@
         "high": "Υψηλό Κόστος",
         "custom": "Προσαρμοσμένο"
       }
+    },
+    "form": {
+      "required_field": "Αυτό το πεδίο είναι απαραίτητο για να συνεχίσετε",
+      "budget_description": "Συνολικός προϋπολογισμός έργου συμπεριλαμβανομένου του οικοπέδου",
+      "address_description": "Πλήρης τοποθεσία του οικοπέδου",
+      "type_description": "Επιλέξτε την κατηγορία του οικοπέδου",
+      "status_description": "Τρέχουσα κατάσταση του οικοπέδου",
+      "surface_description": "Συνολική επιφάνεια του οικοπέδου σε τετραγωνικά μέτρα",
+      "usableSurface_description": "Επιφάνεια που μπορεί να οικοδομηθεί"
     }
   }
 }

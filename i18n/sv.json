@@ -201,62 +201,91 @@
     "reset": "Ny simulering",
     "step1": {
       "title": "1. Projekttyp och enhet",
-      "scope": "Projekttyp",
+      "scope": {
+        "select": "Välj ett alternativ"
+      },
       "scope.select": "Välj ett alternativ",
       "scope.patrimonial": "Kapital",
       "scope.inversion": "Investering",
-      "entity": "Enhet",
+      "entity": {
+        "select": "Välj ett alternativ"
+      },
       "entity.select": "Välj ett alternativ",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "Till steg 2: Budget och Fastighetsdata"
     },
     "step2": {
       "title": "2. Budget och Fastighetsdata",
-      "budget": "Total budget",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "Fastighetens adress",
-      "address.placeholder": "Ex: J Rousseu 3, Anzures, CDMX",
-      "type": "Typ av fastighet",
+      "address": {
+        "placeholder": "Ex: Sveavägen 44, 111 34 Stockholm"
+      },
+      "address.placeholder": "Ex: Sveavägen 44, 111 34 Stockholm",
+      "type": {
+        "select": "Välj en typ"
+      },
       "type.select": "Välj en typ",
       "type.own": "Egen",
       "type.notown": "Ej egen",
       "type.remate": "Exekutiv auktion",
-      "status": "Status",
+      "status": {
+        "select": "Välj en status"
+      },
       "status.select": "Välj status",
       "status.construccion": "Byggnation",
       "status.demolicion": "Rivning",
       "status.reconversion": "Omvandling",
-      "surface": "Yta (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Användbar byggyta (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Tomtens användning",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "Välj användning",
       "use.defined": "H30/20/Z (Jag har användningen)",
       "use.undefined": "Ej definierad (Anta 0,6)",
       "use.request": "Ej definierad (Jag vill ansöka)",
-      "characteristics": "Egenskaper",
-      "characteristics.placeholder": "Skyddad, Ej tillämplig..."
+      "characteristics": {
+        "placeholder": "Skyddad, Ej tillämplig..."
+      },
+      "characteristics.placeholder": "Skyddad, Ej tillämplig...",
+      "prev_description": "Tillbaka till steg 1: Projekttyp och enhet",
+      "next_description": "Till steg 3: Kostnadsuppdelning"
     },
     "step3": {
       "title": "3. Kostnadsuppdelning",
       "materialesLevel": "Materialnivå",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
+      "materialesLevel.low": "Låg kostnad",
+      "materialesLevel.medium": "Medelkostnad",
+      "materialesLevel.high": "Hög kostnad",
+      "materialesLevel.custom": "Anpassad",
       "regulatorio": "Reglerande",
       "materiales": "Material",
       "construccion": "Konstruktion",
       "arquitectura": "Arkitektur",
       "diseno": "Design",
-      "arte": "Konst"
+      "arte": "Konst",
+      "prev_description": "Tillbaka till steg 2: Budget och Fastighetsdata",
+      "next_description": "Till steg 4: Resultat och sammanfattning"
     },
     "step4": {
-      "title": "4. Resultat och sammanfattning"
+      "title": "4. Resultat och sammanfattning",
+      "prev_description": "Tillbaka till steg 3: Kostnadsuppdelning",
+      "reset_description": "Återställ formuläret"
     },
     "tooltips": {
-      "budgetTotal": "Inkluderar tomt och byggnation, exkluderar reglering."
+      "budgetTotal": "Inkluderar tomt och byggnation, exkluderar reglering.",
+      "usableSurface": "Användbar yta för byggnation enligt markanvändning.",
+      "materialesLevel": "Definierar kvalitets- och kostnadsintervall för material."
     },
     "export": {
       "pdf": "Exportera PDF",
@@ -300,7 +329,9 @@
       "address": "Adress:",
       "surface": "Yta:",
       "usableSurface": "Användbar yta:",
-      "use": "Tomtens användning:"
+      "use": "Tomtens användning:",
+      "type": "Tomttyp:",
+      "status": "Status:"
     },
     "result": {
       "totalCost": "Total kostnad:",
@@ -340,6 +371,15 @@
         "high": "Hög kostnad",
         "custom": "Anpassad"
       }
+    },
+    "form": {
+      "required_field": "Detta fält är obligatoriskt för att fortsätta",
+      "budget_description": "Total projektbudget inklusive mark",
+      "address_description": "Fullständig plats för fastigheten",
+      "type_description": "Välj markkategori",
+      "status_description": "Markens nuvarande status",
+      "surface_description": "Total yta av marken i kvadratmeter",
+      "usableSurface_description": "Yta som kan bebyggas"
     }
   }
 }

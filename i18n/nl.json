@@ -201,62 +201,91 @@
     "reset": "Nieuwe simulatie",
     "step1": {
       "title": "1. Projecttype en entiteit",
-      "scope": "Projecttype",
+      "scope": {
+        "select": "Selecteer een optie"
+      },
       "scope.select": "Selecteer een optie",
       "scope.patrimonial": "Patrimoniaal",
       "scope.inversion": "Investering",
-      "entity": "Entiteit",
+      "entity": {
+        "select": "Selecteer een optie"
+      },
       "entity.select": "Selecteer een optie",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "naar stap 2: Budget en Landgegevens"
     },
     "step2": {
       "title": "2. Budget en Landgegevens",
-      "budget": "Totaal budget",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "Adres van het land",
-      "address.placeholder": "Bijv.: J Rousseu 3, Anzures, CDMX",
-      "type": "Type land",
+      "address": {
+        "placeholder": "Bijv.: Herengracht 100, Amsterdam"
+      },
+      "address.placeholder": "Bijv.: Herengracht 100, Amsterdam",
+      "type": {
+        "select": "Selecteer een type"
+      },
       "type.select": "Selecteer een type",
       "type.own": "Eigen",
       "type.notown": "Niet eigen",
       "type.remate": "Veiling",
-      "status": "Status",
+      "status": {
+        "select": "Selecteer een status"
+      },
       "status.select": "Selecteer een status",
       "status.construccion": "Constructie",
       "status.demolicion": "Sloop",
       "status.reconversion": "Herontwikkeling",
-      "surface": "Oppervlakte (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Bruikbare bouwoppervlakte (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Perceelgebruik",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "Selecteer gebruik",
       "use.defined": "H30/20/Z (Gebruik bekend)",
       "use.undefined": "Niet gedefinieerd (Neem 0,6 aan)",
       "use.request": "Niet gedefinieerd (Wil aanvragen)",
-      "characteristics": "Kenmerken",
-      "characteristics.placeholder": "Beschermd, Niet van toepassing..."
+      "characteristics": {
+        "placeholder": "Beschermd, Niet van toepassing..."
+      },
+      "characteristics.placeholder": "Beschermd, Niet van toepassing...",
+      "prev_description": "naar stap 1: Projecttype en entiteit",
+      "next_description": "naar stap 3: Kostenoverzicht"
     },
     "step3": {
       "title": "3. Kostenoverzicht",
       "materialesLevel": "Materiaalniveau",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
+      "materialesLevel.low": "Lage kosten",
+      "materialesLevel.medium": "Gemiddelde kosten",
+      "materialesLevel.high": "Hoge kosten",
+      "materialesLevel.custom": "Aangepast",
       "regulatorio": "Regelgeving",
       "materiales": "Materialen",
       "construccion": "Constructie",
       "arquitectura": "Architectuur",
       "diseno": "Ontwerp",
-      "arte": "Kunst"
+      "arte": "Kunst",
+      "prev_description": "naar stap 2: Budget en Landgegevens",
+      "next_description": "naar stap 4: Resultaten en samenvatting"
     },
     "step4": {
-      "title": "4. Resultaten en samenvatting"
+      "title": "4. Resultaten en samenvatting",
+      "prev_description": "naar stap 3: Kostenoverzicht",
+      "reset_description": "formulier resetten"
     },
     "tooltips": {
-      "budgetTotal": "Inclusief perceel en bouw, exclusief regelgeving."
+      "budgetTotal": "Inclusief perceel en bouw, exclusief regelgeving.",
+      "usableSurface": "Bruikbare oppervlakte voor bebouwing volgens landgebruik.",
+      "materialesLevel": "Bepaalt het bereik van kwaliteit en kosten van materialen."
     },
     "export": {
       "pdf": "PDF exporteren",
@@ -300,7 +329,9 @@
       "address": "Adres:",
       "surface": "Oppervlakte:",
       "usableSurface": "Bruikbare oppervlakte:",
-      "use": "Perceelgebruik:"
+      "use": "Perceelgebruik:",
+      "type": "Type perceel:",
+      "status": "Status:"
     },
     "result": {
       "totalCost": "Totale kosten:",
@@ -340,6 +371,15 @@
         "high": "Hoge kosten",
         "custom": "Aangepast"
       }
+    },
+    "form": {
+      "required_field": "Dit veld is verplicht om door te gaan",
+      "budget_description": "Totaal projectbudget inclusief grond",
+      "address_description": "Volledige locatie van het perceel",
+      "type_description": "Selecteer de perceelcategorie",
+      "status_description": "Huidige status van het perceel",
+      "surface_description": "Totale oppervlakte van het perceel in vierkante meters",
+      "usableSurface_description": "Oppervlakte die bebouwd kan worden"
     }
   }
 }

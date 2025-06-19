@@ -201,62 +201,91 @@
     "reset": "Neue Simulation",
     "step1": {
       "title": "1. Projekttyp und Entität",
-      "scope": "Projekttyp",
+      "scope": {
+        "select": "Option auswählen"
+      },
       "scope.select": "Option auswählen",
       "scope.patrimonial": "Patrimonial",
       "scope.inversion": "Investition",
-      "entity": "Entität",
+      "entity": {
+        "select": "Option auswählen"
+      },
       "entity.select": "Option auswählen",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "zu Schritt 2: Budget und Grundstücksdaten"
     },
     "step2": {
       "title": "2. Budget und Grundstücksdaten",
-      "budget": "Gesamtbudget",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "Grundstücksadresse",
-      "address.placeholder": "z.B.: J Rousseu 3, Anzures, CDMX",
-      "type": "Grundstückstyp",
+      "address": {
+        "placeholder": "z.B.: Friedrichstraße 123, 10117 Berlin"
+      },
+      "address.placeholder": "z.B.: Friedrichstraße 123, 10117 Berlin",
+      "type": {
+        "select": "Typ auswählen"
+      },
       "type.select": "Typ auswählen",
       "type.own": "Eigen",
       "type.notown": "Nicht Eigen",
       "type.remate": "Zwangsversteigerung",
-      "status": "Status",
+      "status": {
+        "select": "Status auswählen"
+      },
       "status.select": "Status auswählen",
       "status.construccion": "Bau",
       "status.demolicion": "Abriss",
       "status.reconversion": "Umnutzung",
-      "surface": "Fläche (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Nutzbare Baufläche (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Bodennutzung",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "Nutzung auswählen",
       "use.defined": "H30/20/Z (Ich habe die Nutzung)",
       "use.undefined": "Nicht definiert (0.6 annehmen)",
       "use.request": "Zu definieren (Ich möchte beantragen)",
-      "characteristics": "Eigenschaften",
-      "characteristics.placeholder": "Geschützt, Nicht anwendbar..."
+      "characteristics": {
+        "placeholder": "Geschützt, Nicht zutreffend..."
+      },
+      "characteristics.placeholder": "Geschützt, Nicht anwendbar...",
+      "prev_description": "zu Schritt 1: Projekttyp und Entität",
+      "next_description": "zu Schritt 3: Kostenaufschlüsselung"
     },
     "step3": {
       "title": "3. Kostenaufschlüsselung",
       "materialesLevel": "Materialniveau",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
+      "materialesLevel.low": "Niedrige Kosten",
+      "materialesLevel.medium": "Mittlere Kosten",
+      "materialesLevel.high": "Hohe Kosten",
+      "materialesLevel.custom": "Benutzerdefiniert",
       "regulatorio": "Regulativ",
       "materiales": "Materialien",
       "construccion": "Konstruktion",
       "arquitectura": "Architektur",
       "diseno": "Design",
-      "arte": "Kunst"
+      "arte": "Kunst",
+      "prev_description": "zu Schritt 2: Budget und Grundstücksdaten",
+      "next_description": "zu Schritt 4: Ergebnisse und Zusammenfassung"
     },
     "step4": {
-      "title": "4. Ergebnisse und Zusammenfassung"
+      "title": "4. Ergebnisse und Zusammenfassung",
+      "prev_description": "zu Schritt 3: Kostenaufschlüsselung",
+      "reset_description": "Formular zurücksetzen"
     },
     "tooltips": {
-      "budgetTotal": "Enthält Grundstück und Bau, ohne Regulierung."
+      "budgetTotal": "Enthält Grundstück und Bau, ohne Regulierung.",
+      "usableSurface": "Nutzbare Fläche für den Bau gemäß Flächennutzung.",
+      "materialesLevel": "Definiert die Qualitäts- und Kostenspanne der Materialien."
     },
     "export": {
       "pdf": "PDF exportieren",
@@ -300,7 +329,9 @@
       "address": "Adresse:",
       "surface": "Fläche:",
       "usableSurface": "Nutzfläche:",
-      "use": "Nutzung:"
+      "use": "Nutzung:",
+      "type": "Grundstückstyp:",
+      "status": "Status:"
     },
     "result": {
       "totalCost": "Gesamtkosten:",
@@ -340,6 +371,15 @@
         "high": "Hohe Kosten",
         "custom": "Benutzerdefiniert"
       }
+    },
+    "form": {
+      "required_field": "Dieses Feld ist erforderlich, um fortzufahren",
+      "budget_description": "Gesamtbudget des Projekts einschließlich Grundstück",
+      "address_description": "Vollständiger Standort des Grundstücks",
+      "type_description": "Wählen Sie die Grundstückskategorie",
+      "status_description": "Aktueller Status des Grundstücks",
+      "surface_description": "Gesamtfläche des Grundstücks in Quadratmetern",
+      "usableSurface_description": "Bebaubare Fläche"
     }
   }
 }
