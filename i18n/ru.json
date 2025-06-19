@@ -201,62 +201,91 @@
     "reset": "Новая симуляция",
     "step1": {
       "title": "1. Тип проекта и субъект",
-      "scope": "Тип проекта",
+      "scope": {
+        "select": "Выберите опцию"
+      },
       "scope.select": "Выберите опцию",
       "scope.patrimonial": "Патримониальный",
       "scope.inversion": "Инвестиционный",
-      "entity": "Субъект",
+      "entity": {
+        "select": "Выберите опцию"
+      },
       "entity.select": "Выберите опцию",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "К шагу 2: Бюджет и данные о земле"
     },
     "step2": {
       "title": "2. Бюджет и данные о земле",
-      "budget": "Общий бюджет",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "Адрес участка",
-      "address.placeholder": "Пример: J Rousseu 3, Anzures, CDMX",
-      "type": "Тип земли",
+      "address": {
+        "placeholder": "Например: ул. Тверская 10, Москва"
+      },
+      "address.placeholder": "Например: ул. Тверская 10, Москва",
+      "type": {
+        "select": "Выберите тип"
+      },
       "type.select": "Выберите тип",
       "type.own": "Собственный",
       "type.notown": "Не собственный",
       "type.remate": "Аукцион",
-      "status": "Статус",
+      "status": {
+        "select": "Выберите статус"
+      },
       "status.select": "Выберите статус",
       "status.construccion": "Строительство",
       "status.demolicion": "Снос",
       "status.reconversion": "Реконверсия",
-      "surface": "Площадь (м²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Полезная строительная площадь (м²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Назначение участка",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "Выберите назначение",
       "use.defined": "H30/20/Z (Назначение есть)",
       "use.undefined": "Не определено (предположить 0.6)",
       "use.request": "Не определено (хочу запросить)",
-      "characteristics": "Характеристики",
-      "characteristics.placeholder": "Охраняется, не применяется..."
+      "characteristics": {
+        "placeholder": "Охраняется, не применяется..."
+      },
+      "characteristics.placeholder": "Охраняется, не применяется...",
+      "prev_description": "К шагу 1: Тип проекта и субъект",
+      "next_description": "К шагу 3: Структура затрат"
     },
     "step3": {
       "title": "3. Структура затрат",
       "materialesLevel": "Уровень материалов",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
+      "materialesLevel.low": "Низкая стоимость",
+      "materialesLevel.medium": "Средняя стоимость",
+      "materialesLevel.high": "Высокая стоимость",
+      "materialesLevel.custom": "Настраиваемый",
       "regulatorio": "Регуляторные",
       "materiales": "Материалы",
       "construccion": "Строительство",
       "arquitectura": "Архитектура",
       "diseno": "Дизайн",
-      "arte": "Искусство"
+      "arte": "Искусство",
+      "prev_description": "К шагу 2: Бюджет и данные о земле",
+      "next_description": "К шагу 4: Результаты и сводка"
     },
     "step4": {
-      "title": "4. Результаты и сводка"
+      "title": "4. Результаты и сводка",
+      "prev_description": "К шагу 3: Структура затрат",
+      "reset_description": "Сбросить форму"
     },
     "tooltips": {
-      "budgetTotal": "Включает участок и строительство, не включает регуляторные расходы."
+      "budgetTotal": "Включает участок и строительство, не включает регуляторные расходы.",
+      "usableSurface": "Полезная площадь для строительства согласно использованию земли.",
+      "materialesLevel": "Определяет диапазон качества и стоимости материалов."
     },
     "export": {
       "pdf": "Экспорт PDF",
@@ -300,7 +329,9 @@
       "address": "Адрес:",
       "surface": "Площадь:",
       "usableSurface": "Полезная площадь:",
-      "use": "Назначение участка:"
+      "use": "Назначение участка:",
+      "type": "Тип участка:",
+      "status": "Статус:"
     },
     "result": {
       "totalCost": "Общие затраты:",
@@ -340,6 +371,15 @@
         "high": "Высокая стоимость",
         "custom": "Пользовательский"
       }
+    },
+    "form": {
+      "required_field": "Это поле обязательно для заполнения",
+      "budget_description": "Общий бюджет проекта, включая землю",
+      "address_description": "Полное местоположение земельного участка",
+      "type_description": "Выберите категорию земельного участка",
+      "status_description": "Текущий статус земельного участка",
+      "surface_description": "Общая площадь земельного участка в квадратных метрах",
+      "usableSurface_description": "Площадь, доступная для застройки"
     }
   }
 }
