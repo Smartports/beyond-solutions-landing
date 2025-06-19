@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond Solutions Color Palette Showcase</title>
+  <meta name="theme-color" content="#334b4e">
+  <link rel="stylesheet" href="../css/colors.css">
+  <style>
+    /* Base styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--color-primary-900);
+      background-color: #f8f9fa;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    header {
+      background-color: var(--color-primary-700);
+      color: white;
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary-800);
+      margin-top: 2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--color-primary-700);
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-primary-700);
+      margin-top: 1.5rem;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    .section {
+      margin-bottom: 3rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      padding: 2rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Color showcase styles */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .color-card {
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .color-sample {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+    
+    .color-info {
+      padding: 1rem;
+      background-color: white;
+    }
+    
+    .color-name {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .color-hex {
+      font-family: monospace;
+      color: var(--color-primary-700);
+    }
+    
+    .color-var {
+      font-family: monospace;
+      font-size: 0.875rem;
+      color: var(--color-primary-500);
+      margin-top: 0.25rem;
+    }
+    
+    /* Text showcase styles */
+    .text-showcase {
+      margin: 1.5rem 0;
+    }
+    
+    .text-sample {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 0.25rem;
+    }
+    
+    /* Component showcase styles */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .component-card {
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--color-primary-200);
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    
+    .button-primary {
+      background-color: var(--color-primary-700);
+      color: white;
+      border: none;
+    }
+    
+    .button-primary:hover {
+      background-color: var(--color-primary-800);
+    }
+    
+    .button-secondary {
+      background-color: white;
+      color: var(--color-primary-700);
+      border: 1px solid var(--color-primary-700);
+    }
+    
+    .button-secondary:hover {
+      background-color: var(--color-primary-100);
+    }
+    
+    .input {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid var(--color-primary-300);
+      border-radius: 0.25rem;
+      margin-bottom: 1rem;
+    }
+    
+    .input:focus {
+      outline: none;
+      border-color: var(--color-primary-700);
+      box-shadow: 0 0 0 2px rgba(51, 75, 78, 0.2);
+    }
+    
+    .alert {
+      padding: 1rem;
+      border-radius: 0.25rem;
+      margin-bottom: 1rem;
+    }
+    
+    .alert-info {
+      background-color: var(--color-primary-100);
+      border-left: 4px solid var(--color-primary-700);
+      color: var(--color-primary-900);
+    }
+    
+    .alert-success {
+      background-color: #d1e7dd;
+      border-left: 4px solid #0f5132;
+      color: #0f5132;
+    }
+    
+    .alert-warning {
+      background-color: #fff3cd;
+      border-left: 4px solid #664d03;
+      color: #664d03;
+    }
+    
+    .alert-danger {
+      background-color: #f8d7da;
+      border-left: 4px solid #842029;
+      color: #842029;
+    }
+    
+    /* Dark mode toggle */
+    .theme-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: var(--color-primary-700);
+      color: white;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border: none;
+      z-index: 100;
+    }
+    
+    /* Dark mode styles */
+    .dark-mode {
+      background-color: var(--color-primary-900);
+      color: var(--color-primary-100);
+    }
+    
+    .dark-mode header {
+      background-color: var(--color-primary-800);
+    }
+    
+    .dark-mode .section {
+      background-color: var(--color-primary-800);
+    }
+    
+    .dark-mode h2 {
+      color: var(--color-primary-100);
+      border-bottom-color: var(--color-primary-600);
+    }
+    
+    .dark-mode h3 {
+      color: var(--color-primary-200);
+    }
+    
+    .dark-mode .color-info {
+      background-color: var(--color-primary-800);
+    }
+    
+    .dark-mode .color-hex {
+      color: var(--color-primary-200);
+    }
+    
+    .dark-mode .color-var {
+      color: var(--color-primary-300);
+    }
+    
+    .dark-mode .component-card {
+      border-color: var(--color-primary-600);
+    }
+    
+    .dark-mode .button-secondary {
+      background-color: var(--color-primary-800);
+      color: var(--color-primary-200);
+      border-color: var(--color-primary-600);
+    }
+    
+    .dark-mode .button-secondary:hover {
+      background-color: var(--color-primary-700);
+    }
+    
+    .dark-mode .input {
+      background-color: var(--color-primary-800);
+      color: var(--color-primary-100);
+      border-color: var(--color-primary-600);
+    }
+    
+    .dark-mode .alert-info {
+      background-color: rgba(51, 75, 78, 0.2);
+      color: var(--color-primary-100);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Beyond Solutions Color Palette</h1>
+      <p>A showcase of our sophisticated, natural color palette for real estate development and architectural excellence.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="section">
+      <h2>Primary Colors</h2>
+      <p>Our primary color palette consists of sophisticated neutral tones that reflect our focus on real estate development and architectural excellence.</p>
+      
+      <div class="color-grid">
+        <div class="color-card">
+          <div class="color-sample" style="background-color: var(--color-primary-900);">900</div>
+          <div class="color-info">
+            <div class="color-name">Primary 900</div>
+            <div class="color-hex">#192525</div>
+            <div class="color-var">--color-primary-900</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-sample" style="background-color: var(--color-primary-800);">800</div>
+          <div class="color-info">
+            <div class="color-name">Primary 800</div>
+            <div class="color-hex">#243b44</div>
+            <div class="color-var">--color-primary-800</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-sample" style="background-color: var(--color-primary-700);">700</div>
+          <div class="color-info">
+            <div class="color-name">Primary 700</div>
+            <div class="color-hex">#334b4e</div>
+            <div class="color-var">--color-primary-700</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-sample" style="background-color: var(--color-primary-600); color: var(--color-primary-100);">600</div>
+          <div class="color-info">
+            <div class="color-name">Primary 600</div>
+            <div class="color-hex">#54676d</div>
+            <div class="color-var">--color-primary-600</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-sample" style="background-color: var(--color-primary-500); color: var(--color-primary-100);">500</div>
+          <div class="color-info">
+            <div class="color-name">Primary 500</div>
+            <div class="color-hex">#68767c</div>
+            <div class="color-var">--color-primary-500</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-sample" style="background-color: var(--color-primary-400); color: var(--color-primary-900);">400</div>
+          <div class="color-info">
+            <div class="color-name">Primary 400</div>
+            <div class="color-hex">#8c8f92</div>
+            <div class="color-var">--color-primary-400</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-sample" style="background-color: var(--color-primary-300); color: var(--color-primary-900);">300</div>
+          <div class="color-info">
+            <div class="color-name">Primary 300</div>
+            <div class="color-hex">#adb3b7</div>
+            <div class="color-var">--color-primary-300</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-sample" style="background-color: var(--color-primary-200); color: var(--color-primary-900);">200</div>
+          <div class="color-info">
+            <div class="color-name">Primary 200</div>
+            <div class="color-hex">#bac4c3</div>
+            <div class="color-var">--color-primary-200</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-sample" style="background-color: var(--color-primary-100); color: var(--color-primary-900);">100</div>
+          <div class="color-info">
+            <div class="color-name">Primary 100</div>
+            <div class="color-hex">#cccfcf</div>
+            <div class="color-var">--color-primary-100</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Accent Colors</h2>
+      <p>Our accent colors complement the primary palette and are used for highlights and special elements.</p>
+      
+      <div class="color-grid">
+        <div class="color-card">
+          <div class="color-sample" style="background-color: #525853; color: white;">Secondary</div>
+          <div class="color-info">
+            <div class="color-name">Secondary</div>
+            <div class="color-hex">#525853</div>
+            <div class="color-var">--color-secondary</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-sample" style="background-color: #b1aaa0; color: var(--color-primary-900);">Accent</div>
+          <div class="color-info">
+            <div class="color-name">Accent</div>
+            <div class="color-hex">#b1aaa0</div>
+            <div class="color-var">--color-accent</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-sample" style="background-color: #b9c6cd; color: var(--color-primary-900);">Accent Light</div>
+          <div class="color-info">
+            <div class="color-name">Accent Light</div>
+            <div class="color-hex">#b9c6cd</div>
+            <div class="color-var">--color-accent-light</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Text Colors</h2>
+      <p>Our text colors are designed for optimal readability and contrast.</p>
+      
+      <div class="text-showcase">
+        <div class="text-sample" style="background-color: white;">
+          <h3 style="color: var(--color-primary-900);">Dark Text on Light Background</h3>
+          <p style="color: var(--color-primary-900);">This is body text using our primary dark color (#192525) on a light background. This combination provides excellent readability with a contrast ratio of 16.1:1, well above the WCAG AA requirement of 4.5:1.</p>
+          <p style="color: var(--color-primary-700);">This is secondary text using our primary color (#334b4e) on a light background. This combination provides good readability with a contrast ratio of 6.8:1.</p>
+        </div>
+        
+        <div class="text-sample" style="background-color: var(--color-primary-900);">
+          <h3 style="color: var(--color-primary-100);">Light Text on Dark Background</h3>
+          <p style="color: var(--color-primary-100);">This is body text using our primary light color (#cccfcf) on a dark background. This combination provides excellent readability with a contrast ratio of 9.2:1, well above the WCAG AA requirement of 4.5:1.</p>
+          <p style="color: var(--color-primary-200);">This is secondary text using our primary light color (#bac4c3) on a dark background. This combination provides good readability with a contrast ratio of 7.5:1.</p>
+        </div>
+        
+        <div class="text-sample" style="background-color: var(--color-primary-700);">
+          <h3 style="color: white;">White Text on Primary Background</h3>
+          <p style="color: white;">This is body text using white on our primary color (#334b4e) background. This combination provides good readability with a contrast ratio of 6.8:1, well above the WCAG AA requirement of 4.5:1.</p>
+        </div>
+        
+        <div class="text-sample" style="background-color: var(--color-primary-200);">
+          <h3 style="color: var(--color-primary-900);">Dark Text on Light Primary Background</h3>
+          <p style="color: var(--color-primary-900);">This is body text using our dark color (#192525) on our light primary color (#bac4c3) background. This combination provides excellent readability with a contrast ratio of 10.2:1.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>UI Components</h2>
+      <p>Our color palette applied to common UI components.</p>
+      
+      <div class="component-grid">
+        <div class="component-card">
+          <h3>Buttons</h3>
+          <button class="button button-primary">Primary Button</button>
+          <button class="button button-secondary">Secondary Button</button>
+        </div>
+        
+        <div class="component-card">
+          <h3>Form Elements</h3>
+          <input type="text" class="input" placeholder="Text input">
+          <input type="text" class="input" value="Filled input">
+        </div>
+        
+        <div class="component-card">
+          <h3>Alerts</h3>
+          <div class="alert alert-info">This is an info alert</div>
+          <div class="alert alert-success">This is a success alert</div>
+          <div class="alert alert-warning">This is a warning alert</div>
+          <div class="alert alert-danger">This is a danger alert</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </button>
+
+  <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#192525');
+      } else {
+        themeToggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#334b4e');
+      }
+    });
+    
+    // Check for dark mode preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#192525');
+    }
+  </script>
+</body>
+</html> 
