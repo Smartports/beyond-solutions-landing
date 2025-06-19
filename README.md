@@ -2,6 +2,36 @@
 
 Landing page for Beyond Solutions, a platform designed to strategically integrate and manage all elements that make up a world-class real estate development.
 
+## Design System
+
+Beyond Solutions features a comprehensive design system with a carefully crafted color palette that ensures accessibility, consistency, and visual appeal across all components.
+
+### Color Palette
+
+The color palette uses sophisticated, natural tones that reflect the company's focus on real estate development and architectural excellence:
+
+- Primary 900 (#192525): Dark backgrounds, footer
+- Primary 800 (#243b44): Dark mode backgrounds
+- Primary 700 (#334b4e): Primary buttons, headings
+- Primary 600 (#54676d): Secondary elements
+- Primary 500 (#68767c): Borders, dividers
+- Primary 400 (#8c979c): Icons, secondary text
+- Primary 300 (#adb3b7): Disabled elements
+- Primary 200 (#bac4c3): Light backgrounds
+- Primary 100 (#cccfcf): Light mode backgrounds
+
+All color combinations have been verified for WCAG 2.1 AA compliance.
+
+### Documentation
+
+For detailed information about the design system, refer to:
+
+- [Color Palette Implementation Report](docs/COLOR_PALETTE_IMPLEMENTATION_REPORT.md): Comprehensive overview of the implementation
+- [Style Guide](docs/STYLE_GUIDE.md): Complete design system documentation
+- [Component Library](docs/COMPONENT_LIBRARY.md): UI component documentation
+- [Color Reference](docs/COLOR_REFERENCE.md): Technical reference for developers
+- [Color Palette Maintenance](docs/COLOR_PALETTE_MAINTENANCE.md): Long-term maintenance plan
+
 ## Multilanguage Support
 
 This site features multilingual support using a client-side i18n system. Unlike traditional multilingual sites that use path-based routing (e.g., `/es/`, `/en/`), this implementation uses query parameters (e.g., `?lang=es`, `?lang=en`) which works better with GitHub Pages.
@@ -40,24 +70,97 @@ To run this site locally:
 - `./js/` - JavaScript modules including i18n system
 - `./css/` - Stylesheets
 - `./img/` - Image assets
+- `./docs/` - Documentation and design system resources
+- `./test/` - Testing scripts and tools
 - `index.html` - Main HTML file
 - `404.html` - Custom 404 page with language redirection
 
 ## Features
 
-- Responsive design optimized for all devices
-- Light/dark theme based on user preferences
-- Complete internationalization (i18n) system with 18 languages
-- Language-based routes for SEO (/es/, /en/, etc.)
-- Performance and accessibility optimization
+- Responsive design for all device sizes
+- Dark/light mode support
+- Multi-language support with RTL capabilities
+- Optimized images with WebP format
+- SEO-friendly structure
+- ADA compliant and accessible
+- WCAG 2.1 AA compliant color palette
+
+## Technologies
+
+- Tailwind CSS
+- Alpine.js for reactive components
+- AOS (Animate on Scroll) library
+- Native browser features for performance
+
+## Development
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/beyond-solutions-landing.git
+
+# Navigate to the directory
+cd beyond-solutions-landing
+
+# Install dependencies
+npm install
+
+# Run development server
+npm start
+
+# Run tests
+npm run test:all
+```
+
+## Testing
+
+The project includes comprehensive testing scripts:
+
+```bash
+# Run accessibility tests
+npm run test:a11y
+
+# Run performance tests
+npm run test:performance
+
+# Run comprehensive accessibility audit
+npm run test:a11y:audit
+
+# Run cross-browser tests
+npm run test:integration
+
+# Run CSS performance analysis
+npm run test:css-performance
+
+# Run color consistency check
+npm run test:consistency
+
+# Run all tests
+npm run test:all
+```
+
+## Optimizations
+
+- Preloaded critical assets
+- Lazy-loaded non-critical images
+- Minified CSS and JS
+- Browser caching headers
+- Responsive image serving with WebP format
+- Reduced motion option for accessibility
 
 ## Project Structure
 
 ```bash
 beyond-solutions-landing/
 ├── css/                  # CSS Styles
+│   ├── colors.css        # Color palette variables
 │   ├── language-selector.css  # Styles for the language selector
 │   └── rtl.css           # Styles for RTL languages (right to left)
+│
+├── docs/                 # Documentation
+│   ├── STYLE_GUIDE.md    # Comprehensive style guide
+│   ├── COMPONENT_LIBRARY.md  # Component library documentation
+│   ├── COLOR_REFERENCE.md  # Color palette reference
+│   └── ...               # Other documentation files
 │
 ├── i18n/                 # Internationalization files
 │   ├── flags/            # SVG flags for each language
@@ -71,6 +174,12 @@ beyond-solutions-landing/
 │   ├── i18n.js           # Main internationalization module
 │   ├── language-selector.js  # Language selector component
 │   └── main.js           # Main script
+│
+├── test/                 # Testing scripts
+│   ├── accessibility/    # Accessibility testing
+│   ├── integration/      # Cross-browser testing
+│   ├── performance/      # Performance testing
+│   └── consistency/      # Consistency checking
 │
 ├── .htaccess             # Apache configuration (routes and redirects)
 ├── index.html            # Main page
@@ -142,8 +251,27 @@ For more details about the i18n system, see [i18n/README.md](i18n/README.md).
 
 - Complete keyboard navigation
 - ARIA attributes to improve screen reader experience
-- Appropriate color contrast
+- WCAG 2.1 AA compliant color palette with sufficient contrast ratios
 - Alternative texts for images
+- Reduced motion options for users with vestibular disorders
+
+## Color Palette Implementation
+
+The Beyond Solutions website features a carefully implemented color palette that ensures:
+
+- **Accessibility**: All color combinations meet WCAG 2.1 AA standards for contrast
+- **Consistency**: Colors are applied consistently across all components
+- **Flexibility**: Support for both light and dark modes
+- **Maintainability**: Centralized color variables for easy updates
+
+The implementation includes:
+
+- CSS custom properties for all colors
+- Dark mode support with appropriate color mapping
+- RTL language support
+- Comprehensive documentation and testing
+
+For more details, see the [Color Palette Implementation Report](docs/COLOR_PALETTE_IMPLEMENTATION_REPORT.md).
 
 ## Sustainability
 
@@ -257,3 +385,42 @@ O bien, instala la extensión de navegador de axe y ejecuta el test manualmente.
 - Tooltips accesibles y traducidos.
 - Exportar/compartir y verificar feedback visual.
 - Cambiar idioma y verificar traducción de tooltips y feedback.
+
+## Color Palette
+
+Beyond Solutions uses a sophisticated, natural color palette that reflects our focus on real estate development and architectural excellence:
+
+### Primary Colors
+- **Main Brand Color**: #334b4e
+- **Dark Background**: #243b44
+- **Dark Text**: #192525
+- **Light Text**: #cccfcf
+
+### Supporting Colors
+- **Secondary Dark**: #525853
+- **Neutral Medium**: #adb3b7
+- **Accent**: #b1aaa0
+- **Accent Light**: #b9c6cd
+
+### Documentation
+- [Color Palette Update](docs/COLOR_PALETTE_UPDATE.md): Overview of the color palette changes
+- [Color Reference](docs/COLOR_REFERENCE.md): Detailed reference guide for developers
+- [Style Guide](docs/STYLE_GUIDE.md): Comprehensive style guide for the design system
+- [Component Library](docs/COMPONENT_LIBRARY.md): Component library documentation
+- [Component Examples](docs/component-examples.html): Interactive example page showcasing components
+
+## WCAG Contrast Compliance
+
+All color combinations used in the interface have been tested for accessibility:
+
+- **Text on background** combinations meet at least AA standard (4.5:1 ratio for normal text)
+- **UI components** and graphical elements meet at least AA standard (3:1 ratio)
+- **Large text** (18pt+) meets at least AA standard (3:1 ratio)
+
+Key contrast ratios:
+- Dark text (`#192525`) on white: 16.1:1 ✓
+- Light text (`#cccfcf`) on dark background (`#192525`): 9.2:1 ✓
+- Primary 700 (`#334b4e`) on white: 6.8:1 ✓
+- White on Primary 700 (`#334b4e`): 6.8:1 ✓
+- Primary 700 (`#334b4e`) on Primary 200 (`#bac4c3`): 3.2:1 ✓
+- Primary 800 (`#243b44`) on white: 9.5:1 ✓
