@@ -201,62 +201,91 @@
     "reset": "Yeni simülasyon",
     "step1": {
       "title": "1. Proje Türü ve Varlık",
-      "scope": "Proje türü",
+      "scope": {
+        "select": "Bir seçenek seçin"
+      },
       "scope.select": "Bir seçenek seçin",
       "scope.patrimonial": "Mülkiyet",
       "scope.inversion": "Yatırım",
-      "entity": "Varlık",
+      "entity": {
+        "select": "Bir seçenek seçin"
+      },
       "entity.select": "Bir seçenek seçin",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "Adım 2'ye git: Bütçe ve Arazi Verileri"
     },
     "step2": {
       "title": "2. Bütçe ve Arazi Verileri",
-      "budget": "Toplam bütçe",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "Arazi adresi",
-      "address.placeholder": "Örn: J Rousseu 3, Anzures, CDMX",
-      "type": "Arazi tipi",
+      "address": {
+        "placeholder": "Örn: Bağdat Caddesi 123, Kadıköy, İstanbul"
+      },
+      "address.placeholder": "Örn: Bağdat Caddesi 123, Kadıköy, İstanbul",
+      "type": {
+        "select": "Bir tip seçin"
+      },
       "type.select": "Bir tip seçin",
       "type.own": "Kendi",
       "type.notown": "Kendi değil",
       "type.remate": "Açık artırma",
-      "status": "Durum",
+      "status": {
+        "select": "Bir durum seçin"
+      },
       "status.select": "Durum seçin",
       "status.construccion": "İnşaat",
       "status.demolicion": "Yıkım",
       "status.reconversion": "Dönüşüm",
-      "surface": "Alan (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "Kullanılabilir inşaat alanı (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "Arsa kullanımı",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "Kullanım seçin",
       "use.defined": "H30/20/Z (Kullanımım var)",
       "use.undefined": "Tanımsız (0.6 varsay)",
       "use.request": "Tanımsız (Başvurmak istiyorum)",
-      "characteristics": "Özellikler",
-      "characteristics.placeholder": "Korunan, Uygulanamaz..."
+      "characteristics": {
+        "placeholder": "Korunan, Uygulanamaz..."
+      },
+      "characteristics.placeholder": "Korunan, Uygulanamaz...",
+      "prev_description": "Adım 1'e dön: Proje Türü ve Varlık",
+      "next_description": "Adım 3'e git: Maliyet Dağılımı"
     },
     "step3": {
       "title": "3. Maliyet Dağılımı",
       "materialesLevel": "Malzeme seviyesi",
-      "materialesLevel.low": "Low Cost",
-      "materialesLevel.medium": "Medium Cost",
-      "materialesLevel.high": "High Cost",
-      "materialesLevel.custom": "Custom",
+      "materialesLevel.low": "Düşük Maliyet",
+      "materialesLevel.medium": "Orta Maliyet",
+      "materialesLevel.high": "Yüksek Maliyet",
+      "materialesLevel.custom": "Özel",
       "regulatorio": "Düzenleyici",
       "materiales": "Malzemeler",
       "construccion": "İnşaat",
       "arquitectura": "Mimari",
       "diseno": "Tasarım",
-      "arte": "Sanat"
+      "arte": "Sanat",
+      "prev_description": "Adım 2'ye dön: Bütçe ve Arazi Verileri",
+      "next_description": "Adım 4'e git: Sonuçlar ve Özet"
     },
     "step4": {
-      "title": "4. Sonuçlar ve özet"
+      "title": "4. Sonuçlar ve özet",
+      "prev_description": "Adım 3'e dön: Maliyet Dağılımı",
+      "reset_description": "Formu sıfırla"
     },
     "tooltips": {
-      "budgetTotal": "Arsa ve inşaat dahil, düzenleyici hariç."
+      "budgetTotal": "Arsa ve inşaat dahil, düzenleyici hariç.",
+      "usableSurface": "Arazi kullanımına göre inşaat için kullanılabilir alan.",
+      "materialesLevel": "Malzemelerin kalite ve maliyet aralığını tanımlar."
     },
     "export": {
       "pdf": "PDF Dışa Aktar",
@@ -300,7 +329,9 @@
       "address": "Adres:",
       "surface": "Alan:",
       "usableSurface": "Kullanılabilir alan:",
-      "use": "Arsa kullanımı:"
+      "use": "Arsa kullanımı:",
+      "type": "Arsa türü:",
+      "status": "Durum:"
     },
     "result": {
       "totalCost": "Toplam maliyet:",
@@ -340,6 +371,15 @@
         "high": "Yüksek Maliyet",
         "custom": "Özel"
       }
+    },
+    "form": {
+      "required_field": "Bu alan devam etmek için gereklidir",
+      "budget_description": "Arazi dahil toplam proje bütçesi",
+      "address_description": "Arazinin tam konumu",
+      "type_description": "Arazi kategorisini seçin",
+      "status_description": "Arazinin mevcut durumu",
+      "surface_description": "Arazinin metrekare cinsinden toplam alanı",
+      "usableSurface_description": "İnşaat yapılabilir yüzey"
     }
   }
 }

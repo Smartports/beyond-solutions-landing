@@ -86,6 +86,23 @@
   margin: 16px 0 0 auto;
 }
 
+/* Color palette support */
+.rtl .bg-primary-600 {
+  background-color: #334b4e;
+}
+
+.rtl .bg-primary-700 {
+  background-color: #243b44;
+}
+
+.rtl .text-primary-600 {
+  color: #334b4e;
+}
+
+.rtl .border-primary-600 {
+  border-color: #334b4e;
+}
+
 /* Dropdown menus */
 .rtl .dropdown-menu {
   left: auto;

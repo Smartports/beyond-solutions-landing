@@ -201,42 +201,65 @@
     "reset": "新模拟",
     "step1": {
       "title": "1. 项目类型和实体",
-      "scope": "项目类型",
+      "scope": {
+        "select": "请选择一个选项"
+      },
       "scope.select": "请选择",
       "scope.patrimonial": "资产型",
       "scope.inversion": "投资型",
-      "entity": "实体",
+      "entity": {
+        "select": "请选择一个选项"
+      },
       "entity.select": "请选择",
       "entity.b2b": "B2B",
-      "entity.b2c": "B2C"
+      "entity.b2c": "B2C",
+      "nav_description": "前往第2步：预算和土地数据"
     },
     "step2": {
       "title": "2. 预算和土地数据",
-      "budget": "总预算",
+      "budget": {
+        "placeholder": "$10,000,000"
+      },
       "budget.placeholder": "$10,000,000",
-      "address": "土地地址",
-      "address.placeholder": "E.g.: J Rousseu 3, Anzures, CDMX",
-      "type": "土地类型",
+      "address": {
+        "placeholder": "例如：南京路100号，黄浦区，上海"
+      },
+      "address.placeholder": "例如：南京路100号，黄浦区，上海",
+      "type": {
+        "select": "请选择一个类型"
+      },
       "type.select": "请选择类型",
       "type.own": "自有",
       "type.notown": "非自有",
       "type.remate": "拍卖",
-      "status": "状态",
+      "status": {
+        "select": "请选择一个状态"
+      },
       "status.select": "请选择状态",
       "status.construccion": "建设",
       "status.demolicion": "拆除",
       "status.reconversion": "改造",
-      "surface": "面积 (m²)",
+      "surface": {
+        "placeholder": "800"
+      },
       "surface.placeholder": "800",
-      "usableSurface": "可用建筑面积 (m²)",
+      "usableSurface": {
+        "placeholder": "480"
+      },
       "usableSurface.placeholder": "480",
-      "use": "土地用途",
+      "use": {
+        "placeholder": "H30/20/Z"
+      },
       "use.select": "请选择用途",
       "use.defined": "H30/20/Z（我有用途）",
       "use.undefined": "未定义（假设0.6）",
       "use.request": "未定义（我想申请）",
-      "characteristics": "特征",
-      "characteristics.placeholder": "受保护，不适用..."
+      "characteristics": {
+        "placeholder": "受保护，不适用..."
+      },
+      "characteristics.placeholder": "受保护，不适用...",
+      "prev_description": "返回第1步：项目类型和实体",
+      "next_description": "前往第3步：成本明细"
     },
     "step3": {
       "title": "3. 成本明细",
@@ -250,13 +273,19 @@
       "construccion": "建造",
       "arquitectura": "建筑",
       "diseno": "设计",
-      "arte": "艺术"
+      "arte": "艺术",
+      "prev_description": "返回第2步：预算和土地数据",
+      "next_description": "前往第4步：结果与摘要"
     },
     "step4": {
-      "title": "4. 结果与摘要"
+      "title": "4. 结果与摘要",
+      "prev_description": "返回第3步：成本明细",
+      "reset_description": "重置表单"
     },
     "tooltips": {
-      "budgetTotal": "包含土地和建设，不含监管费用。"
+      "budgetTotal": "包含土地和建设，不含监管费用。",
+      "usableSurface": "根据土地用途可建设的可用面积。",
+      "materialesLevel": "定义材料的质量和成本范围。"
     },
     "export": {
       "pdf": "导出PDF",
@@ -300,7 +329,9 @@
       "address": "地址：",
       "surface": "面积：",
       "usableSurface": "可用面积：",
-      "use": "土地用途："
+      "use": "土地用途：",
+      "type": "土地类型：",
+      "status": "状态："
     },
     "result": {
       "totalCost": "总成本：",
@@ -317,29 +348,38 @@
     },
     "values": {
       "scope": {
-        "patrimonial": "Patrimonial",
-        "inversion": "Inversión"
+        "patrimonial": "资产型",
+        "inversion": "投资型"
       },
       "entity": {
         "b2b": "B2B",
         "b2c": "B2C"
       },
       "type": {
-        "own": "Propio",
-        "notown": "No Propio",
-        "remate": "Remate"
+        "own": "自有",
+        "notown": "非自有",
+        "remate": "拍卖"
       },
       "status": {
-        "construccion": "Construcción",
-        "demolicion": "Demolición",
-        "reconversion": "Reconversión"
+        "construccion": "建设",
+        "demolicion": "拆除",
+        "reconversion": "改造"
       },
       "materialesLevel": {
-        "low": "Bajo Costo",
-        "medium": "Costo Medio",
-        "high": "Alto Costo",
-        "custom": "Personalizado"
+        "low": "低成本",
+        "medium": "中等成本",
+        "high": "高成本",
+        "custom": "自定义"
       }
+    },
+    "form": {
+      "required_field": "此字段为继续操作所必需",
+      "budget_description": "包含土地在内的总项目预算",
+      "address_description": "土地的完整位置",
+      "type_description": "选择土地类别",
+      "status_description": "土地当前状态",
+      "surface_description": "土地总面积（平方米）",
+      "usableSurface_description": "可建设面积"
     }
   }
 }
