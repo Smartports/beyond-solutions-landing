@@ -1,0 +1,194 @@
+{
+  "file:///Users/edgarzorrilla/Documents/WORK/beyond-solutions-landing/index.html": {
+    "light": {
+      "navigationTime": 2015,
+      "performanceMetrics": {
+        "domContentLoaded": 22,
+        "firstPaint": 433.7000000476837,
+        "firstContentfulPaint": 433.7000000476837
+      },
+      "renderingMetrics": {
+        "scrollingTime": 0.09999990463256836,
+        "layoutTime": 0
+      },
+      "memoryInfo": {
+        "jsHeapSizeLimit": 3760000000,
+        "totalJSHeapSize": 20500000,
+        "usedJSHeapSize": 10000000
+      },
+      "cssInfo": {
+        "totalStyleSheets": 9,
+        "totalRules": 372,
+        "colorRelatedRules": 102,
+        "cssVariables": 0
+      }
+    },
+    "dark": {
+      "navigationTime": 836,
+      "performanceMetrics": {
+        "domContentLoaded": 19,
+        "firstPaint": 209.60000014305115,
+        "firstContentfulPaint": 209.60000014305115
+      },
+      "renderingMetrics": {
+        "scrollingTime": 0,
+        "layoutTime": 0
+      },
+      "memoryInfo": {
+        "jsHeapSizeLimit": 3760000000,
+        "totalJSHeapSize": 19300000,
+        "usedJSHeapSize": 10000000
+      },
+      "cssInfo": {
+        "totalStyleSheets": 9,
+        "totalRules": 372,
+        "colorRelatedRules": 102,
+        "cssVariables": 0
+      }
+    }
+  },
+  "file:///Users/edgarzorrilla/Documents/WORK/beyond-solutions-landing/calculator.html": {
+    "light": {
+      "navigationTime": 1166,
+      "performanceMetrics": {
+        "domContentLoaded": 7.299999952316284,
+        "firstPaint": 188.20000004768372,
+        "firstContentfulPaint": 188.20000004768372
+      },
+      "renderingMetrics": {
+        "scrollingTime": 0.10000014305114746,
+        "layoutTime": 0
+      },
+      "memoryInfo": {
+        "jsHeapSizeLimit": 3760000000,
+        "totalJSHeapSize": 19300000,
+        "usedJSHeapSize": 10000000
+      },
+      "cssInfo": {
+        "totalStyleSheets": 11,
+        "totalRules": 276,
+        "colorRelatedRules": 99,
+        "cssVariables": 0
+      }
+    },
+    "dark": {
+      "navigationTime": 1004,
+      "performanceMetrics": {
+        "domContentLoaded": 6,
+        "firstPaint": 195.19999980926514,
+        "firstContentfulPaint": 195.19999980926514
+      },
+      "renderingMetrics": {
+        "scrollingTime": 0.09999990463256836,
+        "layoutTime": 0
+      },
+      "memoryInfo": {
+        "jsHeapSizeLimit": 3760000000,
+        "totalJSHeapSize": 29400000,
+        "usedJSHeapSize": 11900000
+      },
+      "cssInfo": {
+        "totalStyleSheets": 11,
+        "totalRules": 257,
+        "colorRelatedRules": 92,
+        "cssVariables": 0
+      }
+    }
+  },
+  "file:///Users/edgarzorrilla/Documents/WORK/beyond-solutions-landing/404.html": {
+    "light": {
+      "navigationTime": 1036,
+      "performanceMetrics": {
+        "domContentLoaded": 1.9000000953674316,
+        "firstPaint": 92.90000009536743,
+        "firstContentfulPaint": 92.90000009536743
+      },
+      "renderingMetrics": {
+        "scrollingTime": 0.20000004768371582,
+        "layoutTime": 0
+      },
+      "memoryInfo": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 2780693,
+        "usedJSHeapSize": 1230317
+      },
+      "cssInfo": {
+        "totalStyleSheets": 3,
+        "totalRules": 205,
+        "colorRelatedRules": 67,
+        "cssVariables": 0
+      }
+    },
+    "dark": {
+      "navigationTime": 1040,
+      "performanceMetrics": {
+        "domContentLoaded": 2.0999999046325684,
+        "firstPaint": 116.09999990463257,
+        "firstContentfulPaint": 116.09999990463257
+      },
+      "renderingMetrics": {
+        "scrollingTime": 0.20000004768371582,
+        "layoutTime": 0
+      },
+      "memoryInfo": {
+        "jsHeapSizeLimit": 4294705152,
+        "totalJSHeapSize": 2780693,
+        "usedJSHeapSize": 1230329
+      },
+      "cssInfo": {
+        "totalStyleSheets": 3,
+        "totalRules": 205,
+        "colorRelatedRules": 67,
+        "cssVariables": 0
+      }
+    }
+  },
+  "file:///Users/edgarzorrilla/Documents/WORK/beyond-solutions-landing/docs/component-examples.html": {
+    "light": {
+      "navigationTime": 998,
+      "performanceMetrics": {
+        "domContentLoaded": 0,
+        "firstPaint": 296.59999990463257,
+        "firstContentfulPaint": 296.59999990463257
+      },
+      "renderingMetrics": {
+        "scrollingTime": 0.2999999523162842,
+        "layoutTime": 0
+      },
+      "memoryInfo": {
+        "jsHeapSizeLimit": 3760000000,
+        "totalJSHeapSize": 23100000,
+        "usedJSHeapSize": 10000000
+      },
+      "cssInfo": {
+        "totalStyleSheets": 2,
+        "totalRules": 146,
+        "colorRelatedRules": 64,
+        "cssVariables": 0
+      }
+    },
+    "dark": {
+      "navigationTime": 1003,
+      "performanceMetrics": {
+        "domContentLoaded": 0,
+        "firstPaint": 293.90000009536743,
+        "firstContentfulPaint": 293.90000009536743
+      },
+      "renderingMetrics": {
+        "scrollingTime": 0.10000014305114746,
+        "layoutTime": 0
+      },
+      "memoryInfo": {
+        "jsHeapSizeLimit": 3760000000,
+        "totalJSHeapSize": 23100000,
+        "usedJSHeapSize": 10000000
+      },
+      "cssInfo": {
+        "totalStyleSheets": 2,
+        "totalRules": 146,
+        "colorRelatedRules": 64,
+        "cssVariables": 0
+      }
+    }
+  }
+}
