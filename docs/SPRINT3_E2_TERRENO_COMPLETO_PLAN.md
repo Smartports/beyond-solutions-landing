@@ -10,7 +10,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 | Fecha | Estado | Notas |
 |-------|--------|-------|
-| [FECHA_ACTUAL] | Planeado | Plan inicial creado |
+| 2025-06-18 | Completado | Todas las historias de usuario implementadas |
 
 ## Historias de Usuario
 
@@ -18,23 +18,23 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 **Objetivo:** Implementar la funcionalidad para importar archivos CAD (DXF) y extraer geometría del terreno.
 
-**Estado:** 📝 Pendiente
+**Estado:** ✅ Completado
 
 **Tareas:**
-- [ ] Investigar y seleccionar biblioteca para parsing de archivos DXF
-- [ ] Implementar UI para carga de archivos CAD
-- [ ] Crear parser para extraer polígonos y datos relevantes
-- [ ] Implementar validación de archivos y manejo de errores
-- [ ] Convertir geometrías CAD al formato interno de la aplicación
-- [ ] Añadir soporte para capas básicas (layers)
+- [x] Investigar y seleccionar biblioteca para parsing de archivos DXF
+- [x] Implementar UI para carga de archivos CAD
+- [x] Crear parser para extraer polígonos y datos relevantes
+- [x] Implementar validación de archivos y manejo de errores
+- [x] Convertir geometrías CAD al formato interno de la aplicación
+- [x] Añadir soporte para capas básicas (layers)
 
 **Criterios de Aceptación:**
-- [ ] Usuario puede cargar archivos DXF hasta 10MB
-- [ ] Sistema extrae correctamente polígonos y líneas del archivo
-- [ ] Se validan los archivos por formato y contenido antes de procesarlos
-- [ ] UI muestra feedback durante la carga y procesamiento
-- [ ] Se maneja correctamente formatos DXF comunes (R12, R14, 2000)
-- [ ] Tests unitarios verifican la correcta extracción de geometría
+- [x] Usuario puede cargar archivos DXF hasta 10MB
+- [x] Sistema extrae correctamente polígonos y líneas del archivo
+- [x] Se validan los archivos por formato y contenido antes de procesarlos
+- [x] UI muestra feedback durante la carga y procesamiento
+- [x] Se maneja correctamente formatos DXF comunes (R12, R14, 2000)
+- [x] Tests unitarios verifican la correcta extracción de geometría
 
 **Dependencias:** Sketch 2D básico (Sprint 2)
 
@@ -44,23 +44,23 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 **Objetivo:** Implementar la funcionalidad para importar archivos GeoJSON con datos geoespaciales.
 
-**Estado:** 📝 Pendiente
+**Estado:** ✅ Completado
 
 **Tareas:**
-- [ ] Implementar UI para carga de archivos GeoJSON
-- [ ] Crear parser para GeoJSON y extracción de geometría
-- [ ] Integrar con coordenadas geográficas y proyección
-- [ ] Implementar validación de archivos GeoJSON
-- [ ] Extraer propiedades y metadatos relevantes
-- [ ] Añadir soporte para visualización preliminar
+- [x] Implementar UI para carga de archivos GeoJSON
+- [x] Crear parser para GeoJSON y extracción de geometría
+- [x] Integrar con coordenadas geográficas y proyección
+- [x] Implementar validación de archivos GeoJSON
+- [x] Extraer propiedades y metadatos relevantes
+- [x] Añadir soporte para visualización preliminar
 
 **Criterios de Aceptación:**
-- [ ] Usuario puede cargar archivos GeoJSON hasta 5MB
-- [ ] Sistema extrae correctamente polígonos, líneas y propiedades
-- [ ] Las coordenadas se proyectan correctamente en el mapa
-- [ ] UI muestra propiedades y atributos del GeoJSON de forma accesible
-- [ ] Usuario puede seleccionar qué features importar en caso de múltiples
-- [ ] Tests verifican la proyección y conversión de coordenadas
+- [x] Usuario puede cargar archivos GeoJSON hasta 5MB
+- [x] Sistema extrae correctamente polígonos, líneas y propiedades
+- [x] Las coordenadas se proyectan correctamente en el mapa
+- [x] UI muestra propiedades y atributos del GeoJSON de forma accesible
+- [x] Usuario puede seleccionar qué features importar en caso de múltiples
+- [x] Tests verifican la proyección y conversión de coordenadas
 
 **Dependencias:** Historia #1
 
@@ -70,23 +70,23 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 **Objetivo:** Configurar motor de renderizado 3D (Babylon.js) y estructura base para visualización.
 
-**Estado:** 📝 Pendiente
+**Estado:** ✅ Completado
 
 **Tareas:**
-- [ ] Integrar Babylon.js en el proyecto
-- [ ] Configurar escena 3D básica con cámara, luces y controles
-- [ ] Implementar sistema de coordenadas y escalas
-- [ ] Crear sistema de gestión de recursos 3D (texturas, materiales)
-- [ ] Implementar optimizaciones para dispositivos móviles
-- [ ] Añadir controles de navegación 3D accesibles
+- [x] Integrar Babylon.js en el proyecto
+- [x] Configurar escena 3D básica con cámara, luces y controles
+- [x] Implementar sistema de coordenadas y escalas
+- [x] Crear sistema de gestión de recursos 3D (texturas, materiales)
+- [x] Implementar optimizaciones para dispositivos móviles
+- [x] Añadir controles de navegación 3D accesibles
 
 **Criterios de Aceptación:**
-- [ ] Motor 3D se inicializa correctamente en desktop y dispositivos móviles
-- [ ] Cámara y controles permiten navegación intuitiva en la escena
-- [ ] FPS estable (mínimo 30fps) en dispositivos de gama media
-- [ ] Sistema detecta y se adapta a capacidades del dispositivo
-- [ ] UI incluye controles accesibles por teclado
-- [ ] Tests verifican inicialización correcta en diferentes contextos
+- [x] Motor 3D se inicializa correctamente en desktop y dispositivos móviles
+- [x] Cámara y controles permiten navegación intuitiva en la escena
+- [x] FPS estable (mínimo 30fps) en dispositivos de gama media
+- [x] Sistema detecta y se adapta a capacidades del dispositivo
+- [x] UI incluye controles accesibles por teclado
+- [x] Tests verifican inicialización correcta en diferentes contextos
 
 **Dependencias:** Ninguna del Sprint 3, pero requiere base del Sprint 2
 
@@ -96,23 +96,23 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 **Objetivo:** Implementar algoritmo para convertir datos 2D del terreno en malla 3D low-poly.
 
-**Estado:** 📝 Pendiente
+**Estado:** ✅ Completado
 
 **Tareas:**
-- [ ] Implementar algoritmo de triangulación para polígonos 2D
-- [ ] Crear generador de malla 3D a partir de triangulación
-- [ ] Aplicar elevación y datos de altura al terreno
-- [ ] Implementar sistema de LOD (nivel de detalle)
-- [ ] Añadir texturas básicas al terreno
-- [ ] Optimizar geometría para renderizado eficiente
+- [x] Implementar algoritmo de triangulación para polígonos 2D
+- [x] Crear generador de malla 3D a partir de triangulación
+- [x] Aplicar elevación y datos de altura al terreno
+- [x] Implementar sistema de LOD (nivel de detalle)
+- [x] Añadir texturas básicas al terreno
+- [x] Optimizar geometría para renderizado eficiente
 
 **Criterios de Aceptación:**
-- [ ] Sistema genera malla 3D correcta a partir de polígonos 2D
-- [ ] El terreno refleja con precisión los datos de elevación
-- [ ] La malla mantiene rendimiento óptimo con terrenos complejos
-- [ ] La geometría se actualiza cuando cambia el polígono base
-- [ ] Sistema utiliza LOD para optimizar rendimiento en visualización
-- [ ] Tests unitarios verifican geometría generada
+- [x] Sistema genera malla 3D correcta a partir de polígonos 2D
+- [x] El terreno refleja con precisión los datos de elevación
+- [x] La malla mantiene rendimiento óptimo con terrenos complejos
+- [x] La geometría se actualiza cuando cambia el polígono base
+- [x] Sistema utiliza LOD para optimizar rendimiento en visualización
+- [x] Tests unitarios verifican geometría generada
 
 **Dependencias:** Historia #3
 
@@ -122,23 +122,23 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 **Objetivo:** Implementar análisis solar básico para visualizar sombras en diferentes momentos del día/año.
 
-**Estado:** 📝 Pendiente
+**Estado:** ✅ Completado
 
 **Tareas:**
-- [ ] Implementar sistema de posicionamiento solar basado en coordenadas y fecha/hora
-- [ ] Crear controles para selección de fecha y hora
-- [ ] Implementar cálculo y visualización de sombras
-- [ ] Añadir visualización de trayectoria solar
-- [ ] Crear representación gráfica de horas de sol
-- [ ] Implementar capturas/instantáneas del análisis
+- [x] Implementar sistema de posicionamiento solar basado en coordenadas y fecha/hora
+- [x] Crear controles para selección de fecha y hora
+- [x] Implementar cálculo y visualización de sombras
+- [x] Añadir visualización de trayectoria solar
+- [x] Crear representación gráfica de horas de sol
+- [x] Implementar capturas/instantáneas del análisis
 
 **Criterios de Aceptación:**
-- [ ] Usuario puede seleccionar fecha y hora para análisis solar
-- [ ] Las sombras se renderizan correctamente según la posición solar
-- [ ] Sistema muestra trayectoria solar para la ubicación seleccionada
-- [ ] Usuario puede visualizar análisis para diferentes épocas del año (solsticios/equinoccios)
-- [ ] Análisis considera la ubicación geográfica del terreno
-- [ ] Tests verifican cálculos de posición solar
+- [x] Usuario puede seleccionar fecha y hora para análisis solar
+- [x] Las sombras se renderizan correctamente según la posición solar
+- [x] Sistema muestra trayectoria solar para la ubicación seleccionada
+- [x] Usuario puede visualizar análisis para diferentes épocas del año (solsticios/equinoccios)
+- [x] Análisis considera la ubicación geográfica del terreno
+- [x] Tests verifican cálculos de posición solar
 
 **Dependencias:** Historia #4
 
@@ -148,23 +148,23 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 **Objetivo:** Implementar análisis básico de flujo de viento sobre el terreno.
 
-**Estado:** 📝 Pendiente
+**Estado:** ✅ Completado
 
 **Tareas:**
-- [ ] Implementar modelo simplificado de flujo de viento
-- [ ] Crear controles para dirección e intensidad del viento
-- [ ] Añadir visualización de vectores de viento
-- [ ] Implementar cálculo básico de zonas de presión/succión
-- [ ] Crear sistema de partículas para representación visual
-- [ ] Optimizar para rendimiento en dispositivos objetivo
+- [x] Implementar modelo simplificado de flujo de viento
+- [x] Crear controles para dirección e intensidad del viento
+- [x] Añadir visualización de vectores de viento
+- [x] Implementar cálculo básico de zonas de presión/succión
+- [x] Crear sistema de partículas para representación visual
+- [x] Optimizar para rendimiento en dispositivos objetivo
 
 **Criterios de Aceptación:**
-- [ ] Usuario puede configurar dirección e intensidad del viento
-- [ ] Visualización muestra flujo de viento sobre el terreno
-- [ ] Sistema indica zonas de presión/succión en el terreno
-- [ ] La simulación es fluida (mínimo 20fps) en dispositivos objetivo
-- [ ] La visualización es intuitiva y clara para el usuario
-- [ ] Tests verifican la consistencia del modelo de viento
+- [x] Usuario puede configurar dirección e intensidad del viento
+- [x] Visualización muestra flujo de viento sobre el terreno
+- [x] Sistema indica zonas de presión/succión en el terreno
+- [x] La simulación es fluida (mínimo 20fps) en dispositivos objetivo
+- [x] La visualización es intuitiva y clara para el usuario
+- [x] Tests verifican la consistencia del modelo de viento
 
 **Dependencias:** Historia #4
 
@@ -174,23 +174,23 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 **Objetivo:** Integrar flujos entre Sketch 2D, importaciones y vista 3D con perfiles de elevación.
 
-**Estado:** 📝 Pendiente
+**Estado:** ✅ Completado
 
 **Tareas:**
-- [ ] Implementar sincronización entre Sketch 2D y vista 3D
-- [ ] Crear switch/toggle entre vistas 2D y 3D
-- [ ] Implementar editor de perfil de elevación
-- [ ] Añadir visualización de cortes transversales
-- [ ] Sincronizar cambios en tiempo real entre vistas
-- [ ] Implementar transiciones suaves entre modos
+- [x] Implementar sincronización entre Sketch 2D y vista 3D
+- [x] Crear switch/toggle entre vistas 2D y 3D
+- [x] Implementar editor de perfil de elevación
+- [x] Añadir visualización de cortes transversales
+- [x] Sincronizar cambios en tiempo real entre vistas
+- [x] Implementar transiciones suaves entre modos
 
 **Criterios de Aceptación:**
-- [ ] Cambios en Sketch 2D se reflejan en tiempo real en vista 3D
-- [ ] Usuario puede alternar fácilmente entre vistas 2D y 3D
-- [ ] Editor de perfil de elevación modifica correctamente la vista 3D
-- [ ] Visualización de cortes proporciona información de altura
-- [ ] Sistema mantiene coherencia de datos entre vistas
-- [ ] Tests de integración verifican sincronización entre interfaces
+- [x] Cambios en Sketch 2D se reflejan en tiempo real en vista 3D
+- [x] Usuario puede alternar fácilmente entre vistas 2D y 3D
+- [x] Editor de perfil de elevación modifica correctamente la vista 3D
+- [x] Visualización de cortes proporciona información de altura
+- [x] Sistema mantiene coherencia de datos entre vistas
+- [x] Tests de integración verifican sincronización entre interfaces
 
 **Dependencias:** Historia #4, Sketch 2D del Sprint 2
 
@@ -200,23 +200,23 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 **Objetivo:** Implementar exportación de geometría 3D y preparar la transición a la Fase 3.
 
-**Estado:** 📝 Pendiente
+**Estado:** ✅ Completado
 
 **Tareas:**
-- [ ] Implementar exportación de geometría 3D en formato glTF
-- [ ] Crear sistema de guardado de análisis realizados
-- [ ] Añadir exportación de capturas de análisis
-- [ ] Implementar generación de informe básico (PDF)
-- [ ] Crear validaciones previas al paso a Fase 3
-- [ ] Diseñar UI de transición entre fases
+- [x] Implementar exportación de geometría 3D en formato glTF
+- [x] Crear sistema de guardado de análisis realizados
+- [x] Añadir exportación de capturas de análisis
+- [x] Implementar generación de informe básico (PDF)
+- [x] Crear validaciones previas al paso a Fase 3
+- [x] Diseñar UI de transición entre fases
 
 **Criterios de Aceptación:**
-- [ ] Usuario puede exportar geometría 3D en formato glTF
-- [ ] Análisis y configuraciones se guardan correctamente
-- [ ] Sistema permite capturas y exportación de visualizaciones
-- [ ] Se genera informe básico con datos del terreno y análisis
-- [ ] Sistema valida completitud antes de permitir avance a Fase 3
-- [ ] Tests verifican formatos de exportación generados
+- [x] Usuario puede exportar geometría 3D en formato glTF
+- [x] Análisis y configuraciones se guardan correctamente
+- [x] Sistema permite capturas y exportación de visualizaciones
+- [x] Se genera informe básico con datos del terreno y análisis
+- [x] Sistema valida completitud antes de permitir avance a Fase 3
+- [x] Tests verifican formatos de exportación generados
 
 **Dependencias:** Historias #5, #6, #7
 
@@ -276,15 +276,15 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 | Historia | Estimación (días) | Estado |
 |----------|------------------|--------|
-| #1: Importación de Archivos CAD | 1.0 | 📝 Pendiente |
-| #2: Importación de Archivos GeoJSON | 0.5 | 📝 Pendiente |
-| #3: Implementación de Motor de Renderizado 3D | 1.0 | 📝 Pendiente |
-| #4: Generación de Malla 3D Low-Poly | 1.0 | 📝 Pendiente |
-| #5: Análisis Solar Básico | 1.0 | 📝 Pendiente |
-| #6: Análisis de Viento Básico | 0.5 | 📝 Pendiente |
-| #7: Integración con Sketch 2D y Perfil de Elevación | 0.5 | 📝 Pendiente |
-| #8: Exportación Avanzada y Preparación para Fase 3 | 0.5 | 📝 Pendiente |
-| **Total** | **6.0** | 📝 **Pendiente** |
+| #1: Importación de Archivos CAD | 1.0 | ✅ Completado |
+| #2: Importación de Archivos GeoJSON | 0.5 | ✅ Completado |
+| #3: Implementación de Motor de Renderizado 3D | 1.0 | ✅ Completado |
+| #4: Generación de Malla 3D Low-Poly | 1.0 | ✅ Completado |
+| #5: Análisis Solar Básico | 1.0 | ✅ Completado |
+| #6: Análisis de Viento Básico | 0.5 | ✅ Completado |
+| #7: Integración con Sketch 2D y Perfil de Elevación | 0.5 | ✅ Completado |
+| #8: Exportación Avanzada y Preparación para Fase 3 | 0.5 | ✅ Completado |
+| **Total** | **6.0** | ✅ **Completado** |
 
 ## Leyenda de Estado
 
