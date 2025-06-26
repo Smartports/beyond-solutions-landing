@@ -1,11 +1,26 @@
 {
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.8",
+    "@googlemaps/react-wrapper": "^1.2.0",
+    "@turf/turf": "^7.2.0",
+    "babylonjs": "^8.13.0",
+    "babylonjs-loaders": "^8.13.0",
+    "chart.js": "^4.5.0",
+    "dxf-parser": "^1.1.2",
+    "financial": "^0.2.4",
+    "geojson": "^0.5.0",
     "jspdf": "^3.0.1",
-    "papaparse": "^5.5.3"
+    "jspdf-autotable": "^5.0.2",
+    "papaparse": "^5.5.3",
+    "react-chartjs-2": "^5.3.0",
+    "three": "^0.177.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
     "@axe-core/puppeteer": "^4.10.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "axe-core": "^4.10.3",
     "axe-playwright": "^2.1.0",
     "playwright": "^1.53.1",
@@ -13,14 +28,54 @@
     "wcag-contrast": "^3.0.0"
   },
   "scripts": {
+    "build": "node build.js",
+    "build:prod": "NODE_ENV=production node build.js",
+    "dev": "cd dist && python3 -m http.server 8000",
+    "serve": "npm run build && npm run dev",
+    "test": "npm run test:all",
+    "test:all": "node test/run-all-tests.js",
+    "test:accessibility": "npm run test:a11y && npm run test:a11y:components && npm run test:a11y:audit",
+    "test:performance": "npm run test:perf:color-palette && npm run test:css-performance",
+    "test:cross-browser": "npm run test:integration",
     "test:a11y": "node test/axe-tests/axe-color-palette.js",
     "test:a11y:components": "node test/axe-tests/axe-calculator.js",
-    "test:performance": "node test/performance/color-palette-performance.js",
     "test:a11y:audit": "node test/accessibility/accessibility-audit.js",
+    "test:perf:color-palette": "node test/performance/color-palette-performance.js",
     "test:integration": "node test/integration/cross-browser-test.js",
     "test:css-performance": "node test/performance-optimization/css-performance-analysis.js",
     "test:consistency": "node test/consistency/color-consistency-check.js",
-    "test:all": "node test/run-all-tests.js",
-    "test": "npm run test:all"
+    "validate": "npm run validate:build && npm run validate:assets",
+    "validate:build": "test -f dist/index.html && test -f dist/calculator-gamified.html && test -f dist/manifest.json",
+    "validate:assets": "test -d dist/css && test -d dist/js && test -d dist/img",
+    "clean": "rm -rf dist/*",
+    "deploy:local": "npm run build && npm run dev",
+    "deploy:gh-pages": "npm run build:prod && echo 'Build ready for GitHub Pages deployment'"
+  },
+  "name": "beyond-solutions-landing",
+  "version": "1.9.0",
+  "description": "Landing page for Beyond Solutions, a platform designed to strategically integrate and manage all elements that make up a world-class real estate development.",
+  "main": "build.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Smartports/beyond-solutions-landing.git"
+  },
+  "keywords": [
+    "real-estate",
+    "development",
+    "calculator",
+    "gamification",
+    "pwa",
+    "maps",
+    "3d-visualization"
+  ],
+  "author": "Beyond Solutions Team",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   }
 }
