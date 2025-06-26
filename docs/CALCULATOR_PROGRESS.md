@@ -1,105 +1,321 @@
-# Beyond Calculator – Integration Progress Tracker
+# Sprint 1 - E1 Wizard/Onboarding Completado ✅
+# Sprint 2 - E2 Terreno MVP Completado ✅
+# Sprint 3 - E2+ Terreno Completo Completado ✅
+# Sprint 4 - E3 Costos Completado ✅
+# Sprint 5 - E4 Experiencia 3D Completado ✅
+# Sprint 6 - Hardening y QA Completado ✅
 
-## Progreso General
+Este documento registra el progreso en el desarrollo de la calculadora inmobiliaria v2.
 
-![Progreso](https://geps.dev/progress/100)
+## Resumen de Sprints
 
----
+- **Sprint 1: E1 - Wizard/Onboarding** ✅
+- **Sprint 2: E2 - Terreno MVP** ✅
+- **Sprint 3: E2+ - Terreno Completo** ✅
+- **Sprint 4: E3 - Costos** ✅
+- **Sprint 5: E4 - Experiencia 3D** ✅
+- **Sprint 6: Hardening y QA** ✅
 
-## 1. Resumen de Estado
+## Detalle del Sprint 1 (Completado)
 
-- **Fase actual:** Calculadora funcional y accesible: exportación (PDF/CSV), compartir (WA/Email), validaciones, i18n, UI/UX y accesibilidad implementadas. Listo para pruebas finales y despliegue beta.
-- **Cumplimiento:** Se han seguido las guías de accesibilidad (WCAG, ADA, Section 508, AODA, IDEA), i18n, y estilo visual (TailwindCSS, Alpine.js, dark/light, AOS).
-- **Referencias normativas y técnicas:**
-  - [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)
-  - [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
-  - [TailwindCSS Accessibility](https://tailwindcss.com/docs/accessibility)
-  - [Alpine.js Accessibility](https://alpinejs.dev/directives/bind#accessibility)
-  - [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
-  - [i18n System](../i18n/README.md)
-  - [Guía de georreferenciación y normatividad CDMX](KNOWLEDGE%20BASE.md)
+### Progreso General
+- [x] Configuración del proyecto base (monorepo)
+- [x] Componentes de UI esenciales
+- [x] Wizard de 2 preguntas (Perfil y Tipo de Proyecto)
+- [x] Implementación de autosave
+- [x] Dashboard de proyectos
+- [x] Optimización y pruebas
 
----
+### Entregables Completados
 
-## 2. Tareas y Próximos Pasos
+#### Estructura del Proyecto
+- [x] Monorepo con apps/web, packages/ui, packages/core
+- [x] Configuración de Tailwind CSS
+- [x] Configuración de TypeScript
+- [x] Sistema de i18n
 
-| Tarea                                                                 | Estado      | Responsable | Observaciones |
-|-----------------------------------------------------------------------|-------------|-------------|---------------|
-| Blueprint y pseudocódigo en `BEYOND_CALCULATOR_IMPLEMENTATION.md`     | ✅ Completo  | Equipo Doc  | Revisar ante cambios futuros |
-| Crear archivo de progreso y checklist                                 | ✅ Completo  | Equipo Doc  | Este documento |
-| Crear `calculator.html` con base de `index.html`                      | ✅ Completo  | Frontend    | Estructura y navegación lista |
-| Crear módulo JS `js/calculator.js` para lógica y reactividad          | ✅ Completo  | Frontend    | Lógica, validaciones, exportación y compartir listos |
-| Integrar i18n en todos los textos y labels                            | ✅ Completo  | Frontend    | Español e inglés listos, agregar otros idiomas si aplica |
-| Implementar formulario multistep accesible (Alpine.js, ARIA, AOS)     | ✅ Completo  | Frontend    | Validado con lectores de pantalla |
-| Añadir barra lateral/resumen en vivo                                  | ✅ Completo  | Frontend    | Funcionalidad lista |
-| Validar cumplimiento WCAG/ADA/508/AODA/IDEA                           | ✅ Completo  | QA/Frontend | Validado con axe, Lighthouse, pruebas manuales |
-| Añadir exportación (PDF/CSV) y compartir (email/WA)                   | ✅ Completo  | Frontend    | Funcionalidad lista |
-| Testing cross-browser y dispositivos                                  | ✅ Completo  | QA          | Incluye RTL y dark/light |
-| Actualizar documentación y referencias                                | ✅ Completo  | Equipo Doc  | README, i18n/README, este doc |
-| Añadir link a calculadora en navegación principal                     | ✅ Completo  | Frontend    | i18n y responsive |
-| Revisión de cumplimiento legal y normativo local (CDMX, SEDUVI, etc.) | ⏳ En curso  | Legal/PM     | Ver KNOWLEDGE BASE.md |
-| Añadir tooltips accesibles e i18n en campos clave                  | ✅ Completo  | Frontend    | Tooltips en presupuesto, superficie útil, materiales |
-| Guardar/restaurar simulación en localStorage                      | ✅ Completo  | Frontend    | Botones y feedback accesible en resultados |
-| Feedback visual accesible para acciones y errores                 | ✅ Completo  | Frontend    | Mensajes con ARIA y traducción |
-| Animación visual al cambiar de paso                               | ✅ Completo  | Frontend    | CSS y prefers-reduced-motion |
-| Pruebas automáticas de accesibilidad (axe-core)                   | ✅ Completo  | QA/Dev      | Script y README actualizados |
+#### UI Components
+- [x] StepContainer
+- [x] StepIndicator
+- [x] SelectCard
+- [x] Dashboard
 
----
+#### Core Features
+- [x] IndexedDB setup con Dexie.js
+- [x] Autosave con debounce
+- [x] Recuperación de estado guardado
 
-## 3. Observaciones y Notas
+#### Pantallas
+- [x] Wizard de onboarding
+- [x] Selección de perfil
+- [x] Selección de tipo de proyecto
+- [x] Dashboard (listado de proyectos)
 
-- **Accesibilidad:** Roles ARIA, navegación por teclado, foco visible, contraste suficiente y mensajes de error accesibles en todos los componentes.
-- **i18n:** Todos los textos y mensajes traducibles y soporte para idiomas RTL.
-- **Normatividad:** Se consultaron fuentes oficiales para asegurar relevancia local y global ([ver KNOWLEDGE BASE.md](KNOWLEDGE%20BASE.md)).
-- **Progreso visual:** [markdown-progress](https://github.com/gepser/markdown-progress).
-- **Pruebas:** Se usaron axe, Lighthouse, lectores de pantalla y pruebas manuales.
+### Tests Implementados
+- [x] Validación de componentes
+- [x] Pruebas de persistencia de datos
+- [x] Pruebas de accesibilidad
+- [x] Optimizaciones de rendimiento
 
----
+## Detalle del Sprint 2 (Completado)
 
-## 4. Checklist de Validación Final y QA
+### Progreso General
+- [x] Integración con Google Maps API
+- [x] Componente MapPicker
+- [x] Selección de origen del terreno (propio o catálogo)
+- [x] Catálogo Geo básico
+- [x] Sketch 2D básico
+- [x] Editor de elevación básico
+- [x] Persistencia y exportación básica
+- [x] Integración con Wizard/Onboarding
 
-### Accesibilidad y UX
-- [x] Todos los campos tienen etiquetas, descripciones y mensajes de error accesibles (aria-describedby, aria-live, aria-invalid).
-- [x] Navegación por teclado fluida y lógica en todos los pasos y botones.
-- [x] Contraste de color suficiente en todos los estados (light/dark).
-- [x] Soporte completo para lectores de pantalla (VoiceOver, NVDA, JAWS).
-- [x] Soporte para idiomas RTL y cambio de idioma en tiempo real.
-- [x] Animaciones y transiciones no afectan la usabilidad ni accesibilidad.
+### Entregables Completados
 
-### Funcionalidad y Exportación
-- [x] Exportación a PDF y CSV genera archivos claros, legibles y multilenguaje.
-- [x] Compartir por WhatsApp y Email genera mensajes completos y localizados.
-- [x] Validaciones avanzadas previenen errores y muestran mensajes claros.
-- [x] Resumen lateral y resultados siempre actualizados y accesibles.
+#### Estructura del Proyecto
+- [x] Nuevo paquete @beyond/maps
+- [x] Integración con Google Maps Platform
+- [x] Configuración de API y componentes de mapas
 
-### Compatibilidad y QA
-- [x] Pruebas en Chrome, Firefox, Safari, Edge y dispositivos móviles.
-- [x] Pruebas en modo oscuro y claro.
-- [x] Pruebas en idiomas español e inglés (y otros si aplica).
-- [x] Pruebas de exportación y compartir en diferentes plataformas.
+#### UI Components
+- [x] MapLoader
+- [x] MapContainer
+- [x] MapControls
+- [x] SearchBox
+- [x] TerrainPicker
+- [x] TerrainSketch
+- [x] TerrainCatalog
+- [x] ElevationEditor
+- [x] TerrainExport
 
-### Normatividad y Legal
-- [ ] Revisión final de cumplimiento legal y normativo local (CDMX, SEDUVI, etc.).
-- [ ] Validación de textos legales, disclaimers y enlaces oficiales.
+#### Core Features
+- [x] Integración con Google Maps API
+- [x] Dibujo de polígonos en 2D
+- [x] Cálculos de área y perímetro
+- [x] Editor de elevación
+- [x] Exportación a GeoJSON
+- [x] Catálogo de terrenos predefinidos
 
----
+#### Pantallas
+- [x] Selección de origen del terreno
+- [x] Selección en mapa
+- [x] Dibujo de terreno
+- [x] Configuración de elevación
+- [x] Exportación de datos
 
-## 5. Recomendaciones Finales de Pruebas
+## Detalle del Sprint 3 (Completado)
 
-- Realizar pruebas de usuario con perfiles diversos (usuarios técnicos y no técnicos, personas con discapacidad visual o motriz).
-- Validar la experiencia de exportación y compartir en dispositivos móviles y de escritorio.
-- Revisar la integración de la calculadora con el sistema de navegación y el selector de idioma.
-- Documentar cualquier hallazgo, bug o mejora en este archivo y en el README principal.
-- Mantener actualizado el blueprint y checklist ante cualquier cambio futuro.
+### Progreso General
+- [x] Implementación de importación de archivos CAD (DXF)
+- [x] Implementación de importación de archivos GeoJSON
+- [x] Integración con Babylon.js para renderizado 3D
+- [x] Generación de malla 3D low-poly
+- [x] Implementación de análisis solar básico
+- [x] Implementación de análisis de viento básico
+- [x] Integración con Sketch 2D y perfil de elevación
+- [x] Exportación avanzada y preparación para Fase 3
 
----
+### Entregables Completados
 
-## 6. Referencias y Recursos
-- [Guía oficial WCAG](https://www.w3.org/WAI/standards-guidelines/)
-- [Guía de georreferenciación y normatividad CDMX](KNOWLEDGE%20BASE.md)
-- [markdown-progress](https://github.com/gepser/markdown-progress)
-- [R Markdown Navigation & Progress](https://bookdown.org/yihui/rmarkdown/learnr-nav.html)
+#### Estructura del Proyecto
+- [x] Nuevo paquete @beyond/geo para manejo de archivos CAD/GIS
+- [x] Integración con Babylon.js para renderizado 3D
+- [x] Configuración de herramientas de análisis geoespacial
 
----
+#### UI Components
+- [x] TerrainImport
+- [x] TerrainAnalysis
+- [x] TerrainViewer3D
+- [x] FileImporter
+- [x] ImportPreview
+- [x] LayerSelector
 
-> **Este documento debe actualizarse con cada avance relevante en la integración de la calculadora.** 
+#### Core Features
+- [x] Importación de archivos DXF
+- [x] Importación de archivos GeoJSON
+- [x] Renderizado 3D del terreno
+- [x] Análisis solar básico
+- [x] Análisis de viento básico
+- [x] Exportación de modelos 3D (glTF)
+- [x] Generación de informes de análisis
+
+#### Pantallas
+- [x] Importación de archivos CAD/GIS
+- [x] Vista 3D del terreno
+- [x] Configuración de análisis solar
+- [x] Configuración de análisis de viento
+- [x] Exportación de resultados
+
+## Detalle del Sprint 4 (Completado)
+
+### Progreso General
+- [x] Implementación del sistema constructivo base
+- [x] Desarrollo del selector de nivel de materiales
+- [x] Editor de materiales personalizado
+- [x] Motor financiero para costos directos e indirectos
+- [x] Cálculo de financiamiento e impuestos
+- [x] Proyección de ventas y flujo de caja
+- [x] Cálculo de KPIs financieros
+- [x] Simulador de escenarios
+
+### Entregables Completados
+
+#### Estructura del Proyecto
+- [x] Nuevo paquete @beyond/finance
+- [x] Modelos para cálculos financieros
+- [x] Componentes de UI para selección y visualización
+
+#### UI Components
+- [x] ConstructionSystemSelector
+- [x] MaterialsSelector
+- [x] CostCalculator
+- [x] FinancingCalculator
+- [x] SalesProjector
+- [x] KPIDashboard
+- [x] ScenarioManager
+
+#### Core Features
+- [x] Selección de sistemas constructivos
+- [x] Selección de materiales con diferentes niveles de calidad
+- [x] Cálculo de costos directos e indirectos
+- [x] Esquemas de financiamiento con tablas de amortización
+- [x] Proyección de ventas y análisis de flujo de caja
+- [x] Cálculo de KPIs (ROI, TIR, VAN, Payback)
+- [x] Simulación de escenarios (optimista, realista, pesimista)
+- [x] Proyección a 5 años
+
+#### Pantallas
+- [x] Selección de sistema constructivo
+- [x] Selección de materiales
+- [x] Calculadora de costos
+- [x] Calculadora de financiamiento
+- [x] Proyector de ventas
+- [x] Dashboard de KPIs
+- [x] Gestor de escenarios
+
+## Detalle del Sprint 5 (Completado)
+
+### Progreso General
+- [x] Implementación del visualizador inmersivo 3D
+- [x] Sistema de ciclo día/noche con iluminación dinámica
+- [x] Simulación de estaciones con cambios en entorno
+- [x] Sistema de vistas interior/exterior
+- [x] Implementación de gamificación con XP y badges
+- [x] Sistema de desafíos y tabla de clasificación
+- [x] Exportación de informes financieros en PDF
+- [x] Exportación de modelos 3D y compartición social
+
+### Entregables Completados
+
+#### Estructura del Proyecto
+- [x] Nuevo paquete @beyond/experience3d
+- [x] Modelos para visualización 3D avanzada
+- [x] Componentes para gamificación y exportación
+
+#### UI Components
+- [x] ImmersiveViewer3D
+- [x] DayNightController
+- [x] SeasonSelector
+- [x] ViewSelector
+- [x] GamificationDashboard
+- [x] ChallengeBoard
+- [x] PDFExporter
+- [x] ModelExporter
+
+#### Core Features
+- [x] Visualizador 3D con múltiples modos de cámara
+- [x] Sistema de iluminación dinámica día/noche
+- [x] Simulación de estaciones con efectos visuales
+- [x] Navegación entre vistas interiores y exteriores
+- [x] Sistema de gamificación con XP y badges
+- [x] Desafíos y tabla de clasificación
+- [x] Exportación de informes financieros en PDF
+- [x] Exportación de modelos 3D y opciones de compartición
+
+#### Modelos Implementados
+- [x] ImmersiveViewer
+- [x] LightingSystem
+- [x] SeasonSystem
+- [x] ViewManager
+- [x] GamificationSystem
+- [x] ChallengeSystem
+- [x] ExportSystem
+- [x] SocialSharing
+
+## Detalle del Sprint 6 (Completado)
+
+### Progreso General
+- [x] Auditoría de accesibilidad WCAG 2.1 AA
+- [x] Optimización de rendimiento y pruebas de estrés
+- [x] Pruebas de compatibilidad cross-browser/cross-device
+- [x] Documentación técnica y guías de usuario
+- [x] Corrección de bugs y deuda técnica
+- [x] Internacionalización y localización
+- [x] Pruebas de seguridad
+- [x] Preparación para lanzamiento
+
+### Entregables Completados
+
+#### Accesibilidad
+- [x] Auditoría automatizada con axe-core
+- [x] Pruebas manuales con lectores de pantalla
+- [x] Navegación completa con teclado
+- [x] Mejoras de contraste de colores
+- [x] Implementación de ARIA labels
+- [x] Skip links para navegación
+
+#### Rendimiento
+- [x] Pruebas de carga y estrés
+- [x] Optimización de tiempos de carga
+- [x] Implementación de lazy loading
+- [x] Optimización de bundle size
+- [x] Pruebas en dispositivos de gama baja
+- [x] Monitorización de performance
+
+#### Compatibilidad
+- [x] Matriz de pruebas para navegadores
+- [x] Pruebas en dispositivos iOS y Android
+- [x] Verificación de diseño responsive
+- [x] Pruebas de WebGL en diferentes GPUs
+- [x] Implementación de polyfills
+- [x] Sistema de detección de capacidades
+
+#### Documentación
+- [x] Arquitectura del sistema
+- [x] APIs y componentes
+- [x] Guías de usuario
+- [x] Sistema de ayuda contextual
+- [x] Tutoriales interactivos
+- [x] Documentación para desarrolladores
+
+#### Corrección y Seguridad
+- [x] Resolución de bugs críticos
+- [x] Refactorización de código duplicado
+- [x] Actualización de dependencias
+- [x] Implementación de pruebas unitarias
+- [x] Análisis de vulnerabilidades
+- [x] Protección contra XSS y otros ataques
+- [x] Content Security Policy
+
+#### Preparación para Lanzamiento
+- [x] Pipeline de CI/CD
+- [x] Materiales de marketing
+- [x] Analytics y monitoreo
+- [x] Plan de soporte post-lanzamiento
+- [x] Notas de versión
+- [x] Sistema de feedback
+- [x] Prueba piloto con usuarios
+
+## Próximo Sprint (Sprint 6)
+- [x] Implementar pruebas de integración completas
+- [x] Realizar optimizaciones de rendimiento
+- [x] Mejorar la accesibilidad en toda la aplicación
+- [x] Implementar correcciones de bugs identificados
+- [x] Realizar pruebas de usabilidad con usuarios reales
+- [x] Optimizar la experiencia en dispositivos móviles
+- [x] Preparar documentación final del proyecto
+
+## Leyenda
+- ✅ Completado
+- 🚧 En progreso
+- 📅 Pendiente
+- ❌ Bloqueado
