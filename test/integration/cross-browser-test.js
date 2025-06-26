@@ -1,461 +1,589 @@
 /**
- * Cross-browser testing script for the Beyond Solutions color palette implementation
- * This script tests the color palette across different browsers and devices
+ * Cross-Browser Compatibility Test Suite
+ * Tests application functionality across different browsers and devices
  */
 
-const { chromium, firefox, webkit } = require('playwright');
+const playwright = require('playwright');
 const fs = require('fs');
 const path = require('path');
+const { promisify } = require('util');
+const writeFile = promisify(fs.writeFile);
+const mkdir = promisify(fs.mkdir);
 
-// Base directory
-const baseDir = path.resolve(process.cwd());
-
-// URLs to test
-const urls = [
-  `file://${baseDir}/index.html`,
-  `file://${baseDir}/calculator.html`,
-  `file://${baseDir}/404.html`,
-  `file://${baseDir}/docs/component-examples.html`,
-  `file://${baseDir}/docs/color-palette-showcase.html`
+// Configuration
+const BASE_URL = 'http://localhost:3000';
+const PAGES_TO_TEST = [
+  { path: '/', name: 'Home Page' },
+  { path: '/calculator', name: 'Calculator' },
+  { path: '/wizard', name: 'Wizard' },
+  { path: '/terrain-viewer', name: 'Terrain Viewer' },
+  { path: '/cost-calculator', name: 'Cost Calculator' },
+  { path: '/3d-experience', name: '3D Experience' }
 ];
 
-// Create output directory if it doesn't exist
-const outputDir = path.join(__dirname, '../integration-reports');
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir, { recursive: true });
-}
+// Browsers to test
+const BROWSERS = [
+  { name: 'Chromium', engine: 'chromium' },
+  { name: 'Firefox', engine: 'firefox' },
+  { name: 'WebKit', engine: 'webkit' }
+];
 
-// Viewport sizes to test
-const viewports = [
-  { name: 'Mobile', width: 375, height: 667 },
+// Device configurations
+const DEVICES = [
+  { name: 'Desktop', width: 1920, height: 1080 },
   { name: 'Tablet', width: 768, height: 1024 },
-  { name: 'Desktop', width: 1366, height: 768 }
+  { name: 'Mobile', width: 375, height: 667 }
 ];
 
-console.log('Cross-browser testing script for the Beyond Solutions color palette implementation');
-console.log('This script tests the color palette across different browsers and devices');
-console.log(`Output will be saved to: ${outputDir}`);
+// Test scenarios
+const TEST_SCENARIOS = [
+  { name: 'Page Load', test: testPageLoad },
+  { name: 'UI Components', test: testUIComponents },
+  { name: 'Interactivity', test: testInteractivity },
+  { name: '3D Rendering', test: test3DRendering },
+  { name: 'Responsive Layout', test: testResponsiveLayout }
+];
 
+/**
+ * Runs cross-browser compatibility tests
+ */
 async function runCrossBrowserTests() {
-  console.log('Starting cross-browser tests for the color palette implementation...');
+  console.log('Starting cross-browser compatibility tests...');
+  const timestamp = new Date().toISOString().replace(/:/g, '-');
+  const reportDir = path.join(process.cwd(), 'test', 'integration-reports');
   
-  const results = {
-    chromium: {},
-    firefox: {},
-    webkit: {}
-  };
-  
-  try {
-    // Test in Chromium
-    console.log('Testing with Chromium...');
-    const chromiumBrowser = await chromium.launch();
-    await testBrowser(chromiumBrowser, 'chromium', results.chromium);
-    await chromiumBrowser.close();
-    
-    // Test in Firefox
-    console.log('Testing with Firefox...');
-    const firefoxBrowser = await firefox.launch();
-    await testBrowser(firefoxBrowser, 'firefox', results.firefox);
-    await firefoxBrowser.close();
-    
-    // Test in WebKit
-    console.log('Testing with WebKit...');
-    const webkitBrowser = await webkit.launch();
-    await testBrowser(webkitBrowser, 'webkit', results.webkit);
-    await webkitBrowser.close();
-    
-    // Generate report
-    const report = generateReport(results);
-    
-    // Save report
-    const timestamp = new Date().toISOString().replace(/:/g, '-');
-    const reportPath = path.join(outputDir, `cross-browser-report-${timestamp}.md`);
-    fs.writeFileSync(reportPath, report);
-    
-    console.log(`Cross-browser testing completed. Report saved to ${reportPath}`);
-  } catch (error) {
-    console.error('Error running cross-browser tests:', error);
-    process.exit(1);
+  if (!fs.existsSync(reportDir)) {
+    await mkdir(reportDir, { recursive: true });
   }
-}
-
-async function testBrowser(browser, browserName, results) {
-  for (const url of urls) {
-    const pageName = url.split('/').pop().replace('.html', '');
-    results[pageName] = {};
-    
-    for (const viewport of viewports) {
-      console.log(`  Testing ${pageName} on ${browserName} at ${viewport.name} size...`);
-      results[pageName][viewport.name] = {};
-      
-      // Test in light mode
-      await testPageInMode(browser, url, viewport, 'light', results[pageName][viewport.name]);
-      
-      // Test in dark mode
-      await testPageInMode(browser, url, viewport, 'dark', results[pageName][viewport.name]);
-    }
-  }
-}
-
-async function testPageInMode(browser, url, viewport, mode, results) {
-  const context = await browser.newContext({
-    viewport: { width: viewport.width, height: viewport.height },
-    colorScheme: mode
-  });
   
-  const page = await context.newPage();
+  const reportPath = path.join(reportDir, `cross-browser-report-${timestamp}.md`);
+  const screenshotsDir = path.join(reportDir, `screenshots-${timestamp}`);
   
-  try {
-    // Navigate to page
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
-    
-    // Test CSS variables
-    const cssVarsSupport = await page.evaluate(() => {
-      return window.CSS && CSS.supports('color', 'var(--test)');
-    });
-    
-    // Get computed colors
-    const colors = await page.evaluate(() => {
-      const elements = {
-        body: document.body,
-        heading: document.querySelector('h1, h2, h3'),
-        paragraph: document.querySelector('p'),
-        link: document.querySelector('a'),
-        button: document.querySelector('button')
-      };
-      
-      const result = {};
-      
-      for (const [name, element] of Object.entries(elements)) {
-        if (element) {
-          const style = window.getComputedStyle(element);
-          result[name] = {
-            color: style.color,
-            backgroundColor: style.backgroundColor,
-            borderColor: style.borderColor
-          };
-        } else {
-          // Handle missing elements gracefully
-          result[name] = {
-            color: 'not found',
-            backgroundColor: 'not found',
-            borderColor: 'not found'
-          };
-        }
-      }
-      
-      return result;
-    });
-    
-    // Test dark mode detection
-    const darkModeDetected = await page.evaluate(() => {
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    });
-    
-    // Test RTL support
-    await page.evaluate(() => {
-      document.documentElement.dir = 'rtl';
-    });
-    
-    await page.waitForTimeout(500);
-    
-    let rtlSupport;
-    try {
-      rtlSupport = await page.evaluate(() => {
-        const body = document.body;
-        if (!body) return { direction: 'unknown', supported: false };
-        
-        const style = window.getComputedStyle(body);
-        const direction = style.direction;
-        
-        // Reset direction
-        document.documentElement.dir = 'ltr';
-        
-        return {
-          direction,
-          supported: direction === 'rtl'
-        };
-      });
-    } catch (error) {
-      console.error(`  Error testing RTL support: ${error.message}`);
-      rtlSupport = { direction: 'error', supported: false };
-    }
-    
-    results[mode] = {
-      cssVarsSupport,
-      colors,
-      darkModeDetected,
-      rtlSupport
-    };
-  } catch (error) {
-    console.error(`  Error testing ${url} in ${mode} mode:`, error.message);
-    results[mode] = { error: error.message };
-  } finally {
-    await context.close();
+  if (!fs.existsSync(screenshotsDir)) {
+    await mkdir(screenshotsDir, { recursive: true });
   }
-}
-
-function generateReport(results) {
-  let report = '# Cross-Browser Testing Report\n\n';
+  
+  let report = `# Cross-Browser Compatibility Test Report\n\n`;
   report += `Date: ${new Date().toLocaleString()}\n\n`;
   
-  // Summary
-  report += '## Summary\n\n';
-  report += '| Feature | Chromium | Firefox | WebKit |\n';
-  report += '|---------|----------|---------|--------|\n';
-  
-  const features = {
-    'CSS Variables': checkFeatureSupport(results, 'cssVarsSupport'),
-    'Dark Mode': checkFeatureSupport(results, 'darkModeDetected', 'dark'),
-    'RTL Support': checkFeatureSupport(results, 'rtlSupport.supported')
+  const results = {
+    browsers: {},
+    summary: {
+      total: 0,
+      passed: 0,
+      failed: 0,
+      skipped: 0
+    }
   };
   
-  for (const [feature, support] of Object.entries(features)) {
-    report += `| ${feature} | ${formatSupport(support.chromium)} | ${formatSupport(support.firefox)} | ${formatSupport(support.webkit)} |\n`;
-  }
-  
-  report += '\n';
-  
-  // Color consistency
-  report += '## Color Consistency\n\n';
-  
-  for (const browser of ['chromium', 'firefox', 'webkit']) {
-    report += `### ${capitalizeFirstLetter(browser)}\n\n`;
+  // Run tests for each browser
+  for (const browser of BROWSERS) {
+    console.log(`Testing on ${browser.name}...`);
+    results.browsers[browser.name] = { devices: {} };
     
-    // Check if colors are consistent across viewports
-    const colorConsistency = checkColorConsistency(results[browser]);
+    const browserInstance = await playwright[browser.engine].launch({
+      headless: true
+    });
     
-    if (Object.keys(colorConsistency).length === 0) {
-      report += '✅ **Colors are consistent across all viewports and pages.**\n\n';
-    } else {
-      report += '❌ **Color inconsistencies detected:**\n\n';
-      
-      for (const [page, inconsistencies] of Object.entries(colorConsistency)) {
-        report += `#### ${page}\n\n`;
-        report += '| Element | Property | Value 1 | Value 2 | Viewport 1 | Viewport 2 |\n';
-        report += '|---------|----------|---------|---------|------------|------------|\n';
+    try {
+      // Test on each device configuration
+      for (const device of DEVICES) {
+        console.log(`  Testing on ${device.name}...`);
+        results.browsers[browser.name].devices[device.name] = { pages: {} };
         
-        for (const inconsistency of inconsistencies) {
-          report += `| ${inconsistency.element} | ${inconsistency.property} | ${inconsistency.value1} | ${inconsistency.value2} | ${inconsistency.viewport1} | ${inconsistency.viewport2} |\n`;
-        }
+        const context = await browserInstance.newContext({
+          viewport: { width: device.width, height: device.height },
+          userAgent: `Playwright-${browser.name}-${device.name}-Test`
+        });
         
-        report += '\n';
-      }
-    }
-  }
-  
-  // Light vs Dark mode
-  report += '## Light vs Dark Mode\n\n';
-  
-  for (const browser of ['chromium', 'firefox', 'webkit']) {
-    report += `### ${capitalizeFirstLetter(browser)}\n\n`;
-    
-    const modeConsistency = checkModeConsistency(results[browser]);
-    
-    if (Object.keys(modeConsistency).length === 0) {
-      report += '✅ **Dark mode is properly implemented across all pages.**\n\n';
-    } else {
-      report += '❌ **Dark mode inconsistencies detected:**\n\n';
-      
-      for (const [page, inconsistencies] of Object.entries(modeConsistency)) {
-        report += `#### ${page}\n\n`;
-        report += '| Element | Property | Light Mode | Dark Mode | Viewport |\n';
-        report += '|---------|----------|------------|-----------|----------|\n';
-        
-        for (const inconsistency of inconsistencies) {
-          report += `| ${inconsistency.element} | ${inconsistency.property} | ${inconsistency.lightValue} | ${inconsistency.darkValue} | ${inconsistency.viewport} |\n`;
-        }
-        
-        report += '\n';
-      }
-    }
-  }
-  
-  // Conclusion
-  report += '## Conclusion\n\n';
-  
-  const allFeatures = Object.values(features).every(feature => 
-    feature.chromium && feature.firefox && feature.webkit);
-  
-  const colorIssues = ['chromium', 'firefox', 'webkit'].some(browser => 
-    Object.keys(checkColorConsistency(results[browser])).length > 0);
-  
-  const modeIssues = ['chromium', 'firefox', 'webkit'].some(browser => 
-    Object.keys(checkModeConsistency(results[browser])).length > 0);
-  
-  if (allFeatures && !colorIssues && !modeIssues) {
-    report += '✅ **The color palette implementation is consistent across all tested browsers and viewports.**\n\n';
-    report += 'The implementation successfully supports:\n';
-    report += '- CSS Variables\n';
-    report += '- Dark Mode\n';
-    report += '- RTL Languages\n';
-    report += '- Responsive Design\n';
-  } else {
-    report += '❌ **The color palette implementation has issues that need to be addressed:**\n\n';
-    
-    if (!allFeatures) {
-      report += '- Some features are not supported in all browsers\n';
-    }
-    
-    if (colorIssues) {
-      report += '- Color inconsistencies detected across viewports\n';
-    }
-    
-    if (modeIssues) {
-      report += '- Dark mode implementation is inconsistent\n';
-    }
-  }
-  
-  return report;
-}
-
-function checkFeatureSupport(results, featurePath, mode = 'light') {
-  const support = {
-    chromium: true,
-    firefox: true,
-    webkit: true
-  };
-  
-  for (const browser of ['chromium', 'firefox', 'webkit']) {
-    for (const page in results[browser]) {
-      for (const viewport in results[browser][page]) {
-        const modeResults = results[browser][page][viewport][mode];
-        
-        if (!modeResults || modeResults.error) {
-          support[browser] = false;
-          continue;
-        }
-        
-        // Access nested properties using path string
-        const paths = featurePath.split('.');
-        let value = modeResults;
-        
-        for (const path of paths) {
-          if (value && value[path] !== undefined) {
-            value = value[path];
-          } else {
-            value = undefined;
-            break;
+        // Test each page
+        for (const page of PAGES_TO_TEST) {
+          console.log(`    Testing ${page.name}...`);
+          results.browsers[browser.name].devices[device.name].pages[page.name] = { scenarios: {} };
+          
+          const browserPage = await context.newPage();
+          
+          try {
+            await browserPage.goto(`${BASE_URL}${page.path}`, { 
+              waitUntil: 'networkidle',
+              timeout: 60000
+            });
+            
+            // Take screenshot
+            const screenshotPath = path.join(
+              screenshotsDir, 
+              `${browser.name}-${device.name}-${page.name.replace(/ /g, '-')}.png`
+            );
+            await browserPage.screenshot({ path: screenshotPath, fullPage: true });
+            
+            // Run test scenarios
+            for (const scenario of TEST_SCENARIOS) {
+              console.log(`      Running scenario: ${scenario.name}...`);
+              
+              try {
+                // Skip 3D rendering tests on mobile devices for WebKit (known limitation)
+                if (browser.name === 'WebKit' && device.name === 'Mobile' && 
+                    scenario.name === '3D Rendering' && 
+                    (page.name === '3D Experience' || page.name === 'Terrain Viewer')) {
+                  results.browsers[browser.name].devices[device.name].pages[page.name].scenarios[scenario.name] = {
+                    status: 'skipped',
+                    message: 'WebGL limitations on WebKit mobile'
+                  };
+                  results.summary.skipped++;
+                  continue;
+                }
+                
+                const scenarioResult = await scenario.test(browserPage, page, device);
+                results.browsers[browser.name].devices[device.name].pages[page.name].scenarios[scenario.name] = scenarioResult;
+                
+                if (scenarioResult.status === 'passed') {
+                  results.summary.passed++;
+                } else if (scenarioResult.status === 'failed') {
+                  results.summary.failed++;
+                } else {
+                  results.summary.skipped++;
+                }
+                
+                results.summary.total++;
+  } catch (error) {
+                results.browsers[browser.name].devices[device.name].pages[page.name].scenarios[scenario.name] = {
+                  status: 'failed',
+                  message: `Error: ${error.message}`
+                };
+                results.summary.failed++;
+                results.summary.total++;
+              }
+            }
+            
+          } catch (error) {
+            console.error(`Error testing ${page.name} on ${browser.name} ${device.name}:`, error);
+            results.browsers[browser.name].devices[device.name].pages[page.name].error = error.message;
+            
+            // Mark all scenarios as failed
+            for (const scenario of TEST_SCENARIOS) {
+              results.browsers[browser.name].devices[device.name].pages[page.name].scenarios[scenario.name] = {
+                status: 'failed',
+                message: `Page failed to load: ${error.message}`
+              };
+              results.summary.failed++;
+              results.summary.total++;
+            }
+          } finally {
+            await browserPage.close();
           }
         }
         
-        if (value !== true) {
-          support[browser] = false;
-        }
+        await context.close();
       }
+    } finally {
+      await browserInstance.close();
     }
   }
   
-  return support;
-}
-
-function checkColorConsistency(browserResults) {
-  const inconsistencies = {};
+  // Generate report
+  report += `## Summary\n\n`;
+  report += `- Total tests: ${results.summary.total}\n`;
+  report += `- Passed: ${results.summary.passed} (${(results.summary.passed / results.summary.total * 100).toFixed(2)}%)\n`;
+  report += `- Failed: ${results.summary.failed} (${(results.summary.failed / results.summary.total * 100).toFixed(2)}%)\n`;
+  report += `- Skipped: ${results.summary.skipped} (${(results.summary.skipped / results.summary.total * 100).toFixed(2)}%)\n\n`;
   
-  for (const page in browserResults) {
-    const pageInconsistencies = [];
-    const viewports = Object.keys(browserResults[page]);
+  report += `## Detailed Results\n\n`;
+  
+  for (const [browserName, browserData] of Object.entries(results.browsers)) {
+    report += `### ${browserName}\n\n`;
     
-    // Compare colors across viewports
-    for (let i = 0; i < viewports.length; i++) {
-      for (let j = i + 1; j < viewports.length; j++) {
-        const viewport1 = viewports[i];
-        const viewport2 = viewports[j];
-        
-        const lightMode1 = browserResults[page][viewport1].light;
-        const lightMode2 = browserResults[page][viewport2].light;
-        
-        if (!lightMode1 || !lightMode2 || lightMode1.error || lightMode2.error) {
-          continue;
+    for (const [deviceName, deviceData] of Object.entries(browserData.devices)) {
+      report += `#### ${deviceName}\n\n`;
+      report += `| Page | Scenario | Status | Message |\n`;
+      report += `|------|----------|--------|--------|\n`;
+      
+      for (const [pageName, pageData] of Object.entries(deviceData.pages)) {
+        for (const [scenarioName, scenarioData] of Object.entries(pageData.scenarios)) {
+          const status = scenarioData.status === 'passed' ? '✅' : 
+                         scenarioData.status === 'skipped' ? '⚠️' : '❌';
+          report += `| ${pageName} | ${scenarioName} | ${status} | ${scenarioData.message || ''} |\n`;
         }
-        
-        // Compare colors for each element
-        for (const element in lightMode1.colors) {
-          if (!lightMode2.colors[element]) continue;
-          
-          for (const property in lightMode1.colors[element]) {
-            const value1 = lightMode1.colors[element][property];
-            const value2 = lightMode2.colors[element][property];
+      }
+      
+      report += `\n`;
+    }
+  }
+  
+  report += `## Browser-Specific Issues\n\n`;
+  
+  // Find browser-specific issues
+  const browserIssues = {};
+  
+  for (const [browserName, browserData] of Object.entries(results.browsers)) {
+    browserIssues[browserName] = [];
+    
+    for (const [deviceName, deviceData] of Object.entries(browserData.devices)) {
+      for (const [pageName, pageData] of Object.entries(deviceData.pages)) {
+        for (const [scenarioName, scenarioData] of Object.entries(pageData.scenarios)) {
+          if (scenarioData.status === 'failed') {
+            // Check if this is a browser-specific issue
+            const isUnique = Object.entries(results.browsers)
+              .filter(([otherBrowser]) => otherBrowser !== browserName)
+              .every(([_, otherBrowserData]) => {
+                return otherBrowserData.devices[deviceName]?.pages[pageName]?.scenarios[scenarioName]?.status === 'passed';
+              });
             
-            if (value1 !== value2) {
-              pageInconsistencies.push({
-                element,
-                property,
-                value1,
-                value2,
-                viewport1,
-                viewport2
+            if (isUnique) {
+              browserIssues[browserName].push({
+                device: deviceName,
+                page: pageName,
+                scenario: scenarioName,
+                message: scenarioData.message
               });
             }
           }
         }
       }
     }
-    
-    if (pageInconsistencies.length > 0) {
-      inconsistencies[page] = pageInconsistencies;
+  }
+  
+  // Add browser-specific issues to report
+  for (const [browserName, issues] of Object.entries(browserIssues)) {
+    if (issues.length > 0) {
+      report += `### ${browserName}\n\n`;
+      
+      for (const issue of issues) {
+        report += `- **${issue.page} / ${issue.scenario} (${issue.device})**: ${issue.message}\n`;
+      }
+      
+      report += `\n`;
     }
   }
   
-  return inconsistencies;
+  // Write report
+  await writeFile(reportPath, report);
+  console.log(`Cross-browser tests complete. Report saved to: ${reportPath}`);
+  
+  return { reportPath, results };
 }
 
-function checkModeConsistency(browserResults) {
-  const inconsistencies = {};
-  
-  for (const page in browserResults) {
-    const pageInconsistencies = [];
+/**
+ * Test page load functionality
+ */
+async function testPageLoad(page) {
+  try {
+    // Check if page loaded without errors
+    const hasError = await page.evaluate(() => {
+      return document.querySelector('.error-message, .error-container') !== null;
+    });
     
-    for (const viewport in browserResults[page]) {
-      const lightMode = browserResults[page][viewport].light;
-      const darkMode = browserResults[page][viewport].dark;
+    if (hasError) {
+      return {
+        status: 'failed',
+        message: 'Page loaded with error message'
+      };
+    }
+    
+    // Check if main content loaded
+    const hasContent = await page.evaluate(() => {
+      return document.querySelector('main, #root > *, .app-container') !== null;
+    });
+    
+    if (!hasContent) {
+      return {
+        status: 'failed',
+        message: 'Page loaded without main content'
+      };
+    }
+    
+    return {
+      status: 'passed',
+      message: 'Page loaded successfully'
+    };
+  } catch (error) {
+    return {
+      status: 'failed',
+      message: `Error during page load test: ${error.message}`
+    };
+  }
+}
+
+/**
+ * Test UI components
+ */
+async function testUIComponents(page, pageConfig) {
+  try {
+    // Define critical components for each page
+    const criticalSelectors = {
+      'Home Page': ['header', 'footer', 'main', '.hero-section'],
+      'Calculator': ['.calculator-container', '.input-fields', '.results-section'],
+      'Wizard': ['.wizard-container', '.step-indicator', '.navigation-buttons'],
+      'Terrain Viewer': ['.terrain-viewer', '.controls-panel', '.map-container'],
+      'Cost Calculator': ['.cost-calculator', '.input-section', '.results-section'],
+      '3D Experience': ['.immersive-viewer', '.controls-panel', '.options-panel']
+    };
+    
+    const selectors = criticalSelectors[pageConfig.name] || [];
+    const missingComponents = [];
+    
+    // Check for each critical component
+    for (const selector of selectors) {
+      const exists = await page.evaluate((sel) => {
+        return document.querySelector(sel) !== null;
+      }, selector);
       
-      if (!lightMode || !darkMode || lightMode.error || darkMode.error) {
-        continue;
+      if (!exists) {
+        missingComponents.push(selector);
       }
-      
-      // Check if dark mode colors are different from light mode
-      for (const element in lightMode.colors) {
-        if (!darkMode.colors[element]) continue;
+    }
+    
+    if (missingComponents.length > 0) {
+      return {
+        status: 'failed',
+        message: `Missing components: ${missingComponents.join(', ')}`
+      };
+    }
+    
+    return {
+      status: 'passed',
+      message: 'All critical UI components present'
+    };
+  } catch (error) {
+    return {
+      status: 'failed',
+      message: `Error during UI components test: ${error.message}`
+    };
+  }
+}
+
+/**
+ * Test interactivity
+ */
+async function testInteractivity(page, pageConfig) {
+  try {
+    // Define interactive elements for each page
+    const interactiveElements = {
+      'Home Page': [
+        { selector: 'a.cta-button', action: 'click' },
+        { selector: 'header nav a', action: 'click', expectNavigation: false }
+      ],
+      'Calculator': [
+        { selector: 'input[type="number"]', action: 'type', value: '100' },
+        { selector: 'button.calculate-button', action: 'click' }
+      ],
+      'Wizard': [
+        { selector: '.select-card', action: 'click' },
+        { selector: 'button.next-button', action: 'click' }
+      ],
+      'Terrain Viewer': [
+        { selector: '.controls-panel button', action: 'click' },
+        { selector: '.zoom-control', action: 'click' }
+      ],
+      'Cost Calculator': [
+        { selector: 'select', action: 'select', value: '1' },
+        { selector: 'input[type="range"]', action: 'fill', value: '50' }
+      ],
+      '3D Experience': [
+        { selector: '.view-controls button', action: 'click' },
+        { selector: '.day-night-toggle', action: 'click' }
+      ]
+    };
+    
+    const elements = interactiveElements[pageConfig.name] || [];
+    const interactionFailures = [];
+    
+    // Test each interactive element
+    for (const element of elements) {
+      try {
+        const elementExists = await page.evaluate((sel) => {
+          return document.querySelector(sel) !== null;
+        }, element.selector);
         
-        for (const property in lightMode.colors[element]) {
-          const lightValue = lightMode.colors[element][property];
-          const darkValue = darkMode.colors[element][property];
-          
-          // Skip transparent or unset colors
-          if (lightValue === 'rgba(0, 0, 0, 0)' || darkValue === 'rgba(0, 0, 0, 0)') {
-            continue;
-          }
-          
-          // If light and dark values are the same, it might indicate a problem
-          if (lightValue === darkValue && property === 'color' || property === 'backgroundColor') {
-            pageInconsistencies.push({
-              element,
-              property,
-              lightValue,
-              darkValue,
-              viewport
-            });
-          }
+        if (!elementExists) {
+          interactionFailures.push(`Element not found: ${element.selector}`);
+          continue;
         }
+        
+        // Perform the action
+        if (element.action === 'click') {
+          if (element.expectNavigation !== false) {
+            await Promise.all([
+              page.waitForNavigation({ timeout: 5000 }).catch(() => {}),
+              page.click(element.selector)
+            ]);
+          } else {
+            await page.click(element.selector);
+          }
+        } else if (element.action === 'type') {
+          await page.fill(element.selector, element.value);
+        } else if (element.action === 'select') {
+          await page.selectOption(element.selector, element.value);
+        } else if (element.action === 'fill') {
+          await page.fill(element.selector, element.value);
+        }
+        
+      } catch (error) {
+        interactionFailures.push(`Failed to interact with ${element.selector}: ${error.message}`);
       }
     }
     
-    if (pageInconsistencies.length > 0) {
-      inconsistencies[page] = pageInconsistencies;
+    if (interactionFailures.length > 0) {
+      return {
+        status: 'failed',
+        message: interactionFailures.join('; ')
+      };
     }
+    
+    return {
+      status: 'passed',
+      message: 'All interactive elements working'
+    };
+  } catch (error) {
+    return {
+      status: 'failed',
+      message: `Error during interactivity test: ${error.message}`
+    };
   }
-  
-  return inconsistencies;
 }
 
-function formatSupport(supported) {
-  return supported ? '✅' : '❌';
+/**
+ * Test 3D rendering capabilities
+ */
+async function test3DRendering(page, pageConfig) {
+  try {
+    // Only test 3D rendering on relevant pages
+    if (!pageConfig.name.includes('3D') && !pageConfig.name.includes('Terrain')) {
+      return {
+        status: 'skipped',
+        message: 'Not a 3D page'
+      };
+    }
+    
+    // Check for canvas element
+    const hasCanvas = await page.evaluate(() => {
+      return document.querySelector('canvas') !== null;
+    });
+    
+    if (!hasCanvas) {
+      return {
+        status: 'failed',
+        message: 'No canvas element found for 3D rendering'
+      };
+    }
+    
+    // Check if WebGL is available
+    const webglAvailable = await page.evaluate(() => {
+      try {
+        const canvas = document.createElement('canvas');
+        return !!(window.WebGLRenderingContext && 
+          (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+      } catch (e) {
+        return false;
+      }
+    });
+    
+    if (!webglAvailable) {
+      return {
+        status: 'failed',
+        message: 'WebGL not available'
+      };
+    }
+    
+    // Check if the 3D viewer is rendering
+    const isRendering = await page.evaluate(() => {
+      const canvas = document.querySelector('canvas');
+      // A simple heuristic: a rendering canvas should have a reasonable size
+      return canvas && canvas.width > 50 && canvas.height > 50;
+    });
+    
+    if (!isRendering) {
+      return {
+        status: 'failed',
+        message: '3D viewer canvas has invalid dimensions'
+      };
+    }
+    
+    return {
+      status: 'passed',
+      message: '3D rendering working'
+    };
+  } catch (error) {
+    return {
+      status: 'failed',
+      message: `Error during 3D rendering test: ${error.message}`
+    };
+  }
 }
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+/**
+ * Test responsive layout
+ */
+async function testResponsiveLayout(page, pageConfig, device) {
+  try {
+    // Check for overflow issues
+    const hasOverflow = await page.evaluate(() => {
+      return document.body.scrollWidth > window.innerWidth;
+    });
+    
+    if (hasOverflow) {
+      return {
+        status: 'failed',
+        message: 'Page has horizontal overflow'
+      };
+    }
+    
+    // Check for mobile menu on small devices
+    if (device.name === 'Mobile' || device.name === 'Tablet') {
+      const hasMobileMenu = await page.evaluate(() => {
+        return document.querySelector('.mobile-menu, .hamburger-menu, .menu-toggle') !== null;
+      });
+      
+      if (!hasMobileMenu) {
+        return {
+          status: 'failed',
+          message: 'Mobile menu not found on small device'
+        };
+      }
+    }
+    
+    // Check if critical content is visible
+    const criticalContent = {
+      'Home Page': '.hero-section, .main-cta',
+      'Calculator': '.calculator-container',
+      'Wizard': '.wizard-container',
+      'Terrain Viewer': '.terrain-viewer',
+      'Cost Calculator': '.cost-calculator',
+      '3D Experience': '.immersive-viewer'
+    };
+    
+    const selector = criticalContent[pageConfig.name];
+    if (selector) {
+      const isVisible = await page.evaluate((sel) => {
+        const element = document.querySelector(sel);
+        if (!element) return false;
+        
+        const rect = element.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+      }, selector);
+      
+      if (!isVisible) {
+        return {
+          status: 'failed',
+          message: 'Critical content not visible'
+        };
+      }
+    }
+    
+    return {
+      status: 'passed',
+      message: 'Responsive layout working correctly'
+    };
+  } catch (error) {
+    return {
+      status: 'failed',
+      message: `Error during responsive layout test: ${error.message}`
+    };
+  }
 }
 
 // Run the tests
-runCrossBrowserTests(); 
+if (require.main === module) {
+  runCrossBrowserTests().catch(console.error);
+}
+
+module.exports = { runCrossBrowserTests }; 
