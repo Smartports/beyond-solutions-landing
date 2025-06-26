@@ -16,7 +16,7 @@ Implement a new, fully accessible, multi-language, and style-consistent calculat
 ## 3. **Page Structure & User Flow**
 
 ### **A. Page Route**
-- New page: `/calculator.html`
+- New page: `/calculator-gamified.html`
 - Add navigation link from main site (with i18n support)
 
 ### **B. Main Sections**
@@ -107,7 +107,7 @@ function calculateCosts(state) {
 3. **Config Review**: Ensure new page is registered in navigation and i18n configs.
 
 ### **B. Implementation**
-1. **Create new HTML page** (`calculator.html`), copy base structure from `index.html`.
+1. **Create new HTML page** (`calculator-gamified.html`), copy base structure from `index.html`.
 2. **Add TailwindCSS, Alpine.js, AOS, and i18n scripts** (reuse CDN/config).
 3. **Build multi-step form** using Alpine.js (`x-data`, `x-show`, `x-transition`).
 4. **Bind all text and labels to i18n keys** (use `data-i18n`, `data-i18n-attr`).
@@ -158,7 +158,7 @@ function calculateCosts(state) {
 ---
 
 ## 7. **Change Manifest & Documentation Matrix**
-- **New page**: `calculator.html`
+- **New page**: `calculator-gamified.html`
 - **New JS module**: `js/calculator.js`
 - **i18n updates**: Add keys to all language files
 - **Navigation**: Add link to calculator in main nav (with i18n)

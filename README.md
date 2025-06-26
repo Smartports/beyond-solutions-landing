@@ -96,7 +96,7 @@ To run this site locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/beyond-solutions-landing.git
+git clone https://github.com/Smartports/beyond-solutions-landing.git
 
 # Navigate to the directory
 cd beyond-solutions-landing
@@ -424,3 +424,88 @@ Key contrast ratios:
 - White on Primary 700 (`#334b4e`): 6.8:1 ✓
 - Primary 700 (`#334b4e`) on Primary 200 (`#bac4c3`): 3.2:1 ✓
 - Primary 800 (`#243b44`) on white: 9.5:1 ✓
+
+## Calculadora Inmobiliaria - Beyond Solutions
+
+Este proyecto implementa una calculadora inmobiliaria avanzada para Beyond Solutions, que permite a los usuarios:
+
+1. Configurar proyectos inmobiliarios paso a paso
+2. Seleccionar y configurar terrenos (manual, importación o catálogo)
+3. Realizar análisis 3D del terreno (solar y viento)
+4. Calcular costos y presupuestos
+5. Visualizar el proyecto en 3D
+6. Generar reportes detallados
+
+### Estado Actual
+
+- ✅ Sprint 1: Wizard/Onboarding - Completado
+- ✅ Sprint 2: Terreno MVP - Completado
+- ✅ Sprint 3: Terreno Completo - Completado
+- 📅 Sprint 4: Costos - Pendiente
+- 📅 Sprint 5: Experiencia 3D - Pendiente
+- 📅 Sprint 6: Hardening y QA - Pendiente
+
+### Funcionalidades Implementadas
+
+#### Sprint 1: Wizard/Onboarding
+- Flujo de onboarding paso a paso
+- Configuración inicial de proyectos
+- Validación de datos de entrada
+- Persistencia de configuración
+
+#### Sprint 2: Terreno MVP
+- Selección de terreno en mapa interactivo
+- Sketch 2D para dibujar terrenos manualmente
+- Catálogo de terrenos predefinidos
+- Editor de elevación básico
+- Exportación de datos del terreno
+
+#### Sprint 3: Terreno Completo
+- Importación de archivos CAD (DXF)
+- Importación de archivos GeoJSON
+- Visualización 3D del terreno
+- Análisis solar con simulación de sombras
+- Análisis de viento con visualización de flujo
+- Generación de informes de análisis
+- Exportación de modelos 3D (glTF)
+
+### Estructura del Proyecto
+
+El proyecto está organizado como un monorepo con los siguientes paquetes:
+
+- `apps/web`: Aplicación principal
+- `packages/ui`: Componentes de UI reutilizables
+- `packages/maps`: Componentes y utilidades para mapas
+- `packages/geo`: Utilidades para importación y procesamiento de archivos CAD/GIS
+- `packages/core`: Lógica de negocio central
+
+### Tecnologías Utilizadas
+
+- React 18
+- TypeScript
+- Google Maps API
+- Babylon.js (renderizado 3D)
+- Turf.js (análisis geoespacial)
+- DXF Parser (importación CAD)
+- Tailwind CSS
+
+### Instalación y Ejecución
+
+```bash
+# Instalar dependencias
+npm install
+
+# Ejecutar en modo desarrollo
+npm run dev
+
+# Construir para producción
+npm run build
+```
+
+### Documentación
+
+Para más información sobre el proyecto, consulta los siguientes documentos:
+
+- [Plan de Sprints](./docs/SPRINT_PLAN.md)
+- [Progreso de la Calculadora](./docs/CALCULATOR_PROGRESS.md)
+- [Guía de Contribución](./docs/CONTRIBUTING.md)
