@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Beyond Calculator - Experiencia Inmobiliaria Gamificada</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E🏗️%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+  
+  <!-- CSP Meta Tag - Updated for Google Maps API -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://maps.gstatic.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://maps.googleapis.com https://maps.gstatic.com blob:; connect-src 'self' https: https://maps.googleapis.com wss:; frame-src 'self' https:; worker-src 'self' blob:;">
+  
+  <!-- Reutilizar estilos base -->
+  <link rel="stylesheet" href="./css/colors.css">
+  <link rel="stylesheet" href="./css/language-selector.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              950: "#192525",
+              900: "#243b44",
+              800: "#334b4e",
+              700: "#54676d",
+              600: "#68767c"
+            },
+            accent: {
+              500: "#8c8f92",
+              300: "#adb3b7",
+              200: "#b1aaa0",
+              100: "#b9c6cd",
+              50: "#bac4c3"
+            }
+          }
+        }
+      },
+      darkMode: "class"
+    };
+  </script>
+  
+  <!-- Babylon.js para 3D - Using cdn.jsdelivr.net -->
+  <script src="https://cdn.jsdelivr.net/npm/babylonjs@6.0.0/babylon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/babylonjs-loaders@6.0.0/babylonjs.loaders.min.js"></script>
+  
+  <!-- Chart.js para KPIs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- jsPDF para exportación - Using cdn.jsdelivr.net -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  
+  <!-- i18n y módulos -->
+  <script type="module" src="./js/main.js"></script>
+  <script src="./js/modules/wizard.js"></script>
+  <script src="./js/modules/terrain.js"></script>
+  <script src="./js/modules/viewer3d.js"></script>
+  <script src="./js/modules/finance.js"></script>
+  
+  <!-- Alpine.js -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <style>
+    /* Estilos para gamificación */
+    .phase-indicator {
+      transition: all 0.3s ease;
+    }
+    
+    .phase-indicator.active {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(51, 75, 78, 0.4);
+    }
+    
+    .xp-bar {
+      background: linear-gradient(90deg, #334b4e 0%, #54676d 100%);
+      transition: width 0.5s ease;
+    }
+    
+    .badge-earned {
+      animation: badgeEarned 0.5s ease;
+    }
+    
+    @keyframes badgeEarned {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+      100% { transform: scale(1) rotate(360deg); opacity: 1; }
+    }
+    
+    .terrain-3d-container {
+      height: 500px;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+    
+    .kpi-card {
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      transition: transform 0.2s ease;
+    }
+    
+    .dark .kpi-card {
+      background: linear-gradient(135deg, #243b44 0%, #334b4e 100%);
+    }
+    
+    .kpi-card:hover {
+      transform: translateY(-2px);
+    }
+    
+    /* Loader animation */
+    .loader {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #334b4e;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="font-body antialiased leading-relaxed text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900">
+  
+  <!-- Header reutilizado de index.html -->
+  <header x-data="nav" x-init="init()" class="fixed inset-x-0 top-0 z-50 bg-white/80 dark:bg-primary-900/80 backdrop-blur shadow-sm">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <a href="index.html#about" class="text-primary-800 dark:text-white font-bold text-lg">Beyond&nbsp;Solutions</a>
+      
+      <nav class="hidden md:flex space-x-6">
+        <a href="index.html" class="hover:text-primary-800 dark:hover:text-accent-50">Inicio</a>
+        <a href="calculator-gamified.html" class="text-primary-800 dark:text-accent-50 font-semibold">Calculadora</a>
+        <a href="dashboard.html" class="hover:text-primary-800 dark:hover:text-accent-50">Mis Proyectos</a>
+        <a href="index.html#contacto" class="hover:text-primary-800 dark:hover:text-accent-50">Contacto</a>
+      </nav>
+      
+      <div class="flex items-center space-x-4">
+        <div class="language-selector"></div>
+        <button @click="toggleTheme" class="p-2 bg-accent-50 dark:bg-primary-800 rounded-full">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <main class="pt-24 pb-16 min-h-screen" x-data="calculatorGamified" x-init="init()">
+    
+    <!-- Gamification Header -->
+    <div class="bg-gradient-to-r from-primary-800 to-primary-700 text-white py-4 px-6 mb-8">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="text-2xl font-bold">Nivel <span x-text="playerLevel"></span></div>
+          <div class="w-48 bg-primary-900/50 rounded-full h-3">
+            <div class="xp-bar h-full rounded-full" :style="`width: ${xpProgress}%`"></div>
+          </div>
+          <div class="text-sm"><span x-text="currentXP"></span> / <span x-text="nextLevelXP"></span> XP</div>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+          <div class="flex space-x-2">
+            <template x-for="badge in recentBadges" :key="badge.id">
+              <div class="w-10 h-10 rounded-full bg-accent-200 flex items-center justify-center" :title="badge.name">
+                <span x-text="badge.icon"></span>
+              </div>
+            </template>
+          </div>
+          <button @click="showLeaderboard = true" class="px-4 py-2 bg-accent-200 text-primary-900 rounded-full text-sm font-semibold">
+            🏆 Ranking
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Progress Phases -->
+    <div class="max-w-7xl mx-auto px-6 mb-8">
+      <div class="flex justify-between items-center">
+        <template x-for="(phase, index) in phases" :key="phase.id">
+          <div class="flex-1 relative">
+            <div class="flex items-center">
+              <div 
+                class="phase-indicator w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xl cursor-pointer transition-all"
+                :class="{
+                  'bg-primary-800': currentPhase >= index,
+                  'bg-gray-300 dark:bg-gray-600': currentPhase < index,
+                  'active': currentPhase === index
+                }"
+                @click="currentPhase >= index && goToPhase(index)"
+              >
+                <span x-text="phase.icon"></span>
+              </div>
+              <div x-show="index < phases.length - 1" class="flex-1 h-1 mx-2"
+                :class="currentPhase > index ? 'bg-primary-800' : 'bg-gray-300 dark:bg-gray-600'"></div>
+            </div>
+            <div class="absolute top-20 left-0 right-0 text-center">
+              <p class="text-sm font-semibold" x-text="phase.name"></p>
+              <p class="text-xs text-gray-500" x-text="phase.xp + ' XP'"></p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+    
+    <!-- Main Content Area -->
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-8">
+        
+        <!-- Phase 1: Wizard/Onboarding -->
+        <div x-show="currentPhase === 0" x-transition>
+          <h2 class="text-3xl font-bold mb-6">🎯 Comencemos tu proyecto</h2>
+          
+          <div class="space-y-8">
+            <!-- Pregunta 1: Perfil -->
+            <div x-show="wizardStep === 0">
+              <h3 class="text-xl font-semibold mb-4">¿Cuál es tu perfil?</h3>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button 
+                  @click="selectProfile('developer')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.profile === 'developer' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">🏗️</div>
+                  <div class="font-semibold">Desarrollador</div>
+                </button>
+                
+                <button 
+                  @click="selectProfile('owner')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.profile === 'owner' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">🏠</div>
+                  <div class="font-semibold">Propietario</div>
+                </button>
+                
+                <button 
+                  @click="selectProfile('investor')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.profile === 'investor' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">💰</div>
+                  <div class="font-semibold">Inversionista</div>
+                </button>
+                
+                <button 
+                  @click="selectProfile('architect')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.profile === 'architect' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">📐</div>
+                  <div class="font-semibold">Arquitecto</div>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Pregunta 2: Tipo de Proyecto -->
+            <div x-show="wizardStep === 1">
+              <h3 class="text-xl font-semibold mb-4">¿Qué tipo de proyecto tienes en mente?</h3>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button 
+                  @click="selectProjectType('residential')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.projectType === 'residential' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">🏘️</div>
+                  <div class="font-semibold">Residencial</div>
+                </button>
+                
+                <button 
+                  @click="selectProjectType('commercial')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.projectType === 'commercial' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">🏢</div>
+                  <div class="font-semibold">Comercial</div>
+                </button>
+                
+                <button 
+                  @click="selectProjectType('mixed')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.projectType === 'mixed' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">🏙️</div>
+                  <div class="font-semibold">Mixto</div>
+                </button>
+                
+                <button 
+                  @click="selectProjectType('industrial')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.projectType === 'industrial' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">🏭</div>
+                  <div class="font-semibold">Industrial</div>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Project Details -->
+            <div x-show="wizardStep === 2">
+              <h3 class="text-xl font-semibold mb-4">Dale un nombre a tu proyecto</h3>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm font-medium mb-2">Nombre del proyecto</label>
+                  <input 
+                    type="text" 
+                    x-model="formData.projectName"
+                    class="w-full px-4 py-2 border rounded-lg dark:bg-zinc-700 dark:border-zinc-600"
+                    placeholder="Mi proyecto inmobiliario"
+                  >
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-2">Ubicación</label>
+                  <input 
+                    type="text" 
+                    x-model="formData.location"
+                    id="location-autocomplete"
+                    class="w-full px-4 py-2 border rounded-lg dark:bg-zinc-700 dark:border-zinc-600"
+                    placeholder="Buscar dirección..."
+                    @focus="initLocationAutocomplete()"
+                  >
+                  <p class="text-xs text-gray-500 mt-1">Comienza a escribir para buscar direcciones</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="flex justify-between mt-8">
+              <button 
+                x-show="wizardStep > 0"
+                @click="wizardStep--"
+                class="px-6 py-3 bg-gray-200 dark:bg-gray-700 rounded-full"
+              >
+                Anterior
+              </button>
+              
+              <button 
+                x-show="wizardStep < 2"
+                @click="nextWizardStep()"
+                :disabled="!canProceedWizard()"
+                class="px-6 py-3 bg-primary-800 text-white rounded-full disabled:opacity-50"
+              >
+                Siguiente
+              </button>
+              
+              <button 
+                x-show="wizardStep === 2"
+                @click="completePhase1()"
+                :disabled="!formData.projectName || !formData.location"
+                class="px-6 py-3 bg-primary-800 text-white rounded-full disabled:opacity-50"
+              >
+                Continuar al Terreno
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Phase 2: Terreno -->
+        <div x-show="currentPhase === 1" x-transition>
+          <h2 class="text-3xl font-bold mb-6">🗺️ Configura tu terreno</h2>
+          
+          <div class="space-y-8">
+            <!-- Origen del terreno -->
+            <div x-show="terrainStep === 0">
+              <h3 class="text-xl font-semibold mb-4">¿De dónde obtendrás el terreno?</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button 
+                  @click="selectTerrainSource('own')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.terrainSource === 'own' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">📍</div>
+                  <div class="font-semibold">Terreno Propio</div>
+                  <p class="text-sm text-gray-500 mt-2">Dibuja o importa tu terreno</p>
+                </button>
+                
+                <button 
+                  @click="selectTerrainSource('catalog')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.terrainSource === 'catalog' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">🏪</div>
+                  <div class="font-semibold">Catálogo</div>
+                  <p class="text-sm text-gray-500 mt-2">Explora terrenos disponibles</p>
+                </button>
+                
+                <button 
+                  @click="selectTerrainSource('search')"
+                  class="p-6 border-2 rounded-lg text-center hover:border-primary-700 transition"
+                  :class="formData.terrainSource === 'search' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'"
+                >
+                  <div class="text-3xl mb-2">🔍</div>
+                  <div class="font-semibold">Buscar en Mapa</div>
+                  <p class="text-sm text-gray-500 mt-2">Encuentra terrenos en el mapa</p>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Mapa Interactivo -->
+            <div x-show="terrainStep === 1" class="space-y-4">
+              <h3 class="text-xl font-semibold mb-4">Dibuja o selecciona tu terreno</h3>
+              
+              <!-- Placeholder para Google Maps -->
+              <div id="terrain-map" class="w-full h-96 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                <div class="text-center">
+                  <div class="loader mx-auto mb-4"></div>
+                  <p class="text-gray-500">Cargando mapa...</p>
+                  <p class="text-sm text-gray-400 mt-2">API Key requerida</p>
+                </div>
+              </div>
+              
+              <!-- Controles del mapa -->
+              <div class="flex space-x-4">
+                <button class="px-4 py-2 bg-primary-800 text-white rounded-lg">
+                  ✏️ Dibujar Polígono
+                </button>
+                <button class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg">
+                  📁 Importar CAD/GeoJSON
+                </button>
+                <button class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg">
+                  📏 Medir
+                </button>
+              </div>
+              
+              <!-- Info del terreno -->
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Área</p>
+                  <p class="text-xl font-bold" id="terrain-area">0 m²</p>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Perímetro</p>
+                  <p class="text-xl font-bold" id="terrain-perimeter">0 m</p>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Elevación</p>
+                  <p class="text-xl font-bold" data-terrain="elevation">-- msnm</p>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Uso de Suelo</p>
+                  <p class="text-xl font-bold" data-terrain="landuse">Por determinar</p>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Pendiente</p>
+                  <p class="text-xl font-bold" data-terrain="slope">-- %</p>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Restricciones</p>
+                  <p class="text-xl font-bold" data-terrain="restrictions">Ninguna</p>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Zona</p>
+                  <p class="text-xl font-bold" data-terrain="zone">Por verificar</p>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Coordenadas</p>
+                  <p class="text-xl font-bold" data-terrain="coords">-- puntos</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Vista 3D del Terreno -->
+            <div x-show="terrainStep === 2" class="space-y-4">
+              <h3 class="text-xl font-semibold mb-4">Vista 3D de tu terreno</h3>
+              
+              <div class="terrain-3d-container bg-gray-100 dark:bg-gray-900">
+                <canvas id="viewer3d-canvas" class="w-full h-full"></canvas>
+              </div>
+              
+              <!-- Controles 3D -->
+              <div class="flex space-x-4">
+                <button @click="toggleDayNight()" class="px-4 py-2 bg-primary-800 text-white rounded-lg hover:bg-primary-700 transition">
+                  <span x-text="(viewer3D && typeof viewer3D.isNightMode === 'function' && viewer3D.isNightMode()) ? '🌞 Día' : '🌙 Noche'"></span>
+                </button>
+                <button @click="toggleSolarAnalysis()" class="px-4 py-2 rounded-lg transition"
+                  :class="(viewer3D && typeof viewer3D.getAnalysisMode === 'function' && viewer3D.getAnalysisMode() === 'solar') ? 'bg-yellow-500 text-white' : 'bg-gray-200 dark:bg-gray-700'">
+                  🌤️ Análisis Solar
+                </button>
+                <button @click="toggleWindAnalysis()" class="px-4 py-2 rounded-lg transition"
+                  :class="(viewer3D && typeof viewer3D.getAnalysisMode === 'function' && viewer3D.getAnalysisMode() === 'wind') ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700'">
+                  💨 Análisis de Viento
+                </button>
+              </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="flex justify-between mt-8">
+              <button 
+                @click="terrainStep > 0 ? terrainStep-- : currentPhase--"
+                class="px-6 py-3 bg-gray-200 dark:bg-gray-700 rounded-full"
+              >
+                Anterior
+              </button>
+              
+              <button 
+                @click="nextTerrainStep()"
+                class="px-6 py-3 bg-primary-800 text-white rounded-full"
+              >
+                <span x-text="terrainStep < 2 ? 'Siguiente' : 'Continuar a Costos'"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Phase 3: Costos -->
+        <div x-show="currentPhase === 2" x-transition>
+          <h2 class="text-3xl font-bold mb-6">💰 Análisis de Costos</h2>
+          
+          <div class="space-y-8">
+            <!-- Sistema Constructivo -->
+            <div>
+              <h3 class="text-xl font-semibold mb-4">Sistema Constructivo</h3>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <label class="cursor-pointer">
+                  <input type="radio" name="construction" value="traditional" x-model="formData.constructionSystem" class="sr-only">
+                  <div class="p-4 border-2 rounded-lg text-center transition"
+                    :class="formData.constructionSystem === 'traditional' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
+                    <div class="text-2xl mb-2">🧱</div>
+                    <div class="font-semibold">Tradicional</div>
+                  </div>
+                </label>
+                
+                <label class="cursor-pointer">
+                  <input type="radio" name="construction" value="prefab" x-model="formData.constructionSystem" class="sr-only">
+                  <div class="p-4 border-2 rounded-lg text-center transition"
+                    :class="formData.constructionSystem === 'prefab' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
+                    <div class="text-2xl mb-2">🏗️</div>
+                    <div class="font-semibold">Prefabricado</div>
+                  </div>
+                </label>
+                
+                <label class="cursor-pointer">
+                  <input type="radio" name="construction" value="steel" x-model="formData.constructionSystem" class="sr-only">
+                  <div class="p-4 border-2 rounded-lg text-center transition"
+                    :class="formData.constructionSystem === 'steel' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
+                    <div class="text-2xl mb-2">🏢</div>
+                    <div class="font-semibold">Acero</div>
+                  </div>
+                </label>
+                
+                <label class="cursor-pointer">
+                  <input type="radio" name="construction" value="eco" x-model="formData.constructionSystem" class="sr-only">
+                  <div class="p-4 border-2 rounded-lg text-center transition"
+                    :class="formData.constructionSystem === 'eco' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
+                    <div class="text-2xl mb-2">🌿</div>
+                    <div class="font-semibold">Ecológico</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Nivel de Materiales -->
+            <div>
+              <h3 class="text-xl font-semibold mb-4">Nivel de Materiales</h3>
+              <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <label class="cursor-pointer">
+                  <input type="radio" name="materials" value="basic" x-model="formData.materialLevel" class="sr-only">
+                  <div class="p-4 border-2 rounded-lg text-center transition"
+                    :class="formData.materialLevel === 'basic' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
+                    <div class="text-xl mb-1">💵</div>
+                    <div class="font-semibold">Básico</div>
+                    <div class="text-sm text-gray-500">$8,000/m²</div>
+                  </div>
+                </label>
+                
+                <label class="cursor-pointer">
+                  <input type="radio" name="materials" value="standard" x-model="formData.materialLevel" class="sr-only">
+                  <div class="p-4 border-2 rounded-lg text-center transition"
+                    :class="formData.materialLevel === 'standard' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
+                    <div class="text-xl mb-1">💵💵</div>
+                    <div class="font-semibold">Estándar</div>
+                    <div class="text-sm text-gray-500">$12,000/m²</div>
+                  </div>
+                </label>
+                
+                <label class="cursor-pointer">
+                  <input type="radio" name="materials" value="premium" x-model="formData.materialLevel" class="sr-only">
+                  <div class="p-4 border-2 rounded-lg text-center transition"
+                    :class="formData.materialLevel === 'premium' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
+                    <div class="text-xl mb-1">💵💵💵</div>
+                    <div class="font-semibold">Premium</div>
+                    <div class="text-sm text-gray-500">$18,000/m²</div>
+                  </div>
+                </label>
+                
+                <label class="cursor-pointer">
+                  <input type="radio" name="materials" value="luxury" x-model="formData.materialLevel" class="sr-only">
+                  <div class="p-4 border-2 rounded-lg text-center transition"
+                    :class="formData.materialLevel === 'luxury' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
+                    <div class="text-xl mb-1">💎</div>
+                    <div class="font-semibold">Lujo</div>
+                    <div class="text-sm text-gray-500">$25,000/m²</div>
+                  </div>
+                </label>
+                
+                <label class="cursor-pointer">
+                  <input type="radio" name="materials" value="custom" x-model="formData.materialLevel" class="sr-only">
+                  <div class="p-4 border-2 rounded-lg text-center transition"
+                    :class="formData.materialLevel === 'custom' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
+                    <div class="text-xl mb-1">⚙️</div>
+                    <div class="font-semibold">Personalizado</div>
+                    <div class="text-sm text-gray-500">Definir</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+            
+            <!-- KPIs Financieros -->
+            <div>
+              <h3 class="text-xl font-semibold mb-4">Indicadores Financieros</h3>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="kpi-card p-6 rounded-lg">
+                  <p class="text-sm text-gray-500 dark:text-gray-400">ROI</p>
+                  <p class="text-3xl font-bold text-primary-800 dark:text-primary-300" data-indicator="roi">--</p>
+                  <p class="text-xs text-gray-500 trend">Calculando...</p>
+                </div>
+                
+                <div class="kpi-card p-6 rounded-lg">
+                  <p class="text-sm text-gray-500 dark:text-gray-400">TIR</p>
+                  <p class="text-3xl font-bold text-primary-800 dark:text-primary-300" data-indicator="irr">--</p>
+                  <p class="text-xs text-gray-500 trend">Calculando...</p>
+                </div>
+                
+                <div class="kpi-card p-6 rounded-lg">
+                  <p class="text-sm text-gray-500 dark:text-gray-400">VAN</p>
+                  <p class="text-3xl font-bold text-primary-800 dark:text-primary-300" data-indicator="npv">--</p>
+                  <p class="text-xs text-gray-500 trend">Calculando...</p>
+                </div>
+                
+                <div class="kpi-card p-6 rounded-lg">
+                  <p class="text-sm text-gray-500 dark:text-gray-400">Payback</p>
+                  <p class="text-3xl font-bold text-primary-800 dark:text-primary-300" data-indicator="payback">--</p>
+                  <p class="text-xs text-gray-500 trend">Calculando...</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Simulador de Escenarios -->
+            <div>
+              <h3 class="text-xl font-semibold mb-4">Simulador de Escenarios</h3>
+              <div class="flex space-x-4 mb-4">
+                <button 
+                  @click="scenario = 'optimistic'"
+                  class="px-4 py-2 rounded-lg transition"
+                  :class="scenario === 'optimistic' ? 'bg-green-600 text-white' : 'bg-gray-200 dark:bg-gray-700'"
+                >
+                  😊 Optimista
+                </button>
+                <button 
+                  @click="scenario = 'realistic'"
+                  class="px-4 py-2 rounded-lg transition"
+                  :class="scenario === 'realistic' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700'"
+                >
+                  😐 Realista
+                </button>
+                <button 
+                  @click="scenario = 'pessimistic'"
+                  class="px-4 py-2 rounded-lg transition"
+                  :class="scenario === 'pessimistic' ? 'bg-red-600 text-white' : 'bg-gray-200 dark:bg-gray-700'"
+                >
+                  😟 Pesimista
+                </button>
+              </div>
+              
+              <!-- Gráfica de proyección -->
+              <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+                <canvas id="projection-chart" class="w-full h-64"></canvas>
+              </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="flex justify-between mt-8">
+              <button 
+                @click="currentPhase--"
+                class="px-6 py-3 bg-gray-200 dark:bg-gray-700 rounded-full"
+              >
+                Anterior
+              </button>
+              
+              <button 
+                @click="completePhase3()"
+                class="px-6 py-3 bg-primary-800 text-white rounded-full"
+              >
+                Ver Experiencia 3D
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Phase 4: Experiencia 3D -->
+        <div x-show="currentPhase === 3" x-transition>
+          <h2 class="text-3xl font-bold mb-6">🎮 Experiencia Inmersiva</h2>
+          
+          <div class="space-y-8">
+            <!-- Visualizador 3D Principal -->
+            <div class="relative">
+              <div class="terrain-3d-container bg-gray-100 dark:bg-gray-900" style="height: 600px;">
+                <canvas id="immersive-canvas" class="w-full h-full"></canvas>
+              </div>
+              
+              <!-- Controles flotantes -->
+              <div class="absolute top-4 right-4 space-y-2">
+                <button class="px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur rounded-lg shadow">
+                  🏠 Vista Exterior
+                </button>
+                <button class="px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur rounded-lg shadow">
+                  🚪 Vista Interior
+                </button>
+                <button class="px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur rounded-lg shadow">
+                  🚁 Vista Aérea
+                </button>
+              </div>
+              
+              <!-- Timeline día/noche -->
+              <div class="absolute bottom-4 left-4 right-4">
+                <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur rounded-lg p-4">
+                  <label class="text-sm font-semibold">Hora del día</label>
+                  <input type="range" min="0" max="24" x-model="timeOfDay" class="w-full">
+                  <div class="flex justify-between text-xs text-gray-500">
+                    <span>00:00</span>
+                    <span>06:00</span>
+                    <span>12:00</span>
+                    <span>18:00</span>
+                    <span>24:00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Badges y Logros -->
+            <div>
+              <h3 class="text-xl font-semibold mb-4">🏆 Logros Desbloqueados</h3>
+              <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="text-center">
+                  <div class="w-20 h-20 mx-auto bg-yellow-400 rounded-full flex items-center justify-center text-3xl badge-earned">
+                    🎯
+                  </div>
+                  <p class="mt-2 text-sm font-semibold">Primer Proyecto</p>
+                  <p class="text-xs text-gray-500">+100 XP</p>
+                </div>
+                
+                <div class="text-center">
+                  <div class="w-20 h-20 mx-auto bg-blue-400 rounded-full flex items-center justify-center text-3xl badge-earned">
+                    🗺️
+                  </div>
+                  <p class="mt-2 text-sm font-semibold">Cartógrafo</p>
+                  <p class="text-xs text-gray-500">+150 XP</p>
+                </div>
+                
+                <div class="text-center">
+                  <div class="w-20 h-20 mx-auto bg-green-400 rounded-full flex items-center justify-center text-3xl badge-earned">
+                    💰
+                  </div>
+                  <p class="mt-2 text-sm font-semibold">Analista Financiero</p>
+                  <p class="text-xs text-gray-500">+200 XP</p>
+                </div>
+                
+                <div class="text-center opacity-50">
+                  <div class="w-20 h-20 mx-auto bg-gray-300 rounded-full flex items-center justify-center text-3xl">
+                    🔒
+                  </div>
+                  <p class="mt-2 text-sm font-semibold">Visionario 3D</p>
+                  <p class="text-xs text-gray-500">Bloqueado</p>
+                </div>
+                
+                <div class="text-center opacity-50">
+                  <div class="w-20 h-20 mx-auto bg-gray-300 rounded-full flex items-center justify-center text-3xl">
+                    🔒
+                  </div>
+                  <p class="mt-2 text-sm font-semibold">Master Builder</p>
+                  <p class="text-xs text-gray-500">Bloqueado</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Opciones de Exportación -->
+            <div>
+              <h3 class="text-xl font-semibold mb-4">📤 Compartir y Exportar</h3>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button class="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                  <div class="text-2xl mb-2">📄</div>
+                  <div class="font-semibold">PDF</div>
+                  <p class="text-xs text-gray-500">Reporte completo</p>
+                </button>
+                
+                <button class="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                  <div class="text-2xl mb-2">📊</div>
+                  <div class="font-semibold">Excel</div>
+                  <p class="text-xs text-gray-500">Análisis financiero</p>
+                </button>
+                
+                <button class="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                  <div class="text-2xl mb-2">🎮</div>
+                  <div class="font-semibold">glTF</div>
+                  <p class="text-xs text-gray-500">Modelo 3D</p>
+                </button>
+                
+                <button class="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                  <div class="text-2xl mb-2">🔗</div>
+                  <div class="font-semibold">Compartir</div>
+                  <p class="text-xs text-gray-500">Link público</p>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Finalizar -->
+            <div class="text-center">
+              <button 
+                @click="saveProject()"
+                class="px-8 py-4 bg-green-600 text-white rounded-full text-lg font-semibold hover:bg-green-700 transition"
+              >
+                ✅ Guardar Proyecto
+              </button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- Leaderboard Modal -->
+    <div x-show="showLeaderboard" x-cloak
+      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      @click.away="showLeaderboard = false">
+      <div class="bg-white dark:bg-zinc-800 rounded-lg p-8 max-w-md w-full">
+        <h3 class="text-2xl font-bold mb-6">🏆 Tabla de Clasificación</h3>
+        
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+            <div class="flex items-center space-x-3">
+              <span class="text-2xl">🥇</span>
+              <div>
+                <p class="font-semibold">ArquitectoMaster</p>
+                <p class="text-sm text-gray-500">Nivel 42</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="font-bold">12,450 XP</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900/20 rounded-lg">
+            <div class="flex items-center space-x-3">
+              <span class="text-2xl">🥈</span>
+              <div>
+                <p class="font-semibold">DesarrolladorPro</p>
+                <p class="text-sm text-gray-500">Nivel 38</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="font-bold">10,200 XP</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+            <div class="flex items-center space-x-3">
+              <span class="text-2xl">🥉</span>
+              <div>
+                <p class="font-semibold">InversionistaElite</p>
+                <p class="text-sm text-gray-500">Nivel 35</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="font-bold">9,850 XP</p>
+            </div>
+          </div>
+          
+          <div class="border-t pt-4">
+            <div class="flex items-center justify-between p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg">
+              <div class="flex items-center space-x-3">
+                <span class="text-2xl">🎯</span>
+                <div>
+                  <p class="font-semibold">Tú</p>
+                  <p class="text-sm text-gray-500">Nivel <span x-text="playerLevel"></span></p>
+                </div>
+              </div>
+              <div class="text-right">
+                <p class="font-bold"><span x-text="currentXP"></span> XP</p>
+                <p class="text-sm text-gray-500">#127</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <button 
+          @click="showLeaderboard = false"
+          class="mt-6 w-full px-4 py-2 bg-primary-800 text-white rounded-lg"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+    
+  </main>
+  
+  <!-- Footer -->
+  <footer class="py-12 text-center border-t border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+    <p class="text-sm text-zinc-500 dark:text-zinc-400">© 2025 Beyond Solutions. Todos los derechos reservados.</p>
+  </footer>
+  
+  <!-- API Keys Configuration -->
+  <script src="./config.js"></script>
+  <script>
+    // Verificar que la configuración se cargó correctamente
+    if (!window.BEYOND_CONFIG) {
+      console.error('⚠️ No se pudo cargar la configuración. Asegúrate de que config.js existe.');
+    } else {
+      console.log('✅ Configuración cargada correctamente');
+      
+      // Advertencia si faltan API keys importantes
+      if (!window.BEYOND_CONFIG.GOOGLE_MAPS_API_KEY || window.BEYOND_CONFIG.GOOGLE_MAPS_API_KEY.includes('YOUR_')) {
+        console.warn('⚠️ Google Maps API Key no configurada correctamente.');
+      }
+    }
+  </script>
+  
+  <!-- Módulo de almacenamiento (debe cargarse antes de Alpine.js) -->
+  <script src="./js/modules/storage.js"></script>
+  
+  <!-- Componente Principal de la Calculadora Gamificada -->
+  <script>
+    // Definir el componente Alpine.js antes de que se inicialice
+    document.addEventListener('alpine:init', () => {
+      // Componente de navegación
+      Alpine.data('nav', () => ({
+        theme: localStorage.getItem('theme') || 'light',
+        
+        init() {
+          this.applyTheme();
+        },
+        
+        toggleTheme() {
+          this.theme = this.theme === 'dark' ? 'light' : 'dark';
+          localStorage.setItem('theme', this.theme);
+          this.applyTheme();
+        },
+        
+        applyTheme() {
+          document.documentElement.classList.toggle('dark', this.theme === 'dark');
+        }
+      }));
+      
+      // Componente principal de la calculadora gamificada
+      Alpine.data('calculatorGamified', () => ({
+        // Estado del proyecto
+        projectId: null,
+        currentProject: null,
+        
+        // Estado de gamificación
+        playerLevel: 1,
+        currentXP: 0,
+        nextLevelXP: 100,
+        xpProgress: 0,
+        recentBadges: [],
+        showLeaderboard: false,
+        
+        // Fases del proceso
+        currentPhase: 0,
+        phases: [
+          { id: 'wizard', name: 'Onboarding', icon: '🎯', xp: 100 },
+          { id: 'terrain', name: 'Terreno', icon: '🗺️', xp: 150 },
+          { id: 'costs', name: 'Costos', icon: '💰', xp: 200 },
+          { id: 'experience', name: '3D Experience', icon: '🎮', xp: 250 }
+        ],
+        
+        // Estado del wizard
+        wizardStep: 0,
+        autocompleteInstance: null,
+        
+        // Estado del terreno
+        terrainStep: 0,
+        terrainModule: null,
+        
+        // Estado de costos
+        scenario: 'realistic',
+        chartInstance: null,
+        financeModule: null,
+        
+        // Estado 3D
+        viewer3D: null,
+        timeOfDay: 12,
+        
+        // Datos del formulario
+        formData: {
+          // Wizard
+          profile: '',
+          projectType: '',
+          projectName: '',
+          location: '',
+          
+          // Terreno
+          terrainSource: '',
+          terrainData: null,
+          
+          // Costos
+          constructionSystem: 'traditional',
+          materialLevel: 'standard',
+          budget: 0,
+          
+          // Financiamiento
+          financing: {
+            loanAmount: 0,
+            interestRate: 12,
+            termMonths: 24
+          }
+        },
+        
+        async init() {
+          console.log('🚀 Inicializando calculadora gamificada...');
+          
+          // Inicializar StorageModule
+          if (window.StorageModule) {
+            await window.StorageModule.init();
+          }
+          
+          // Cargar proyecto si viene de un parámetro
+          const urlParams = new URLSearchParams(window.location.search);
+          const projectParam = urlParams.get('project');
+          
+          if (projectParam && window.StorageModule) {
+            await this.loadProject(projectParam);
+          }
+          
+          // Cargar estado de gamificación
+          await this.loadGamificationState();
+          
+          // Auto-guardar cambios
+          this.$watch('formData', () => {
+            this.autoSave();
+          });
+        },
+        
+        async loadProject(projectId) {
+          try {
+            if (window.StorageModule?.Projects) {
+              const project = await window.StorageModule.Projects.get(projectId);
+              if (project) {
+                this.projectId = projectId;
+                this.currentProject = project;
+                
+                // Restaurar datos del formulario
+                Object.assign(this.formData, project);
+                
+                // Restaurar progreso
+                if (project.progress) {
+                  // Ir a la última fase no completada
+                  const phases = ['wizard', 'terrain', 'costs', 'viewer3d'];
+                  for (let i = 0; i < phases.length; i++) {
+                    if (!project.progress[phases[i]]) {
+                      this.currentPhase = i;
+                      break;
+                    }
+                  }
+                }
+                
+                console.log('✅ Proyecto cargado:', project);
+              }
+            }
+          } catch (error) {
+            console.error('Error al cargar proyecto:', error);
+          }
+        },
+        
+        async loadGamificationState() {
+          if (window.StorageModule?.Gamification) {
+            const state = await window.StorageModule.Gamification.getOrCreate();
+            this.playerLevel = state.level;
+            this.currentXP = state.totalXP % 100;
+            this.nextLevelXP = 100;
+            this.xpProgress = (this.currentXP / this.nextLevelXP) * 100;
+            
+            // Cargar badges recientes
+            if (state.badges.length > 0) {
+              this.recentBadges = state.badges.slice(-3).map(badgeId => ({
+                id: badgeId,
+                icon: this.getBadgeIcon(badgeId),
+                name: this.getBadgeName(badgeId)
+              }));
+            }
+          }
+        },
+        
+        getBadgeIcon(badgeId) {
+          const badges = {
+            'first-project': '🎯',
+            'terrain-master': '🗺️',
+            'cost-analyst': '💰',
+            '3d-visionary': '🎮',
+            'speed-demon': '⚡',
+            'perfectionist': '💎'
+          };
+          return badges[badgeId] || '🏆';
+        },
+        
+        getBadgeName(badgeId) {
+          const names = {
+            'first-project': 'Primer Proyecto',
+            'terrain-master': 'Maestro del Terreno',
+            'cost-analyst': 'Analista de Costos',
+            '3d-visionary': 'Visionario 3D',
+            'speed-demon': 'Velocidad Extrema',
+            'perfectionist': 'Perfeccionista'
+          };
+          return names[badgeId] || 'Logro';
+        },
+        
+        async autoSave() {
+          if (window.StorageModule?.AutoSave) {
+            const key = this.projectId ? `project_${this.projectId}_data` : 'calculator_temp_data';
+            await window.StorageModule.AutoSave.save(key, this.formData);
+          }
+        },
+        
+        async initLocationAutocomplete() {
+          // Solo inicializar una vez
+          if (this.autocompleteInstance) return;
+          
+          try {
+            // Verificar API key
+            const apiKey = window.BEYOND_CONFIG?.GOOGLE_MAPS_API_KEY;
+            if (!apiKey || apiKey.includes('YOUR_')) {
+              console.warn('Google Maps API Key no configurada para autocompletado');
+              this.showGoogleMapsError('API Key no configurada');
+              return;
+            }
+            
+            // Verificar que Google Maps esté cargado
+            if (!window.google || !window.google.maps || !window.google.maps.places) {
+              await this.loadGoogleMapsAPI(apiKey);
+            }
+            
+            this.setupModernAutocomplete();
+          } catch (error) {
+            console.error('Error initializing Google Maps:', error);
+            this.showGoogleMapsError('Error cargando Google Maps');
+          }
+        },
+
+        async loadGoogleMapsAPI(apiKey) {
+          return new Promise((resolve, reject) => {
+            // Verificar si ya está cargado
+            if (window.google && window.google.maps && window.google.maps.places) {
+              resolve();
+              return;
+            }
+            
+            // Limpiar callbacks previos
+            if (window.initGoogleMapsCallback) {
+              delete window.initGoogleMapsCallback;
+            }
+            
+            // Usar la nueva API de importación con loading=async
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places,drawing,geometry&loading=async&callback=initGoogleMapsCallback`;
+            script.async = true;
+            script.defer = true;
+            
+            // Callback global para cuando se cargue
+            window.initGoogleMapsCallback = () => {
+              console.log('✅ Google Maps API loaded successfully');
+              resolve();
+            };
+            
+            script.onerror = () => {
+              console.error('❌ Failed to load Google Maps API');
+              reject(new Error('Google Maps API failed to load'));
+            };
+            
+            // Timeout de 15 segundos
+            setTimeout(() => {
+              if (!window.google || !window.google.maps) {
+                reject(new Error('Google Maps API loading timeout'));
+              }
+            }, 15000);
+            
+            document.head.appendChild(script);
+          });
+        },
+        
+        setupModernAutocomplete() {
+          const input = document.getElementById('location-autocomplete');
+          if (!input) return;
+          
+          try {
+            // Check if the new PlaceAutocompleteElement is available
+            if (google.maps.places.PlaceAutocompleteElement) {
+              // Create the new autocomplete element
+              const autocompleteElement = new google.maps.places.PlaceAutocompleteElement();
+              
+              // Set properties correctly for the new API
+              autocompleteElement.setAttribute('placeholder', input.placeholder);
+              
+              // Copy classes and styling
+              autocompleteElement.className = input.className;
+              autocompleteElement.id = input.id;
+              
+              // Add country restriction and types via options
+              autocompleteElement.options = {
+                componentRestrictions: { country: 'mx' },
+                types: ['geocode', 'establishment']
+              };
+              
+              // Replace the input with the new element
+              input.parentNode.replaceChild(autocompleteElement, input);
+              
+              // Listen for place selection
+              autocompleteElement.addEventListener('gmp-placeselect', (event) => {
+                const place = event.place;
+                this.handlePlaceSelection(place);
+              });
+              
+              this.autocompleteInstance = autocompleteElement;
+              console.log('✅ Using new PlaceAutocompleteElement API');
+            } else {
+              // Fallback to legacy API
+              this.setupLegacyAutocomplete(input);
+            }
+          } catch (error) {
+            console.error('Error with new autocomplete API, falling back to legacy:', error);
+            this.setupLegacyAutocomplete(input);
+          }
+        },
+        
+        setupLegacyAutocomplete(input) {
+          // Configurar opciones para México principalmente
+          const options = {
+            componentRestrictions: { country: 'mx' },
+            fields: ['address_components', 'geometry', 'formatted_address', 'name'],
+            types: ['geocode', 'establishment']
+          };
+          
+          this.autocompleteInstance = new google.maps.places.Autocomplete(input, options);
+          
+          // Listener para cuando se seleccione una dirección
+          this.autocompleteInstance.addListener('place_changed', () => {
+            const place = this.autocompleteInstance.getPlace();
+            this.handlePlaceSelection(place);
+          });
+          
+          console.log('Using legacy Autocomplete API (deprecated)');
+        },
+        
+        handlePlaceSelection(place) {
+          if (!place || !place.geometry) {
+            console.warn('No se encontraron detalles para esta ubicación');
+            return;
+          }
+          
+          // Actualizar el modelo con la dirección formateada
+          this.formData.location = place.formatted_address || place.name;
+          
+          // Guardar información adicional para uso posterior
+          this.formData.locationDetails = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+            placeId: place.place_id,
+            addressComponents: place.address_components
+          };
+          
+          // Forzar actualización de Alpine
+          this.$nextTick(() => {
+            const input = document.getElementById('location-autocomplete');
+            if (input && input.value !== undefined) {
+              input.value = this.formData.location;
+            }
+          });
+          
+          console.log('Ubicación seleccionada:', this.formData.location);
+        },
+        
+        showGoogleMapsError(message) {
+          // Mostrar mensaje de error y deshabilitar funcionalidad
+          const input = document.getElementById('location-autocomplete');
+          if (input) {
+            input.placeholder = `Error: ${message}`;
+            input.disabled = true;
+            input.className += ' bg-red-100 border-red-300 text-red-700';
+          }
+          
+          // Mostrar notificación al usuario
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-2';
+          errorDiv.innerHTML = `
+            <strong>Error con Google Maps:</strong> ${message}
+            <br><small>Puedes continuar ingresando la dirección manualmente.</small>
+          `;
+          
+          if (input && input.parentNode) {
+            input.parentNode.appendChild(errorDiv);
+          }
+        },
+        
+        goToPhase(phase) {
+          if (phase <= this.currentPhase) {
+            this.currentPhase = phase;
+          }
+        },
+        
+        // Funciones del Wizard
+        selectProfile(profile) {
+          this.formData.profile = profile;
+          this.addXP(10);
+        },
+        
+        selectProjectType(type) {
+          this.formData.projectType = type;
+          this.addXP(10);
+        },
+        
+        canProceedWizard() {
+          switch (this.wizardStep) {
+            case 0: return this.formData.profile !== '';
+            case 1: return this.formData.projectType !== '';
+            case 2: return this.formData.projectName && this.formData.location;
+            default: return false;
+          }
+        },
+        
+        nextWizardStep() {
+          if (this.canProceedWizard()) {
+            this.wizardStep++;
+          }
+        },
+        
+        async completePhase1() {
+          // Crear o actualizar proyecto
+          if (!this.projectId && window.StorageModule?.Projects) {
+            const project = await window.StorageModule.Projects.create(this.formData);
+            this.projectId = project.id;
+            this.currentProject = project;
+            
+            // Otorgar badge de primer proyecto
+            await this.unlockBadge('first-project');
+          }
+          
+          // Actualizar progreso
+          await this.updateProgress('wizard', true);
+          
+          // Agregar XP y avanzar
+          await this.addXP(100);
+          this.currentPhase = 1;
+          
+          // Inicializar módulo de terreno
+          this.initTerrainModule();
+        },
+        
+        // Funciones del Terreno
+        selectTerrainSource(source) {
+          this.formData.terrainSource = source;
+          this.terrainStep = 1;
+          this.addXP(15);
+          
+          // Inicializar mapa cuando se selecciona origen
+          this.$nextTick(() => {
+            this.initTerrainModule();
+          });
+        },
+        
+        async initTerrainModule() {
+          if (window.TerrainModule && !this.terrainModule) {
+            this.terrainModule = window.TerrainModule();
+            await this.terrainModule.init();
+            
+            // Escuchar eventos del terreno
+            window.addEventListener('terrainUpdated', (event) => {
+              this.formData.terrainData = event.detail;
+              console.log('Terrain data updated:', event.detail);
+              
+              // Actualizar UI con datos del terreno
+              const coordsElement = document.querySelector('[data-terrain="coords"]');
+              if (coordsElement && event.detail.coordinates) {
+                coordsElement.textContent = `${event.detail.coordinates.length} puntos`;
+              }
+              
+              const slopeElement = document.querySelector('[data-terrain="slope"]');
+              if (slopeElement && event.detail.slope !== undefined) {
+                slopeElement.textContent = `${event.detail.slope}%`;
+              }
+            });
+          }
+        },
+        
+        async nextTerrainStep() {
+          if (this.terrainStep < 2) {
+            this.terrainStep++;
+            
+            if (this.terrainStep === 2) {
+              // Inicializar vista 3D del terreno
+              if (window.Viewer3DModule) {
+                this.viewer3D = window.Viewer3DModule();
+                await this.viewer3D.init('viewer3d-canvas');
+                
+                // Cargar datos del terreno si existen
+                if (this.formData.terrainData && this.formData.terrainData.coordinates.length > 0) {
+                  await this.viewer3D.loadTerrainData(this.formData.terrainData);
+                  this.addXP(25);
+                }
+              }
+            }
+          } else {
+            await this.completePhase2();
+          }
+        },
+        
+        async completePhase2() {
+          // Guardar datos del terreno
+          if (this.terrainModule) {
+            this.formData.terrainData = this.terrainModule.terrainData;
+          }
+          
+          // Actualizar progreso
+          await this.updateProgress('terrain', true);
+          
+          // Agregar XP y badges
+          await this.addXP(150);
+          await this.unlockBadge('terrain-master');
+          
+          this.currentPhase = 2;
+          
+          // Inicializar gráfica de proyección
+          this.$nextTick(() => {
+            this.initProjectionChart();
+          });
+        },
+        
+        // Funciones de Costos
+        async initProjectionChart() {
+          // Inicializar módulo financiero si no existe
+          if (!this.financeModule && window.FinanceModule) {
+            this.financeModule = window.FinanceModule();
+            await this.financeModule.init({
+              callbacks: {
+                onCalculationComplete: (calculations) => {
+                  this.updateFinancialUI(calculations);
+                },
+                onScenarioChange: (scenario) => {
+                  console.log('Scenario changed to:', scenario);
+                }
+              }
+            });
+          }
+          
+          // Establecer datos del proyecto
+          if (this.financeModule && this.formData.terrainData) {
+            this.financeModule.setProjectData(this.formData);
+          }
+        },
+        
+        updateFinancialUI(calculations) {
+          if (!calculations || !calculations.indicators) return;
+          
+          // Actualizar KPIs
+          const roiElement = document.querySelector('[data-indicator="roi"]');
+          if (roiElement) {
+            roiElement.textContent = `${calculations.indicators.roi}%`;
+          }
+          
+          const irrElement = document.querySelector('[data-indicator="irr"]');
+          if (irrElement) {
+            irrElement.textContent = `${calculations.indicators.irr}%`;
+          }
+          
+          const npvElement = document.querySelector('[data-indicator="npv"]');
+          if (npvElement) {
+            const npvInMillions = (calculations.indicators.npv / 1000000).toFixed(1);
+            npvElement.textContent = `$${npvInMillions}M`;
+          }
+          
+          const paybackElement = document.querySelector('[data-indicator="payback"]');
+          if (paybackElement) {
+            paybackElement.textContent = `${calculations.indicators.paybackPeriod} años`;
+          }
+        },
+        
+        changeScenario(newScenario) {
+          this.scenario = newScenario;
+          if (this.financeModule) {
+            this.financeModule.setScenario(newScenario);
+          }
+        },
+        
+        updateConstructionSystem() {
+          if (this.financeModule && this.formData.terrainData) {
+            this.financeModule.setProjectData(this.formData);
+          }
+        },
+        
+        updateMaterialLevel() {
+          if (this.financeModule && this.formData.terrainData) {
+            this.financeModule.setProjectData(this.formData);
+          }
+        },
+        
+        getProjectionData() {
+          // Si tenemos módulo financiero, usar datos reales
+          if (this.financeModule) {
+            const cashFlows = this.financeModule.getCashFlows();
+            if (cashFlows && cashFlows.length > 0) {
+              return cashFlows.map(cf => cf.netCashFlow / 1000000); // En millones
+            }
+          }
+          
+          // Fallback a datos estáticos
+          const scenarios = {
+            optimistic: [-1000, -500, 200, 800, 1500],
+            realistic: [-1000, -700, -200, 400, 900],
+            pessimistic: [-1000, -900, -600, -100, 300]
+          };
+          return scenarios[this.scenario] || scenarios.realistic;
+        },
+        
+        async completePhase3() {
+          // Guardar datos de costos
+          await this.updateProgress('costs', true);
+          
+          // Agregar XP y badges
+          await this.addXP(200);
+          await this.unlockBadge('cost-analyst');
+          
+          this.currentPhase = 3;
+        },
+        
+        // Funciones 3D
+        toggleDayNight() {
+          if (this.viewer3D) {
+            this.viewer3D.toggleDayNight();
+            this.addXP(5);
+          }
+        },
+        
+        toggleSolarAnalysis() {
+          if (this.viewer3D) {
+            if (this.viewer3D.getAnalysisMode() === 'solar') {
+              this.viewer3D.disableAnalysis();
+            } else {
+              this.viewer3D.enableSolarAnalysis();
+              this.addXP(10);
+            }
+          }
+        },
+        
+        toggleWindAnalysis() {
+          if (this.viewer3D) {
+            if (this.viewer3D.getAnalysisMode() === 'wind') {
+              this.viewer3D.disableAnalysis();
+            } else {
+              this.viewer3D.enableWindAnalysis();
+              this.addXP(10);
+            }
+          }
+        },
+        
+        // Sistema de gamificación
+        async addXP(amount) {
+          this.currentXP += amount;
+          
+          // Verificar nivel
+          while (this.currentXP >= this.nextLevelXP) {
+            this.currentXP -= this.nextLevelXP;
+            this.playerLevel++;
+            
+            // Animación de nivel
+            this.showLevelUpAnimation();
+          }
+          
+          this.xpProgress = (this.currentXP / this.nextLevelXP) * 100;
+          
+          // Actualizar en IndexedDB
+          if (window.StorageModule?.Gamification) {
+            await window.StorageModule.Gamification.addXP(amount);
+          }
+        },
+        
+        async unlockBadge(badgeId) {
+          if (window.StorageModule?.Gamification) {
+            await window.StorageModule.Gamification.unlockBadge(badgeId);
+            
+            // Agregar a badges recientes
+            this.recentBadges.push({
+              id: badgeId,
+              icon: this.getBadgeIcon(badgeId),
+              name: this.getBadgeName(badgeId)
+            });
+            
+            // Mantener solo los últimos 3
+            if (this.recentBadges.length > 3) {
+              this.recentBadges.shift();
+            }
+          }
+        },
+        
+        showLevelUpAnimation() {
+          // Aquí podrías agregar una animación de nivel
+          console.log('🎉 ¡Subiste de nivel!', this.playerLevel);
+        },
+        
+        async updateProgress(phase, completed) {
+          if (this.projectId && window.StorageModule?.Projects) {
+            await window.StorageModule.Projects.updateProgress(this.projectId, phase, completed);
+          }
+        },
+        
+        // Guardar proyecto final
+        async saveProject() {
+          try {
+            if (this.projectId && window.StorageModule?.Projects) {
+              // Actualizar proyecto con todos los datos
+              const updatedProject = await window.StorageModule.Projects.update(this.projectId, {
+                ...this.formData,
+                completedAt: new Date().toISOString(),
+                status: 'completed'
+              });
+              
+              // Actualizar progreso final
+              await this.updateProgress('viewer3d', true);
+              
+              // Agregar XP final y badge
+              await this.addXP(250);
+              await this.unlockBadge('3d-visionary');
+              
+              // Actualizar estadísticas
+              if (window.StorageModule?.Gamification) {
+                const stats = await window.StorageModule.Gamification.getOrCreate();
+                await window.StorageModule.Gamification.updateStatistics({
+                  projectsCompleted: stats.statistics.projectsCompleted + 1,
+                  totalAreaAnalyzed: stats.statistics.totalAreaAnalyzed + (this.formData.terrainData?.area || 0),
+                  totalInvestment: stats.statistics.totalInvestment + (this.formData.budget || 0)
+                });
+              }
+              
+              // Mostrar mensaje de éxito
+              alert('¡Proyecto guardado exitosamente! 🎉');
+              
+              // Redirigir al dashboard
+              setTimeout(() => {
+                window.location.href = '/dashboard.html';
+              }, 2000);
+            }
+          } catch (error) {
+            console.error('Error al guardar proyecto:', error);
+            alert('Error al guardar el proyecto. Por favor, intenta de nuevo.');
+          }
+        }
+      }));
+    });
+  </script>
+    <script src="./js/phase6-integration.js" type="module"></script>
+</body>
+</html> 
