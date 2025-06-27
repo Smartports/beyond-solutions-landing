@@ -47,6 +47,15 @@ jobs:
       - name: 🔧  Build static site (root build.js)
         run: bun run build:prod  # runs `node build.js` and outputs ./dist
 
+      - name: 🗑️  Clean dist for production
+        run: |
+          # Remove test suites, reports and other non-production assets
+          rm -rf dist/test dist/test-* dist/**/*.md || true
+          # Remove accessibility/performance reports if any
+          find dist -type f -name "*report*.md" -delete || true
+          # Verify size
+          du -sh dist || true
+
       - name: 📤  Upload dist artifact
         uses: actions/upload-pages-artifact@v3
         with:
