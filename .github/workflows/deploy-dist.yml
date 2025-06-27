@@ -35,6 +35,15 @@ jobs:
       - name: 📦  Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: 🏗️  Build internal packages
+        run: |
+          for dir in packages/*; do
+            if [ -f "$dir/package.json" ]; then
+              echo "🔨 Building $dir";
+              (cd "$dir" && bun run build || true);
+            fi;
+          done
+
       - name: 🔧  Build web app
         run: |
           cd apps/web

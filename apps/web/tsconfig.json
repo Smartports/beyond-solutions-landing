@@ -20,8 +20,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@beyond/ui": ["../../packages/ui/src"],
-      "@beyond/core": ["../../packages/core/src"]
+      "@beyond/core": ["../../packages/core/src"],
+      "@beyond/geo": ["../../packages/geo/src"],
+      "@beyond/geo/*": ["../../packages/geo/src/*"],
+      "@beyond/maps": ["../../packages/maps/src"],
+      "@beyond/maps/*": ["../../packages/maps/src/*"],
+      "@beyond/ui": ["../../packages/ui/src"]
     }
   },
   "include": [

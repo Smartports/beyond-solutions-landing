@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@beyond/core": "workspace:*",
+    "@beyond/geo": "workspace:*",
+    "@beyond/maps": "workspace:*",
     "@beyond/ui": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
