@@ -41,7 +41,7 @@ jobs:
           bun run build          # produces apps/web/dist
 
       - name: 📤  Upload dist artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: apps/web/dist    # folder that will be published
 
@@ -55,4 +55,4 @@ jobs:
     steps:
       - name: 🚀  Deploy to GitHub Pages
         id: deploy
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v4
