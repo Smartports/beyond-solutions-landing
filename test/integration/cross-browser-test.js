@@ -11,14 +11,12 @@ const writeFile = promisify(fs.writeFile);
 const mkdir = promisify(fs.mkdir);
 
 // Configuration
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = process.env.TEST_BASE_URL || 'http://localhost:8000';
 const PAGES_TO_TEST = [
   { path: '/', name: 'Home Page' },
-  { path: '/calculator', name: 'Calculator' },
-  { path: '/wizard', name: 'Wizard' },
-  { path: '/terrain-viewer', name: 'Terrain Viewer' },
-  { path: '/cost-calculator', name: 'Cost Calculator' },
-  { path: '/3d-experience', name: '3D Experience' }
+  { path: '/calculator-gamified.html', name: 'Calculator' },
+  { path: '/wizard.html', name: 'Wizard' },
+  { path: '/dashboard.html', name: 'Dashboard' }
 ];
 
 // Browsers to test
@@ -145,7 +143,7 @@ async function runCrossBrowserTests() {
                 }
                 
                 results.summary.total++;
-  } catch (error) {
+              } catch (error) {
                 results.browsers[browser.name].devices[device.name].pages[page.name].scenarios[scenario.name] = {
                   status: 'failed',
                   message: `Error: ${error.message}`
