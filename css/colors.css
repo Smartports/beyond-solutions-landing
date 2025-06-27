@@ -32,6 +32,82 @@
   --color-button-primary: var(--color-primary-700);
   --color-button-hover: var(--color-primary-800);
   --color-button-active: var(--color-primary-600);
+
+  /* Primary Colors */
+  --primary-950: #192525;
+  --primary-900: #243b44;
+  --primary-800: #334b4e;
+  --primary-700: #54676d;
+  --primary-600: #68767c;
+  
+  /* Accent Colors */
+  --accent-500: #8c8f92;
+  --accent-300: #adb3b7;
+  --accent-200: #b1aaa0;
+  --accent-100: #b9c6cd;
+  --accent-50: #bac4c3;
+  
+  /* Text Colors */
+  --text-primary: #334b4e;
+  --text-secondary: #6b7280;
+  --text-light: #9ca3af;
+  --text-dark: #1f2937;
+  --text-white: #ffffff;
+  
+  /* Background Colors */
+  --bg-white: #ffffff;
+  --bg-light: #f9fafb;
+  --bg-gray-50: #f3f4f6;
+  --bg-gray-100: #e5e7eb;
+  --bg-gray-200: #d1d5db;
+  --bg-dark: #1f2937;
+  --bg-darker: #111827;
+  
+  /* Border Colors */
+  --border-light: #e5e7eb;
+  --border-default: #d1d5db;
+  --border-dark: #6b7280;
+  
+  /* Success/Error/Warning Colors */
+  --success: #10b981;
+  --success-light: #34d399;
+  --error: #ef4444;
+  --error-light: #f87171;
+  --warning: #f59e0b;
+  --warning-light: #fbbf24;
+  --info: #3b82f6;
+  --info-light: #60a5fa;
+  
+  /* Shadow Colors */
+  --shadow-sm: rgba(0, 0, 0, 0.05);
+  --shadow-md: rgba(0, 0, 0, 0.1);
+  --shadow-lg: rgba(0, 0, 0, 0.15);
+  
+  /* Form Field Colors - WCAG AA Compliant */
+  --input-bg: #ffffff;
+  --input-text: #0f172a;
+  --input-border: #94a3b8;
+  --input-placeholder: #6b7280;
+  --input-focus-ring: #2563eb;
+  --input-disabled-bg: #f1f5f9;
+  --input-disabled-text: #9ca3af;
+  
+  /* Button Colors */
+  --btn-primary-bg: #334b4e;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #243b44;
+  --btn-secondary-bg: #e5e7eb;
+  --btn-secondary-text: #1f2937;
+  --btn-secondary-hover: #d1d5db;
+  
+  /* Link Colors */
+  --link-color: #2563eb;
+  --link-hover: #1d4ed8;
+  --link-visited: #7c3aed;
+  
+  /* Overlay Colors */
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+  --overlay-light: rgba(255, 255, 255, 0.9);
 }
 
 /* Dark mode overrides */
@@ -65,4 +141,110 @@
   --text-primary-dark: var(--color-primary-100);
   --border-color-dark: var(--color-primary-600);
   --border-color-hover-dark: var(--color-primary-500);
+
+  /* Override colors for dark mode */
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-light: #f9fafb;
+  --text-dark: #0f172a;
+  
+  --bg-white: #1f2937;
+  --bg-light: #111827;
+  --bg-gray-50: #374151;
+  --bg-gray-100: #4b5563;
+  --bg-gray-200: #6b7280;
+  
+  --border-light: #4b5563;
+  --border-default: #6b7280;
+  --border-dark: #9ca3af;
+  
+  /* Form Field Colors for Dark Mode */
+  --input-bg: #1f2937;
+  --input-text: #f1f5f9;
+  --input-border: #475569;
+  --input-placeholder: #9ca3af;
+  --input-focus-ring: #3b82f6;
+  --input-disabled-bg: #334155;
+  --input-disabled-text: #64748b;
+  
+  /* Button Colors for Dark Mode */
+  --btn-primary-bg: #3b82f6;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #2563eb;
+  --btn-secondary-bg: #374151;
+  --btn-secondary-text: #f9fafb;
+  --btn-secondary-hover: #4b5563;
+  
+  /* Link Colors for Dark Mode */
+  --link-color: #60a5fa;
+  --link-hover: #93bbfc;
+  --link-visited: #a78bfa;
+}
+
+/* Utility Classes using CSS Variables */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-light { color: var(--text-light); }
+.bg-primary { background-color: var(--primary-800); }
+.bg-light { background-color: var(--bg-light); }
+.border-default { border-color: var(--border-default); }
+
+/* Form Field Styles using CSS Variables */
+input:not([type="radio"]):not([type="checkbox"]),
+textarea,
+select {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+}
+
+input:not([type="radio"]):not([type="checkbox"]):focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--input-focus-ring);
+  outline-offset: 2px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder);
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: var(--input-disabled-bg);
+  color: var(--input-disabled-text);
+}
+
+/* Button Styles using CSS Variables */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+}
+
+.btn-secondary:hover {
+  background-color: var(--btn-secondary-hover);
+}
+
+/* Link Styles using CSS Variables */
+a {
+  color: var(--link-color);
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+a:visited {
+  color: var(--link-visited);
 } 
