@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://maps.gstatic.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://maps.googleapis.com https://maps.gstatic.com blob:; connect-src 'self' https: https://maps.googleapis.com wss:; frame-src 'self' https:; worker-src 'self' blob:;">
   <title>Beyond Calculator - Experiencia Inmobiliaria Gamificada</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E🏗️%3C/text%3E%3C/svg%3E" type="image/svg+xml">
-  
-  <!-- CSP Meta Tag - Updated for Google Maps API -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://maps.gstatic.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://maps.googleapis.com https://maps.gstatic.com blob:; connect-src 'self' https: https://maps.googleapis.com wss:; frame-src 'self' https:; worker-src 'self' blob:;">
   
   <!-- Reutilizar estilos base -->
   <link rel="stylesheet" href="./css/colors.css">
@@ -121,6 +120,41 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    
+    /* Hide elements with x-cloak until Alpine.js is ready */
+    [x-cloak] { display: none !important; }
+    
+    /* Accessible form-field styles – WCAG AA compliant */
+:root{
+  --input-bg:#fff;--input-text:#0f172a;--input-border:#94a3b8;
+  --input-placeholder:#6b7280;--focus-ring:#2563eb;
+}
+.dark{
+  --input-bg:#1f2937;--input-text:#f1f5f9;--input-border:#475569;
+  --input-placeholder:#9ca3af;--focus-ring:#3b82f6;
+}
+input:not([type=radio]):not([type=checkbox]),textarea,select{
+  background-color:var(--input-bg);
+  color:var(--input-text);
+  border:1px solid var(--input-border);
+  border-radius:.5rem;
+  width:100%;padding:.5rem 1rem;line-height:1.5;
+  transition:border-color .15s ease,background-color .15s ease;
+}
+input:not([type=radio]):not([type=checkbox]):hover,textarea:hover,select:hover{
+  border-color:var(--focus-ring);
+}
+input:not([type=radio]):not([type=checkbox]):focus-visible,
+textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--focus-ring);outline-offset:2px;
+}
+input::placeholder,textarea::placeholder{color:var(--input-placeholder);opacity:1;}
+input:disabled,textarea:disabled,select:disabled{
+  background-color:#f1f5f9;color:#9ca3af;cursor:not-allowed;
+}
+.dark input:disabled,.dark textarea:disabled,.dark select:disabled{
+  background-color:#334155;color:#64748b;
+}
   </style>
 </head>
 <body class="font-body antialiased leading-relaxed text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900">
@@ -303,26 +337,37 @@
               <h3 class="text-xl font-semibold mb-4">Dale un nombre a tu proyecto</h3>
               <div class="space-y-4">
                 <div>
-                  <label class="block text-sm font-medium mb-2">Nombre del proyecto</label>
+                  <label for="project-name" class="block text-sm font-medium mb-2">Nombre del proyecto</label>
                   <input 
                     type="text" 
+                    id="project-name"
+                    name="projectName"
                     x-model="formData.projectName"
-                    class="w-full px-4 py-2 border rounded-lg dark:bg-zinc-700 dark:border-zinc-600"
+                    class="w-full px-4 py-2 border rounded-lg dark:bg-zinc-700 dark:border-zinc-600 focus:ring-2 focus:ring-primary-800 focus:border-transparent"
                     placeholder="Mi proyecto inmobiliario"
+                    data-validate="projectName"
+                    aria-required="true"
+                    aria-describedby="project-name-help"
                   >
+                  <p id="project-name-help" class="sr-only">Ingresa un nombre descriptivo para tu proyecto inmobiliario</p>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium mb-2">Ubicación</label>
+                  <label for="location-autocomplete" class="block text-sm font-medium mb-2">Ubicación</label>
                   <input 
                     type="text" 
                     x-model="formData.location"
                     id="location-autocomplete"
-                    class="w-full px-4 py-2 border rounded-lg dark:bg-zinc-700 dark:border-zinc-600"
+                    name="location"
+                    class="w-full px-4 py-2 border rounded-lg dark:bg-zinc-700 dark:border-zinc-600 focus:ring-2 focus:ring-primary-800 focus:border-transparent"
                     placeholder="Buscar dirección..."
                     @focus="initLocationAutocomplete()"
                     @input="formData.location = $event.target.value"
+                    data-validate="location"
+                    aria-required="true"
+                    aria-describedby="location-help"
+                    aria-autocomplete="list"
                   >
-                  <p class="text-xs text-gray-500 mt-1">Comienza a escribir para buscar direcciones</p>
+                  <p id="location-help" class="text-xs text-gray-500 mt-1">Comienza a escribir para buscar direcciones</p>
                 </div>
               </div>
             </div>
@@ -417,11 +462,14 @@
                 <button class="px-4 py-2 bg-primary-800 text-white rounded-lg">
                   ✏️ Dibujar Polígono
                 </button>
-                <button class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg">
+                <button @click="importTerrain()" :disabled="!terrainReady" class="px-4 py-2 rounded-lg" :class="terrainReady ? 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600' : 'bg-gray-100 dark:bg-gray-600 opacity-50 cursor-not-allowed'">
                   📁 Importar CAD/GeoJSON
                 </button>
-                <button class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg">
+                <button @click="toggleMeasure()" :disabled="!terrainReady" class="px-4 py-2 rounded-lg" :class="terrainReady ? 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600' : 'bg-gray-100 dark:bg-gray-600 opacity-50 cursor-not-allowed'">
                   📏 Medir
+                </button>
+                <button @click="resetTerrain()" :disabled="!terrainReady" class="px-4 py-2 rounded-lg" :class="terrainReady ? 'bg-red-200 dark:bg-red-700 text-red-900 dark:text-white hover:bg-red-300 dark:hover:bg-red-600 transition' : 'bg-gray-100 dark:bg-gray-600 opacity-50 cursor-not-allowed'">
+                  🗑️ Limpiar
                 </button>
               </div>
               
@@ -515,7 +563,7 @@
               <h3 class="text-xl font-semibold mb-4">Sistema Constructivo</h3>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <label class="cursor-pointer">
-                  <input type="radio" name="construction" value="traditional" x-model="formData.constructionSystem" class="sr-only">
+                  <input type="radio" name="construction" value="traditional" x-model="formData.constructionSystem" @change="updateConstructionSystem()" class="sr-only">
                   <div class="p-4 border-2 rounded-lg text-center transition"
                     :class="formData.constructionSystem === 'traditional' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
                     <div class="text-2xl mb-2">🧱</div>
@@ -524,7 +572,7 @@
                 </label>
                 
                 <label class="cursor-pointer">
-                  <input type="radio" name="construction" value="prefab" x-model="formData.constructionSystem" class="sr-only">
+                  <input type="radio" name="construction" value="prefab" x-model="formData.constructionSystem" @change="updateConstructionSystem()" class="sr-only">
                   <div class="p-4 border-2 rounded-lg text-center transition"
                     :class="formData.constructionSystem === 'prefab' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
                     <div class="text-2xl mb-2">🏗️</div>
@@ -533,7 +581,7 @@
                 </label>
                 
                 <label class="cursor-pointer">
-                  <input type="radio" name="construction" value="steel" x-model="formData.constructionSystem" class="sr-only">
+                  <input type="radio" name="construction" value="steel" x-model="formData.constructionSystem" @change="updateConstructionSystem()" class="sr-only">
                   <div class="p-4 border-2 rounded-lg text-center transition"
                     :class="formData.constructionSystem === 'steel' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
                     <div class="text-2xl mb-2">🏢</div>
@@ -542,7 +590,7 @@
                 </label>
                 
                 <label class="cursor-pointer">
-                  <input type="radio" name="construction" value="eco" x-model="formData.constructionSystem" class="sr-only">
+                  <input type="radio" name="construction" value="eco" x-model="formData.constructionSystem" @change="updateConstructionSystem()" class="sr-only">
                   <div class="p-4 border-2 rounded-lg text-center transition"
                     :class="formData.constructionSystem === 'eco' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
                     <div class="text-2xl mb-2">🌿</div>
@@ -557,7 +605,7 @@
               <h3 class="text-xl font-semibold mb-4">Nivel de Materiales</h3>
               <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
                 <label class="cursor-pointer">
-                  <input type="radio" name="materials" value="basic" x-model="formData.materialLevel" class="sr-only">
+                  <input type="radio" name="materials" value="basic" x-model="formData.materialLevel" @change="updateMaterialLevel()" class="sr-only">
                   <div class="p-4 border-2 rounded-lg text-center transition"
                     :class="formData.materialLevel === 'basic' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
                     <div class="text-xl mb-1">💵</div>
@@ -567,7 +615,7 @@
                 </label>
                 
                 <label class="cursor-pointer">
-                  <input type="radio" name="materials" value="standard" x-model="formData.materialLevel" class="sr-only">
+                  <input type="radio" name="materials" value="standard" x-model="formData.materialLevel" @change="updateMaterialLevel()" class="sr-only">
                   <div class="p-4 border-2 rounded-lg text-center transition"
                     :class="formData.materialLevel === 'standard' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
                     <div class="text-xl mb-1">💵💵</div>
@@ -577,7 +625,7 @@
                 </label>
                 
                 <label class="cursor-pointer">
-                  <input type="radio" name="materials" value="premium" x-model="formData.materialLevel" class="sr-only">
+                  <input type="radio" name="materials" value="premium" x-model="formData.materialLevel" @change="updateMaterialLevel()" class="sr-only">
                   <div class="p-4 border-2 rounded-lg text-center transition"
                     :class="formData.materialLevel === 'premium' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
                     <div class="text-xl mb-1">💵💵💵</div>
@@ -587,7 +635,7 @@
                 </label>
                 
                 <label class="cursor-pointer">
-                  <input type="radio" name="materials" value="luxury" x-model="formData.materialLevel" class="sr-only">
+                  <input type="radio" name="materials" value="luxury" x-model="formData.materialLevel" @change="updateMaterialLevel()" class="sr-only">
                   <div class="p-4 border-2 rounded-lg text-center transition"
                     :class="formData.materialLevel === 'luxury' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
                     <div class="text-xl mb-1">💎</div>
@@ -597,7 +645,7 @@
                 </label>
                 
                 <label class="cursor-pointer">
-                  <input type="radio" name="materials" value="custom" x-model="formData.materialLevel" class="sr-only">
+                  <input type="radio" name="materials" value="custom" x-model="formData.materialLevel" @change="updateMaterialLevel()" class="sr-only">
                   <div class="p-4 border-2 rounded-lg text-center transition"
                     :class="formData.materialLevel === 'custom' ? 'border-primary-700 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300'">
                     <div class="text-xl mb-1">⚙️</div>
@@ -643,21 +691,21 @@
               <h3 class="text-xl font-semibold mb-4">Simulador de Escenarios</h3>
               <div class="flex space-x-4 mb-4">
                 <button 
-                  @click="scenario = 'optimistic'"
+                  @click="changeScenario('optimistic')"
                   class="px-4 py-2 rounded-lg transition"
                   :class="scenario === 'optimistic' ? 'bg-green-600 text-white' : 'bg-gray-200 dark:bg-gray-700'"
                 >
                   😊 Optimista
                 </button>
                 <button 
-                  @click="scenario = 'realistic'"
+                  @click="changeScenario('realistic')"
                   class="px-4 py-2 rounded-lg transition"
                   :class="scenario === 'realistic' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700'"
                 >
                   😐 Realista
                 </button>
                 <button 
-                  @click="scenario = 'pessimistic'"
+                  @click="changeScenario('pessimistic')"
                   class="px-4 py-2 rounded-lg transition"
                   :class="scenario === 'pessimistic' ? 'bg-red-600 text-white' : 'bg-gray-200 dark:bg-gray-700'"
                 >
@@ -824,8 +872,8 @@
     <!-- Leaderboard Modal -->
     <div x-show="showLeaderboard" x-cloak
       class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-      @click.away="showLeaderboard = false">
-      <div class="bg-white dark:bg-zinc-800 rounded-lg p-8 max-w-md w-full">
+      @click.self="showLeaderboard = false">
+      <div class="bg-white dark:bg-zinc-800 rounded-lg p-8 max-w-md w-full" @click.stop>
         <h3 class="text-2xl font-bold mb-6">🏆 Tabla de Clasificación</h3>
         
         <div class="space-y-4">
@@ -972,6 +1020,7 @@
         
         // Estado del terreno
         terrainStep: 0,
+        terrainReady: false,
         terrainModule: null,
         
         // Estado de costos
@@ -1030,6 +1079,11 @@
           // Auto-guardar cambios
           this.$watch('formData', () => {
             this.autoSave();
+          });
+          
+          // Escuchar evento global
+          window.addEventListener('terrainReady', () => {
+            this.terrainReady = true;
           });
         },
         
@@ -1207,11 +1261,41 @@
               // Replace the input with the new element
               input.parentNode.replaceChild(autocompleteElement, input);
               
-              // Listen for place selection
-              autocompleteElement.addEventListener('gmp-placeselect', (event) => {
-                const place = event.place;
-                this.handlePlaceSelection(place);
-              });
+              // Handle both legacy and new events so the widget works across API versions
+              const handleSelectEvent = async (event) => {
+                let place = null;
+
+                // Newer event (beta/stable) – gmp-select exposes `placePrediction`
+                if (event.placePrediction) {
+                  try {
+                    // Convert the prediction into a full Place object
+                    if (typeof event.placePrediction.toPlace === 'function') {
+                      place = event.placePrediction.toPlace();
+                      // Fetch only minimal fields we need
+                      if (typeof place.fetchFields === 'function') {
+                        await place.fetchFields({
+                          fields: ['displayName', 'formattedAddress', 'location', 'addressComponents', 'id']
+                        });
+                      }
+                    }
+                  } catch (err) {
+                    console.warn('Error resolving placePrediction:', err);
+                  }
+                }
+
+                // Older event – gmp-placeselect exposes `place`
+                if (!place && event.place) {
+                  place = event.place;
+                }
+
+                if (place) {
+                  this.handlePlaceSelection(place);
+                }
+              };
+
+              // Register both possible event names (the newer one first so it has priority)
+              autocompleteElement.addEventListener('gmp-select', handleSelectEvent);
+              autocompleteElement.addEventListener('gmp-placeselect', handleSelectEvent);
               
               // Listen for manual typing to keep model in sync
               autocompleteElement.addEventListener('input', (event) => {
@@ -1260,19 +1344,37 @@
             return;
           }
           
+          // Compatibilidad con versiones modernas y heredadas del objeto Place
+          const formatted =
+            place.formatted_address ||
+            place.formattedAddress ||
+            place.displayName ||
+            place.name ||
+            '';
           // Siempre actualizar el modelo con la dirección formateada o nombre
-          this.formData.location = place.formatted_address || place.name || '';
+          this.formData.location = formatted;
           
           // Guardar información adicional cuando haya geometría disponible
+          let lat = null;
+          let lng = null;
           if (place.geometry && place.geometry.location) {
+            lat = typeof place.geometry.location.lat === 'function' ? place.geometry.location.lat() : place.geometry.location.lat;
+            lng = typeof place.geometry.location.lng === 'function' ? place.geometry.location.lng() : place.geometry.location.lng;
+          } else if (place.location) {
+            // New Places API
+            lat = place.location.lat;
+            lng = place.location.lng;
+          }
+
+          if (lat !== null && lng !== null) {
             this.formData.locationDetails = {
-              lat: place.geometry.location.lat(),
-              lng: place.geometry.location.lng(),
-              placeId: place.place_id,
-              addressComponents: place.address_components
+              lat,
+              lng,
+              placeId: place.place_id || place.id || null,
+              addressComponents: place.address_components || place.addressComponents || null
             };
           }
-          
+           
           // Forzar actualización de Alpine
           this.$nextTick(() => {
             const input = document.getElementById('location-autocomplete');
@@ -1374,25 +1476,22 @@
         
         async initTerrainModule() {
           if (window.TerrainModule && !this.terrainModule) {
-            this.terrainModule = window.TerrainModule();
-            await this.terrainModule.init();
-            
-            // Escuchar eventos del terreno
-            window.addEventListener('terrainUpdated', (event) => {
-              this.formData.terrainData = event.detail;
-              console.log('Terrain data updated:', event.detail);
-              
-              // Actualizar UI con datos del terreno
-              const coordsElement = document.querySelector('[data-terrain="coords"]');
-              if (coordsElement && event.detail.coordinates) {
-                coordsElement.textContent = `${event.detail.coordinates.length} puntos`;
-              }
-              
-              const slopeElement = document.querySelector('[data-terrain="slope"]');
-              if (slopeElement && event.detail.slope !== undefined) {
-                slopeElement.textContent = `${event.detail.slope}%`;
-              }
+            // Determine center based on previously selected location (if available)
+            let centerOpt = null;
+            if (this.formData.locationDetails && this.formData.locationDetails.lat && this.formData.locationDetails.lng) {
+              centerOpt = {
+                lat: this.formData.locationDetails.lat,
+                lng: this.formData.locationDetails.lng
+              };
+            }
+
+            this.terrainModule = window.TerrainModule({
+              center: centerOpt || { lat: 19.4326, lng: -99.1332 },
+              zoom: 18,
+              locationPoint: centerOpt
             });
+            await this.terrainModule.init();
+            this.terrainReady = true;
           }
         },
         
@@ -1408,7 +1507,7 @@
                 
                 // Cargar datos del terreno si existen
                 if (this.formData.terrainData && this.formData.terrainData.coordinates.length > 0) {
-                  await this.viewer3D.loadTerrainData(this.formData.terrainData);
+                  await this.viewer3D.loadTerrainData(this.formData.terrainData, { projectType: this.formData.projectType });
                   this.addXP(25);
                 }
               }
@@ -1656,7 +1755,30 @@
             console.error('Error al guardar proyecto:', error);
             alert('Error al guardar el proyecto. Por favor, intenta de nuevo.');
           }
-        }
+        },
+        
+        // --- NUEVO: Reiniciar terreno manualmente ---
+        resetTerrain() {
+          if (this.terrainModule) {
+            this.terrainModule.clearTerrain();
+          }
+          // Resetar datos relacionados en el formulario
+          this.formData.terrainData = null;
+        },
+        importTerrain() {
+          if (this.terrainModule && typeof this.terrainModule.showImportDialog === 'function') {
+            this.terrainModule.showImportDialog();
+          } else {
+            alert('El módulo de terreno aún no está listo.');
+          }
+        },
+        toggleMeasure() {
+          if (this.terrainModule && typeof this.terrainModule.toggleMeasureTool === 'function') {
+            this.terrainModule.toggleMeasureTool();
+          } else {
+            alert('El módulo de terreno aún no está listo.');
+          }
+        },
       }));
     });
   </script>
