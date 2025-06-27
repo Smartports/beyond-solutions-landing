@@ -6,9 +6,9 @@ alwaysApply: false
 # Frontend Patterns
 
 ## UI Framework
-- [index.html](mdc:index.html) uses TailwindCSS for styling via CDN
-- Alpine.js for reactive UI components
-- AOS (Animate On Scroll) for scroll animations
+- `apps/web` uses **React + TypeScript** powered by Vite and TailwindCSS via PostCSS.
+- Static landing pages (e.g. [index.html](mdc:index.html)) rely on TailwindCSS via CDN with **Alpine.js** for light reactive behaviour.
+- AOS (Animate On Scroll) is leveraged only on static pages for scroll animations.
 
 ## Component Structure
 - Alpine.js components are defined with `x-data` attribute
@@ -34,3 +34,10 @@ alwaysApply: false
 - Reduced animation for users with `prefers-reduced-motion`
 - Debounced event listeners for scroll/resize events
 - Efficient Alpine.js reactivity
+
+## React Component Guidelines
+- Follow **function component** style and the `PascalCase` naming convention (e.g. `TerrainViewer3D`).
+- Group components under `src/components/` and export them through a package barrel (`index.ts`).
+- Use **TailwindCSS** utility classes directly or via `clsx` for conditional styling.
+- Prefer **React.lazy** and **Suspense** for code-splitting of heavy modules (3D viewer, finance dashboards).
+- Co-locate tests next to components with the `.test.tsx` suffix and Storybook stories under `*.stories.tsx` (where applicable).

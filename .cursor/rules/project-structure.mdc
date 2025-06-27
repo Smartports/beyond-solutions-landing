@@ -25,3 +25,26 @@ This project is a landing page for Beyond Solutions, a platform for real estate 
 
 ## SEO and Accessibility
 The site is optimized for SEO with proper meta tags, hreflang annotations, and a comprehensive sitemap. Accessibility features include keyboard navigation, ARIA attributes, and proper color contrast.
+
+## Monorepo Workspace
+- The repository uses a monorepo layout managed via npm workspaces/Bun with a root `package.json`.
+- Apps:
+  - `apps/web/` – React + TypeScript front-end built with Vite and TailwindCSS.
+- Packages:
+  - `packages/core/` – Shared core utilities, IndexedDB storage, and the TypeScript i18n implementation ([packages/core/src/i18n/i18n.ts](mdc:packages/core/src/i18n/i18n.ts)).
+  - `packages/ui/` – Re-usable React UI primitives such as `StepContainer`, `SelectCard`, and `Dashboard`.
+  - `packages/geo/` – GIS/CAD importers and the Three/Babylon-based terrain renderer.
+  - `packages/maps/` – Google Maps configuration and React components.
+  - `packages/finance/` – Financial calculation engine and visualisation widgets.
+  - `packages/experience3d/` – Immersive 3D viewer, gamification, and export systems.
+
+## Build & Tooling
+- React workspaces are bootstrapped with Vite (`apps/web/vite.config.ts`).
+- TailwindCSS is configured per workspace through `tailwind.config.js`, extending a shared base preset.
+- Each workspace ships its own `tsconfig.json` that extends the root configuration for strict type-safety.
+- Linting and formatting are enforced project-wide via shared ESLint/Prettier configs.
+
+## Deployment
+- Static landing pages are served via GitHub Pages from the repository root.
+- The React application is built with Vite and output to `apps/web/dist`.
+- PWA assets (manifest & service worker) are generated during the build step and deployed alongside the landing pages.

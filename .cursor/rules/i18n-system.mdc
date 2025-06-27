@@ -12,6 +12,7 @@ The site uses a client-side i18n system that supports multiple languages using q
 - [js/language-selector.js](mdc:js/language-selector.js) - Language selector component
 - [i18n/es.json](mdc:i18n/es.json) - Spanish translation (default)
 - [i18n/en.json](mdc:i18n/en.json) - English translation (fallback)
+- [packages/core/src/i18n/i18n.ts](mdc:packages/core/src/i18n/i18n.ts) - Shared TypeScript implementation reused by React workspaces
 
 ## Usage in HTML
 - Text translation: `data-i18n="key.path"`

@@ -1,0 +1,45 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Monorepo Architecture & Package Conventions
+
+This repository is organised as a **monorepo** that unifies the landing pages and the full-featured React application for the Beyond Solutions platform.
+
+## Workspaces
+- `apps/web` – React + TypeScript client built with Vite and TailwindCSS.
+- `packages/core` – Shared utilities, storage helpers, and TypeScript i18n implementation.
+- `packages/ui` – Shared React UI primitives (e.g. `StepContainer`, `SelectCard`).
+- `packages/geo` – GIS & CAD import utilities and 3D terrain renderer.
+- `packages/maps` – Google Maps configuration and React wrappers.
+- `packages/finance` – Financial engine, scenarios, and KPI visualisations.
+- `packages/experience3d` – Immersive 3D viewer, lighting, season simulation, and gamification.
+
+## Cross-package Conventions
+1. **TypeScript First** – All packages compile with `strict` settings and expose barrel exports via `index.ts`.
+2. **Semantic Versioning** – Public interfaces follow semver; breaking changes require a major bump and migration guide.
+3. **TailwindCSS** – Utility classes are used directly; shared config lives in the root and is extended per workspace.
+4. **Testing** – Unit tests are colocated with source files using Jest/Vitest; E2E tests reside under `test/`.
+5. **Documentation** – Each package must include a `README.md` with usage examples and API references.
+
+## Build & CI
+- **Vite** drives the dev server and production build for React apps.
+- **Bun** lockfile (`bun.lock`) tracks dependency versions; `npm run build` will invoke workspace builds sequentially.
+- **CI Pipeline** ensures lint, unit tests, type-checking, and accessibility audits pass before merge.
+
+## Shared Storage Layer
+- IndexedDB abstraction lives at `[packages/core/src/storage/db.ts](mdc:packages/core/src/storage/db.ts)` and is consumed via the `autosave` helper (`[packages/core/src/storage/autosave.ts](mdc:packages/core/src/storage/autosave.ts)`).
+
+## 3D & Gamification
+- 3D viewer component: `[packages/experience3d/src/components/ImmersiveViewer3D.tsx](mdc:packages/experience3d/src/components/ImmersiveViewer3D.tsx)`
+- Gamification system: `[packages/experience3d/src/models/GamificationSystem.ts](mdc:packages/experience3d/src/models/GamificationSystem.ts)`
+
+## Financial Engine
+- Core cost calculations: `[packages/finance/src/models/CostEngine.ts](mdc:packages/finance/src/models/CostEngine.ts)`
+- KPI dashboard UI: `[packages/finance/src/components/KPIDashboard.tsx](mdc:packages/finance/src/components/KPIDashboard.tsx)`
+
+## Usage Notes
+- Import React UI components from `@beyond/ui` rather than relative paths.
+- Business logic should live in the respective domain package, not inside React components.
+- Cross-domain orchestration should occur in `apps/web` React hooks/contexts to keep packages decoupled.
