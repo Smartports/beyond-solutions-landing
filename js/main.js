@@ -5,6 +5,11 @@
 
 import { initI18n, changeLanguage, t, isRTL } from './i18n.js';
 import { initLanguageSelector } from './language-selector.js';
+import i18nService from './modules/i18n.js';
+import ThemeService from './modules/theme.js';
+import A11yEnhancements from './modules/a11y-enhancements.js';
+import NavigationTiming from './modules/navigation-timing.js';
+import Security from './modules/security.js';
 
 // Expose functions globally for Alpine.js and inline scripts
 window.t = t;
@@ -162,4 +167,21 @@ export {
   changeLanguage,
   t,
   isRTL
-}; 
+};
+
+// Initialize i18n service
+i18nService.init();
+
+// Expose i18n globally for Alpine components
+window.i18n = i18nService;
+window.t = i18nService.t.bind(i18nService);
+
+// Initialize navigation timing
+window.navigationTiming = new NavigationTiming();
+window.navigationTiming.init();
+
+// Initialize security features
+window.Security = Security;
+
+// Theme toggle functionality
+// ... existing code ... 
