@@ -1,0 +1,19 @@
+{
+  "extends": "../../.eslintrc.json",
+  "overrides": [
+    {
+      "files": ["src/render/Terrain3DRenderer.ts"],
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    },
+    {
+      "files": ["src/**/*.ts", "src/**/*.tsx"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "no-case-declarations": "off"
+      }
+    }
+  ]
+} 

@@ -1,0 +1,34 @@
+{
+  "name": "@beyond/experience3d",
+  "version": "0.1.0",
+  "description": "3D experience and gamification components for Beyond Solutions",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "bunx jest --passWithNoTests"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^5.47.0",
+    "@babylonjs/loaders": "^5.47.0",
+    "@babylonjs/materials": "^5.47.0",
+    "@babylonjs/gui": "^5.47.0",
+    "@beyond/geo": "^0.1.0",
+    "@beyond/maps": "^0.1.0",
+    "@beyond/ui": "^0.1.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.28",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+} 

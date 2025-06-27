@@ -1,0 +1,21 @@
+{
+  "name": "@beyond/core",
+  "version": "0.1.0",
+  "description": "Core business logic for Beyond Solutions",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "dexie": "^3.2.4",
+    "zod": "^3.22.4",
+    "i18next": "^23.5.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6",
+    "eslint": "^8.45.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0"
+  }
+} 
