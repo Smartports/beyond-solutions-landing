@@ -1,0 +1,58 @@
+# .github/workflows/deploy-dist.yml
+# Deploys apps/web/dist to GitHub Pages without touching the rest of the repo
+name: Deploy Dist to GitHub Pages
+
+on:
+  push:
+    branches: [release-v1.9]      # ← adjust if you deploy from main or another branch
+    paths:                       # run only when build-relevant files change
+      - 'apps/web/**'
+      - '.github/workflows/deploy-dist.yml'
+  workflow_dispatch:             # manual trigger
+
+permissions:
+  contents: read                 # required by actions/checkout
+  pages: write                   # required by actions/deploy-pages
+  id-token: write                # required by actions/deploy-pages
+
+concurrency:                     # prevent simultaneous deployments
+  group: 'github-pages'
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥  Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🧑‍🍳  Set up Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 'latest'  # pin a version if you need deterministic builds
+
+      - name: 📦  Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🔧  Build web app
+        run: |
+          cd apps/web
+          bun run build          # produces apps/web/dist
+
+      - name: 📤  Upload dist artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: apps/web/dist    # folder that will be published
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: 🚀  Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v3
