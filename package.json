@@ -19,12 +19,19 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
     "@axe-core/puppeteer": "^4.10.2",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^18.3.7",
+    "@types/react-dom": "^18.3.3",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "axe-core": "^4.10.3",
     "axe-playwright": "^2.1.0",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^30.0.3",
     "playwright": "^1.53.1",
     "puppeteer": "^22.15.0",
+    "ts-jest": "^29.4.0",
     "wcag-contrast": "^3.0.0"
   },
   "scripts": {
@@ -74,6 +81,10 @@
   ],
   "author": "Beyond Solutions Team",
   "license": "ISC",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
