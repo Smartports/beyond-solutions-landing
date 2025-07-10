@@ -1,6 +1,6 @@
 # Jekyll configuration for GitHub Pages
-baseurl: "/beyond-solutions-landing"
-url: "https://smartports.github.io"
+baseurl: '/beyond-solutions-landing'
+url: 'https://smartports.github.io'
 
 # Exclude files that don't need to be processed
 exclude:
@@ -22,4 +22,4 @@ gfm_quirks: paragraph_end
 
 # Preserve languages files
 keep_files:
-  - i18n 
+  - i18n

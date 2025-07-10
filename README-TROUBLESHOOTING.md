@@ -5,22 +5,26 @@
 ### 1. **Directory Not Found Errors**
 
 #### Error Messages:
+
 ```
 Error: ENOENT: no such file or directory, uv_cwd
 FileNotFoundError: [Errno 2] No such file or directory
 ```
 
 #### Root Cause:
+
 The terminal is trying to access a directory that was deleted, moved, or doesn't exist.
 
 #### Solutions:
 
 **Option A: Use the startup script (Recommended)**
+
 ```bash
 ./start-server.sh
 ```
 
 **Option B: Manual navigation**
+
 ```bash
 # Navigate to project root first
 cd /beyond-solutions-landing
@@ -30,6 +34,7 @@ cd dist && python3 -m http.server 8000
 ```
 
 **Option C: Reset terminal**
+
 ```bash
 # Open a new terminal window/tab
 # Navigate to the project directory
@@ -39,18 +44,22 @@ cd /beyond-solutions-landing
 ### 2. **Port Already in Use**
 
 #### Error Message:
+
 ```
 OSError: [Errno 48] Address already in use
 ```
 
 #### ✅ **Automatic Solution (Recommended):**
+
 The `start-server.sh` script now handles this automatically:
+
 - 🔍 **Detects** if port 8000 is in use
-- 🔄 **Attempts** to terminate the conflicting process safely  
+- 🔄 **Attempts** to terminate the conflicting process safely
 - 📡 **Falls back** to alternative ports (8001, 8002, etc.) if needed
 - 🎯 **Shows** exactly which port the server is running on
 
 Simply run:
+
 ```bash
 ./start-server.sh
 ```
@@ -58,21 +67,25 @@ Simply run:
 #### 🛠️ **Manual Solutions:**
 
 **Check what's using the port:**
+
 ```bash
 lsof -i :8000
 ```
 
 **Kill the existing process:**
+
 ```bash
 kill -9 [PID_FROM_ABOVE_COMMAND]
 ```
 
 **Use a different port:**
+
 ```bash
 python3 -m http.server 8080
 ```
 
 **Kill all HTTP servers:**
+
 ```bash
 pkill -f "python.*http.server"
 ```
@@ -80,41 +93,48 @@ pkill -f "python.*http.server"
 ### 3. **Build Issues**
 
 #### Missing dist directory:
+
 ```bash
 # Rebuild the project
 node build.js
 ```
 
-#### Node.js/NPM issues:
+#### Node.js/bun issues:
+
 ```bash
-# Clear npm cache
-npm cache clean --force
+# Clear bun cache
+bun cache clean --force
 
 # Reinstall dependencies
 rm -rf node_modules package-lock.json
-npm install
+bun install
 ```
 
 ### 4. **Google Maps API Issues**
 
 #### API Key not configured:
+
 1. Copy `config.example.js` to `config.js`
 2. Replace `YOUR_GOOGLE_MAPS_API_KEY` with your actual API key
 3. Rebuild: `node build.js`
 
 #### CSP Violations:
+
 These are already fixed in the current version. If you see CSP errors:
+
 1. Ensure you're using the latest build
 2. Check browser console for specific blocked resources
 
 ### 5. **Permission Issues**
 
 #### Script not executable:
+
 ```bash
 chmod +x start-server.sh
 ```
 
 #### File system permissions:
+
 ```bash
 # Check permissions
 ls -la start-server.sh
@@ -128,18 +148,20 @@ chmod 755 start-server.sh
 ### Starting Development
 
 1. **Always use the startup script:**
+
    ```bash
    ./start-server.sh
    ```
 
 2. **Or manual workflow:**
+
    ```bash
    # 1. Navigate to project
    cd ~/Documents/WORK/beyond-solutions-landing
-   
+
    # 2. Rebuild if needed
    node build.js
-   
+
    # 3. Start server
    cd dist && python3 -m http.server 8000
    ```
@@ -169,21 +191,25 @@ chmod 755 start-server.sh
 ### Common Console Errors
 
 #### Google Maps not loading:
+
 - Check API key configuration
 - Verify internet connection
 - Look for CSP violations
 
 #### Module not found:
+
 - Rebuild the project: `node build.js`
 - Clear browser cache: Cmd+Shift+R
 
 #### Database errors:
+
 - Clear IndexedDB data in browser dev tools
 - Refresh the page
 
 ### Server Logs
 
 The Python HTTP server shows request logs. Look for:
+
 - **200**: Success
 - **404**: File not found (rebuild needed)
 - **500**: Server error
@@ -203,6 +229,7 @@ When something isn't working:
 ## 🚀 Server Management
 
 ### Starting the Server
+
 ```bash
 # Recommended method
 ./start-server.sh
@@ -216,10 +243,12 @@ npx http-server dist -p 8000
 ```
 
 ### Stopping the Server
+
 - **Terminal:** Press `Ctrl+C`
 - **Background process:** Find PID with `lsof -i :8000`, then `kill -9 [PID]`
 
 ### Changing Ports
+
 ```bash
 # Use port 8080 instead
 python3 -m http.server 8080
@@ -231,11 +260,13 @@ python3 -m http.server 8080
 ## 🔧 Environment Setup
 
 ### Required Software
+
 - **Node.js:** v16+ (for build process)
 - **Python 3:** (for development server)
 - **Modern Browser:** Chrome, Firefox, Safari, Edge
 
 ### Project Structure
+
 ```
 beyond-solutions-landing/
 ├── dist/                 # Built files (served by web server)
@@ -293,4 +324,4 @@ node build.js
 
 **Last Updated:** June 26, 2025  
 **Version:** 1.9.1  
-**Status:** All known issues resolved ✅ 
+**Status:** All known issues resolved ✅

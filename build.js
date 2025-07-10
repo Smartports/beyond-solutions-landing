@@ -23,16 +23,16 @@ const buildConfig = {
     '.htaccess',
     '_config.yml',
     'config.js',
-    'config.example.js',  // Include config example for setup reference
+    'config.example.js', // Include config example for setup reference
     'test-phase6-integration.html',
-    'test-accessibility.js'
+    'test-accessibility.js',
   ],
   directories: [
     'css',
     'js',
     'img',
     'i18n',
-    'test'  // Add test directory for Phase 6 test files
+    'test', // Add test directory for Phase 6 test files
   ],
   // Optimización avanzada
   optimization: {
@@ -40,8 +40,8 @@ const buildConfig = {
     criticalCSS: true,
     imageOptimization: true,
     minifyJS: true,
-    compressAssets: true
-  }
+    compressAssets: true,
+  },
 };
 
 // Configuración legacy (mantener compatibilidad)
@@ -58,35 +58,31 @@ const config = {
     '_config.yml',
     'config.js',
     'test-phase6-integration.html',
-    'test-accessibility.js'
+    'test-accessibility.js',
   ],
   directories: [
     'css',
     'js',
     'img',
     'i18n',
-    'test'  // Add test directory for Phase 6 test files
+    'test', // Add test directory for Phase 6 test files
   ],
   componentsToMigrate: [
     { from: 'apps/web/src/Wizard.tsx', to: 'js/modules/wizard.js' },
     { from: 'apps/web/src/TerrainModule.tsx', to: 'js/modules/terrain.js' },
-    { from: 'apps/web/src/TerrainViewer3D.tsx', to: 'js/modules/viewer3d.js' }
+    { from: 'apps/web/src/TerrainViewer3D.tsx', to: 'js/modules/viewer3d.js' },
   ],
   // Phase 6 modules - ALL Phase 6 components
-  phase6Modules: [
-    'js/accessibility.js',
-    'js/mobile-optimization.js',
-    'js/phase6-integration.js'
-  ],
+  phase6Modules: ['js/accessibility.js', 'js/mobile-optimization.js', 'js/phase6-integration.js'],
   // Phase 6 additional files that need to be verified
   phase6RequiredFiles: [
     'js/accessibility.js',
-    'js/mobile-optimization.js', 
+    'js/mobile-optimization.js',
     'js/phase6-integration.js',
     'test/run-all-tests.js',
     'test/accessibility/a11y-helpers.js',
-    'test/accessibility/run-a11y-audit.js'
-  ]
+    'test/accessibility/run-a11y-audit.js',
+  ],
 };
 
 // Funciones auxiliares
@@ -102,7 +98,7 @@ async function cleanDist() {
 
 async function copyStaticFiles() {
   console.log('📄 Copiando archivos estáticos...');
-  
+
   for (const file of config.staticFiles) {
     try {
       await fs.copyFile(file, path.join(config.outputDir, file));
@@ -115,7 +111,7 @@ async function copyStaticFiles() {
 
 async function copyDirectories() {
   console.log('📁 Copiando directorios...');
-  
+
   for (const dir of config.directories) {
     try {
       await fs.cp(dir, path.join(config.outputDir, dir), { recursive: true });
@@ -134,7 +130,7 @@ async function createModulesDirectory() {
 
 async function createStorageModule() {
   console.log('💾 Creando módulo de almacenamiento con IndexedDB...');
-  
+
   const storageContent = `/**
  * Storage Module - Sistema de persistencia con IndexedDB
  * Gestiona todos los datos del usuario de forma local y persistente
@@ -589,25 +585,22 @@ window.StorageModule = (function() {
   }
 })();
 `;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'js', 'modules', 'storage.js'),
-    storageContent
-  );
+
+  await fs.writeFile(path.join(config.outputDir, 'js', 'modules', 'storage.js'), storageContent);
 }
 
 async function createLazyLoaderModule() {
   console.log('🚀 Creando módulo de lazy loading...');
-  
+
   try {
     // Copiar el archivo lazy-loader.js que ya creamos
     await fs.copyFile(
       'js/modules/lazy-loader.js',
-      path.join(config.outputDir, 'js', 'modules', 'lazy-loader.js')
+      path.join(config.outputDir, 'js', 'modules', 'lazy-loader.js'),
     );
   } catch (error) {
     console.warn('Archivo lazy-loader.js no encontrado, creando directamente...');
-    
+
     // Si el archivo no existe, lo creamos aquí
     const lazyLoaderContent = `/**
  * Lazy Loader Module - Sistema de carga diferida inteligente
@@ -978,17 +971,17 @@ if (document.readyState === 'loading') {
 } else {
   window.LazyLoader.init();
 }`;
-    
+
     await fs.writeFile(
       path.join(config.outputDir, 'js', 'modules', 'lazy-loader.js'),
-      lazyLoaderContent
+      lazyLoaderContent,
     );
   }
 }
 
 async function createWizardModule() {
   console.log('🧙 Creando módulo Wizard estático...');
-  
+
   const wizardContent = `/**
  * Wizard Module - Versión estática con Alpine.js
  * Usa StorageModule para persistencia con IndexedDB
@@ -1143,16 +1136,13 @@ window.WizardModule = function() {
   };
 };
 `;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'js', 'modules', 'wizard.js'),
-    wizardContent
-  );
+
+  await fs.writeFile(path.join(config.outputDir, 'js', 'modules', 'wizard.js'), wizardContent);
 }
 
 async function createViewer3DModule() {
   console.log('🎮 Creando módulo Viewer 3D...');
-  
+
   const viewer3DContent = `/**
  * Viewer 3D Module - Usando Babylon.js
  */
@@ -1254,16 +1244,13 @@ window.Viewer3DModule = function() {
   };
 };
 `;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'js', 'modules', 'viewer3d.js'),
-    viewer3DContent
-  );
+
+  await fs.writeFile(path.join(config.outputDir, 'js', 'modules', 'viewer3d.js'), viewer3DContent);
 }
 
 async function createTerrainModule() {
   console.log('🗺️ Creando módulo de Terreno...');
-  
+
   const terrainContent = `/**
  * Terrain Module - Gestión de terrenos con Google Maps
  */
@@ -1409,16 +1396,13 @@ window.TerrainModule = function() {
   };
 };
 `;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'js', 'modules', 'terrain.js'),
-    terrainContent
-  );
+
+  await fs.writeFile(path.join(config.outputDir, 'js', 'modules', 'terrain.js'), terrainContent);
 }
 
 async function createFinanceModule() {
   console.log('💰 Creando módulo Financiero...');
-  
+
   const financeContent = `/**
  * Finance Module - Cálculos financieros y costos
  */
@@ -1561,16 +1545,13 @@ window.FinanceModule = function() {
   };
 };
 `;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'js', 'modules', 'finance.js'),
-    financeContent
-  );
+
+  await fs.writeFile(path.join(config.outputDir, 'js', 'modules', 'finance.js'), financeContent);
 }
 
 async function createDashboardPage() {
   console.log('📊 Creando página de Dashboard...');
-  
+
   const dashboardContent = `<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
@@ -1804,16 +1785,13 @@ async function createDashboardPage() {
   
 </body>
 </html>`;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'dashboard.html'),
-    dashboardContent
-  );
+
+  await fs.writeFile(path.join(config.outputDir, 'dashboard.html'), dashboardContent);
 }
 
 async function createWizardPage() {
   console.log('🧙 Creando página del Wizard...');
-  
+
   const wizardContent = `<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
@@ -2034,59 +2012,56 @@ async function createWizardPage() {
   
 </body>
 </html>`;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'wizard.html'),
-    wizardContent
-  );
+
+  await fs.writeFile(path.join(config.outputDir, 'wizard.html'), wizardContent);
 }
 
 async function updateManifest() {
   console.log('📱 Creando manifest.json para PWA...');
-  
+
   const manifestContent = {
-    "name": "Beyond Solutions Calculator",
-    "short_name": "Beyond Calc",
-    "description": "Calculadora inmobiliaria inteligente",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#334b4e",
-    "orientation": "portrait-primary",
-    "icons": [
+    name: 'Beyond Solutions Calculator',
+    short_name: 'Beyond Calc',
+    description: 'Calculadora inmobiliaria inteligente',
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#ffffff',
+    theme_color: '#334b4e',
+    orientation: 'portrait-primary',
+    icons: [
       {
-        "src": "/img/icon-192.png",
-        "sizes": "192x192",
-        "type": "image/png"
+        src: '/img/icon-192.png',
+        sizes: '192x192',
+        type: 'image/png',
       },
       {
-        "src": "/img/icon-512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ]
+        src: '/img/icon-512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
   };
-  
+
   await fs.writeFile(
     path.join(config.outputDir, 'manifest.json'),
-    JSON.stringify(manifestContent, null, 2)
+    JSON.stringify(manifestContent, null, 2),
   );
 }
 
 async function updateIndexForPWA() {
   console.log('🔧 Actualizando index.html para PWA...');
-  
+
   try {
     let indexContent = await fs.readFile(path.join(config.outputDir, 'index.html'), 'utf-8');
-    
+
     // Agregar link al manifest
     if (!indexContent.includes('manifest.json')) {
       indexContent = indexContent.replace(
         '</head>',
-        '  <link rel="manifest" href="/manifest.json">\n</head>'
+        '  <link rel="manifest" href="/manifest.json">\n</head>',
       );
     }
-    
+
     // Agregar registro del service worker
     if (!indexContent.includes('serviceWorker')) {
       const swScript = `
@@ -2101,10 +2076,10 @@ async function updateIndexForPWA() {
     }
   </script>
 </body>`;
-      
+
       indexContent = indexContent.replace('</body>', swScript);
     }
-    
+
     await fs.writeFile(path.join(config.outputDir, 'index.html'), indexContent);
   } catch (e) {
     console.warn('  ⚠️  No se pudo actualizar index.html para PWA');
@@ -2113,23 +2088,107 @@ async function updateIndexForPWA() {
 
 async function createGitHubPagesConfig() {
   console.log('⚙️  Configurando para GitHub Pages...');
-  
+
   // Crear archivo CNAME si tienes dominio personalizado
   // await fs.writeFile(
   //   path.join(config.outputDir, 'CNAME'),
   //   'calculator.beyondsolutions.app'
   // );
-  
+
   // Crear .nojekyll para evitar procesamiento de Jekyll
-  await fs.writeFile(
-    path.join(config.outputDir, '.nojekyll'),
-    ''
-  );
+  await fs.writeFile(path.join(config.outputDir, '.nojekyll'), '');
+}
+
+async function validateAndOptimizeCSP() {
+  console.log('🔒 Validando y optimizando CSP para GitHub Pages...');
+
+  const htmlFiles = ['calculator-gamified.html', 'index.html'];
+  
+  for (const file of htmlFiles) {
+    const filePath = path.join(config.outputDir, file);
+    
+    try {
+      let content = await fs.readFile(filePath, 'utf-8');
+      let modified = false;
+
+      // Verificar que existe meta tag CSP
+      if (!content.includes('Content-Security-Policy')) {
+        console.warn(`  ⚠️  ${file}: No CSP meta tag found`);
+        continue;
+      }
+
+      // Verificar y limpiar nonces (incompatibles con GitHub Pages)
+      if (content.includes('nonce=')) {
+        console.log(`  🧹 ${file}: Removing nonces for GitHub Pages compatibility`);
+        content = content.replace(/\s+nonce="[^"]*"/g, '');
+        modified = true;
+      }
+
+      // Verificar Alpine CSP build
+      if (content.includes('@alpinejs/csp')) {
+        console.log(`  ✅ ${file}: Alpine CSP build detected`);
+      } else if (content.includes('alpinejs@3.x.x')) {
+        console.log(`  🔄 ${file}: Updating to Alpine CSP build`);
+        content = content.replace(
+          /alpinejs@3\.x\.x\/dist\/cdn\.min\.js/g,
+          '@alpinejs/csp@3.x.x/dist/cdn.min.js'
+        );
+        modified = true;
+      }
+
+      // Optimizar CSP para GitHub Pages
+      if (content.includes('script-src')) {
+        // Asegurar que incluye dominios de GitHub
+        if (!content.includes('*.github.io')) {
+          console.log(`  🔄 ${file}: Adding GitHub Pages domains to CSP`);
+          content = content.replace(
+            /(script-src[^;]+)/,
+            '$1 *.github.io *.githubpages.com'
+          );
+          modified = true;
+        }
+
+        // Eliminar report-uri si existe (no funcional en GitHub Pages)
+        if (content.includes('report-uri')) {
+          console.log(`  🧹 ${file}: Removing report-uri for GitHub Pages`);
+          content = content.replace(/\s*report-uri[^;]*;?/g, '');
+          modified = true;
+        }
+      }
+
+      // Guardar cambios si hubo modificaciones
+      if (modified) {
+        await fs.writeFile(filePath, content);
+        console.log(`  ✅ ${file}: CSP optimized for GitHub Pages`);
+      } else {
+        console.log(`  ✅ ${file}: CSP already optimized`);
+      }
+
+    } catch (error) {
+      console.warn(`  ⚠️  ${file}: Error validating CSP - ${error.message}`);
+    }
+  }
+
+  // Validar Alpine CSP init
+  const alpineInitPath = path.join(config.outputDir, 'js', 'alpine-csp-init.js');
+  try {
+    const alpineContent = await fs.readFile(alpineInitPath, 'utf-8');
+    
+    if (alpineContent.includes('nonce')) {
+      console.log('  🧹 alpine-csp-init.js: Cleaning nonce references');
+      const cleanContent = alpineContent.replace(/nonce[^']*'[^']*'/g, '');
+      await fs.writeFile(alpineInitPath, cleanContent);
+    }
+    
+    console.log('  ✅ alpine-csp-init.js: Validated for GitHub Pages');
+  } catch (error) {
+    console.warn('  ⚠️  alpine-csp-init.js: Not found or error reading');
+  }
 }
 
 async function validateBuild() {
   console.log('✅ Validando build...');
-  
+
   const requiredFiles = [
     'index.html',
     'calculator.html',
@@ -2169,11 +2228,11 @@ async function validateBuild() {
     'css/critical.css',
     // Phase 6 integration files
     'js/phase6-loader.js',
-    'PHASE6_README.md'
+    'PHASE6_README.md',
   ];
-  
+
   let allValid = true;
-  
+
   for (const file of requiredFiles) {
     try {
       await fs.access(path.join(config.outputDir, file));
@@ -2183,7 +2242,7 @@ async function validateBuild() {
       allValid = false;
     }
   }
-  
+
   // Validate Phase 6 specific files
   console.log('\n🔍 Validando archivos específicos de Phase 6...');
   for (const file of config.phase6RequiredFiles) {
@@ -2194,29 +2253,29 @@ async function validateBuild() {
       console.warn(`  ⚠️ Phase 6: ${file} - FALTANTE (opcional)`);
     }
   }
-  
+
   if (!allValid) {
     throw new Error('La validación del build falló. Algunos archivos están faltantes.');
   }
-  
+
   console.log('\n✅ Todos los archivos requeridos están presentes');
 }
 
 async function optimizeAssets() {
   console.log('🎯 Optimizando assets...');
-  
+
   // Aquí podrías agregar:
   // - Minificación de JS/CSS
   // - Optimización de imágenes
   // - Compresión gzip
-  
+
   // Por ahora, solo reportamos
   console.log('  ✓ Assets optimizados (minificación pendiente en producción)');
 }
 
 async function generateServiceWorker() {
   console.log('⚡ Generando Service Worker mejorado...');
-  
+
   const swContent = `/**
  * Service Worker para Beyond Solutions
  * Versión: 1.9.0
@@ -2331,11 +2390,8 @@ self.addEventListener('message', event => {
     self.skipWaiting();
   }
 });`;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'sw.js'),
-    swContent
-  );
+
+  await fs.writeFile(path.join(config.outputDir, 'sw.js'), swContent);
 }
 
 /**
@@ -2343,13 +2399,13 @@ self.addEventListener('message', event => {
  */
 async function implementBundleSplitting() {
   console.log('📦 Implementando bundle splitting avanzado...');
-  
+
   const bundleConfig = {
     critical: ['storage.js', 'lazy-loader.js'],
     onDemand: ['terrain.js', 'viewer3d.js', 'finance.js'],
-    shared: ['wizard.js']
+    shared: ['wizard.js'],
   };
-  
+
   // Crear manifest de módulos
   const moduleManifest = {
     version: '1.9.0',
@@ -2357,20 +2413,16 @@ async function implementBundleSplitting() {
     chunks: {
       critical: bundleConfig.critical,
       onDemand: bundleConfig.onDemand,
-      shared: bundleConfig.shared
+      shared: bundleConfig.shared,
     },
-    loadOrder: [
-      'critical',
-      'shared',
-      'onDemand'
-    ]
+    loadOrder: ['critical', 'shared', 'onDemand'],
   };
-  
+
   await fs.writeFile(
     path.join(buildConfig.outputDir, 'js', 'module-manifest.json'),
-    JSON.stringify(moduleManifest, null, 2)
+    JSON.stringify(moduleManifest, null, 2),
   );
-  
+
   // Crear loader optimizado
   const optimizedLoader = `/**
  * Optimized Module Loader - Beyond Solutions v1.9
@@ -2453,11 +2505,8 @@ if (document.readyState === 'loading') {
 } else {
   window.ModuleLoader.init();
 }`;
-  
-  await fs.writeFile(
-    path.join(buildConfig.outputDir, 'js', 'module-loader.js'),
-    optimizedLoader
-  );
+
+  await fs.writeFile(path.join(buildConfig.outputDir, 'js', 'module-loader.js'), optimizedLoader);
 }
 
 /**
@@ -2465,7 +2514,7 @@ if (document.readyState === 'loading') {
  */
 async function extractCriticalCSS() {
   console.log('🎨 Extrayendo CSS crítico...');
-  
+
   const criticalCSS = `/**
  * Critical CSS - Beyond Solutions
  * Estilos críticos para above-the-fold content
@@ -2550,29 +2599,26 @@ header {
     padding: 0.5rem 1rem;
   }
 }`;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'css', 'critical.css'),
-    criticalCSS
-  );
-  
+
+  await fs.writeFile(path.join(config.outputDir, 'css', 'critical.css'), criticalCSS);
+
   // Inline critical CSS en HTML
   const htmlFiles = ['index.html', 'calculator-gamified.html', 'dashboard.html', 'wizard.html'];
-  
+
   for (const file of htmlFiles) {
     try {
       let content = await fs.readFile(path.join(config.outputDir, file), 'utf-8');
-      
+
       // Insertar critical CSS inline
       const criticalStyle = `<style id="critical-css">${criticalCSS}</style>`;
       content = content.replace('</head>', `${criticalStyle}\n</head>`);
-      
+
       // Cargar CSS no crítico de forma asíncrona
       content = content.replace(
         /<link rel="stylesheet" href="([^"]*\.css)">/g,
-        '<link rel="preload" href="$1" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">'
+        '<link rel="preload" href="$1" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">',
       );
-      
+
       await fs.writeFile(path.join(config.outputDir, file), content);
     } catch (e) {
       console.warn(`  ⚠️  No se pudo optimizar ${file}`);
@@ -2585,7 +2631,7 @@ header {
  */
 async function optimizeImages() {
   console.log('🖼️ Optimizando imágenes...');
-  
+
   // Crear WebP fallbacks
   const imageOptimizer = `/**
  * Image Optimizer - Beyond Solutions
@@ -2637,11 +2683,8 @@ if (document.readyState === 'loading') {
 } else {
   window.ImageOptimizer.init();
 }`;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'js', 'image-optimizer.js'),
-    imageOptimizer
-  );
+
+  await fs.writeFile(path.join(config.outputDir, 'js', 'image-optimizer.js'), imageOptimizer);
 }
 
 /**
@@ -2649,7 +2692,7 @@ if (document.readyState === 'loading') {
  */
 async function optimizePreloading() {
   console.log('⚡ Optimizando estrategia de precarga...');
-  
+
   const preloadOptimizer = `/**
  * Preload Optimizer - Beyond Solutions
  * Estrategia inteligente de precarga basada en comportamiento del usuario
@@ -2748,11 +2791,8 @@ window.PreloadOptimizer = {
 
 // Auto-inicializar
 window.PreloadOptimizer.init();`;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'js', 'preload-optimizer.js'),
-    preloadOptimizer
-  );
+
+  await fs.writeFile(path.join(config.outputDir, 'js', 'preload-optimizer.js'), preloadOptimizer);
 }
 
 /**
@@ -2760,7 +2800,7 @@ window.PreloadOptimizer.init();`;
  */
 async function createPerformanceMonitor() {
   console.log('📊 Creando monitor de performance...');
-  
+
   const performanceMonitor = `/**
  * Performance Monitor - Beyond Solutions
  * Monitoreo en tiempo real de métricas de performance
@@ -2889,10 +2929,10 @@ window.PerformanceMonitor.init();
 window.addEventListener('beforeunload', () => {
   window.PerformanceMonitor.sendMetrics();
 });`;
-  
+
   await fs.writeFile(
     path.join(config.outputDir, 'js', 'performance-monitor.js'),
-    performanceMonitor
+    performanceMonitor,
   );
 }
 
@@ -2901,7 +2941,7 @@ window.addEventListener('beforeunload', () => {
  */
 async function ensurePhase6Integration() {
   console.log('🔧 Verificando integración de Phase 6...');
-  
+
   // Create Phase 6 integration loader if it doesn't exist
   const phase6LoaderContent = `/**
  * Phase 6 Integration Loader
@@ -2969,12 +3009,9 @@ async function ensurePhase6Integration() {
     isReady: () => loadedComponents === totalComponents
   };
 })();`;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'js', 'phase6-loader.js'),
-    phase6LoaderContent
-  );
-  
+
+  await fs.writeFile(path.join(config.outputDir, 'js', 'phase6-loader.js'), phase6LoaderContent);
+
   // Create README for Phase 6
   const phase6ReadmeContent = `# Phase 6 - Accessibility & Mobile Optimization
 
@@ -3090,12 +3127,9 @@ Phase 6 helps achieve:
 
 For more details, see the individual component documentation.
 `;
-  
-  await fs.writeFile(
-    path.join(config.outputDir, 'PHASE6_README.md'),
-    phase6ReadmeContent
-  );
-  
+
+  await fs.writeFile(path.join(config.outputDir, 'PHASE6_README.md'), phase6ReadmeContent);
+
   console.log('✅ Phase 6 integration files created');
 }
 
@@ -3104,14 +3138,14 @@ For more details, see the individual component documentation.
 // Script principal actualizado
 async function build() {
   console.log('🚀 Iniciando build optimizado de Beyond Solutions v1.9...\n');
-  
+
   try {
     // Fase 1: Preparación
     await cleanDist();
     await copyStaticFiles();
     await copyDirectories();
     await createModulesDirectory();
-    
+
     // Fase 2: Crear módulos base
     await createStorageModule();
     await createLazyLoaderModule();
@@ -3119,40 +3153,41 @@ async function build() {
     await createViewer3DModule();
     await createTerrainModule();
     await createFinanceModule();
-    
+
     // Fase 3: Crear páginas
     await createDashboardPage();
     await createWizardPage();
-    
+
     // Fase 4: Optimizaciones avanzadas ✨ NUEVO
     if (buildConfig.optimization.bundleSplitting) {
       await implementBundleSplitting();
     }
-    
+
     if (buildConfig.optimization.criticalCSS) {
       await extractCriticalCSS();
     }
-    
+
     if (buildConfig.optimization.imageOptimization) {
       await optimizeImages();
     }
-    
+
     await optimizePreloading();
     await createPerformanceMonitor();
-    
+
     // Fase 4.5: Integración Phase 6 ✨ NUEVO
     await ensurePhase6Integration();
-    
+
     // Fase 5: PWA y configuración
     await updateManifest();
     await generateServiceWorker();
     await updateIndexForPWA();
     await createGitHubPagesConfig();
-    
+    await validateAndOptimizeCSP();
+
     // Fase 6: Validación final
     await optimizeAssets();
     await validateBuild();
-    
+
     console.log('\n✅ Build optimizado completado exitosamente!');
     console.log(`📁 Archivos generados en: ${config.outputDir}/`);
     console.log('\n🚀 Optimizaciones implementadas:');
@@ -3181,7 +3216,6 @@ async function build() {
     console.log('   2. Ejecutar auditoría de accesibilidad completa');
     console.log('   3. Verificar performance en conexiones lentas');
     console.log('   4. Validar en lectores de pantalla');
-    
   } catch (error) {
     console.error('\n❌ Error durante el build:', error);
     process.exit(1);
@@ -3193,4 +3227,4 @@ if (require.main === module) {
   build();
 }
 
-module.exports = { build }; 
+module.exports = { build };

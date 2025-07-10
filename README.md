@@ -47,22 +47,37 @@ This site is configured to be deployed on GitHub Pages. Key features:
 
 ## Local Development
 
-To run this site locally:
+This repository is a monorepo managed with **bun workspaces**. All packages/apps share a single lock-file and use strict TypeScript settings.
 
-1. Clone the repository
-2. Serve the files using any static web server
+```bash
+# 1. Install dependencies (root-level)
+git clone https://github.com/Smartports/beyond-solutions-landing.git
+cd beyond-solutions-landing
+bun install
 
-   ```bash
-   python -m http.server 8000
-   ```
+# 2. Build shared Tailwind CSS for static pages
+bun run build:tailwind:static
 
-   or
+# 3. Start legacy static demo (serves root index.html)
+bun run dev            # python3 http.server 8000
 
-   ```bash
-   npx serve -l 8080 .
-   ```
+# 4. Work on React application (apps/web)
+cd apps/web
+bun run dev            # vite dev server at http://localhost:5173
 
-3. Navigate to `http://localhost:8000` in your browser
+# 5. Run ALL unit + legacy tests from repo root
+cd ../..
+bun run test           # runs vitest + legacy Node tests
+
+# 6. Build everything for production
+bun run build          # static CSS + build.js + React vite build
+```
+
+Common helper scripts:
+
+- `bun run fix:tailwind-html` – removes Tailwind CDN from static HTML pages.
+- `bun run fix:csp` – injects consistent CSP meta tag into static HTML pages.
+- `bun run depcheck` – lists unused dependencies.
 
 ## File Structure
 
@@ -102,13 +117,13 @@ git clone https://github.com/Smartports/beyond-solutions-landing.git
 cd beyond-solutions-landing
 
 # Install dependencies
-npm install
+bun install
 
 # Run development server
-npm start
+bun start
 
 # Run tests
-npm run test:all
+bun run test:all
 ```
 
 ## Testing
@@ -117,25 +132,25 @@ The project includes comprehensive testing scripts:
 
 ```bash
 # Run accessibility tests
-npm run test:a11y
+bun run test:a11y
 
 # Run performance tests
-npm run test:performance
+bun run test:performance
 
 # Run comprehensive accessibility audit
-npm run test:a11y:audit
+bun run test:a11y:audit
 
 # Run cross-browser tests
-npm run test:integration
+bun run test:integration
 
 # Run CSS performance analysis
-npm run test:css-performance
+bun run test:css-performance
 
 # Run color consistency check
-npm run test:consistency
+bun run test:consistency
 
 # Run all tests
-npm run test:all
+bun run test:all
 ```
 
 ## Optimizations
@@ -350,6 +365,7 @@ La nueva herramienta "Beyond Calculator" permite estimar presupuestos, márgenes
 ---
 
 ## Referencias y Recursos
+
 - [Blueprint de implementación](./BEYOND_CALCULATOR_IMPLEMENTATION.md)
 - [Progreso y checklist de QA](./docs/CALCULATOR_PROGRESS.md)
 - [Guía oficial WCAG](https://www.w3.org/WAI/standards-guidelines/)
@@ -391,18 +407,21 @@ O bien, instala la extensión de navegador de axe y ejecuta el test manualmente.
 Beyond Solutions uses a sophisticated, natural color palette that reflects our focus on real estate development and architectural excellence:
 
 ### Primary Colors
+
 - **Main Brand Color**: #334b4e
 - **Dark Background**: #243b44
 - **Dark Text**: #192525
 - **Light Text**: #cccfcf
 
 ### Supporting Colors
+
 - **Secondary Dark**: #525853
 - **Neutral Medium**: #adb3b7
 - **Accent**: #b1aaa0
 - **Accent Light**: #b9c6cd
 
 ### Documentation
+
 - [Color Palette Update](docs/COLOR_PALETTE_UPDATE.md): Overview of the color palette changes
 - [Color Reference](docs/COLOR_REFERENCE.md): Detailed reference guide for developers
 - [Style Guide](docs/STYLE_GUIDE.md): Comprehensive style guide for the design system
@@ -418,6 +437,7 @@ All color combinations used in the interface have been tested for accessibility:
 - **Large text** (18pt+) meets at least AA standard (3:1 ratio)
 
 Key contrast ratios:
+
 - Dark text (`#192525`) on white: 16.1:1 ✓
 - Light text (`#cccfcf`) on dark background (`#192525`): 9.2:1 ✓
 - Primary 700 (`#334b4e`) on white: 6.8:1 ✓
@@ -448,12 +468,14 @@ Este proyecto implementa una calculadora inmobiliaria avanzada para Beyond Solut
 ### Funcionalidades Implementadas
 
 #### Sprint 1: Wizard/Onboarding
+
 - Flujo de onboarding paso a paso
 - Configuración inicial de proyectos
 - Validación de datos de entrada
 - Persistencia de configuración
 
 #### Sprint 2: Terreno MVP
+
 - Selección de terreno en mapa interactivo
 - Sketch 2D para dibujar terrenos manualmente
 - Catálogo de terrenos predefinidos
@@ -461,6 +483,7 @@ Este proyecto implementa una calculadora inmobiliaria avanzada para Beyond Solut
 - Exportación de datos del terreno
 
 #### Sprint 3: Terreno Completo
+
 - Importación de archivos CAD (DXF)
 - Importación de archivos GeoJSON
 - Visualización 3D del terreno
@@ -493,13 +516,13 @@ El proyecto está organizado como un monorepo con los siguientes paquetes:
 
 ```bash
 # Instalar dependencias
-npm install
+bun install
 
 # Ejecutar en modo desarrollo
-npm run dev
+bun run dev
 
 # Construir para producción
-npm run build
+bun run build
 ```
 
 ### Documentación
