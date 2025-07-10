@@ -10,7 +10,14 @@ declare class jsPDF {
   setDrawColor(r: number, g: number, b: number): this;
   rect(x: number, y: number, w: number, h: number, style: string): this;
   text(text: string, x: number, y: number, options?: any): this;
-  addImage(imageData: any, format: string, x: number, y: number, width: number, height: number): this;
+  addImage(
+    imageData: any,
+    format: string,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+  ): this;
   addPage(): this;
   save(filename: string): void;
   output(type: string): string | Uint8Array;
@@ -86,15 +93,15 @@ export class ExportSystem {
   private viewer: ImmersiveViewer;
   private financialData: any = {};
   private projectData: any = {};
-  
+
   constructor(viewer: ImmersiveViewer) {
     this.viewer = viewer;
     this.scene = viewer.getScene();
-    
+
     // En una implementación real, se importaría jsPDF correctamente
     // this.jsPDF = jsPDF;
   }
-  
+
   /**
    * Establece los datos financieros para incluir en exportaciones
    * @param data Datos financieros
@@ -102,7 +109,7 @@ export class ExportSystem {
   public setFinancialData(data: any): void {
     this.financialData = data;
   }
-  
+
   /**
    * Establece los datos del proyecto para incluir en exportaciones
    * @param data Datos del proyecto
@@ -110,7 +117,7 @@ export class ExportSystem {
   public setProjectData(data: any): void {
     this.projectData = data;
   }
-  
+
   /**
    * Exporta el modelo 3D actual
    * @param options Opciones de exportación
@@ -118,11 +125,11 @@ export class ExportSystem {
    */
   public async exportModel(options: ModelExportOptions): Promise<string> {
     try {
-      const filename = options.filename || `model_export_${Date.now()}`;
-      
+      const _filename = options.filename || `model_export_${Date.now()}`;
+
       // Preparar escena para exportación
-      const exportScene = this.scene;
-      
+      const _exportScene = this.scene;
+
       // Exportar según formato
       switch (options.format) {
         case 'glb':
@@ -138,7 +145,7 @@ export class ExportSystem {
               reject(error);
             }
           });
-        
+
         case 'obj':
           // Simulación de exportación OBJ
           return new Promise<string>((resolve, reject) => {
@@ -150,7 +157,7 @@ export class ExportSystem {
               reject(error);
             }
           });
-          
+
         default:
           throw new Error(`Unsupported export format: ${options.format}`);
       }
@@ -159,13 +166,13 @@ export class ExportSystem {
       throw error;
     }
   }
-  
+
   /**
    * Exporta un informe financiero en PDF
    * @param options Opciones de exportación
    * @returns Promise con la URL del PDF o un error
    */
-  public async exportPDF(options: PDFExportOptions): Promise<string> {
+  public async exportPDF(_options: PDFExportOptions): Promise<string> {
     try {
       // En una implementación real, esto usaría jsPDF
       return new Promise<string>((resolve, reject) => {
@@ -183,7 +190,7 @@ export class ExportSystem {
       throw error;
     }
   }
-  
+
   /**
    * Toma una captura de pantalla de la vista actual
    * @param options Opciones de captura
@@ -191,11 +198,11 @@ export class ExportSystem {
    */
   public async takeScreenshot(options: ScreenshotOptions = {}): Promise<string> {
     try {
-      const width = options.width || 1920;
-      const height = options.height || 1080;
-      const quality = options.quality !== undefined ? options.quality : 0.9;
+      const _width = options.width || 1920;
+      const _height = options.height || 1080;
+      const _quality = options.quality !== undefined ? options.quality : 0.9;
       const fileType = options.fileType || 'png';
-      
+
       // En una implementación real, esto usaría el método de captura de Babylon.js
       return new Promise<string>((resolve, reject) => {
         try {
@@ -212,7 +219,7 @@ export class ExportSystem {
       throw error;
     }
   }
-  
+
   /**
    * Genera un recorrido automático y lo exporta como video
    * @param duration Duración en segundos
@@ -236,7 +243,7 @@ export class ExportSystem {
       throw error;
     }
   }
-  
+
   /**
    * Genera una URL para compartir el proyecto
    * @param includeViewpoint Si se debe incluir el punto de vista actual
@@ -246,13 +253,13 @@ export class ExportSystem {
     try {
       // Base URL
       const baseUrl = window.location.origin + window.location.pathname;
-      
+
       // Datos a incluir
       const shareData: any = {
         projectId: this.projectData.id || 'unknown',
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
-      
+
       // Incluir punto de vista si está habilitado
       if (includeViewpoint) {
         const camera = this.viewer.getActiveCamera();
@@ -260,30 +267,30 @@ export class ExportSystem {
           position: {
             x: camera.position.x,
             y: camera.position.y,
-            z: camera.position.z
-          }
+            z: camera.position.z,
+          },
         };
-        
+
         if ('target' in camera) {
           const target = (camera as any).getTarget();
           shareData.camera.target = {
             x: target.x,
             y: target.y,
-            z: target.z
+            z: target.z,
           };
         }
       }
-      
+
       // Codificar datos
       const shareParam = btoa(JSON.stringify(shareData));
-      
+
       return `${baseUrl}?share=${shareParam}`;
     } catch (error) {
       console.error('Error generating share URL:', error);
       return window.location.href;
     }
   }
-  
+
   /**
    * Genera un QR code para compartir
    * @param url URL a codificar (o se usa la URL de compartir por defecto)
@@ -291,8 +298,8 @@ export class ExportSystem {
    */
   public async generateQRCode(url?: string): Promise<string> {
     try {
-      const shareUrl = url || this.generateShareURL();
-      
+      const _shareUrl = url || this.generateShareURL();
+
       // En una implementación real, esto usaría una biblioteca de QR
       return new Promise<string>((resolve, reject) => {
         try {
@@ -309,4 +316,4 @@ export class ExportSystem {
       throw error;
     }
   }
-} 
+}
