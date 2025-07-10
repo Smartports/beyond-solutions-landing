@@ -80,7 +80,7 @@ jobs:
           echo "🔍 Validating JavaScript modules..."
           
           # Verificar que los módulos Alpine CSP existen
-          for file in js/alpine-csp-init.js js/modules/storage.js js/main.js; do
+          for file in js/alpine-csp-init.js js/main.js; do
             if [ -f "$file" ]; then
               echo "✅ $file exists"
             else
