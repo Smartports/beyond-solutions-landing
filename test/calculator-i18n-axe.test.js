@@ -6,8 +6,24 @@ const axeSource = require('axe-core').source;
 
 // Lista de códigos de idioma soportados (según i18n/README.md)
 const languages = [
-  'es', 'en', 'fr', 'de', 'it', 'pt', 'zh', 'ja', 'ko', 'ru',
-  'ar', 'pl', 'tr', 'sv', 'nl', 'hi', 'vi', 'el'
+  'es',
+  'en',
+  'fr',
+  'de',
+  'it',
+  'pt',
+  'zh',
+  'ja',
+  'ko',
+  'ru',
+  'ar',
+  'pl',
+  'tr',
+  'sv',
+  'nl',
+  'hi',
+  'vi',
+  'el',
 ];
 
 const BASE_URL = 'http://localhost:8080/calculator.html?lang=';
@@ -23,7 +39,7 @@ async function runAxeForLang(lang) {
   const results = await page.evaluate(async () => {
     return await window.axe.run({
       runOnly: ['wcag2a', 'wcag2aa', 'section508'],
-      resultTypes: ['violations', 'incomplete', 'passes']
+      resultTypes: ['violations', 'incomplete', 'passes'],
     });
   });
   await browser.close();
@@ -50,11 +66,11 @@ async function runAxeForLang(lang) {
   }
   // Mostrar resumen
   console.log('\nResumen de accesibilidad e i18n:');
-  summary.forEach(r => {
+  summary.forEach((r) => {
     if (r.error) {
       console.log(`[${r.lang}] ERROR: ${r.error}`);
     } else {
       console.log(`[${r.lang}] Violaciones: ${r.violations}, Incompletos: ${r.incomplete}`);
     }
   });
-})(); 
+})();

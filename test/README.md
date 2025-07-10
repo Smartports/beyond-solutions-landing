@@ -28,6 +28,7 @@ npm run test:a11y
 ```
 
 This will:
+
 1. Launch a headless browser
 2. Test each page in both light and dark mode
 3. Generate detailed reports in the `axe-reports` directory
@@ -68,4 +69,4 @@ While automated tests are valuable, they should be supplemented with manual test
 
 - [WCAG 2.1 Guidelines](https://www.w3.org/TR/WCAG21/)
 - [axe-core Documentation](https://github.com/dequelabs/axe-core)
-- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) 
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
