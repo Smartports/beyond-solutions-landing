@@ -21,7 +21,7 @@ export const MapLoader: React.FC<MapLoaderProps> = ({
   onError,
   apiKey = MAPS_CONFIG.API_KEY,
   loadingComponent = <DefaultLoading />,
-  errorComponent = <DefaultError />
+  errorComponent = <DefaultError />,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -30,10 +30,11 @@ export const MapLoader: React.FC<MapLoaderProps> = ({
     const loader = new Loader({
       apiKey,
       version: 'weekly',
-      libraries: ['places', 'drawing', 'geometry']
+      libraries: ['places', 'drawing', 'geometry'],
     });
 
-    loader.load()
+    loader
+      .load()
       .then(() => {
         setIsLoaded(true);
         if (onLoad) onLoad();
@@ -71,8 +72,19 @@ const DefaultError = () => (
   <div className="flex items-center justify-center p-8 min-h-[400px] bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
     <div className="text-center">
       <div className="bg-red-100 dark:bg-red-800/30 p-3 rounded-full inline-flex mb-4">
-        <svg className="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <svg
+          className="w-8 h-8 text-red-600 dark:text-red-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
         </svg>
       </div>
       <h3 className="text-lg font-semibold text-red-700 dark:text-red-400 mb-2">
@@ -89,4 +101,4 @@ const DefaultError = () => (
       </button>
     </div>
   </div>
-); 
+);

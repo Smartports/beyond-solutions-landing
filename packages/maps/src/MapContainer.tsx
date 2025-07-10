@@ -24,14 +24,14 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   onMapLoad,
   onClick,
   className = '',
-  style = {}
+  style = {},
 }) => {
   const mapRef = useRef<HTMLDivElement>(null);
 
   // Inicializar el mapa cuando el componente se monta
   useEffect(() => {
     if (!mapRef.current) return;
-    
+
     try {
       // Crear nueva instancia del mapa
       const mapInstance = new window.google.maps.Map(mapRef.current, {
@@ -39,7 +39,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
         center,
         zoom,
         mapTypeId,
-        styles: MAPS_CONFIG.MAP_STYLES
+        styles: MAPS_CONFIG.MAP_STYLES,
       });
 
       // Configurar eventos
@@ -62,12 +62,12 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   }, [center, zoom, mapTypeId, onMapLoad, onClick]);
 
   return (
-    <div 
-      ref={mapRef} 
-      className={`w-full h-96 rounded-lg ${className}`} 
+    <div
+      ref={mapRef}
+      className={`w-full h-96 rounded-lg ${className}`}
       style={{ ...style }}
       aria-label="Mapa interactivo"
       role="application"
     />
   );
-}; 
+};
