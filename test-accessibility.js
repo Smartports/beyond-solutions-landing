@@ -20,14 +20,14 @@ console.log(`✓ Live regions: ${liveRegions.length}`);
 
 // Test 5: Check color contrast (basic)
 const lowContrastElements = [];
-document.querySelectorAll('*').forEach(el => {
-    const styles = getComputedStyle(el);
-    const color = styles.color;
-    const bg = styles.backgroundColor;
-    // This is a simplified check - real contrast testing is more complex
-    if (color && bg && color !== 'rgb(0, 0, 0)' && bg !== 'rgba(0, 0, 0, 0)') {
-        // Would need proper contrast calculation here
-    }
+document.querySelectorAll('*').forEach((el) => {
+  const styles = getComputedStyle(el);
+  const color = styles.color;
+  const bg = styles.backgroundColor;
+  // This is a simplified check - real contrast testing is more complex
+  if (color && bg && color !== 'rgb(0, 0, 0)' && bg !== 'rgba(0, 0, 0, 0)') {
+    // Would need proper contrast calculation here
+  }
 });
 
 console.log('✅ Basic accessibility tests complete!');
