@@ -17,7 +17,7 @@ export function autoSave(project: Project, callback?: SaveCallback): void {
   if (saveTimeout) {
     clearTimeout(saveTimeout);
   }
-  
+
   // Crear nuevo timeout
   saveTimeout = setTimeout(async () => {
     try {
@@ -31,29 +31,32 @@ export function autoSave(project: Project, callback?: SaveCallback): void {
         }
         await saveProject(project);
       }
-      
+
       // Llamar al callback con éxito
       if (callback) {
         callback(true);
       }
-      
+
       // Disparar evento para notificar guardado exitoso
-      window.dispatchEvent(new CustomEvent('project:saved', {
-        detail: { project }
-      }));
-      
+      window.dispatchEvent(
+        new CustomEvent('project:saved', {
+          detail: { project },
+        }),
+      );
     } catch (error) {
       console.error('Error al guardar automáticamente:', error);
-      
+
       // Llamar al callback con error
       if (callback) {
         callback(false, error as Error);
       }
-      
+
       // Disparar evento para notificar error
-      window.dispatchEvent(new CustomEvent('project:save:error', {
-        detail: { project, error }
-      }));
+      window.dispatchEvent(
+        new CustomEvent('project:save:error', {
+          detail: { project, error },
+        }),
+      );
     }
   }, DEBOUNCE_DELAY);
 }
@@ -69,12 +72,12 @@ export async function forceSave(project: Project): Promise<number> {
     clearTimeout(saveTimeout);
     saveTimeout = null;
   }
-  
+
   try {
     // Actualizar fechas
     project.updatedAt = new Date();
     project.lastAccessed = new Date();
-    
+
     // Guardar según si es nuevo o existente
     if (project.id) {
       return await updateProject(project);
@@ -83,14 +86,14 @@ export async function forceSave(project: Project): Promise<number> {
       if (!project.name) {
         project.name = `Proyecto ${new Date().toLocaleDateString()}`;
       }
-      
+
       // Asegurarse de tener fecha de creación
       project.createdAt = new Date();
-      
+
       return await saveProject(project);
     }
   } catch (error) {
     console.error('Error al guardar forzadamente:', error);
     throw error;
   }
-} 
+}

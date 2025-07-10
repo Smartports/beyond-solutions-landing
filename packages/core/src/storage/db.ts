@@ -3,7 +3,7 @@ import Dexie, { Table } from 'dexie';
 // Define tipos de datos
 export interface UserProfile {
   id?: number;
-  type: string;    // 'developer' | 'owner' | 'investor' | 'architect'
+  type: string; // 'developer' | 'owner' | 'investor' | 'architect'
   entity?: string; // 'b2b' | 'b2c'
   createdAt: Date;
   updatedAt: Date;
@@ -13,7 +13,7 @@ export interface Project {
   id?: number;
   name: string;
   profileId: number;
-  projectType: string;  // 'residential' | 'commercial' | 'mixed' | 'industrial'
+  projectType: string; // 'residential' | 'commercial' | 'mixed' | 'industrial'
   budgetTotal?: number;
   land?: {
     address?: string;
@@ -52,11 +52,11 @@ class BeyondCalculatorDB extends Dexie {
 
   constructor() {
     super('BeyondCalculatorDB');
-    
+
     // Definir esquema y versión
     this.version(1).stores({
       profiles: '++id, type, createdAt, updatedAt',
-      projects: '++id, name, profileId, projectType, createdAt, updatedAt, lastAccessed'
+      projects: '++id, name, profileId, projectType, createdAt, updatedAt, lastAccessed',
     });
   }
 }
@@ -124,10 +124,10 @@ export async function importProject(jsonString: string): Promise<number> {
     projectData.createdAt = new Date();
     projectData.updatedAt = new Date();
     projectData.lastAccessed = new Date();
-    
+
     const id = (await db.projects.add(projectData)) as number;
     return Number(id);
   } catch (error) {
     throw new Error('Invalid project data format');
   }
-} 
+}
