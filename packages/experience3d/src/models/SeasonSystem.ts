@@ -1,4 +1,13 @@
-import { Scene, ParticleSystem, Texture, Color4, Vector3, AbstractMesh, StandardMaterial, Color3 } from '@babylonjs/core';
+import {
+  Scene,
+  ParticleSystem,
+  Texture,
+  Color4,
+  Vector3,
+  AbstractMesh,
+  StandardMaterial,
+  Color3,
+} from '@babylonjs/core';
 import { ImmersiveViewer } from './ImmersiveViewer';
 import { LightingSystem } from './LightingSystem';
 
@@ -9,7 +18,7 @@ export enum Season {
   SPRING = 'spring',
   SUMMER = 'summer',
   AUTUMN = 'autumn',
-  WINTER = 'winter'
+  WINTER = 'winter',
 }
 
 /**
@@ -37,29 +46,29 @@ export class SeasonSystem {
 
   constructor(
     private viewer: ImmersiveViewer,
-    private options: SeasonSystemOptions = {}
+    private options: SeasonSystemOptions = {},
   ) {
     this.scene = viewer.getScene();
     this.currentSeason = options.initialSeason || Season.SUMMER;
-    
+
     // Inicializar mapas de materiales estacionales
-    Object.values(Season).forEach(season => {
+    Object.values(Season).forEach((season) => {
       this.seasonalMaterials.set(season, new Map<string, StandardMaterial>());
     });
-    
+
     // Crear sistemas de partículas si está habilitado
     if (options.enableParticleEffects) {
       this.createParticleSystems();
     }
   }
-  
+
   /**
    * Establece el sistema de iluminación para coordinar cambios
    */
   public setLightingSystem(lightingSystem: LightingSystem): void {
     this.lightingSystem = lightingSystem;
   }
-  
+
   /**
    * Crea sistemas de partículas para efectos estacionales
    */
@@ -67,11 +76,17 @@ export class SeasonSystem {
     // Determinar cantidad de partículas según intensidad
     let particleCount = 1000;
     switch (this.options.particleIntensity) {
-      case 'low': particleCount = 500; break;
-      case 'medium': particleCount = 1500; break;
-      case 'high': particleCount = 3000; break;
+      case 'low':
+        particleCount = 500;
+        break;
+      case 'medium':
+        particleCount = 1500;
+        break;
+      case 'high':
+        particleCount = 3000;
+        break;
     }
-    
+
     // Sistema para nieve (invierno)
     const snowSystem = new ParticleSystem('snow', particleCount, this.scene);
     snowSystem.particleTexture = new Texture('/assets/textures/snowflake.png', this.scene);
@@ -91,7 +106,7 @@ export class SeasonSystem {
     snowSystem.minAngularSpeed = 0;
     snowSystem.maxAngularSpeed = Math.PI;
     this.particleSystems.set(Season.WINTER, snowSystem);
-    
+
     // Sistema para hojas cayendo (otoño)
     const leavesSystem = new ParticleSystem('leaves', particleCount / 2, this.scene);
     leavesSystem.particleTexture = new Texture('/assets/textures/leaf.png', this.scene);
@@ -112,7 +127,7 @@ export class SeasonSystem {
     leavesSystem.minAngularSpeed = 0.5;
     leavesSystem.maxAngularSpeed = Math.PI;
     this.particleSystems.set(Season.AUTUMN, leavesSystem);
-    
+
     // Sistema para pétalos (primavera)
     const petalsSystem = new ParticleSystem('petals', particleCount / 3, this.scene);
     petalsSystem.particleTexture = new Texture('/assets/textures/petal.png', this.scene);
@@ -134,7 +149,7 @@ export class SeasonSystem {
     petalsSystem.maxAngularSpeed = Math.PI / 2;
     this.particleSystems.set(Season.SPRING, petalsSystem);
   }
-  
+
   /**
    * Añade un mesh de vegetación que cambiará según la estación
    * @param mesh Mesh de vegetación
@@ -144,21 +159,21 @@ export class SeasonSystem {
       console.warn('Vegetation mesh must have a StandardMaterial');
       return;
     }
-    
+
     // Guardar material original
     const originalMaterial = mesh.material as StandardMaterial;
     this.originalMaterials.set(mesh.id, originalMaterial.clone(`${mesh.id}_original`));
-    
+
     // Crear materiales para cada estación
     this.createSeasonalMaterials(mesh.id, originalMaterial);
-    
+
     // Añadir a la lista
     this.vegetationMeshes.push(mesh);
-    
+
     // Aplicar material de la estación actual
     this.applySeasonalMaterial(mesh);
   }
-  
+
   /**
    * Crea materiales para cada estación basados en el material original
    * @param meshId ID del mesh
@@ -170,39 +185,39 @@ export class SeasonSystem {
     springMaterial.diffuseColor = new Color3(0.4, 0.8, 0.4);
     springMaterial.specularColor = new Color3(0.2, 0.2, 0.2);
     this.seasonalMaterials.get(Season.SPRING)?.set(meshId, springMaterial);
-    
+
     // Verano - Verde intenso
     const summerMaterial = baseMaterial.clone(`${meshId}_summer`);
     summerMaterial.diffuseColor = new Color3(0.2, 0.7, 0.2);
     summerMaterial.specularColor = new Color3(0.1, 0.1, 0.1);
     this.seasonalMaterials.get(Season.SUMMER)?.set(meshId, summerMaterial);
-    
+
     // Otoño - Amarillos, naranjas y rojos
     const autumnMaterial = baseMaterial.clone(`${meshId}_autumn`);
     autumnMaterial.diffuseColor = new Color3(0.8, 0.4, 0.1);
     autumnMaterial.specularColor = new Color3(0.1, 0.1, 0.1);
     this.seasonalMaterials.get(Season.AUTUMN)?.set(meshId, autumnMaterial);
-    
+
     // Invierno - Más gris, con menos saturación
     const winterMaterial = baseMaterial.clone(`${meshId}_winter`);
     winterMaterial.diffuseColor = new Color3(0.5, 0.5, 0.6);
     winterMaterial.specularColor = new Color3(0.3, 0.3, 0.3);
     this.seasonalMaterials.get(Season.WINTER)?.set(meshId, winterMaterial);
   }
-  
+
   /**
    * Aplica el material estacional a un mesh
    * @param mesh Mesh a actualizar
    */
   private applySeasonalMaterial(mesh: AbstractMesh): void {
     if (!this.options.affectMaterials) return;
-    
+
     const seasonalMaterial = this.seasonalMaterials.get(this.currentSeason)?.get(mesh.id);
     if (seasonalMaterial) {
       mesh.material = seasonalMaterial;
     }
   }
-  
+
   /**
    * Cambia la estación actual
    * @param season Nueva estación
@@ -213,14 +228,14 @@ export class SeasonSystem {
       this.activeParticleSystem.stop();
       this.activeParticleSystem = null;
     }
-    
+
     this.currentSeason = season;
-    
+
     // Aplicar materiales estacionales
     if (this.options.affectMaterials) {
-      this.vegetationMeshes.forEach(mesh => this.applySeasonalMaterial(mesh));
+      this.vegetationMeshes.forEach((mesh) => this.applySeasonalMaterial(mesh));
     }
-    
+
     // Activar sistema de partículas correspondiente
     if (this.options.enableParticleEffects) {
       const particleSystem = this.particleSystems.get(season);
@@ -229,7 +244,7 @@ export class SeasonSystem {
         this.activeParticleSystem = particleSystem;
       }
     }
-    
+
     // Ajustar iluminación según estación
     if (this.lightingSystem) {
       switch (season) {
@@ -252,37 +267,37 @@ export class SeasonSystem {
       }
     }
   }
-  
+
   /**
    * Obtiene la estación actual
    */
   public getCurrentSeason(): Season {
     return this.currentSeason;
   }
-  
+
   /**
    * Limpia recursos
    */
   public dispose(): void {
     // Detener y liberar sistemas de partículas
-    this.particleSystems.forEach(system => {
+    this.particleSystems.forEach((system) => {
       system.stop();
       system.dispose();
     });
-    
+
     // Restaurar materiales originales
     if (this.options.affectMaterials) {
-      this.vegetationMeshes.forEach(mesh => {
+      this.vegetationMeshes.forEach((mesh) => {
         const originalMaterial = this.originalMaterials.get(mesh.id);
         if (originalMaterial) {
           mesh.material = originalMaterial;
         }
       });
     }
-    
+
     // Liberar materiales estacionales
-    this.seasonalMaterials.forEach(materials => {
-      materials.forEach(material => material.dispose());
+    this.seasonalMaterials.forEach((materials) => {
+      materials.forEach((material) => material.dispose());
     });
   }
-} 
+}

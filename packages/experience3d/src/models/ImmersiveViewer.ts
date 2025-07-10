@@ -1,4 +1,16 @@
-import { Engine, Scene, Vector3, ArcRotateCamera, FreeCamera, Camera, TargetCamera, HemisphericLight, MeshBuilder, Mesh, Color3 } from '@babylonjs/core';
+import {
+  Engine,
+  Scene,
+  Vector3,
+  ArcRotateCamera,
+  FreeCamera,
+  Camera,
+  TargetCamera,
+  HemisphericLight,
+  MeshBuilder,
+  Mesh,
+  Color3,
+} from '@babylonjs/core';
 
 /**
  * Tipos de cámara disponibles
@@ -7,7 +19,7 @@ export enum CameraType {
   FREE = 'free',
   ARC_ROTATE = 'arc_rotate',
   FIRST_PERSON = 'first_person',
-  TOP_DOWN = 'top_down'
+  TOP_DOWN = 'top_down',
 }
 
 /**
@@ -44,11 +56,12 @@ export class ImmersiveViewer {
    */
   public initialize(): boolean {
     try {
-      const canvas = document.getElementById(this.options.canvasId) as HTMLCanvasElement;
-      if (!canvas) {
-        console.error(`Canvas with id ${this.options.canvasId} not found`);
+      const canvasEl = document.getElementById(this.options.canvasId);
+      if (!(canvasEl instanceof HTMLCanvasElement)) {
+        console.error(`Element with id ${this.options.canvasId} is not an HTMLCanvasElement`);
         return false;
       }
+      const canvas = canvasEl;
 
       // Crear motor y escena
       this.engine = new Engine(canvas, this.options.antialias ?? true);
@@ -111,7 +124,7 @@ export class ImmersiveViewer {
       Math.PI / 3,
       15,
       initialTarget,
-      this.scene
+      this.scene,
     );
     arcRotateCamera.lowerRadiusLimit = 5;
     arcRotateCamera.upperRadiusLimit = 50;
@@ -207,4 +220,4 @@ export class ImmersiveViewer {
       this.engine.dispose();
     }
   }
-} 
+}
