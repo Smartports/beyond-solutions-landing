@@ -8,4 +8,4 @@ export { default as Dashboard } from './components/Dashboard';
 export type { StepContainerProps } from './components/StepContainer';
 export type { StepIndicatorProps } from './components/StepIndicator';
 export type { SelectCardOption, SelectCardProps } from './components/SelectCard';
-export type { ProjectSummary, DashboardProps } from './components/Dashboard'; 
+export type { ProjectSummary, DashboardProps } from './components/Dashboard';

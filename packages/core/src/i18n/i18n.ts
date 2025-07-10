@@ -20,21 +20,22 @@ const resources: TranslationResources = {
           sectores: 'Sectors',
           capacidades: 'Capabilities',
           calculadora: 'Calculator',
-          contacto: 'Contact'
+          contacto: 'Contact',
         },
         brand: 'Beyond Solutions',
         menu: {
           open: 'Open menu',
-          close: 'Close menu'
+          close: 'Close menu',
         },
         theme: {
           dark: 'Switch to dark mode',
-          light: 'Switch to light mode'
-        }
+          light: 'Switch to light mode',
+        },
       },
       calculator: {
         title: 'Real Estate Budget Calculator',
-        intro: 'Follow the steps to estimate the budget, margins and profit of your real estate project.',
+        intro:
+          'Follow the steps to estimate the budget, margins and profit of your real estate project.',
         next: 'Next',
         prev: 'Previous',
         reset: 'New simulation',
@@ -45,12 +46,12 @@ const resources: TranslationResources = {
           scopeLabel: 'Project Type',
           entityLabel: 'Entity',
           scopeSelect: {
-            select: 'Select an option'
+            select: 'Select an option',
           },
           entitySelect: {
-            select: 'Select an option'
+            select: 'Select an option',
           },
-          nav_description: 'to step 2: Budget and Land Data'
+          nav_description: 'to step 2: Budget and Land Data',
         },
         step2: {
           title: '2. Budget and Land Data',
@@ -71,33 +72,33 @@ const resources: TranslationResources = {
           typeSelect: 'Select an option',
           statusSelect: 'Select an option',
           prev_description: 'to step 1: Project Type and Entity',
-          next_description: 'to step 3: Cost Breakdown'
+          next_description: 'to step 3: Cost Breakdown',
         },
         values: {
           scope: {
             patrimonial: 'Patrimonial',
-            inversion: 'Investment'
+            inversion: 'Investment',
           },
           entity: {
             b2b: 'B2B',
-            b2c: 'B2C'
+            b2c: 'B2C',
           },
           type: {
             own: 'Own',
             notown: 'Not Own',
-            remate: 'Foreclosure'
+            remate: 'Foreclosure',
           },
           status: {
             construccion: 'Construction',
             demolicion: 'Demolition',
-            reconversion: 'Reconversion'
+            reconversion: 'Reconversion',
           },
           materialesLevel: {
             low: 'Low Cost',
             medium: 'Medium Cost',
             high: 'High Cost',
-            custom: 'Custom'
-          }
+            custom: 'Custom',
+          },
         },
         form: {
           required_field: 'This field is required to continue',
@@ -106,10 +107,10 @@ const resources: TranslationResources = {
           type_description: 'Select the category of the land',
           status_description: 'Current state of the land',
           surface_description: 'Total area of the land in square meters',
-          usableSurface_description: 'Surface that can be built'
+          usableSurface_description: 'Surface that can be built',
         },
         tooltips: {
-          budgetTotal: 'Includes land and construction, without regulatory.'
+          budgetTotal: 'Includes land and construction, without regulatory.',
         },
         step3: {
           title: '3. Cost Breakdown',
@@ -121,25 +122,25 @@ const resources: TranslationResources = {
           management: 'Management',
           marketing: 'Marketing',
           prev_description: 'to step 2: Budget and Land Data',
-          next_description: 'to step 4: Results and Summary'
+          next_description: 'to step 4: Results and Summary',
         },
         step4: {
           title: '4. Results and Summary',
           prev_description: 'to step 3: Cost Breakdown',
-          reset_description: 'reset form'
+          reset_description: 'reset form',
         },
         result: {
           totalCost: 'Total cost:',
           totalSell: 'Estimated selling price:',
           profit: 'Gross profit:',
           m2Cost: 'Cost per m²:',
-          m2Sell: 'Selling price per m²:'
+          m2Sell: 'Selling price per m²:',
         },
         export: {
           pdf: 'Export PDF',
           csv: 'Export CSV',
           wa: 'Share WhatsApp',
-          email: 'Share Email'
+          email: 'Share Email',
         },
         summary: {
           title: 'Summary',
@@ -151,23 +152,23 @@ const resources: TranslationResources = {
           usableSurface: 'Usable surface area',
           use: 'Land use',
           type: 'Land type',
-          status: 'Status'
-        }
+          status: 'Status',
+        },
       },
       accessibility: {
-        navigation: 'Main navigation'
+        navigation: 'Main navigation',
       },
       footer: {
         brand: {
           name: 'Beyond Solutions',
-          tagline: 'Smart real estate development'
+          tagline: 'Smart real estate development',
         },
         copyright: '© 2025 Beyond Solutions. All rights reserved.',
         links: {
-          contact: 'Contact'
-        }
-      }
-    }
+          contact: 'Contact',
+        },
+      },
+    },
   },
   es: {
     translation: {
@@ -179,21 +180,22 @@ const resources: TranslationResources = {
           sectores: 'Sectores',
           capacidades: 'Capacidades',
           calculadora: 'Calculadora',
-          contacto: 'Contacto'
+          contacto: 'Contacto',
         },
         brand: 'Beyond Solutions',
         menu: {
           open: 'Abrir menú',
-          close: 'Cerrar menú'
+          close: 'Cerrar menú',
         },
         theme: {
           dark: 'Cambiar a modo oscuro',
-          light: 'Cambiar a modo claro'
-        }
+          light: 'Cambiar a modo claro',
+        },
       },
       calculator: {
         title: 'Calculadora de Presupuesto Inmobiliario',
-        intro: 'Sigue los pasos para estimar el presupuesto, márgenes y utilidad de tu proyecto inmobiliario.',
+        intro:
+          'Sigue los pasos para estimar el presupuesto, márgenes y utilidad de tu proyecto inmobiliario.',
         next: 'Siguiente',
         prev: 'Anterior',
         reset: 'Nueva simulación',
@@ -204,12 +206,12 @@ const resources: TranslationResources = {
           scopeLabel: 'Tipo de proyecto',
           entityLabel: 'Entidad',
           scopeSelect: {
-            select: 'Selecciona una opción'
+            select: 'Selecciona una opción',
           },
           entitySelect: {
-            select: 'Selecciona una opción'
+            select: 'Selecciona una opción',
           },
-          nav_description: 'al paso 2: Presupuesto y Datos del Terreno'
+          nav_description: 'al paso 2: Presupuesto y Datos del Terreno',
         },
         step2: {
           title: '2. Presupuesto y Datos del Terreno',
@@ -230,33 +232,33 @@ const resources: TranslationResources = {
           typeSelect: 'Selecciona una opción',
           statusSelect: 'Selecciona una opción',
           prev_description: 'al paso 1: Tipo de Proyecto y Entidad',
-          next_description: 'al paso 3: Desglose de Costos'
+          next_description: 'al paso 3: Desglose de Costos',
         },
         values: {
           scope: {
             patrimonial: 'Patrimonial',
-            inversion: 'Inversión'
+            inversion: 'Inversión',
           },
           entity: {
             b2b: 'B2B',
-            b2c: 'B2C'
+            b2c: 'B2C',
           },
           type: {
             own: 'Propio',
             notown: 'No Propio',
-            remate: 'Remate'
+            remate: 'Remate',
           },
           status: {
             construccion: 'Construcción',
             demolicion: 'Demolición',
-            reconversion: 'Reconversión'
+            reconversion: 'Reconversión',
           },
           materialesLevel: {
             low: 'Bajo Costo',
             medium: 'Costo Medio',
             high: 'Alto Costo',
-            custom: 'Personalizado'
-          }
+            custom: 'Personalizado',
+          },
         },
         form: {
           required_field: 'Este campo es obligatorio para continuar',
@@ -265,10 +267,10 @@ const resources: TranslationResources = {
           type_description: 'Seleccione la categoría del terreno',
           status_description: 'Estado actual del terreno',
           surface_description: 'Área total del terreno en metros cuadrados',
-          usableSurface_description: 'Superficie que puede ser construida'
+          usableSurface_description: 'Superficie que puede ser construida',
         },
         tooltips: {
-          budgetTotal: 'Incluye terreno y construcción, sin regulatorio.'
+          budgetTotal: 'Incluye terreno y construcción, sin regulatorio.',
         },
         step3: {
           title: '3. Desglose de Costos',
@@ -280,25 +282,25 @@ const resources: TranslationResources = {
           management: 'Gestión',
           marketing: 'Marketing',
           prev_description: 'al paso 2: Presupuesto y Datos del Terreno',
-          next_description: 'al paso 3: Resultados y Resumen'
+          next_description: 'al paso 3: Resultados y Resumen',
         },
         step4: {
           title: '4. Resultados y Resumen',
           prev_description: 'al paso 3: Desglose de Costos',
-          reset_description: 'reiniciar formulario'
+          reset_description: 'reiniciar formulario',
         },
         result: {
           totalCost: 'Costo total:',
           totalSell: 'Precio de venta estimado:',
           profit: 'Utilidad bruta:',
           m2Cost: 'Costo por m²:',
-          m2Sell: 'Precio de venta por m²:'
+          m2Sell: 'Precio de venta por m²:',
         },
         export: {
           pdf: 'Exportar PDF',
           csv: 'Exportar CSV',
           wa: 'Compartir WhatsApp',
-          email: 'Compartir Email'
+          email: 'Compartir Email',
         },
         summary: {
           title: 'Resumen',
@@ -310,24 +312,24 @@ const resources: TranslationResources = {
           usableSurface: 'Superficie útil',
           use: 'Uso de suelo',
           type: 'Tipo de terreno',
-          status: 'Estatus'
-        }
+          status: 'Estatus',
+        },
       },
       accessibility: {
-        navigation: 'Navegación principal'
+        navigation: 'Navegación principal',
       },
       footer: {
         brand: {
           name: 'Beyond Solutions',
-          tagline: 'Desarrollo inmobiliario inteligente'
+          tagline: 'Desarrollo inmobiliario inteligente',
         },
         copyright: '© 2025 Beyond Solutions. Todos los derechos reservados.',
         links: {
-          contact: 'Contacto'
-        }
-      }
-    }
-  }
+          contact: 'Contacto',
+        },
+      },
+    },
+  },
 };
 
 // Opciones de inicialización
@@ -336,12 +338,12 @@ const i18nOptions: InitOptions = {
   lng: 'es',
   fallbackLng: 'es',
   interpolation: {
-    escapeValue: false
+    escapeValue: false,
   },
   saveMissing: true,
   missingKeyHandler: (lng, ns, key) => {
     console.warn(`Missing translation key: ${key} for language: ${lng}`);
-  }
+  },
 };
 
 // Inicializar i18n
@@ -365,7 +367,7 @@ export async function loadLanguage(lang: string): Promise<void> {
   if (i18n.hasResourceBundle(lang, 'translation')) {
     return;
   }
-  
+
   try {
     // Aquí podríamos cargar dinámicamente el archivo de idioma desde el servidor
     // Por ahora solo simulamos la carga
@@ -377,4 +379,4 @@ export async function loadLanguage(lang: string): Promise<void> {
   }
 }
 
-export default i18n; 
+export default i18n;
