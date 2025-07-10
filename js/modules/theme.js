@@ -8,7 +8,7 @@ class ThemeService {
     this.theme = 'light';
     this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
   }
-  
+
   init() {
     // Get saved theme or use system preference
     const savedTheme = localStorage.getItem('theme');
@@ -17,10 +17,10 @@ class ThemeService {
     } else if (this.mediaQuery.matches) {
       this.theme = 'dark';
     }
-    
+
     // Apply theme
     this.applyTheme();
-    
+
     // Listen for system theme changes
     this.mediaQuery.addEventListener('change', (e) => {
       if (!localStorage.getItem('theme')) {
@@ -29,30 +29,30 @@ class ThemeService {
       }
     });
   }
-  
+
   applyTheme() {
     document.documentElement.classList.toggle('dark', this.theme === 'dark');
-    
+
     // Update meta theme-color
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
       metaThemeColor.content = this.theme === 'dark' ? '#1f2937' : '#ffffff';
     }
   }
-  
+
   toggle() {
     this.theme = this.theme === 'dark' ? 'light' : 'dark';
     localStorage.setItem('theme', this.theme);
     this.applyTheme();
-    
+
     // Dispatch event
     window.dispatchEvent(new CustomEvent('themeChanged', { detail: this.theme }));
   }
-  
+
   getTheme() {
     return this.theme;
   }
-  
+
   setTheme(theme) {
     if (theme === 'dark' || theme === 'light') {
       this.theme = theme;
@@ -62,4 +62,4 @@ class ThemeService {
   }
 }
 
-export default ThemeService; 
+export default ThemeService;

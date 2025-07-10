@@ -8,24 +8,24 @@ class A11yEnhancements {
     this.focusTrapStack = [];
     this.announcer = null;
   }
-  
+
   init() {
     // Create screen reader announcer
     this.createAnnouncer();
-    
+
     // Add skip links
     this.addSkipLinks();
-    
+
     // Enhance keyboard navigation
     this.enhanceKeyboardNav();
-    
+
     // Add focus indicators
     this.enhanceFocusIndicators();
-    
+
     // Initialize ARIA live regions
     this.initializeLiveRegions();
   }
-  
+
   createAnnouncer() {
     this.announcer = document.createElement('div');
     this.announcer.className = 'sr-only';
@@ -33,27 +33,28 @@ class A11yEnhancements {
     this.announcer.setAttribute('aria-atomic', 'true');
     document.body.appendChild(this.announcer);
   }
-  
+
   announce(message, priority = 'polite') {
     if (this.announcer) {
       this.announcer.setAttribute('aria-live', priority);
       this.announcer.textContent = message;
-      
+
       // Clear after announcement
       setTimeout(() => {
         this.announcer.textContent = '';
       }, 1000);
     }
   }
-  
+
   addSkipLinks() {
     const skipLink = document.createElement('a');
     skipLink.href = '#main';
-    skipLink.className = 'sr-only focus:not-sr-only absolute top-0 left-0 bg-primary-800 text-white p-2 m-2 rounded';
+    skipLink.className =
+      'sr-only focus:not-sr-only absolute top-0 left-0 bg-primary-800 text-white p-2 m-2 rounded';
     skipLink.textContent = 'Skip to main content';
     document.body.insertBefore(skipLink, document.body.firstChild);
   }
-  
+
   enhanceKeyboardNav() {
     // Add keyboard shortcuts
     document.addEventListener('keydown', (e) => {
@@ -65,7 +66,7 @@ class A11yEnhancements {
           main.scrollIntoView({ behavior: 'smooth' });
         }
       }
-      
+
       // Escape: Close modals
       if (e.key === 'Escape') {
         const event = new CustomEvent('escapePressed');
@@ -73,37 +74,37 @@ class A11yEnhancements {
       }
     });
   }
-  
+
   enhanceFocusIndicators() {
     // Add focus-visible polyfill behavior
     document.addEventListener('keydown', () => {
       document.body.classList.add('keyboard-nav');
     });
-    
+
     document.addEventListener('mousedown', () => {
       document.body.classList.remove('keyboard-nav');
     });
   }
-  
+
   initializeLiveRegions() {
     // Find all elements with aria-live and ensure they're properly configured
     const liveRegions = document.querySelectorAll('[aria-live]');
-    liveRegions.forEach(region => {
+    liveRegions.forEach((region) => {
       if (!region.hasAttribute('aria-atomic')) {
         region.setAttribute('aria-atomic', 'true');
       }
     });
   }
-  
+
   // Focus trap management
   trapFocus(element) {
     const focusableElements = element.querySelectorAll(
-      'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])',
     );
-    
+
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
-    
+
     const trapHandler = (e) => {
       if (e.key === 'Tab') {
         if (e.shiftKey) {
@@ -119,16 +120,16 @@ class A11yEnhancements {
         }
       }
     };
-    
+
     element.addEventListener('keydown', trapHandler);
     this.focusTrapStack.push({ element, handler: trapHandler });
-    
+
     // Focus first element
     if (firstFocusable) {
       firstFocusable.focus();
     }
   }
-  
+
   releaseFocus() {
     const trap = this.focusTrapStack.pop();
     if (trap) {
@@ -137,4 +138,4 @@ class A11yEnhancements {
   }
 }
 
-export default A11yEnhancements; 
+export default A11yEnhancements;

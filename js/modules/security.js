@@ -25,33 +25,33 @@ export const Security = {
       email: {
         pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         sanitize: (val) => val.toLowerCase().trim(),
-        error: 'Please enter a valid email address'
+        error: 'Please enter a valid email address',
       },
       text: {
         pattern: /^[a-zA-Z0-9\s\-_,.áéíóúñÁÉÍÓÚÑ]+$/,
         sanitize: (val) => this.sanitizeHTML(val.trim()),
-        error: 'Please enter valid text (letters, numbers, and basic punctuation only)'
+        error: 'Please enter valid text (letters, numbers, and basic punctuation only)',
       },
       projectName: {
         pattern: /^[a-zA-Z0-9\s\-_,.áéíóúñÁÉÍÓÚÑ]{3,100}$/,
         sanitize: (val) => this.sanitizeHTML(val.trim()),
-        error: 'Project name must be 3-100 characters long'
+        error: 'Project name must be 3-100 characters long',
       },
       location: {
         pattern: /^[a-zA-Z0-9\s\-,#.áéíóúñÁÉÍÓÚÑ]{3,200}$/,
         sanitize: (val) => this.sanitizeHTML(val.trim()),
-        error: 'Please enter a valid location'
+        error: 'Please enter a valid location',
       },
       number: {
         pattern: /^\d+(\.\d{1,2})?$/,
         sanitize: (val) => parseFloat(val) || 0,
-        error: 'Please enter a valid number'
+        error: 'Please enter a valid number',
       },
       phone: {
         pattern: /^[\d\s\-\+\(\)]+$/,
         sanitize: (val) => val.replace(/[^\d\s\-\+\(\)]/g, ''),
-        error: 'Please enter a valid phone number'
-      }
+        error: 'Please enter a valid phone number',
+      },
     };
 
     const validator = validators[type] || validators.text;
@@ -61,7 +61,7 @@ export const Security = {
     return {
       valid,
       sanitized,
-      error: valid ? undefined : validator.error
+      error: valid ? undefined : validator.error,
     };
   },
 
@@ -73,18 +73,18 @@ export const Security = {
    */
   safeInsert(element, content, isHTML = false) {
     if (!element) return;
-    
+
     if (isHTML) {
       // Parse HTML safely
       const parser = new DOMParser();
       const doc = parser.parseFromString(content, 'text/html');
-      
+
       // Remove script tags and event handlers
       const scripts = doc.querySelectorAll('script');
-      scripts.forEach(script => script.remove());
-      
+      scripts.forEach((script) => script.remove());
+
       const elements = doc.querySelectorAll('*');
-      elements.forEach(el => {
+      elements.forEach((el) => {
         // Remove all event handlers
         for (const attr of el.attributes) {
           if (attr.name.startsWith('on')) {
@@ -92,7 +92,7 @@ export const Security = {
           }
         }
       });
-      
+
       element.innerHTML = doc.body.innerHTML;
     } else {
       element.textContent = content;
@@ -109,24 +109,24 @@ export const Security = {
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const formData = new FormData(form);
       const data = {};
       const errors = {};
-      
+
       // Validate all inputs
       for (const [key, value] of formData.entries()) {
         const input = form.elements[key];
         const type = input.dataset.validate || 'text';
         const result = this.validateInput(value, type);
-        
+
         if (result.valid) {
           data[key] = result.sanitized;
         } else {
           errors[key] = result.error;
         }
       }
-      
+
       if (Object.keys(errors).length === 0) {
         // All inputs valid
         callback(data);
@@ -145,9 +145,9 @@ export const Security = {
   showErrors(form, errors) {
     if (!form) return;
     // Clear previous errors
-    form.querySelectorAll('.error-message').forEach(el => el.remove());
-    form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
-    
+    form.querySelectorAll('.error-message').forEach((el) => el.remove());
+    form.querySelectorAll('.error').forEach((el) => el.classList.remove('error'));
+
     // Show new errors
     for (const [field, error] of Object.entries(errors)) {
       const input = form.elements[field];
@@ -166,24 +166,24 @@ export const Security = {
    */
   rateLimiter: {
     limits: new Map(),
-    
+
     check(key, maxRequests = 10, windowMs = 60000) {
       const now = Date.now();
       const userLimits = this.limits.get(key) || { count: 0, resetTime: now + windowMs };
-      
+
       if (now > userLimits.resetTime) {
         userLimits.count = 0;
         userLimits.resetTime = now + windowMs;
       }
-      
+
       if (userLimits.count >= maxRequests) {
         return false;
       }
-      
+
       userLimits.count++;
       this.limits.set(key, userLimits);
       return true;
-    }
+    },
   },
 
   /**
@@ -191,21 +191,21 @@ export const Security = {
    */
   csrf: {
     token: null,
-    
+
     generate() {
       const array = new Uint8Array(32);
       crypto.getRandomValues(array);
-      this.token = Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+      this.token = Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('');
       return this.token;
     },
-    
+
     validate(token) {
       return token === this.token;
     },
-    
+
     addToForm(form) {
       if (!this.token) this.generate();
-      
+
       let input = form.querySelector('input[name="csrf_token"]');
       if (!input) {
         input = document.createElement('input');
@@ -214,23 +214,23 @@ export const Security = {
         form.appendChild(input);
       }
       input.value = this.token;
-    }
-  }
+    },
+  },
 };
 
 // Auto-initialize security features
 document.addEventListener('DOMContentLoaded', () => {
   // Add CSRF tokens to all forms
-  document.querySelectorAll('form').forEach(form => {
+  document.querySelectorAll('form').forEach((form) => {
     Security.csrf.addToForm(form);
   });
-  
+
   // Add input validation to all inputs with data-validate
-  document.querySelectorAll('input[data-validate], textarea[data-validate]').forEach(input => {
+  document.querySelectorAll('input[data-validate], textarea[data-validate]').forEach((input) => {
     input.addEventListener('blur', () => {
       const type = input.dataset.validate;
       const result = Security.validateInput(input.value, type);
-      
+
       if (!result.valid) {
         input.classList.add('error');
         Security.showErrors(input.form, { [input.name]: result.error });
@@ -243,4 +243,4 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-export default Security; 
+export default Security;

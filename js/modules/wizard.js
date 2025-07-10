@@ -4,14 +4,14 @@
  * @module WizardModule
  */
 
-(function() {
+(function () {
   'use strict';
 
   /**
    * Factory function para crear instancias del Wizard
    * @returns {Object} Instancia del módulo Wizard
    */
-  window.WizardModule = function() {
+  window.WizardModule = function () {
     // Estado privado del wizard
     const state = {
       currentStep: 0,
@@ -22,15 +22,15 @@
       callbacks: {
         onStepChange: null,
         onComplete: null,
-        onValidationError: null
-      }
+        onValidationError: null,
+      },
     };
 
     // Configuración de accesibilidad
     const a11yConfig = {
       announceDelay: 100,
       focusDelay: 200,
-      ariaLiveRegion: null
+      ariaLiveRegion: null,
     };
 
     /**
@@ -40,7 +40,7 @@
      */
     async function init(config = {}) {
       console.log('🎯 Initializing Wizard Module...');
-      
+
       // Configurar callbacks si se proporcionan
       if (config.callbacks) {
         Object.assign(state.callbacks, config.callbacks);
@@ -48,16 +48,16 @@
 
       // Configurar reglas de validación
       setupValidationRules();
-      
+
       // Crear región ARIA live para anuncios
       createAriaLiveRegion();
-      
+
       // Configurar navegación por teclado
       setupKeyboardNavigation();
-      
+
       // Restaurar estado si existe
       await restoreState();
-      
+
       console.log('✅ Wizard Module initialized');
     }
 
@@ -66,23 +66,28 @@
      */
     function setupValidationRules() {
       state.validationRules = {
-        0: { // Perfil
+        0: {
+          // Perfil
           validator: () => state.formData.profile && state.formData.profile.length > 0,
-          message: 'Por favor selecciona tu perfil'
+          message: 'Por favor selecciona tu perfil',
         },
-        1: { // Tipo de proyecto
+        1: {
+          // Tipo de proyecto
           validator: () => state.formData.projectType && state.formData.projectType.length > 0,
-          message: 'Por favor selecciona el tipo de proyecto'
+          message: 'Por favor selecciona el tipo de proyecto',
         },
-        2: { // Detalles del proyecto
+        2: {
+          // Detalles del proyecto
           validator: () => {
-            return state.formData.projectName && 
-                   state.formData.projectName.trim().length >= 3 &&
-                   state.formData.location && 
-                   state.formData.location.trim().length >= 5;
+            return (
+              state.formData.projectName &&
+              state.formData.projectName.trim().length >= 3 &&
+              state.formData.location &&
+              state.formData.location.trim().length >= 5
+            );
           },
-          message: 'Por favor completa el nombre del proyecto (mínimo 3 caracteres) y la ubicación'
-        }
+          message: 'Por favor completa el nombre del proyecto (mínimo 3 caracteres) y la ubicación',
+        },
       };
     }
 
@@ -133,7 +138,7 @@
           return;
         }
 
-        switch(e.key) {
+        switch (e.key) {
           case 'ArrowRight':
           case 'Enter':
             if (e.key === 'Enter' && e.target.type !== 'submit') break;
@@ -165,24 +170,24 @@
       if (state.currentStep < state.totalSteps - 1) {
         state.currentStep++;
         state.stepHistory.push(state.currentStep);
-        
+
         // Guardar estado
         await saveState();
-        
+
         // Anunciar cambio para screen readers
         announceToScreenReader(`Paso ${state.currentStep + 1} de ${state.totalSteps}`);
-        
+
         // Callback
         if (state.callbacks.onStepChange) {
           state.callbacks.onStepChange(state.currentStep, 'forward');
         }
-        
+
         // Manejar foco para accesibilidad
         manageFocus();
-        
+
         return true;
       }
-      
+
       return false;
     }
 
@@ -193,24 +198,24 @@
     async function previousStep() {
       if (state.currentStep > 0) {
         state.currentStep--;
-        
+
         // Guardar estado
         await saveState();
-        
+
         // Anunciar cambio
         announceToScreenReader(`Volviendo al paso ${state.currentStep + 1} de ${state.totalSteps}`);
-        
+
         // Callback
         if (state.callbacks.onStepChange) {
           state.callbacks.onStepChange(state.currentStep, 'backward');
         }
-        
+
         // Manejar foco
         manageFocus();
-        
+
         return true;
       }
-      
+
       return false;
     }
 
@@ -225,21 +230,21 @@
         if (step < state.currentStep || (step === state.currentStep + 1 && validateCurrentStep())) {
           state.currentStep = step;
           state.stepHistory.push(step);
-          
+
           await saveState();
-          
+
           announceToScreenReader(`Navegando al paso ${step + 1} de ${state.totalSteps}`);
-          
+
           if (state.callbacks.onStepChange) {
             state.callbacks.onStepChange(step, 'jump');
           }
-          
+
           manageFocus();
-          
+
           return true;
         }
       }
-      
+
       return false;
     }
 
@@ -249,22 +254,22 @@
      */
     function validateCurrentStep() {
       const rule = state.validationRules[state.currentStep];
-      
+
       if (rule && !rule.validator()) {
         // Mostrar error
         const errorMessage = rule.message;
         announceToScreenReader(`Error de validación: ${errorMessage}`);
-        
+
         if (state.callbacks.onValidationError) {
           state.callbacks.onValidationError(state.currentStep, errorMessage);
         }
-        
+
         // Enfocar primer campo con error
         focusFirstInvalidField();
-        
+
         return false;
       }
-      
+
       return true;
     }
 
@@ -273,7 +278,13 @@
      */
     function focusFirstInvalidField() {
       setTimeout(() => {
-        const invalidField = document.querySelector('[data-wizard-step="' + state.currentStep + '"] [aria-invalid="true"], [data-wizard-step="' + state.currentStep + '"] .error');
+        const invalidField = document.querySelector(
+          '[data-wizard-step="' +
+            state.currentStep +
+            '"] [aria-invalid="true"], [data-wizard-step="' +
+            state.currentStep +
+            '"] .error',
+        );
         if (invalidField) {
           invalidField.focus();
         }
@@ -286,10 +297,14 @@
     function manageFocus() {
       setTimeout(() => {
         // Buscar el contenedor del paso actual
-        const currentStepContainer = document.querySelector(`[data-wizard-step="${state.currentStep}"]`);
+        const currentStepContainer = document.querySelector(
+          `[data-wizard-step="${state.currentStep}"]`,
+        );
         if (currentStepContainer) {
           // Buscar primer elemento enfocable
-          const focusable = currentStepContainer.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          const focusable = currentStepContainer.querySelector(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+          );
           if (focusable) {
             focusable.focus();
           } else {
@@ -308,7 +323,7 @@
      */
     function updateFormData(field, value) {
       state.formData[field] = value;
-      
+
       // Auto-guardar
       debounce(saveState, 500)();
     }
@@ -328,15 +343,15 @@
       state.currentStep = 0;
       state.formData = {};
       state.stepHistory = [0];
-      
+
       await clearState();
-      
+
       announceToScreenReader('Wizard reiniciado. Comenzando desde el paso 1.');
-      
+
       if (state.callbacks.onStepChange) {
         state.callbacks.onStepChange(0, 'reset');
       }
-      
+
       manageFocus();
     }
 
@@ -352,15 +367,15 @@
       // Marcar como completado
       state.formData.completed = true;
       state.formData.completedAt = new Date().toISOString();
-      
+
       await saveState();
-      
+
       announceToScreenReader('¡Wizard completado exitosamente!');
-      
+
       if (state.callbacks.onComplete) {
         state.callbacks.onComplete(state.formData);
       }
-      
+
       return true;
     }
 
@@ -373,9 +388,9 @@
           currentStep: state.currentStep,
           formData: state.formData,
           stepHistory: state.stepHistory,
-          lastUpdated: new Date().toISOString()
+          lastUpdated: new Date().toISOString(),
         };
-        
+
         if (window.StorageModule && window.StorageModule.AutoSave) {
           await window.StorageModule.AutoSave.save('wizard_state', stateToSave);
         } else {
@@ -393,7 +408,7 @@
     async function restoreState() {
       try {
         let savedState;
-        
+
         if (window.StorageModule && window.StorageModule.AutoSave) {
           savedState = await window.StorageModule.AutoSave.load('wizard_state');
         } else {
@@ -401,12 +416,12 @@
           const stored = localStorage.getItem('wizard_state');
           savedState = stored ? JSON.parse(stored) : null;
         }
-        
+
         if (savedState) {
           state.currentStep = savedState.currentStep || 0;
           state.formData = savedState.formData || {};
           state.stepHistory = savedState.stepHistory || [0];
-          
+
           console.log('✅ Wizard state restored');
         }
       } catch (error) {
@@ -438,9 +453,9 @@
       const stepDescriptions = [
         'Selecciona tu perfil para personalizar la experiencia',
         'Elige el tipo de proyecto que deseas desarrollar',
-        'Proporciona los detalles básicos de tu proyecto'
+        'Proporciona los detalles básicos de tu proyecto',
       ];
-      
+
       return {
         step: state.currentStep,
         totalSteps: state.totalSteps,
@@ -449,7 +464,7 @@
         progress: ((state.currentStep + 1) / state.totalSteps) * 100,
         canGoBack: state.currentStep > 0,
         canGoForward: state.currentStep < state.totalSteps - 1,
-        isLastStep: state.currentStep === state.totalSteps - 1
+        isLastStep: state.currentStep === state.totalSteps - 1,
       };
     }
 
@@ -474,13 +489,13 @@
     function destroy() {
       // Remover event listeners
       document.removeEventListener('keydown', setupKeyboardNavigation);
-      
+
       // Remover región ARIA
       if (a11yConfig.ariaLiveRegion && a11yConfig.ariaLiveRegion.parentNode) {
         a11yConfig.ariaLiveRegion.parentNode.removeChild(a11yConfig.ariaLiveRegion);
         a11yConfig.ariaLiveRegion = null;
       }
-      
+
       console.log('🧹 Wizard Module destroyed');
     }
 
@@ -498,9 +513,9 @@
       complete,
       destroy,
       // Exponer estado para debugging (solo en desarrollo)
-      _state: process.env.NODE_ENV === 'development' ? state : undefined
+      _state: process.env.NODE_ENV === 'development' ? state : undefined,
     };
   };
 
   console.log('✅ Wizard Module loaded');
-})(); 
+})();

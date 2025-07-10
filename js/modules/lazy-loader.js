@@ -6,19 +6,19 @@
 window.LazyLoader = {
   // Cache de módulos cargados
   loadedModules: new Set(),
-  
+
   // Cache de assets cargados
   loadedAssets: new Set(),
-  
+
   // Observable de carga
   loadingObserver: null,
-  
+
   // Configuración
   config: {
     intersectionThreshold: 0.1,
     rootMargin: '50px',
     preloadDelay: 100,
-    chunkSize: 50000 // 50KB chunks
+    chunkSize: 50000, // 50KB chunks
   },
 
   /**
@@ -40,16 +40,19 @@ window.LazyLoader = {
       return;
     }
 
-    this.loadingObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          this.handleIntersection(entry.target);
-        }
-      });
-    }, {
-      threshold: this.config.intersectionThreshold,
-      rootMargin: this.config.rootMargin
-    });
+    this.loadingObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.handleIntersection(entry.target);
+          }
+        });
+      },
+      {
+        threshold: this.config.intersectionThreshold,
+        rootMargin: this.config.rootMargin,
+      },
+    );
   },
 
   /**
@@ -75,11 +78,7 @@ window.LazyLoader = {
    * Precargar assets críticos
    */
   async preloadCriticalAssets() {
-    const criticalAssets = [
-      '/css/colors.css',
-      '/js/main.js',
-      '/js/i18n.js'
-    ];
+    const criticalAssets = ['/css/colors.css', '/js/main.js', '/js/i18n.js'];
 
     for (const asset of criticalAssets) {
       await this.loadAsset(asset);
@@ -96,11 +95,11 @@ window.LazyLoader = {
 
     try {
       const moduleMap = {
-        'terrain': '/js/modules/terrain.js',
-        'viewer3d': '/js/modules/viewer3d.js',
-        'finance': '/js/modules/finance.js',
-        'storage': '/js/modules/storage.js',
-        'wizard': '/js/modules/wizard.js'
+        terrain: '/js/modules/terrain.js',
+        viewer3d: '/js/modules/viewer3d.js',
+        finance: '/js/modules/finance.js',
+        storage: '/js/modules/storage.js',
+        wizard: '/js/modules/wizard.js',
       };
 
       const modulePath = moduleMap[moduleName];
@@ -113,17 +112,18 @@ window.LazyLoader = {
 
       // Cargar script de forma asíncrona
       await this.loadScript(modulePath);
-      
+
       this.loadedModules.add(moduleName);
       this.hideModuleLoader(moduleName);
-      
-      console.log(`✅ Module ${moduleName} loaded successfully`);
-      
-      // Disparar evento personalizado
-      window.dispatchEvent(new CustomEvent('moduleLoaded', {
-        detail: { moduleName }
-      }));
 
+      console.log(`✅ Module ${moduleName} loaded successfully`);
+
+      // Disparar evento personalizado
+      window.dispatchEvent(
+        new CustomEvent('moduleLoaded', {
+          detail: { moduleName },
+        }),
+      );
     } catch (error) {
       console.error(`Error loading module ${moduleName}:`, error);
       this.showModuleError(moduleName, error.message);
@@ -144,12 +144,12 @@ window.LazyLoader = {
       script.src = src;
       script.async = true;
       script.defer = true;
-      
+
       script.onload = () => {
         this.loadedAssets.add(src);
         resolve();
       };
-      
+
       script.onerror = () => {
         reject(new Error(`Failed to load script: ${src}`));
       };
@@ -168,7 +168,7 @@ window.LazyLoader = {
 
     try {
       const extension = this.getFileExtension(assetPath);
-      
+
       switch (extension) {
         case 'css':
           await this.loadCSS(assetPath);
@@ -188,7 +188,6 @@ window.LazyLoader = {
       }
 
       this.loadedAssets.add(assetPath);
-      
     } catch (error) {
       console.error(`Error loading asset ${assetPath}:`, error);
     }
@@ -202,10 +201,10 @@ window.LazyLoader = {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = href;
-      
+
       link.onload = resolve;
       link.onerror = () => reject(new Error(`Failed to load CSS: ${href}`));
-      
+
       document.head.appendChild(link);
     });
   },
@@ -216,7 +215,7 @@ window.LazyLoader = {
   loadImage(src, element = null) {
     return new Promise((resolve, reject) => {
       const img = new Image();
-      
+
       img.onload = () => {
         if (element) {
           if (element.tagName === 'IMG') {
@@ -229,9 +228,9 @@ window.LazyLoader = {
         }
         resolve();
       };
-      
+
       img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
-      
+
       img.src = src;
     });
   },
@@ -249,11 +248,12 @@ window.LazyLoader = {
   showModuleLoader(moduleName) {
     const loaderId = `loader-${moduleName}`;
     let loader = document.getElementById(loaderId);
-    
+
     if (!loader) {
       loader = document.createElement('div');
       loader.id = loaderId;
-      loader.className = 'module-loader fixed top-4 right-4 bg-primary-800 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+      loader.className =
+        'module-loader fixed top-4 right-4 bg-primary-800 text-white px-4 py-2 rounded-lg shadow-lg z-50';
       loader.innerHTML = `
         <div class="flex items-center space-x-2">
           <div class="loader w-4 h-4"></div>
@@ -280,11 +280,12 @@ window.LazyLoader = {
    */
   showModuleError(moduleName, errorMessage) {
     this.hideModuleLoader(moduleName);
-    
+
     const errorId = `error-${moduleName}`;
     const error = document.createElement('div');
     error.id = errorId;
-    error.className = 'module-error fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+    error.className =
+      'module-error fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
     error.innerHTML = `
       <div class="flex items-center space-x-2">
         <span>❌</span>
@@ -293,7 +294,7 @@ window.LazyLoader = {
       </div>
     `;
     document.body.appendChild(error);
-    
+
     // Auto-remover después de 5 segundos
     setTimeout(() => {
       if (error.parentNode) {
@@ -307,7 +308,7 @@ window.LazyLoader = {
    */
   setupModuleLoader() {
     // Observar elementos con data-lazy-module
-    document.querySelectorAll('[data-lazy-module]').forEach(element => {
+    document.querySelectorAll('[data-lazy-module]').forEach((element) => {
       if (this.loadingObserver) {
         this.loadingObserver.observe(element);
       } else {
@@ -317,7 +318,7 @@ window.LazyLoader = {
     });
 
     // Observar elementos con data-lazy-asset
-    document.querySelectorAll('[data-lazy-asset]').forEach(element => {
+    document.querySelectorAll('[data-lazy-asset]').forEach((element) => {
       if (this.loadingObserver) {
         this.loadingObserver.observe(element);
       } else {
@@ -350,9 +351,9 @@ window.LazyLoader = {
       loadedModules: Array.from(this.loadedModules),
       loadedAssets: Array.from(this.loadedAssets),
       totalModules: this.loadedModules.size,
-      totalAssets: this.loadedAssets.size
+      totalAssets: this.loadedAssets.size,
     };
-  }
+  },
 };
 
 // Auto-inicializar cuando el DOM esté listo
@@ -362,4 +363,4 @@ if (document.readyState === 'loading') {
   });
 } else {
   window.LazyLoader.init();
-} 
+}
