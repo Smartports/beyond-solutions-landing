@@ -38,7 +38,7 @@ Inspecciona el nuevo diagrama de decisiones a implementar: /docs/new-calculator-
 6. **Sprint 5 – E4 completo (viewer 3D, badges iniciales, export PDF)**
 7. **Sprint 6 – Hardening & QA** (accesibilidad, estrés, docs)
 
-*(Si algún sprint excede el WIP máximo, se divide por vertical funcional.)*
+_(Si algún sprint excede el WIP máximo, se divide por vertical funcional.)_
 
 ---
 
@@ -84,45 +84,45 @@ Restricciones:
 Ejecuta ahora usando los datos del sprint y retorna el plan.
 ```
 
-> **Uso recomendado**: el *Scrum Master* ejecuta el prompt al inicio de cada sprint; el resultado se revisa en planning y se copia a GitHub Projects.
+> **Uso recomendado**: el _Scrum Master_ ejecuta el prompt al inicio de cada sprint; el resultado se revisa en planning y se copia a GitHub Projects.
 
 ---
 
 ## 6. Checklist GLOBAL de entrega
 
-* [ ] Estructura de carpetas `apps/web`, `packages/ui`, `packages/core` lista.
-* [ ] Storybook con tokens de diseño publicados.
-* [ ] Wizard funcional con autosave en IndexedDB.
-* [ ] Mapa con búsqueda, pin y sketch 2D.
-* [ ] Import CAD/GIS (.dxf, .geojson) compatible.
-* [ ] Viewer 3D con LOD y controles táctiles.
-* [ ] Selector de materiales + texturas PBR (≥50 presets).
-* [ ] Motor financiero con USD ↔ MXN y simulador de escenarios.
-* [ ] XP + badges: 10 logros iniciales.
-* [ ] Export PDF (finanzas) y glTF (modelo).
-* [ ] Tests unitarios ≥ 80 % coverage.
-* [ ] Lighthouse ≥ 90 / 90 / 90 / 100 (PWA disabled).
-* [ ] Docs actualizadas en `/docs` + README Sprint 6.
+- [ ] Estructura de carpetas `apps/web`, `packages/ui`, `packages/core` lista.
+- [ ] Storybook con tokens de diseño publicados.
+- [ ] Wizard funcional con autosave en IndexedDB.
+- [ ] Mapa con búsqueda, pin y sketch 2D.
+- [ ] Import CAD/GIS (.dxf, .geojson) compatible.
+- [ ] Viewer 3D con LOD y controles táctiles.
+- [ ] Selector de materiales + texturas PBR (≥50 presets).
+- [ ] Motor financiero con USD ↔ MXN y simulador de escenarios.
+- [ ] XP + badges: 10 logros iniciales.
+- [ ] Export PDF (finanzas) y glTF (modelo).
+- [ ] Tests unitarios ≥ 80 % coverage.
+- [ ] Lighthouse ≥ 90 / 90 / 90 / 100 (PWA disabled).
+- [ ] Docs actualizadas en `/docs` + README Sprint 6.
 
 ---
 
 ## 7. Gobernanza y métricas
 
-* **Fuente única de verdad**: rama `main`; deploy preview en Vercel.
-* **Reporte diario**: bot PostHog → canal #dashboards.
-* **Defecto SLA**: bugs bloqueantes corregidos <48 h.
-* **Éxito MVP**: >70 % usuarios nuevos completan Fase 2 y >40 % llegan a Viewer 3D.
+- **Fuente única de verdad**: rama `main`; deploy preview en Vercel.
+- **Reporte diario**: bot PostHog → canal #dashboards.
+- **Defecto SLA**: bugs bloqueantes corregidos <48 h.
+- **Éxito MVP**: >70 % usuarios nuevos completan Fase 2 y >40 % llegan a Viewer 3D.
 
 ---
 
 ## 8. Contactos clave
 
-| Rol           | Nombre / Alias | Canal             |
-| ------------- | -------------- | ----------------- |
+| Rol           | Nombre / Alias | Canal                           |
+| ------------- | -------------- | ------------------------------- |
 | Product Owner | Edgar          | `edgar.zorrilla@smartports.app` |
-| Tech Lead FE  | Edgar  | |
-| Tech Lead BE  | Edgar  | |
-| UX Lead       | Edgar  | |
+| Tech Lead FE  | Edgar          |                                 |
+| Tech Lead BE  | Edgar          |                                 |
+| UX Lead       | Edgar          |                                 |
 
 ---
 

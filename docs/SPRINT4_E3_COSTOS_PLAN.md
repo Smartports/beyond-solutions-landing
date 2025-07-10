@@ -8,8 +8,8 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 
 ## Registro de Estado
 
-| Fecha | Estado | Notas |
-|-------|--------|-------|
+| Fecha      | Estado     | Notas                             |
+| ---------- | ---------- | --------------------------------- |
 | 2025-06-19 | Completado | Todas las historias implementadas |
 
 ## Historias de Usuario
@@ -21,6 +21,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Diseñar UI para selección de sistema constructivo
 - [x] Implementar selección de tipo de estructura
 - [x] Crear componente para selección de cerramientos
@@ -29,6 +30,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 - [x] Integrar con el sistema de autosave
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede seleccionar entre al menos 3 tipos de estructuras
 - [x] Selector de cerramientos ofrece al menos 4 opciones
 - [x] Selector de cubiertas muestra al menos 3 alternativas
@@ -47,6 +49,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Diseñar UI para selector de nivel de materiales
 - [x] Implementar presets: básico, estándar, premium, ecológico
 - [x] Crear editor para opción personalizada
@@ -55,6 +58,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 - [x] Añadir sistema de favoritos para configuraciones personalizadas
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede seleccionar entre los 4 presets de materiales
 - [x] Cada preset muestra claramente sus características y costos asociados
 - [x] El modo personalizado permite ajustar componentes individuales
@@ -73,6 +77,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Implementar catálogo de materiales con texturas PBR
 - [x] Crear interfaz para selección y aplicación de materiales
 - [x] Implementar previsualización 3D básica de materiales
@@ -81,6 +86,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 - [x] Crear sistema de guardado de combinaciones personalizadas
 
 **Criterios de Aceptación:**
+
 - [x] Catálogo incluye al menos 50 materiales con texturas PBR
 - [x] Usuario puede aplicar y previsualizar materiales en tiempo real
 - [x] Sistema permite filtrar materiales por tipo, costo, sostenibilidad
@@ -99,6 +105,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Implementar modelo de cálculo para costos directos de construcción
 - [x] Crear calculadora de costos indirectos con porcentajes configurables
 - [x] Implementar desglose detallado de partidas
@@ -107,6 +114,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 - [x] Crear dashboard de resumen de costos
 
 **Criterios de Aceptación:**
+
 - [x] Sistema calcula costos directos basados en m² y selecciones previas
 - [x] Costos indirectos se calculan con porcentajes configurables
 - [x] Desglose muestra al menos 10 partidas principales con sus costos
@@ -125,6 +133,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Crear calculadora de financiamiento con diferentes esquemas
 - [x] Implementar tabla de amortización configurable
 - [x] Desarrollar calculadora de impuestos por región
@@ -133,6 +142,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 - [x] Crear visualizaciones para facilitar la comprensión
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede configurar al menos 3 esquemas de financiamiento
 - [x] Sistema genera tabla de amortización correcta para cada esquema
 - [x] Cálculo de impuestos considera ubicación y tipo de proyecto
@@ -151,6 +161,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Desarrollar modelo de proyección de ventas configurable
 - [x] Crear flujo de caja con ingresos y egresos temporales
 - [x] Implementar visualización de punto de equilibrio
@@ -159,6 +170,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 - [x] Desarrollar gráficos de proyección mensual/anual
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede configurar parámetros de proyección de ventas
 - [x] Flujo de caja muestra correctamente ingresos y egresos en línea temporal
 - [x] Gráfico de punto de equilibrio identifica claramente el momento de recuperación
@@ -177,6 +189,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Implementar cálculo de ROI (Retorno sobre inversión)
 - [x] Desarrollar módulo para TIR (Tasa interna de retorno)
 - [x] Crear calculadora de VAN (Valor actual neto)
@@ -185,6 +198,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 - [x] Desarrollar dashboard unificado de KPIs
 
 **Criterios de Aceptación:**
+
 - [x] Sistema calcula ROI correctamente basado en inversión y retornos
 - [x] Cálculo de TIR considera flujo de caja completo del proyecto
 - [x] VAN se calcula con tasa de descuento configurable
@@ -203,6 +217,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Diseñar interfaz para configuración de escenarios
 - [x] Implementar presets (optimista, realista, pesimista)
 - [x] Crear sistema para guardar y comparar escenarios personalizados
@@ -211,6 +226,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 - [x] Añadir sistema de exportación de resultados
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede configurar y comparar al menos 3 escenarios diferentes
 - [x] Presets predefinidos aplican automáticamente parámetros adecuados
 - [x] Sistema permite crear y guardar escenarios personalizados
@@ -226,9 +242,11 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 ## Riesgos y Mitigaciones
 
 ### Riesgo 1: Complejidad del Modelo Financiero
+
 **Descripción:** El modelo financiero podría volverse demasiado complejo, dificultando su comprensión y uso por parte de usuarios no especializados.
 
 **Mitigación:**
+
 - Implementar niveles de detalle progresivos (básico, intermedio, avanzado)
 - Crear tooltips y ayudas contextuales para términos financieros
 - Proporcionar valores predeterminados sensatos para todas las variables
@@ -238,9 +256,11 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Mitigado
 
 ### Riesgo 2: Precisión de Estimaciones de Costos
+
 **Descripción:** Las estimaciones de costos podrían desviarse significativamente de valores reales de mercado.
 
 **Mitigación:**
+
 - Utilizar fuentes confiables y actualizadas para datos de costos base
 - Implementar factores de ajuste por región, inflación y temporada
 - Añadir rangos de confianza en las estimaciones
@@ -251,9 +271,11 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Mitigado
 
 ### Riesgo 3: Rendimiento con Cálculos Complejos
+
 **Descripción:** Los cálculos financieros complejos podrían afectar el rendimiento, especialmente en dispositivos móviles.
 
 **Mitigación:**
+
 - Implementar cálculos por lotes y en segundo plano
 - Optimizar algoritmos para reducir complejidad computacional
 - Utilizar workers para cálculos intensivos
@@ -264,9 +286,11 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 **Estado:** ✅ Mitigado
 
 ### Riesgo 4: Complejidad de UX en Simulaciones
+
 **Descripción:** La interfaz para crear y comparar escenarios podría resultar confusa debido a la gran cantidad de variables.
 
 **Mitigación:**
+
 - Implementar diseño progresivo que muestre solo las variables relevantes
 - Usar visualizaciones interactivas para facilitar la comprensión
 - Crear wizards guiados para configuración de escenarios
@@ -278,17 +302,17 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 
 ## Estimación Total del Sprint
 
-| Historia | Estimación (días) | Estado |
-|----------|------------------|--------|
-| #1: Sistema Constructivo Base | 0.5 | ✅ Completado |
-| #2: Selector de Nivel de Materiales | 0.5 | ✅ Completado |
-| #3: Editor de Materiales Personalizado | 1.0 | ✅ Completado |
-| #4: Motor Financiero - Costos Directos/Indirectos | 1.0 | ✅ Completado |
-| #5: Motor Financiero - Financiamiento e Impuestos | 0.5 | ✅ Completado |
-| #6: Proyección de Ventas y Flujo de Caja | 0.5 | ✅ Completado |
-| #7: Cálculo de KPIs Financieros | 1.0 | ✅ Completado |
-| #8: Simulador de Escenarios | 1.0 | ✅ Completado |
-| **Total** | **6.0** | ✅ **Completado** |
+| Historia                                          | Estimación (días) | Estado            |
+| ------------------------------------------------- | ----------------- | ----------------- |
+| #1: Sistema Constructivo Base                     | 0.5               | ✅ Completado     |
+| #2: Selector de Nivel de Materiales               | 0.5               | ✅ Completado     |
+| #3: Editor de Materiales Personalizado            | 1.0               | ✅ Completado     |
+| #4: Motor Financiero - Costos Directos/Indirectos | 1.0               | ✅ Completado     |
+| #5: Motor Financiero - Financiamiento e Impuestos | 0.5               | ✅ Completado     |
+| #6: Proyección de Ventas y Flujo de Caja          | 0.5               | ✅ Completado     |
+| #7: Cálculo de KPIs Financieros                   | 1.0               | ✅ Completado     |
+| #8: Simulador de Escenarios                       | 1.0               | ✅ Completado     |
+| **Total**                                         | **6.0**           | ✅ **Completado** |
 
 ## Leyenda de Estado
 
@@ -303,7 +327,7 @@ La Épica E3 tiene como objetivo estimar costos y KPIs mediante un selector de m
 ```mermaid
 graph TD
     Sprint3[Finalización Sprint 3: Terreno Completo] -->|Requerido| H1
-    
+
     H1[Historia #1: Sistema Constructivo Base] --> H2
     H2[Historia #2: Selector de Nivel de Materiales] --> H3
     H2 --> H4
@@ -326,4 +350,4 @@ graph TD
 
 ---
 
-> Este plan está sujeto a ajustes según el feedback del equipo y los desafíos encontrados durante la implementación. 
+> Este plan está sujeto a ajustes según el feedback del equipo y los desafíos encontrados durante la implementación.
