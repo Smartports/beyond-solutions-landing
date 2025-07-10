@@ -18,20 +18,32 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
   ],
   "settings": {
     "react": {
       "version": "detect"
     }
   },
-  "ignorePatterns": ["dist/**", "**/*.js"],
+  "ignorePatterns": ["dist/**", "**/dist/**", "**/*.js", "**/*.d.ts"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],
       "rules": {
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "vars": "all",
+            "args": "after-used",
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_"
+          }
+        ],
+        "prefer-const": "warn"
       }
     }
   ]
-} 
+}

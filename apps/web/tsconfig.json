@@ -1,38 +1,11 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2018",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
     "noEmit": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "@beyond/core": ["../../packages/core/src"],
-      "@beyond/geo": ["../../packages/geo/src"],
-      "@beyond/geo/*": ["../../packages/geo/src/*"],
-      "@beyond/maps": ["../../packages/maps/src"],
-      "@beyond/maps/*": ["../../packages/maps/src/*"],
-      "@beyond/ui": ["../../packages/ui/src"]
-    }
+    "allowJs": true,
+    "isolatedModules": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
-} 
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules"]
+}
