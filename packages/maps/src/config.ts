@@ -1,6 +1,6 @@
 /**
  * Configuración para la integración con Google Maps API
- * 
+ *
  * Este archivo centraliza la configuración de la API de Google Maps.
  * En un entorno real, la API_KEY debería cargarse desde variables de entorno
  * y estar restringida por dominio en la consola de Google Cloud.
@@ -34,7 +34,7 @@ export const MAPS_CONFIG = {
   // En producción, esta clave debería estar protegida y cargada desde variables de entorno
   // Aquí usamos una clave de ejemplo que debería ser reemplazada
   API_KEY: 'AIzaSyCHZEIwEo3h7Ah3skmMbyMOEcj6H85eG_c',
-  
+
   // Opciones por defecto para el mapa
   DEFAULT_OPTIONS: {
     center: { lat: 19.4326, lng: -99.1332 }, // Ciudad de México por defecto
@@ -46,35 +46,35 @@ export const MAPS_CONFIG = {
     mapTypeId: 'roadmap' as const,
     mapTypeControlOptions: {
       style: 2, // dropdown menu
-      mapTypeIds: ['roadmap', 'satellite']
-    }
+      mapTypeIds: ['roadmap', 'satellite'],
+    },
   },
-  
+
   // Límites de uso para prevenir costos excesivos
   USAGE_LIMITS: {
     maxPolygonVertices: 50,
     maxSearchRadius: 5000, // metros
     maxMapInstances: 1,
-    geocodingRateLimit: 10 // peticiones por minuto
+    geocodingRateLimit: 10, // peticiones por minuto
   },
-  
+
   // Estilos personalizados para el mapa
   MAP_STYLES: [
     {
       featureType: 'poi',
       elementType: 'labels',
-      stylers: [{ visibility: 'off' }]
+      stylers: [{ visibility: 'off' }],
     },
     {
       featureType: 'transit',
       elementType: 'labels',
-      stylers: [{ visibility: 'off' }]
-    }
+      stylers: [{ visibility: 'off' }],
+    },
   ],
-  
+
   // Opciones para el geocoding
   GEOCODING_OPTIONS: {
     region: 'mx', // Enfoque en México
-    language: 'es'
-  }
-}; 
+    language: 'es',
+  },
+};

@@ -12,4 +12,4 @@ export { MAPS_CONFIG } from './config';
 export type { MapPickerProps } from './MapPicker';
 export type { MapContainerProps } from './MapContainer';
 export type { SearchBoxProps } from './SearchBox';
-export type { MapControlsProps } from './MapControls'; 
+export type { MapControlsProps } from './MapControls';
