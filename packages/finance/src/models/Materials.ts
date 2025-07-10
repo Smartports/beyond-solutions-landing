@@ -13,7 +13,7 @@ export enum MaterialCategory {
   HVAC = 'hvac',
   PLUMBING = 'plumbing',
   ELECTRICAL = 'electrical',
-  EXTERIOR = 'exterior'
+  EXTERIOR = 'exterior',
 }
 
 /**
@@ -24,7 +24,7 @@ export enum MaterialQualityLevel {
   STANDARD = 'standard',
   PREMIUM = 'premium',
   LUXURY = 'luxury',
-  ECO = 'eco'
+  ECO = 'eco',
 }
 
 /**
@@ -65,10 +65,10 @@ export interface MaterialPreset {
 export function calculateMaterialsCost(preset: MaterialPreset, areaM2: number): number {
   // Factor base por m²
   const baseCostPerM2 = 200; // Costo base de materiales por m²
-  
+
   // Aplicar multiplicador del preset
   const totalCost = baseCostPerM2 * preset.costMultiplier * areaM2;
-  
+
   return totalCost;
 }
 
@@ -81,13 +81,13 @@ export function calculateMaterialsCost(preset: MaterialPreset, areaM2: number): 
 export function calculateAnnualMaintenanceCost(preset: MaterialPreset, areaM2: number): number {
   // Calcular promedio de costo de mantenimiento por m²
   let totalMaintenanceCost = 0;
-  
-  Object.values(preset.materials).forEach(material => {
+
+  Object.values(preset.materials).forEach((material) => {
     totalMaintenanceCost += material.maintenanceCostPerYear;
   });
-  
+
   const avgMaintenanceCostPerM2 = totalMaintenanceCost / Object.keys(preset.materials).length;
-  
+
   // Aplicar al área
   return avgMaintenanceCostPerM2 * areaM2;
 }
@@ -99,10 +99,10 @@ export function calculateAnnualMaintenanceCost(preset: MaterialPreset, areaM2: n
  */
 export function calculateAverageLifespan(preset: MaterialPreset): number {
   let totalLifespan = 0;
-  
-  Object.values(preset.materials).forEach(material => {
+
+  Object.values(preset.materials).forEach((material) => {
     totalLifespan += material.durabilityYears;
   });
-  
+
   return totalLifespan / Object.keys(preset.materials).length;
 }

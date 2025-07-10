@@ -61,60 +61,59 @@ export interface SalesProjectionResult {
 export function generateSalesProjection(
   config: SalesProjectionConfig,
   constructionCosts: number[],
-  indirectCosts: number[]
+  indirectCosts: number[],
 ): SalesProjectionResult {
   const monthlySales: SalesProjectionResult['monthlySales'] = [];
   const cashFlow: CashFlowEntry[] = [];
-  
+
   let unitsSoldTotal = 0;
   let revenueTotal = 0;
   let cumulativeCashFlow = 0;
   let breakEvenMonth: number | null = null;
   let breakEvenDate: Date | null = null;
-  
+
   // Asegurar que los arrays de costos tengan la longitud correcta
   const normalizedConstructionCosts = normalizeArray(constructionCosts, config.projectDuration);
   const normalizedIndirectCosts = normalizeArray(indirectCosts, config.projectDuration);
-  
+
   // Generar proyección mes a mes
   for (let month = 0; month < config.projectDuration; month++) {
     const currentDate = addMonths(config.salesStartDate, month);
-    
+
     // Calcular ventas del mes
-    const unitsSold = Math.min(
-      config.salesVelocity,
-      config.totalUnits - unitsSoldTotal
-    );
-    
+    const unitsSold = Math.min(config.salesVelocity, config.totalUnits - unitsSoldTotal);
+
     // Aplicar incremento de precio anual
     const yearsPassed = month / 12;
     const priceAdjustment = Math.pow(1 + config.priceIncreaseRate / 100, yearsPassed);
     const currentUnitPrice = config.unitPrice * priceAdjustment;
-    
+
     // Calcular ingresos del mes
     const reservationRevenue = unitsSold * currentUnitPrice * (config.reservationFee / 100);
     const downPaymentRevenue = unitsSold * currentUnitPrice * (config.downPayment / 100);
-    
+
     // Calcular pagos de instalamentos de meses anteriores
     let installmentRevenue = 0;
-    const installmentPercentage = (100 - config.reservationFee - config.downPayment) / config.installmentMonths;
-    
+    const installmentPercentage =
+      (100 - config.reservationFee - config.downPayment) / config.installmentMonths;
+
     for (let i = 1; i <= config.installmentMonths; i++) {
       const pastMonth = month - i;
       if (pastMonth >= 0 && pastMonth < monthlySales.length) {
         const pastUnitsSold = monthlySales[pastMonth].unitsSold;
-        const pastUnitPrice = config.unitPrice * Math.pow(1 + config.priceIncreaseRate / 100, pastMonth / 12);
+        const pastUnitPrice =
+          config.unitPrice * Math.pow(1 + config.priceIncreaseRate / 100, pastMonth / 12);
         installmentRevenue += pastUnitsSold * pastUnitPrice * (installmentPercentage / 100);
       }
     }
-    
+
     // Calcular ingresos totales del mes
     const monthlyRevenue = reservationRevenue + downPaymentRevenue + installmentRevenue;
-    
+
     // Actualizar totales
     unitsSoldTotal += unitsSold;
     revenueTotal += monthlyRevenue;
-    
+
     // Registrar ventas mensuales
     monthlySales.push({
       month,
@@ -123,36 +122,36 @@ export function generateSalesProjection(
       revenue: monthlyRevenue,
       cumulativeUnitsSold: unitsSoldTotal,
       cumulativeRevenue: revenueTotal,
-      absorptionRate: config.totalUnits > 0 ? (unitsSoldTotal / config.totalUnits) * 100 : 0
+      absorptionRate: config.totalUnits > 0 ? (unitsSoldTotal / config.totalUnits) * 100 : 0,
     });
-    
+
     // Calcular flujo de caja
     const constructionCost = normalizedConstructionCosts[month];
     const indirectCost = normalizedIndirectCosts[month];
-    
+
     const inflows = {
       reservations: reservationRevenue,
       downPayments: downPaymentRevenue,
-      installments: installmentRevenue
+      installments: installmentRevenue,
     };
-    
+
     const outflows = {
       construction: constructionCost,
-      indirect: indirectCost
+      indirect: indirectCost,
     };
-    
+
     const totalInflow = Object.values(inflows).reduce((sum, value) => sum + value, 0);
     const totalOutflow = Object.values(outflows).reduce((sum, value) => sum + value, 0);
     const netCashFlow = totalInflow - totalOutflow;
-    
+
     cumulativeCashFlow += netCashFlow;
-    
+
     // Detectar punto de equilibrio
     if (breakEvenMonth === null && cumulativeCashFlow >= 0 && month > 0) {
       breakEvenMonth = month;
       breakEvenDate = new Date(currentDate);
     }
-    
+
     cashFlow.push({
       month,
       date: new Date(currentDate),
@@ -161,28 +160,31 @@ export function generateSalesProjection(
       totalInflow,
       totalOutflow,
       netCashFlow,
-      cumulativeCashFlow
+      cumulativeCashFlow,
     });
   }
-  
+
   // Calcular métricas
   const metrics = {
     totalRevenue: revenueTotal,
-    averageAbsorptionRate: config.totalUnits > 0 
-      ? (unitsSoldTotal / config.totalUnits) * 100 / Math.min(config.projectDuration, monthlySales.length)
-      : 0,
-    salesDuration: unitsSoldTotal >= config.totalUnits 
-      ? monthlySales.findIndex(m => m.cumulativeUnitsSold >= config.totalUnits) + 1
-      : config.projectDuration,
+    averageAbsorptionRate:
+      config.totalUnits > 0
+        ? ((unitsSoldTotal / config.totalUnits) * 100) /
+          Math.min(config.projectDuration, monthlySales.length)
+        : 0,
+    salesDuration:
+      unitsSoldTotal >= config.totalUnits
+        ? monthlySales.findIndex((m) => m.cumulativeUnitsSold >= config.totalUnits) + 1
+        : config.projectDuration,
     breakEvenMonth,
-    breakEvenDate
+    breakEvenDate,
   };
-  
+
   return {
     config,
     monthlySales,
     cashFlow,
-    metrics
+    metrics,
   };
 }
 
@@ -194,24 +196,24 @@ export function generateSalesProjection(
  */
 function normalizeArray(array: number[], length: number): number[] {
   if (array.length === length) return array;
-  
+
   const result = new Array(length).fill(0);
-  
+
   if (array.length === 0) return result;
-  
+
   // Si el array es más corto, repetir los valores
   if (array.length < length) {
     for (let i = 0; i < length; i++) {
       result[i] = array[i % array.length];
     }
-  } 
+  }
   // Si el array es más largo, truncar
   else {
     for (let i = 0; i < length; i++) {
       result[i] = array[i];
     }
   }
-  
+
   return result;
 }
 
@@ -237,14 +239,14 @@ function addMonths(date: Date, months: number): Date {
 export function calculateOptimalSalesVelocity(
   totalUnits: number,
   targetSalesDuration: number,
-  marketAbsorptionRate: number
+  marketAbsorptionRate: number,
 ): number {
   // Calcular basado en duración objetivo
   const velocityByDuration = totalUnits / targetSalesDuration;
-  
+
   // Calcular basado en tasa de absorción del mercado
   const velocityByMarket = totalUnits * (marketAbsorptionRate / 100);
-  
+
   // Usar el valor más conservador
   return Math.min(velocityByDuration, velocityByMarket);
 }
@@ -259,10 +261,10 @@ export function calculateOptimalSalesVelocity(
 export function distributeConstructionCosts(
   totalConstructionCost: number,
   projectDuration: number,
-  distributionPattern: 'linear' | 'frontloaded' | 'backloaded' | 'bell' = 'bell'
+  distributionPattern: 'linear' | 'frontloaded' | 'backloaded' | 'bell' = 'bell',
 ): number[] {
   const costs: number[] = new Array(projectDuration).fill(0);
-  
+
   switch (distributionPattern) {
     case 'linear':
       // Distribución uniforme
@@ -271,15 +273,15 @@ export function distributeConstructionCosts(
         costs[i] = monthlyAmount;
       }
       break;
-      
+
     case 'frontloaded':
       // Mayor costo al inicio
       for (let i = 0; i < projectDuration; i++) {
-        const factor = 1 - (i / projectDuration);
+        const factor = 1 - i / projectDuration;
         costs[i] = (totalConstructionCost * 2 * factor) / projectDuration;
       }
       break;
-      
+
     case 'backloaded':
       // Mayor costo al final
       for (let i = 0; i < projectDuration; i++) {
@@ -287,7 +289,7 @@ export function distributeConstructionCosts(
         costs[i] = (totalConstructionCost * 2 * factor) / projectDuration;
       }
       break;
-      
+
     case 'bell':
       // Distribución en forma de campana (más costo en el medio)
       for (let i = 0; i < projectDuration; i++) {
@@ -299,10 +301,10 @@ export function distributeConstructionCosts(
       }
       break;
   }
-  
+
   // Normalizar para asegurar que la suma sea exactamente el costo total
   const sum = costs.reduce((acc, cost) => acc + cost, 0);
   const adjustmentFactor = totalConstructionCost / sum;
-  
-  return costs.map(cost => cost * adjustmentFactor);
+
+  return costs.map((cost) => cost * adjustmentFactor);
 }
