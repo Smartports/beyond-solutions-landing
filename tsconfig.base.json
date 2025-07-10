@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@beyond/core/*": ["packages/core/src/*"],
+      "@beyond/ui/*": ["packages/ui/src/*"],
+      "@beyond/geo/*": ["packages/geo/src/*"],
+      "@beyond/maps/*": ["packages/maps/src/*"],
+      "@beyond/finance/*": ["packages/finance/src/*"],
+      "@beyond/experience3d/*": ["packages/experience3d/src/*"]
+    },
+    "types": ["node", "jest"]
+  },
+  "exclude": ["node_modules", "dist"]
+}

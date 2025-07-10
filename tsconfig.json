@@ -1,0 +1,12 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/core" },
+    { "path": "packages/ui" },
+    { "path": "packages/geo" },
+    { "path": "packages/maps" },
+    { "path": "packages/finance" },
+    { "path": "packages/experience3d" },
+    { "path": "apps/web" }
+  ]
+}
