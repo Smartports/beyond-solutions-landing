@@ -10,7 +10,7 @@ export enum DxfEntityType {
   CIRCLE = 'CIRCLE',
   ARC = 'ARC',
   SPLINE = 'SPLINE',
-  TEXT = 'TEXT'
+  TEXT = 'TEXT',
 }
 
 /**
@@ -56,7 +56,7 @@ export class DxfImporter {
     try {
       // Parsear el archivo DXF
       const dxf = this.parser.parseSync(fileContent);
-      
+
       // Extraer entidades
       const entities: DxfEntity[] = [];
       const layers = new Set<string>();
@@ -64,21 +64,21 @@ export class DxfImporter {
       let minY = Infinity;
       let maxX = -Infinity;
       let maxY = -Infinity;
-      
+
       // Procesar entidades
       if (dxf && dxf.entities && Array.isArray(dxf.entities)) {
-        dxf.entities.forEach(entity => {
+        dxf.entities.forEach((entity) => {
           const processedEntity = this.processEntity(entity);
-          
+
           if (processedEntity) {
             entities.push(processedEntity);
             layers.add(processedEntity.layer);
-            
+
             // Actualizar límites
-            processedEntity.coordinates.forEach(coord => {
+            processedEntity.coordinates.forEach((coord) => {
               const x = coord[0];
               const y = coord[1];
-              
+
               minX = Math.min(minX, x);
               minY = Math.min(minY, y);
               maxX = Math.max(maxX, x);
@@ -87,15 +87,15 @@ export class DxfImporter {
           }
         });
       }
-      
+
       return {
         entities,
         bounds: {
           min: { x: minX, y: minY },
-          max: { x: maxX, y: maxY }
+          max: { x: maxX, y: maxY },
         },
         layers: Array.from(layers),
-        success: true
+        success: true,
       };
     } catch (error) {
       console.error('Error al importar archivo DXF:', error);
@@ -103,11 +103,11 @@ export class DxfImporter {
         entities: [],
         bounds: {
           min: { x: 0, y: 0 },
-          max: { x: 0, y: 0 }
+          max: { x: 0, y: 0 },
         },
         layers: [],
         success: false,
-        error: error instanceof Error ? error.message : 'Error desconocido al importar DXF'
+        error: error instanceof Error ? error.message : 'Error desconocido al importar DXF',
       };
     }
   }
@@ -119,23 +119,23 @@ export class DxfImporter {
    */
   private processEntity(entity: any): DxfEntity | null {
     const layer = entity.layer || 'default';
-    
+
     switch (entity.type) {
       case 'LWPOLYLINE':
         return this.processLwPolyline(entity, layer);
-      
+
       case 'POLYLINE':
         return this.processPolyline(entity, layer);
-      
+
       case 'LINE':
         return this.processLine(entity, layer);
-      
+
       case 'CIRCLE':
         return this.processCircle(entity, layer);
-      
+
       case 'ARC':
         return this.processArc(entity, layer);
-      
+
       default:
         // Entidad no soportada
         return null;
@@ -147,27 +147,27 @@ export class DxfImporter {
    */
   private processLwPolyline(entity: any, layer: string): DxfEntity {
     const coordinates: number[][] = [];
-    
+
     // Extraer vértices
     if (entity.vertices && Array.isArray(entity.vertices)) {
       entity.vertices.forEach((vertex: any) => {
         coordinates.push([vertex.x, vertex.y]);
       });
-      
+
       // Si es un polígono cerrado, añadir el primer punto al final
       if (entity.closed && coordinates.length > 0) {
         coordinates.push([...coordinates[0]]);
       }
     }
-    
+
     return {
       type: DxfEntityType.LWPOLYLINE,
       layer,
       coordinates,
       properties: {
         closed: entity.closed || false,
-        color: entity.color
-      }
+        color: entity.color,
+      },
     };
   }
 
@@ -176,27 +176,27 @@ export class DxfImporter {
    */
   private processPolyline(entity: any, layer: string): DxfEntity {
     const coordinates: number[][] = [];
-    
+
     // Extraer vértices
     if (entity.vertices && Array.isArray(entity.vertices)) {
       entity.vertices.forEach((vertex: any) => {
         coordinates.push([vertex.x, vertex.y]);
       });
-      
+
       // Si es un polígono cerrado, añadir el primer punto al final
       if (entity.closed && coordinates.length > 0) {
         coordinates.push([...coordinates[0]]);
       }
     }
-    
+
     return {
       type: DxfEntityType.POLYLINE,
       layer,
       coordinates,
       properties: {
         closed: entity.closed || false,
-        color: entity.color
-      }
+        color: entity.color,
+      },
     };
   }
 
@@ -206,16 +206,16 @@ export class DxfImporter {
   private processLine(entity: any, layer: string): DxfEntity {
     const coordinates: number[][] = [
       [entity.start.x, entity.start.y],
-      [entity.end.x, entity.end.y]
+      [entity.end.x, entity.end.y],
     ];
-    
+
     return {
       type: DxfEntityType.LINE,
       layer,
       coordinates,
       properties: {
-        color: entity.color
-      }
+        color: entity.color,
+      },
     };
   }
 
@@ -227,16 +227,16 @@ export class DxfImporter {
     const center = [entity.center.x, entity.center.y];
     const radius = entity.radius;
     const points = 32; // Número de puntos para aproximar el círculo
-    
+
     const coordinates: number[][] = [];
-    
+
     for (let i = 0; i <= points; i++) {
       const angle = (i / points) * Math.PI * 2;
       const x = center[0] + radius * Math.cos(angle);
       const y = center[1] + radius * Math.sin(angle);
       coordinates.push([x, y]);
     }
-    
+
     return {
       type: DxfEntityType.CIRCLE,
       layer,
@@ -244,8 +244,8 @@ export class DxfImporter {
       properties: {
         center,
         radius,
-        color: entity.color
-      }
+        color: entity.color,
+      },
     };
   }
 
@@ -259,22 +259,22 @@ export class DxfImporter {
     const startAngle = entity.startAngle * (Math.PI / 180); // Convertir a radianes
     const endAngle = entity.endAngle * (Math.PI / 180); // Convertir a radianes
     const points = 16; // Número de puntos para aproximar el arco
-    
+
     const coordinates: number[][] = [];
-    
+
     // Asegurar que endAngle > startAngle
     let endAngleAdjusted = endAngle;
     if (endAngleAdjusted < startAngle) {
       endAngleAdjusted += Math.PI * 2;
     }
-    
+
     for (let i = 0; i <= points; i++) {
       const angle = startAngle + (i / points) * (endAngleAdjusted - startAngle);
       const x = center[0] + radius * Math.cos(angle);
       const y = center[1] + radius * Math.sin(angle);
       coordinates.push([x, y]);
     }
-    
+
     return {
       type: DxfEntityType.ARC,
       layer,
@@ -284,8 +284,8 @@ export class DxfImporter {
         radius,
         startAngle: entity.startAngle,
         endAngle: entity.endAngle,
-        color: entity.color
-      }
+        color: entity.color,
+      },
     };
   }
 
@@ -296,18 +296,18 @@ export class DxfImporter {
    */
   public toGeoJSON(entities: DxfEntity[]): GeoJSON.FeatureCollection {
     const features: GeoJSON.Feature[] = [];
-    
-    entities.forEach(entity => {
+
+    entities.forEach((entity) => {
       if (entity.coordinates.length < 2) return;
-      
+
       let geometry: GeoJSON.Geometry;
-      
+
       // Determinar tipo de geometría
       if (entity.type === DxfEntityType.LINE || entity.type === DxfEntityType.ARC) {
         // Línea o arco -> LineString
         geometry = {
           type: 'LineString',
-          coordinates: entity.coordinates
+          coordinates: entity.coordinates,
         };
       } else if (
         (entity.type === DxfEntityType.POLYLINE || entity.type === DxfEntityType.LWPOLYLINE) &&
@@ -317,22 +317,22 @@ export class DxfImporter {
         // Polilínea cerrada -> Polygon
         geometry = {
           type: 'Polygon',
-          coordinates: [entity.coordinates]
+          coordinates: [entity.coordinates],
         };
       } else if (entity.type === DxfEntityType.CIRCLE) {
         // Círculo -> Polygon
         geometry = {
           type: 'Polygon',
-          coordinates: [entity.coordinates]
+          coordinates: [entity.coordinates],
         };
       } else {
         // Por defecto -> LineString
         geometry = {
           type: 'LineString',
-          coordinates: entity.coordinates
+          coordinates: entity.coordinates,
         };
       }
-      
+
       // Crear feature
       const feature: GeoJSON.Feature = {
         type: 'Feature',
@@ -340,16 +340,16 @@ export class DxfImporter {
         properties: {
           layer: entity.layer,
           type: entity.type,
-          ...entity.properties
-        }
+          ...entity.properties,
+        },
       };
-      
+
       features.push(feature);
     });
-    
+
     return {
       type: 'FeatureCollection',
-      features
+      features,
     };
   }
 
@@ -362,32 +362,34 @@ export class DxfImporter {
     try {
       // Intentar parsear el archivo
       const dxf = this.parser.parseSync(fileContent);
-      
+
       // Verificar si tiene entidades
       if (!dxf || !dxf.entities || !Array.isArray(dxf.entities) || dxf.entities.length === 0) {
         return { valid: false, message: 'El archivo DXF no contiene entidades' };
       }
-      
+
       // Verificar si tiene entidades soportadas
-      const supportedEntities = dxf.entities.filter(entity => 
-        ['LWPOLYLINE', 'POLYLINE', 'LINE', 'CIRCLE', 'ARC'].includes(entity.type)
+      const supportedEntities = dxf.entities.filter((entity) =>
+        ['LWPOLYLINE', 'POLYLINE', 'LINE', 'CIRCLE', 'ARC'].includes(entity.type),
       );
-      
+
       if (supportedEntities.length === 0) {
-        return { 
-          valid: false, 
-          message: 'El archivo DXF no contiene entidades soportadas (LWPOLYLINE, POLYLINE, LINE, CIRCLE, ARC)' 
+        return {
+          valid: false,
+          message:
+            'El archivo DXF no contiene entidades soportadas (LWPOLYLINE, POLYLINE, LINE, CIRCLE, ARC)',
         };
       }
-      
+
       return { valid: true, message: 'Archivo DXF válido' };
     } catch (error) {
-      return { 
-        valid: false, 
-        message: error instanceof Error ? 
-          `Error al validar archivo DXF: ${error.message}` : 
-          'Error desconocido al validar archivo DXF' 
+      return {
+        valid: false,
+        message:
+          error instanceof Error
+            ? `Error al validar archivo DXF: ${error.message}`
+            : 'Error desconocido al validar archivo DXF',
       };
     }
   }
-} 
+}
