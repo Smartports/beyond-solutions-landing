@@ -41,7 +41,7 @@ class AccessibilityManager {
 
     this.announcer = {
       status: statusAnnouncer,
-      alert: alertAnnouncer
+      alert: alertAnnouncer,
     };
   }
 
@@ -97,17 +97,20 @@ class AccessibilityManager {
   enhanceTabNavigation() {
     // Set proper tabindex for interactive elements
     const interactiveElements = document.querySelectorAll(
-      'a, button, input, select, textarea, [role="button"], [tabindex]'
+      'a, button, input, select, textarea, [role="button"], [tabindex]',
     );
 
-    interactiveElements.forEach(element => {
+    interactiveElements.forEach((element) => {
       // Skip disabled elements
       if (element.disabled || element.getAttribute('aria-disabled') === 'true') {
         element.setAttribute('tabindex', '-1');
       }
 
       // Ensure buttons and links are keyboard accessible
-      if ((element.tagName === 'A' || element.tagName === 'BUTTON') && !element.hasAttribute('tabindex')) {
+      if (
+        (element.tagName === 'A' || element.tagName === 'BUTTON') &&
+        !element.hasAttribute('tabindex')
+      ) {
         element.setAttribute('tabindex', '0');
       }
     });
@@ -167,18 +170,18 @@ class AccessibilityManager {
   // Enhance forms accessibility
   enhanceFormsAccessibility() {
     const forms = document.querySelectorAll('form');
-    
-    forms.forEach(form => {
+
+    forms.forEach((form) => {
       // Add ARIA labels to inputs without labels
       const inputs = form.querySelectorAll('input, select, textarea');
-      
-      inputs.forEach(input => {
+
+      inputs.forEach((input) => {
         // Check if input has a label
         if (!input.labels || input.labels.length === 0) {
           // Try to find label by placeholder or name
           const placeholder = input.placeholder;
           const name = input.name;
-          
+
           if (placeholder) {
             input.setAttribute('aria-label', placeholder);
           } else if (name) {
@@ -216,11 +219,11 @@ class AccessibilityManager {
     const errors = [];
     const inputs = form.querySelectorAll('[required], [aria-required="true"]');
 
-    inputs.forEach(input => {
+    inputs.forEach((input) => {
       if (!input.value || (input.validity && !input.validity.valid)) {
         errors.push({
           field: input,
-          message: this.getErrorMessage(input)
+          message: this.getErrorMessage(input),
         });
       }
     });
@@ -230,13 +233,13 @@ class AccessibilityManager {
       this.announceAlert(`Form has ${errors.length} error${errors.length > 1 ? 's' : ''}`);
 
       // Show errors
-      errors.forEach(error => {
+      errors.forEach((error) => {
         error.field.setAttribute('aria-invalid', 'true');
-        
+
         // Create or update error message
         let errorId = error.field.id + '-error';
         let errorElement = document.getElementById(errorId);
-        
+
         if (!errorElement) {
           errorElement = document.createElement('span');
           errorElement.id = errorId;
@@ -244,7 +247,7 @@ class AccessibilityManager {
           errorElement.setAttribute('role', 'alert');
           error.field.parentElement.appendChild(errorElement);
         }
-        
+
         errorElement.textContent = error.message;
         error.field.setAttribute('aria-describedby', errorId);
       });
@@ -260,7 +263,7 @@ class AccessibilityManager {
   // Get appropriate error message
   getErrorMessage(input) {
     const label = input.labels?.[0]?.textContent || input.getAttribute('aria-label') || input.name;
-    
+
     if (input.validity) {
       if (input.validity.valueMissing) {
         return `${label} is required`;
@@ -284,7 +287,7 @@ class AccessibilityManager {
         return `${label} format is invalid`;
       }
     }
-    
+
     return `${label} is invalid`;
   }
 
@@ -298,7 +301,7 @@ class AccessibilityManager {
       'input[type="radio"]:not([disabled])',
       'input[type="checkbox"]:not([disabled])',
       'select:not([disabled])',
-      '[tabindex]:not([tabindex="-1"])'
+      '[tabindex]:not([tabindex="-1"])',
     ];
 
     const focusableElements = element.querySelectorAll(focusableSelectors.join(','));
@@ -331,7 +334,7 @@ class AccessibilityManager {
     this.focusTrap = {
       element,
       handleKeydown,
-      previouslyFocused
+      previouslyFocused,
     };
   }
 
@@ -347,7 +350,8 @@ class AccessibilityManager {
   // Show keyboard help dialog
   showKeyboardHelp() {
     const helpDialog = document.createElement('div');
-    helpDialog.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+    helpDialog.className =
+      'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
     helpDialog.innerHTML = `
       <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4" role="dialog" aria-labelledby="help-title">
         <h2 id="help-title" class="text-2xl font-bold mb-4">Keyboard Shortcuts</h2>
@@ -402,14 +406,7 @@ class AccessibilityManager {
 
   // Make element accessible
   makeAccessible(element, options = {}) {
-    const {
-      role,
-      label,
-      description,
-      live,
-      atomic,
-      relevant
-    } = options;
+    const { role, label, description, live, atomic, relevant } = options;
 
     if (role) element.setAttribute('role', role);
     if (label) element.setAttribute('aria-label', label);
@@ -432,4 +429,4 @@ if (document.readyState === 'loading') {
 }
 
 // Export for use in other modules
-export default AccessibilityManager; 
+export default AccessibilityManager;

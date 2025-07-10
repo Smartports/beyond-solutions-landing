@@ -36,46 +36,56 @@ export function initLanguageSelector(options = {}) {
       { code: 'tr', name: 'Türkçe', flag: 'tr.svg' },
       { code: 'hi', name: 'हिन्दी', flag: 'in.svg' },
       { code: 'vi', name: 'Tiếng Việt', flag: 'vn.svg' },
-      { code: 'el', name: 'Ελληνικά', flag: 'gr.svg' }
+      { code: 'el', name: 'Ελληνικά', flag: 'gr.svg' },
     ],
-    ...options
+    ...options,
   };
-  
+
   // Encontrar el contenedor
   container = document.querySelector(settings.containerSelector);
   if (!container) {
     console.error('Selector de idiomas: No se encontró el contenedor', settings.containerSelector);
     return;
   }
-  
+
   console.log('[language-selector] Initializing language selector');
-  
+
   // Renderizar el selector
   renderSelector(container, settings);
-  
+
   // Agregar event listeners
   setupEventListeners(container, settings);
-  
+
   // Actualizar el selector cuando cambie el idioma
   document.addEventListener('i18n:languageChanged', (e) => {
-    console.log(`[language-selector] Language changed event received with language: ${e.detail?.newLanguage}`);
-    updateSelectedLanguage(container, e.detail?.newLanguage || window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale'), settings);
+    console.log(
+      `[language-selector] Language changed event received with language: ${e.detail?.newLanguage}`,
+    );
+    updateSelectedLanguage(
+      container,
+      e.detail?.newLanguage ||
+        window.i18n?.getCurrentLanguage?.() ||
+        localStorage.getItem('beyondLocale'),
+      settings,
+    );
   });
-  
+
   // Also handle the i18n:ready event
   document.addEventListener('i18n:ready', (e) => {
     console.log('[language-selector] i18n:ready event received');
-    const currentLang = window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'es';
+    const currentLang =
+      window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'es';
     updateSelectedLanguage(container, currentLang, settings);
   });
-  
+
   // Force update the selected language on initialization
   setTimeout(() => {
-    const currentLang = window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'es';
+    const currentLang =
+      window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'es';
     console.log(`[language-selector] Force updating language selector to: ${currentLang}`);
     updateSelectedLanguage(container, currentLang, settings);
   }, 500);
-  
+
   return {
     getContainer: () => container,
     updateLanguages: (languages) => {
@@ -83,9 +93,10 @@ export function initLanguageSelector(options = {}) {
       renderSelector(container, settings);
     },
     refreshLanguage: () => {
-      const currentLang = window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'es';
+      const currentLang =
+        window.i18n?.getCurrentLanguage?.() || localStorage.getItem('beyondLocale') || 'es';
       updateSelectedLanguage(container, currentLang, settings);
-    }
+    },
   };
 }
 
@@ -96,17 +107,19 @@ export function initLanguageSelector(options = {}) {
  */
 function renderSelector(container, settings) {
   // Determinar el idioma actual
-  const currentLang = window.i18n?.getCurrentLanguage?.() || 
-                     localStorage.getItem('beyondLocale') || 
-                     document.documentElement.lang || 
-                     'es';
-  
+  const currentLang =
+    window.i18n?.getCurrentLanguage?.() ||
+    localStorage.getItem('beyondLocale') ||
+    document.documentElement.lang ||
+    'es';
+
   console.log(`[language-selector] Rendering selector with current language: ${currentLang}`);
-  
+
   // Encontrar los datos del idioma actual
-  const currentLanguage = settings.languages.find(lang => lang.code === currentLang) || 
-                         settings.languages.find(lang => lang.code === 'es');
-  
+  const currentLanguage =
+    settings.languages.find((lang) => lang.code === currentLang) ||
+    settings.languages.find((lang) => lang.code === 'es');
+
   // Crear el HTML del selector
   container.innerHTML = `
     <button 
@@ -133,7 +146,9 @@ function renderSelector(container, settings) {
       aria-labelledby="language-dropdown-toggle"
     >
       <ul class="py-1">
-        ${settings.languages.map(lang => `
+        ${settings.languages
+          .map(
+            (lang) => `
           <li>
             <button 
               type="button"
@@ -146,7 +161,9 @@ function renderSelector(container, settings) {
               <span>${lang.name}</span>
             </button>
           </li>
-        `).join('')}
+        `,
+          )
+          .join('')}
       </ul>
     </div>
   `;
@@ -160,37 +177,39 @@ function renderSelector(container, settings) {
 function setupEventListeners(container, settings) {
   const toggle = container.querySelector('#language-dropdown-toggle');
   const dropdown = container.querySelector('#language-dropdown');
-  
+
   if (!toggle || !dropdown) return;
-  
+
   // Abrir/cerrar el menú desplegable
   toggle.addEventListener('click', () => {
     const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', !isExpanded);
     dropdown.classList.toggle('hidden', isExpanded);
-    
+
     if (!isExpanded) {
       // Enfocar el primer elemento al abrir
       const firstItem = dropdown.querySelector('button');
       if (firstItem) firstItem.focus();
     }
   });
-  
+
   // Cambiar de idioma al hacer clic en una opción
   dropdown.addEventListener('click', async (e) => {
     const langButton = e.target.closest('[data-lang]');
     if (langButton) {
       const langCode = langButton.getAttribute('data-lang');
       console.log(`[language-selector] Language change requested to: ${langCode}`);
-      
+
       try {
         // Show loading indicator
         const loadingIndicator = document.createElement('div');
         loadingIndicator.id = 'language-loading-indicator';
-        loadingIndicator.className = 'fixed top-0 left-0 w-full h-1 bg-primary-700 dark:bg-primary-500';
-        loadingIndicator.style.cssText = 'z-index: 9999; animation: language-loading 2s infinite linear;';
+        loadingIndicator.className =
+          'fixed top-0 left-0 w-full h-1 bg-primary-700 dark:bg-primary-500';
+        loadingIndicator.style.cssText =
+          'z-index: 9999; animation: language-loading 2s infinite linear;';
         document.body.appendChild(loadingIndicator);
-        
+
         // Add animation style if not exists
         if (!document.querySelector('#language-loading-style')) {
           const style = document.createElement('style');
@@ -204,28 +223,28 @@ function setupEventListeners(container, settings) {
           `;
           document.head.appendChild(style);
         }
-        
+
         // Attempt to change language
         await changeLanguage(langCode);
-        
+
         // Ensure translations are loaded
         if (window.preloadAllTranslations) {
           console.log('[language-selector] Calling preloadAllTranslations');
           await window.preloadAllTranslations();
         }
-        
+
         // Manually trigger translation updates
         if (window.updateCalculatorTranslations) {
           console.log('[language-selector] Calling updateCalculatorTranslations');
           window.updateCalculatorTranslations();
         }
-        
+
         // Trigger direct fixes if available
         if (window.directFixTranslations) {
           console.log('[language-selector] Calling directFixTranslations');
           window.directFixTranslations();
         }
-        
+
         // Update Alpine store if available
         if (window.Alpine?.store) {
           try {
@@ -239,13 +258,13 @@ function setupEventListeners(container, settings) {
             console.warn('[language-selector] Error updating Alpine store:', e);
           }
         }
-        
+
         // Dispatch custom event for other components
         const event = new CustomEvent('language:changed', {
-          detail: { langCode, timestamp: Date.now() }
+          detail: { langCode, timestamp: Date.now() },
         });
         document.dispatchEvent(event);
-        
+
         // Remove loading indicator after a delay
         setTimeout(() => {
           const indicator = document.getElementById('language-loading-indicator');
@@ -257,7 +276,7 @@ function setupEventListeners(container, settings) {
         }, 500);
       } catch (error) {
         console.error('[language-selector] Error changing language:', error);
-        
+
         // Fallback: store the selection in localStorage and reload the page with the lang parameter
         try {
           localStorage.setItem('beyondLocale', langCode);
@@ -268,14 +287,14 @@ function setupEventListeners(container, settings) {
           console.error('[language-selector] Fallback failed:', e);
         }
       }
-      
+
       // Cerrar el menú desplegable
       toggle.setAttribute('aria-expanded', 'false');
       dropdown.classList.add('hidden');
       toggle.focus();
     }
   });
-  
+
   // Cerrar al presionar ESC
   container.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
@@ -284,7 +303,7 @@ function setupEventListeners(container, settings) {
       toggle.focus();
     }
   });
-  
+
   // Cerrar al hacer clic fuera
   document.addEventListener('click', (e) => {
     if (!container.contains(e.target) && toggle.getAttribute('aria-expanded') === 'true') {
@@ -292,22 +311,22 @@ function setupEventListeners(container, settings) {
       dropdown.classList.add('hidden');
     }
   });
-  
+
   // Navegación por teclado
   dropdown.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault();
-      
+
       const items = Array.from(dropdown.querySelectorAll('button[role="menuitem"]'));
       const currentIndex = items.indexOf(document.activeElement);
-      
+
       let newIndex;
       if (e.key === 'ArrowDown') {
         newIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
       } else {
         newIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
       }
-      
+
       items[newIndex].focus();
     }
   });
@@ -322,35 +341,35 @@ function setupEventListeners(container, settings) {
 function updateSelectedLanguage(container, langCode, settings) {
   const toggle = container.querySelector('#language-dropdown-toggle');
   const languageItems = container.querySelectorAll('[data-lang]');
-  
+
   if (!toggle || !languageItems.length) return;
-  
+
   console.log(`[language-selector] Updating selected language to: ${langCode}`);
-  
+
   // Encontrar los datos del idioma seleccionado
-  const selectedLang = settings.languages.find(lang => lang.code === langCode);
+  const selectedLang = settings.languages.find((lang) => lang.code === langCode);
   if (!selectedLang) {
     console.warn(`[language-selector] Language ${langCode} not found in settings`);
     return;
   }
-  
+
   // Actualizar el botón principal
   const toggleImg = toggle.querySelector('img');
   const toggleText = toggle.querySelector('span.sm\\:inline');
-  
+
   if (toggleImg) {
     toggleImg.src = `${settings.flagsPath}${selectedLang.flag}`;
     toggleImg.alt = `Flag of ${selectedLang.name} (${selectedLang.code})`;
     console.log(`[language-selector] Updated flag image to: ${toggleImg.src}`);
   }
-  
+
   if (toggleText) {
     toggleText.textContent = selectedLang.name;
     console.log(`[language-selector] Updated language name to: ${selectedLang.name}`);
   }
-  
+
   // Actualizar los elementos del menú
-  languageItems.forEach(item => {
+  languageItems.forEach((item) => {
     const isSelected = item.getAttribute('data-lang') === langCode;
     item.setAttribute('aria-current', isSelected ? 'true' : 'false');
     item.classList.toggle('bg-primary-100', isSelected);
@@ -360,5 +379,5 @@ function updateSelectedLanguage(container, langCode, settings) {
 }
 
 export default {
-  initLanguageSelector
-}; 
+  initLanguageSelector,
+};

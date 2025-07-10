@@ -25,8 +25,10 @@ class MobileOptimizer {
 
   // Detect mobile device
   detectMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-           window.innerWidth < 768;
+    return (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+      window.innerWidth < 768
+    );
   }
 
   // Setup touch handlers for 3D viewer
@@ -103,7 +105,7 @@ class MobileOptimizer {
     this.touchHandlers.set(canvas, {
       touchstart: handleTouchStart,
       touchmove: handleTouchMove,
-      touchend: handleTouchEnd
+      touchend: handleTouchEnd,
     });
 
     // Add mobile controls UI
@@ -155,7 +157,7 @@ class MobileOptimizer {
       if (!btn) return;
 
       const action = btn.dataset.action;
-      
+
       // Haptic feedback
       if ('vibrate' in navigator) {
         navigator.vibrate(50);
@@ -195,13 +197,17 @@ class MobileOptimizer {
   setupTouchHandlers() {
     // Prevent double-tap zoom
     let lastTouchEnd = 0;
-    document.addEventListener('touchend', (e) => {
-      const now = Date.now();
-      if (now - lastTouchEnd <= 300) {
-        e.preventDefault();
-      }
-      lastTouchEnd = now;
-    }, false);
+    document.addEventListener(
+      'touchend',
+      (e) => {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+          e.preventDefault();
+        }
+        lastTouchEnd = now;
+      },
+      false,
+    );
 
     // Add swipe gestures for navigation
     this.setupSwipeGestures();
@@ -234,16 +240,24 @@ class MobileOptimizer {
       }
     };
 
-    document.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-      touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
+    document.addEventListener(
+      'touchstart',
+      (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      },
+      { passive: true },
+    );
 
-    document.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      touchEndY = e.changedTouches[0].screenY;
-      handleSwipe();
-    }, { passive: true });
+    document.addEventListener(
+      'touchend',
+      (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+      },
+      { passive: true },
+    );
   }
 
   // Improve tap targets for mobile
@@ -253,19 +267,19 @@ class MobileOptimizer {
     // Find all interactive elements
     const elements = document.querySelectorAll('button, a, input, select, [role="button"]');
 
-    elements.forEach(element => {
+    elements.forEach((element) => {
       const rect = element.getBoundingClientRect();
-      
+
       if (rect.width < minSize || rect.height < minSize) {
         // Add padding to increase tap target
         element.style.position = 'relative';
-        
+
         // Create invisible expanded hit area
         const hitArea = document.createElement('span');
         hitArea.style.position = 'absolute';
         hitArea.style.inset = `-${(minSize - rect.height) / 2}px -${(minSize - rect.width) / 2}px`;
         hitArea.style.pointerEvents = 'none';
-        
+
         element.appendChild(hitArea);
       }
     });
@@ -281,7 +295,7 @@ class MobileOptimizer {
     // Lazy load images
     if ('IntersectionObserver' in window) {
       const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const img = entry.target;
             img.src = img.dataset.src;
@@ -291,7 +305,7 @@ class MobileOptimizer {
         });
       });
 
-      document.querySelectorAll('img[data-src]').forEach(img => {
+      document.querySelectorAll('img[data-src]').forEach((img) => {
         imageObserver.observe(img);
       });
     }
@@ -320,7 +334,7 @@ class MobileOptimizer {
       setTimeout(() => {
         window.scrollTo(0, 0);
         this.triggerEvent('orientation:change', {
-          orientation: window.orientation
+          orientation: window.orientation,
         });
       }, 300);
     });
@@ -358,8 +372,7 @@ class MobileOptimizer {
     const toggle = document.querySelector('.mobile-menu-toggle');
     toggle.addEventListener('click', () => {
       document.body.classList.toggle('mobile-menu-open');
-      toggle.setAttribute('aria-expanded', 
-        document.body.classList.contains('mobile-menu-open'));
+      toggle.setAttribute('aria-expanded', document.body.classList.contains('mobile-menu-open'));
     });
   }
 
@@ -371,41 +384,54 @@ class MobileOptimizer {
     const container = document.body;
 
     const pullIndicator = document.createElement('div');
-    pullIndicator.className = 'pull-to-refresh-indicator fixed top-0 left-0 right-0 h-20 flex items-center justify-center bg-blue-500 text-white transform -translate-y-full transition-transform';
+    pullIndicator.className =
+      'pull-to-refresh-indicator fixed top-0 left-0 right-0 h-20 flex items-center justify-center bg-blue-500 text-white transform -translate-y-full transition-transform';
     pullIndicator.innerHTML = '<span>Pull to refresh</span>';
     container.appendChild(pullIndicator);
 
-    container.addEventListener('touchstart', (e) => {
-      if (window.scrollY === 0) {
-        startY = e.touches[0].pageY;
-      }
-    }, { passive: true });
+    container.addEventListener(
+      'touchstart',
+      (e) => {
+        if (window.scrollY === 0) {
+          startY = e.touches[0].pageY;
+        }
+      },
+      { passive: true },
+    );
 
-    container.addEventListener('touchmove', (e) => {
-      if (window.scrollY === 0 && startY > 0) {
-        pullDistance = e.touches[0].pageY - startY;
-        
-        if (pullDistance > 0) {
-          const progress = Math.min(pullDistance / threshold, 1);
-          pullIndicator.style.transform = `translateY(${progress * 80 - 80}px)`;
-          
-          if (pullDistance > threshold) {
-            pullIndicator.textContent = 'Release to refresh';
+    container.addEventListener(
+      'touchmove',
+      (e) => {
+        if (window.scrollY === 0 && startY > 0) {
+          pullDistance = e.touches[0].pageY - startY;
+
+          if (pullDistance > 0) {
+            const progress = Math.min(pullDistance / threshold, 1);
+            pullIndicator.style.transform = `translateY(${progress * 80 - 80}px)`;
+
+            if (pullDistance > threshold) {
+              pullIndicator.textContent = 'Release to refresh';
+            }
           }
         }
-      }
-    }, { passive: true });
+      },
+      { passive: true },
+    );
 
-    container.addEventListener('touchend', () => {
-      if (pullDistance > threshold) {
-        pullIndicator.textContent = 'Refreshing...';
-        window.location.reload();
-      } else {
-        pullIndicator.style.transform = 'translateY(-100%)';
-      }
-      pullDistance = 0;
-      startY = 0;
-    }, { passive: true });
+    container.addEventListener(
+      'touchend',
+      () => {
+        if (pullDistance > threshold) {
+          pullIndicator.textContent = 'Refreshing...';
+          window.location.reload();
+        } else {
+          pullIndicator.style.transform = 'translateY(-100%)';
+        }
+        pullDistance = 0;
+        startY = 0;
+      },
+      { passive: true },
+    );
   }
 
   // Setup native share
@@ -413,16 +439,16 @@ class MobileOptimizer {
     if (navigator.share) {
       // Replace share buttons with native share
       const shareButtons = document.querySelectorAll('[data-share]');
-      
-      shareButtons.forEach(button => {
+
+      shareButtons.forEach((button) => {
         button.addEventListener('click', async (e) => {
           e.preventDefault();
-          
+
           try {
             await navigator.share({
               title: button.dataset.shareTitle || document.title,
               text: button.dataset.shareText || '',
-              url: button.dataset.shareUrl || window.location.href
+              url: button.dataset.shareUrl || window.location.href,
             });
           } catch (err) {
             if (err.name !== 'AbortError') {
@@ -437,7 +463,8 @@ class MobileOptimizer {
   // Setup offline detection
   setupOfflineDetection() {
     const offlineIndicator = document.createElement('div');
-    offlineIndicator.className = 'offline-indicator fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 transform -translate-y-full transition-transform';
+    offlineIndicator.className =
+      'offline-indicator fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 transform -translate-y-full transition-transform';
     offlineIndicator.textContent = 'You are offline';
     document.body.appendChild(offlineIndicator);
 
@@ -458,16 +485,16 @@ class MobileOptimizer {
   setupResponsiveImages() {
     // Convert images to use srcset
     const images = document.querySelectorAll('img[data-srcset]');
-    
-    images.forEach(img => {
+
+    images.forEach((img) => {
       img.srcset = img.dataset.srcset;
       img.sizes = img.dataset.sizes || '100vw';
     });
 
     // WebP detection and fallback
-    this.detectWebPSupport().then(supportsWebP => {
+    this.detectWebPSupport().then((supportsWebP) => {
       if (!supportsWebP) {
-        document.querySelectorAll('img[data-fallback]').forEach(img => {
+        document.querySelectorAll('img[data-fallback]').forEach((img) => {
           img.src = img.dataset.fallback;
         });
       }
@@ -477,9 +504,10 @@ class MobileOptimizer {
   // Detect WebP support
   async detectWebPSupport() {
     const webP = new Image();
-    webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
-    
-    return new Promise(resolve => {
+    webP.src =
+      'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+
+    return new Promise((resolve) => {
       webP.onload = webP.onerror = () => {
         resolve(webP.height === 2);
       };
@@ -490,10 +518,10 @@ class MobileOptimizer {
   setupAdaptiveLoading() {
     if ('connection' in navigator) {
       const connection = navigator.connection;
-      
+
       const updateLoadingStrategy = () => {
         const effectiveType = connection.effectiveType;
-        
+
         if (effectiveType === 'slow-2g' || effectiveType === '2g') {
           // Low quality mode
           document.documentElement.classList.add('low-bandwidth');
@@ -520,19 +548,23 @@ class MobileOptimizer {
     let resizeTimeout;
 
     // Debounced scroll
-    window.addEventListener('scroll', () => {
-      if (scrollTimeout) return;
-      
-      scrollTimeout = setTimeout(() => {
-        this.triggerEvent('scroll:debounced');
-        scrollTimeout = null;
-      }, 150);
-    }, { passive: true });
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (scrollTimeout) return;
+
+        scrollTimeout = setTimeout(() => {
+          this.triggerEvent('scroll:debounced');
+          scrollTimeout = null;
+        }, 150);
+      },
+      { passive: true },
+    );
 
     // Debounced resize
     window.addEventListener('resize', () => {
       if (resizeTimeout) return;
-      
+
       resizeTimeout = setTimeout(() => {
         this.triggerEvent('resize:debounced');
         resizeTimeout = null;
@@ -596,4 +628,4 @@ if (document.readyState === 'loading') {
 }
 
 // Export for use in other modules
-export default MobileOptimizer; 
+export default MobileOptimizer;
