@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Budget, 
-  calculateBudget, 
-  _IndirectCostType,
-  calculateDetailedBreakdown
+import {
+  Budget,
+  calculateBudget,
+  IndirectCostType,
+  calculateDetailedBreakdown,
 } from '../models/CostEngine';
 import { ConstructionSystem } from '../models/ConstructionSystem';
 import { MaterialPreset } from '../models/Materials';
@@ -17,7 +17,7 @@ interface CostCalculatorProps {
   landCost?: number;
   locationFactor?: number;
   yearOffset?: number;
-  indirectCostPercentages?: Partial<Record<_IndirectCostType, number>>;
+  indirectCostPercentages?: Partial<Record<IndirectCostType, number>>;
 }
 
 export const CostCalculator: React.FC<CostCalculatorProps> = ({
@@ -29,12 +29,14 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
   landCost = 0,
   locationFactor = 1.0,
   yearOffset = 0,
-  indirectCostPercentages = {}
+  indirectCostPercentages = {},
 }) => {
   const [budget, setBudget] = useState<Budget | null>(null);
-  const [activeTab, setActiveTab] = useState<'summary' | 'direct' | 'indirect' | 'breakdown'>('summary');
+  const [activeTab, setActiveTab] = useState<'summary' | 'direct' | 'indirect' | 'breakdown'>(
+    'summary',
+  );
   const [breakdown, setBreakdown] = useState<Record<string, number>>({});
-  
+
   useEffect(() => {
     // Calcular presupuesto cuando cambien los inputs
     const calculatedBudget = calculateBudget(
@@ -46,30 +48,30 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
       landCost,
       locationFactor,
       yearOffset,
-      indirectCostPercentages
+      indirectCostPercentages,
     );
-    
+
     setBudget(calculatedBudget);
-    
+
     // Calcular desglose detallado
     const detailedBreakdown = calculateDetailedBreakdown(calculatedBudget);
     setBreakdown(detailedBreakdown);
   }, [
-    projectId, 
-    projectName, 
-    areaM2, 
-    constructionSystem, 
-    materialPreset, 
-    landCost, 
-    locationFactor, 
-    yearOffset, 
-    indirectCostPercentages
+    projectId,
+    projectName,
+    areaM2,
+    constructionSystem,
+    materialPreset,
+    landCost,
+    locationFactor,
+    yearOffset,
+    indirectCostPercentages,
   ]);
-  
+
   if (!budget) {
     return <div className="p-4">Calculando presupuesto...</div>;
   }
-  
+
   return (
     <div className="bg-white rounded-lg shadow">
       <div className="p-4 border-b">
@@ -78,15 +80,15 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
           Proyecto: {projectName} | Área: {areaM2.toLocaleString()} m²
         </p>
       </div>
-      
+
       <div className="border-b">
         <div className="flex">
-          {(['summary', 'direct', 'indirect', 'breakdown'] as const).map(tab => (
+          {(['summary', 'direct', 'indirect', 'breakdown'] as const).map((tab) => (
             <button
               key={tab}
               className={`px-4 py-2 font-medium text-sm ${
-                activeTab === tab 
-                  ? 'border-b-2 border-blue-500 text-blue-600' 
+                activeTab === tab
+                  ? 'border-b-2 border-blue-500 text-blue-600'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
               onClick={() => setActiveTab(tab)}
@@ -96,7 +98,7 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
           ))}
         </div>
       </div>
-      
+
       <div className="p-4">
         {activeTab === 'summary' && (
           <div>
@@ -114,7 +116,7 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
                 <p className="text-2xl font-bold">${budget.totalCost.toLocaleString()}</p>
               </div>
             </div>
-            
+
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
@@ -131,13 +133,15 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Última Actualización</p>
-                  <p className="text-lg font-semibold">{new Date(budget.updatedAt).toLocaleDateString()}</p>
+                  <p className="text-lg font-semibold">
+                    {new Date(budget.updatedAt).toLocaleDateString()}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         )}
-        
+
         {activeTab === 'direct' && (
           <div>
             <h3 className="text-lg font-semibold mb-4">Costos Directos</h3>
@@ -160,7 +164,7 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {Object.values(budget.directCosts).map(cost => (
+                  {Object.values(budget.directCosts).map((cost) => (
                     <tr key={cost.type}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {cost.name}
@@ -195,7 +199,7 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
             </div>
           </div>
         )}
-        
+
         {activeTab === 'indirect' && (
           <div>
             <h3 className="text-lg font-semibold mb-4">Costos Indirectos</h3>
@@ -218,7 +222,7 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {Object.values(budget.indirectCosts).map(cost => (
+                  {Object.values(budget.indirectCosts).map((cost) => (
                     <tr key={cost.type}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {cost.name}
@@ -253,7 +257,7 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
             </div>
           </div>
         )}
-        
+
         {activeTab === 'breakdown' && (
           <div>
             <h3 className="text-lg font-semibold mb-4">Desglose Detallado de Partidas</h3>
@@ -278,7 +282,7 @@ function getTabName(tab: 'summary' | 'direct' | 'indirect' | 'breakdown'): strin
     summary: 'Resumen',
     direct: 'Costos Directos',
     indirect: 'Costos Indirectos',
-    breakdown: 'Desglose Detallado'
+    breakdown: 'Desglose Detallado',
   };
   return names[tab];
 }
