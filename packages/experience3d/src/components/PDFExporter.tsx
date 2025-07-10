@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExportSystem, PDFExportOptions, PDFSection } from '../models/ExportSystem';
+import { ExportSystem, PDFExportOptions } from '../models/ExportSystem';
 
 interface PDFExporterProps {
   exportSystem: ExportSystem;
@@ -19,7 +19,7 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
   defaultOptions,
   onExportStart,
   onExportComplete,
-  onExportError
+  onExportError,
 }) => {
   const [isExporting, setIsExporting] = useState<boolean>(false);
   const [exportProgress, setExportProgress] = useState<number>(0);
@@ -35,87 +35,88 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
     includeCharts: true,
     orientation: 'portrait',
     pageSize: 'a4',
-    ...defaultOptions
+    ...defaultOptions,
   });
-  
+
   // Manejar cambios en las opciones
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
-    
+
     // Manejar checkboxes
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked;
-      setOptions(prev => ({
+      setOptions((prev) => ({
         ...prev,
-        [name]: checked
+        [name]: checked,
       }));
     } else {
-      setOptions(prev => ({
+      setOptions((prev) => ({
         ...prev,
-        [name]: value
+        [name]: value,
       }));
     }
   };
-  
+
   // Iniciar exportación
   const startExport = async () => {
     if (isExporting) return;
-    
+
     setIsExporting(true);
     setExportProgress(0);
     setExportError(null);
-    
+
     if (onExportStart) {
       onExportStart();
     }
-    
+
     try {
       // Simular progreso
       const progressInterval = setInterval(() => {
-        setExportProgress(prev => {
+        setExportProgress((prev) => {
           const newProgress = prev + 10;
           return newProgress > 90 ? 90 : newProgress;
         });
       }, 300);
-      
+
       // Realizar exportación
       const pdfUrl = await exportSystem.exportPDF(options);
-      
+
       // Limpiar intervalo y completar
       clearInterval(progressInterval);
       setExportProgress(100);
-      
+
       if (onExportComplete) {
         onExportComplete(pdfUrl);
       }
-      
+
       // Ofrecer descarga
       const link = document.createElement('a');
       link.href = pdfUrl;
       link.download = options.filename || 'informe.pdf';
       link.click();
-      
+
       // Resetear estado después de un momento
       setTimeout(() => {
         setIsExporting(false);
         setExportProgress(0);
       }, 2000);
-      
     } catch (error) {
-      setExportError(`Error al exportar PDF: ${error instanceof Error ? error.message : String(error)}`);
+      setExportError(
+        `Error al exportar PDF: ${error instanceof Error ? error.message : String(error)}`,
+      );
       setIsExporting(false);
-      
+
       if (onExportError && error instanceof Error) {
         onExportError(error);
       }
     }
   };
-  
+
   return (
     <div className={`pdf-exporter ${className || ''}`}>
       <div className="export-options">
         <h3>Opciones de Exportación PDF</h3>
-        
+
         <div className="option-group">
           <label htmlFor="filename">Nombre del archivo:</label>
           <input
@@ -127,7 +128,7 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
             disabled={isExporting}
           />
         </div>
-        
+
         <div className="option-group">
           <label htmlFor="title">Título:</label>
           <input
@@ -139,7 +140,7 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
             disabled={isExporting}
           />
         </div>
-        
+
         <div className="option-group">
           <label htmlFor="pageSize">Tamaño de página:</label>
           <select
@@ -154,7 +155,7 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
             <option value="legal">Legal</option>
           </select>
         </div>
-        
+
         <div className="option-group">
           <label htmlFor="orientation">Orientación:</label>
           <select
@@ -168,7 +169,7 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
             <option value="landscape">Horizontal</option>
           </select>
         </div>
-        
+
         <div className="checkbox-group">
           <label>
             <input
@@ -181,7 +182,7 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
             Incluir imágenes
           </label>
         </div>
-        
+
         <div className="checkbox-group">
           <label>
             <input
@@ -194,7 +195,7 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
             Incluir datos financieros
           </label>
         </div>
-        
+
         <div className="checkbox-group">
           <label>
             <input
@@ -207,7 +208,7 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
             Incluir tablas
           </label>
         </div>
-        
+
         <div className="checkbox-group">
           <label>
             <input
@@ -221,33 +222,20 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
           </label>
         </div>
       </div>
-      
-      {exportError && (
-        <div className="export-error">
-          {exportError}
-        </div>
-      )}
-      
+
+      {exportError && <div className="export-error">{exportError}</div>}
+
       {isExporting && (
         <div className="export-progress">
           <div className="progress-bar">
-            <div 
-              className="progress-fill" 
-              style={{ width: `${exportProgress}%` }}
-            />
+            <div className="progress-fill" style={{ width: `${exportProgress}%` }} />
           </div>
-          <div className="progress-text">
-            {exportProgress}% completado
-          </div>
+          <div className="progress-text">{exportProgress}% completado</div>
         </div>
       )}
-      
+
       <div className="export-actions">
-        <button
-          className="export-button"
-          onClick={startExport}
-          disabled={isExporting}
-        >
+        <button className="export-button" onClick={startExport} disabled={isExporting}>
           {isExporting ? 'Exportando...' : 'Exportar PDF'}
         </button>
       </div>
@@ -255,4 +243,4 @@ const PDFExporter: React.FC<PDFExporterProps> = ({
   );
 };
 
-export default PDFExporter; 
+export default PDFExporter;

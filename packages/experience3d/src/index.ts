@@ -16,4 +16,4 @@ export * from './components/ViewSelector';
 export * from './components/GamificationDashboard';
 export * from './components/ChallengeBoard';
 export * from './components/PDFExporter';
-export * from './components/ModelExporter'; 
+export * from './components/ModelExporter';
