@@ -53,6 +53,7 @@ The color palette was implemented using CSS custom properties (variables) with a
 ```
 
 This approach provides:
+
 - Centralized color management
 - Easy updates and maintenance
 - Consistent application across components
@@ -62,12 +63,12 @@ This approach provides:
 
 All color combinations were verified for WCAG 2.1 AA compliance:
 
-| Element Type | Contrast Requirement | Status |
-|--------------|----------------------|--------|
-| Normal Text | 4.5:1 | ✅ Passed |
-| Large Text | 3:1 | ✅ Passed |
-| UI Components | 3:1 | ✅ Passed |
-| Focus States | Visible | ✅ Passed |
+| Element Type  | Contrast Requirement | Status    |
+| ------------- | -------------------- | --------- |
+| Normal Text   | 4.5:1                | ✅ Passed |
+| Large Text    | 3:1                  | ✅ Passed |
+| UI Components | 3:1                  | ✅ Passed |
+| Focus States  | Visible              | ✅ Passed |
 
 Comprehensive accessibility testing was performed using automated tools (axe-core) and manual verification.
 
@@ -86,11 +87,11 @@ No significant rendering inconsistencies were identified.
 
 Performance testing showed minimal impact on key metrics:
 
-| Metric | Before | After | Change |
-|--------|--------|-------|--------|
-| CSS File Size | 45.2KB | 47.8KB | +2.6KB |
-| First Contentful Paint | 1.2s | 1.25s | +0.05s |
-| Time to Interactive | 2.4s | 2.45s | +0.05s |
+| Metric                 | Before | After  | Change |
+| ---------------------- | ------ | ------ | ------ |
+| CSS File Size          | 45.2KB | 47.8KB | +2.6KB |
+| First Contentful Paint | 1.2s   | 1.25s  | +0.05s |
+| Time to Interactive    | 2.4s   | 2.45s  | +0.05s |
 
 The slight increase in file size is offset by the improved maintainability and consistency of the codebase.
 
@@ -197,13 +198,13 @@ The tools, documentation, and processes developed during this project provide a 
 
 ### Project Timeline
 
-| Phase | Duration | Key Activities |
-|-------|----------|----------------|
-| Planning | 2 weeks | Research, color selection, accessibility verification |
-| Implementation | 3 weeks | CSS variable creation, component updates, testing |
-| Documentation | 2 weeks | Style guide, reference docs, maintenance plan |
-| Testing | 1 week | Accessibility, cross-browser, performance testing |
-| Refinement | 1 week | Addressing issues, final adjustments |
+| Phase          | Duration | Key Activities                                        |
+| -------------- | -------- | ----------------------------------------------------- |
+| Planning       | 2 weeks  | Research, color selection, accessibility verification |
+| Implementation | 3 weeks  | CSS variable creation, component updates, testing     |
+| Documentation  | 2 weeks  | Style guide, reference docs, maintenance plan         |
+| Testing        | 1 week   | Accessibility, cross-browser, performance testing     |
+| Refinement     | 1 week   | Addressing issues, final adjustments                  |
 
 ### Team Members
 
@@ -218,4 +219,4 @@ The tools, documentation, and processes developed during this project provide a 
 - [Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG21/)
 - [CSS Custom Properties (Variables)](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
 - [Design Systems Handbook](https://www.designbetter.co/design-systems-handbook)
-- [Color Theory for Designers](https://www.smashingmagazine.com/2010/01/color-theory-for-designers-part-1-the-meaning-of-color/) 
+- [Color Theory for Designers](https://www.smashingmagazine.com/2010/01/color-theory-for-designers-part-1-the-meaning-of-color/)

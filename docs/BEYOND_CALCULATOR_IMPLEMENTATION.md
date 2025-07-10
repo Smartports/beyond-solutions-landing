@@ -1,11 +1,13 @@
 # Beyond Calculator – Implementation Blueprint
 
 ## 1. **Overview**
+
 Implement a new, fully accessible, multi-language, and style-consistent calculator page for the Beyond Solutions landing site. This document details the pseudocode, structure, integration steps, and best practices for building the "Beyond Calculator" tool, ensuring compliance with UI/UX, accessibility, and code quality guidelines.
 
 ---
 
 ## 2. **Objectives**
+
 - Provide a user-friendly, step-by-step calculator for real estate project budgeting.
 - Ensure full compatibility with the current i18n system (18+ languages, RTL support).
 - Match the visual and interactive style of the existing landing page (TailwindCSS, Alpine.js, AOS, dark/light modes).
@@ -16,10 +18,12 @@ Implement a new, fully accessible, multi-language, and style-consistent calculat
 ## 3. **Page Structure & User Flow**
 
 ### **A. Page Route**
+
 - New page: `/calculator-gamified.html`
 - Add navigation link from main site (with i18n support)
 
 ### **B. Main Sections**
+
 1. **Introduction**
    - Brief description, instructions, and benefits (i18n)
 2. **Step-by-Step Form**
@@ -36,6 +40,7 @@ Implement a new, fully accessible, multi-language, and style-consistent calculat
 ## 4. **Pseudocode & Component Structure**
 
 ### **A. Data Model**
+
 ```js
 const calculatorState = {
   language: 'es', // or from i18n system
@@ -59,7 +64,9 @@ const calculatorState = {
     diseno: { percent: 0.05, value: 0 },
     arte: { percent: 0.05, value: 0 },
   },
-  paymentCycles: { /* ... */ },
+  paymentCycles: {
+    /* ... */
+  },
   results: {
     totalCost: 0,
     totalSell: 0,
@@ -72,6 +79,7 @@ const calculatorState = {
 ```
 
 ### **B. UI Components**
+
 - `<CalculatorIntro />` – i18n intro, instructions
 - `<StepForm />` – Multi-step form (Alpine.js x-data or Vue/React if SPA)
   - `<Step1ScopeEntity />`
@@ -83,6 +91,7 @@ const calculatorState = {
 - `<HelpTooltip />` – Contextual help, ARIA, keyboard accessible
 
 ### **C. Calculation Logic (Pseudocode)**
+
 ```js
 function calculateCosts(state) {
   // For each cost category
@@ -102,11 +111,13 @@ function calculateCosts(state) {
 ## 5. **Integration Steps**
 
 ### **A. Preparation**
+
 1. **Pattern Search**: Review project for similar forms/components (see Creation Protocol).
 2. **Utility Check**: Reuse i18n, form, and style utilities.
 3. **Config Review**: Ensure new page is registered in navigation and i18n configs.
 
 ### **B. Implementation**
+
 1. **Create new HTML page** (`calculator-gamified.html`), copy base structure from `index.html`.
 2. **Add TailwindCSS, Alpine.js, AOS, and i18n scripts** (reuse CDN/config).
 3. **Build multi-step form** using Alpine.js (`x-data`, `x-show`, `x-transition`).
@@ -137,6 +148,7 @@ function calculateCosts(state) {
 ---
 
 ## 6. **UI/UX & Accessibility Best Practices**
+
 - **WCAG 2.1 AA+**: All interactive elements must be keyboard accessible, have visible focus, and provide sufficient contrast.
 - **ARIA**: Use ARIA roles, labels, and live regions for dynamic content.
 - **ADA/Section 508/AODA/IDEA**: Ensure compatibility with assistive technologies, provide error messages, and avoid time-based interactions.
@@ -158,6 +170,7 @@ function calculateCosts(state) {
 ---
 
 ## 7. **Change Manifest & Documentation Matrix**
+
 - **New page**: `calculator-gamified.html`
 - **New JS module**: `js/calculator.js`
 - **i18n updates**: Add keys to all language files
@@ -169,6 +182,7 @@ function calculateCosts(state) {
 ---
 
 ## 8. **References & Further Reading**
+
 - [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)
 - [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
 - [TailwindCSS Accessibility](https://tailwindcss.com/docs/accessibility)
@@ -178,4 +192,4 @@ function calculateCosts(state) {
 
 ---
 
-> **This document must be kept up to date with all changes to the calculator implementation. All contributors must review and follow these guidelines for any related work.** 
+> **This document must be kept up to date with all changes to the calculator implementation. All contributors must review and follow these guidelines for any related work.**

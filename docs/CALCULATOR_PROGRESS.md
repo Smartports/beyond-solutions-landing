@@ -1,8 +1,13 @@
 # Sprint 1 - E1 Wizard/Onboarding Completado ✅
+
 # Sprint 2 - E2 Terreno MVP Completado ✅
+
 # Sprint 3 - E2+ Terreno Completo Completado ✅
+
 # Sprint 4 - E3 Costos Completado ✅
+
 # Sprint 5 - E4 Experiencia 3D Completado ✅
+
 # Sprint 6 - Hardening y QA Completado ✅
 
 Este documento registra el progreso en el desarrollo de la calculadora inmobiliaria v2.
@@ -19,6 +24,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ## Detalle del Sprint 1 (Completado)
 
 ### Progreso General
+
 - [x] Configuración del proyecto base (monorepo)
 - [x] Componentes de UI esenciales
 - [x] Wizard de 2 preguntas (Perfil y Tipo de Proyecto)
@@ -29,29 +35,34 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ### Entregables Completados
 
 #### Estructura del Proyecto
+
 - [x] Monorepo con apps/web, packages/ui, packages/core
 - [x] Configuración de Tailwind CSS
 - [x] Configuración de TypeScript
 - [x] Sistema de i18n
 
 #### UI Components
+
 - [x] StepContainer
 - [x] StepIndicator
 - [x] SelectCard
 - [x] Dashboard
 
 #### Core Features
+
 - [x] IndexedDB setup con Dexie.js
 - [x] Autosave con debounce
 - [x] Recuperación de estado guardado
 
 #### Pantallas
+
 - [x] Wizard de onboarding
 - [x] Selección de perfil
 - [x] Selección de tipo de proyecto
 - [x] Dashboard (listado de proyectos)
 
 ### Tests Implementados
+
 - [x] Validación de componentes
 - [x] Pruebas de persistencia de datos
 - [x] Pruebas de accesibilidad
@@ -60,6 +71,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ## Detalle del Sprint 2 (Completado)
 
 ### Progreso General
+
 - [x] Integración con Google Maps API
 - [x] Componente MapPicker
 - [x] Selección de origen del terreno (propio o catálogo)
@@ -72,11 +84,13 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ### Entregables Completados
 
 #### Estructura del Proyecto
+
 - [x] Nuevo paquete @beyond/maps
 - [x] Integración con Google Maps Platform
 - [x] Configuración de API y componentes de mapas
 
 #### UI Components
+
 - [x] MapLoader
 - [x] MapContainer
 - [x] MapControls
@@ -88,6 +102,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] TerrainExport
 
 #### Core Features
+
 - [x] Integración con Google Maps API
 - [x] Dibujo de polígonos en 2D
 - [x] Cálculos de área y perímetro
@@ -96,6 +111,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Catálogo de terrenos predefinidos
 
 #### Pantallas
+
 - [x] Selección de origen del terreno
 - [x] Selección en mapa
 - [x] Dibujo de terreno
@@ -105,6 +121,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ## Detalle del Sprint 3 (Completado)
 
 ### Progreso General
+
 - [x] Implementación de importación de archivos CAD (DXF)
 - [x] Implementación de importación de archivos GeoJSON
 - [x] Integración con Babylon.js para renderizado 3D
@@ -117,11 +134,13 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ### Entregables Completados
 
 #### Estructura del Proyecto
+
 - [x] Nuevo paquete @beyond/geo para manejo de archivos CAD/GIS
 - [x] Integración con Babylon.js para renderizado 3D
 - [x] Configuración de herramientas de análisis geoespacial
 
 #### UI Components
+
 - [x] TerrainImport
 - [x] TerrainAnalysis
 - [x] TerrainViewer3D
@@ -130,6 +149,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] LayerSelector
 
 #### Core Features
+
 - [x] Importación de archivos DXF
 - [x] Importación de archivos GeoJSON
 - [x] Renderizado 3D del terreno
@@ -139,6 +159,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Generación de informes de análisis
 
 #### Pantallas
+
 - [x] Importación de archivos CAD/GIS
 - [x] Vista 3D del terreno
 - [x] Configuración de análisis solar
@@ -148,6 +169,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ## Detalle del Sprint 4 (Completado)
 
 ### Progreso General
+
 - [x] Implementación del sistema constructivo base
 - [x] Desarrollo del selector de nivel de materiales
 - [x] Editor de materiales personalizado
@@ -160,11 +182,13 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ### Entregables Completados
 
 #### Estructura del Proyecto
+
 - [x] Nuevo paquete @beyond/finance
 - [x] Modelos para cálculos financieros
 - [x] Componentes de UI para selección y visualización
 
 #### UI Components
+
 - [x] ConstructionSystemSelector
 - [x] MaterialsSelector
 - [x] CostCalculator
@@ -174,6 +198,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] ScenarioManager
 
 #### Core Features
+
 - [x] Selección de sistemas constructivos
 - [x] Selección de materiales con diferentes niveles de calidad
 - [x] Cálculo de costos directos e indirectos
@@ -184,6 +209,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Proyección a 5 años
 
 #### Pantallas
+
 - [x] Selección de sistema constructivo
 - [x] Selección de materiales
 - [x] Calculadora de costos
@@ -195,6 +221,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ## Detalle del Sprint 5 (Completado)
 
 ### Progreso General
+
 - [x] Implementación del visualizador inmersivo 3D
 - [x] Sistema de ciclo día/noche con iluminación dinámica
 - [x] Simulación de estaciones con cambios en entorno
@@ -207,11 +234,13 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ### Entregables Completados
 
 #### Estructura del Proyecto
+
 - [x] Nuevo paquete @beyond/experience3d
 - [x] Modelos para visualización 3D avanzada
 - [x] Componentes para gamificación y exportación
 
 #### UI Components
+
 - [x] ImmersiveViewer3D
 - [x] DayNightController
 - [x] SeasonSelector
@@ -222,6 +251,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] ModelExporter
 
 #### Core Features
+
 - [x] Visualizador 3D con múltiples modos de cámara
 - [x] Sistema de iluminación dinámica día/noche
 - [x] Simulación de estaciones con efectos visuales
@@ -232,6 +262,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Exportación de modelos 3D y opciones de compartición
 
 #### Modelos Implementados
+
 - [x] ImmersiveViewer
 - [x] LightingSystem
 - [x] SeasonSystem
@@ -244,6 +275,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ## Detalle del Sprint 6 (Completado)
 
 ### Progreso General
+
 - [x] Auditoría de accesibilidad WCAG 2.1 AA
 - [x] Optimización de rendimiento y pruebas de estrés
 - [x] Pruebas de compatibilidad cross-browser/cross-device
@@ -256,6 +288,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 ### Entregables Completados
 
 #### Accesibilidad
+
 - [x] Auditoría automatizada con axe-core
 - [x] Pruebas manuales con lectores de pantalla
 - [x] Navegación completa con teclado
@@ -264,6 +297,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Skip links para navegación
 
 #### Rendimiento
+
 - [x] Pruebas de carga y estrés
 - [x] Optimización de tiempos de carga
 - [x] Implementación de lazy loading
@@ -272,6 +306,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Monitorización de performance
 
 #### Compatibilidad
+
 - [x] Matriz de pruebas para navegadores
 - [x] Pruebas en dispositivos iOS y Android
 - [x] Verificación de diseño responsive
@@ -280,6 +315,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Sistema de detección de capacidades
 
 #### Documentación
+
 - [x] Arquitectura del sistema
 - [x] APIs y componentes
 - [x] Guías de usuario
@@ -288,6 +324,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Documentación para desarrolladores
 
 #### Corrección y Seguridad
+
 - [x] Resolución de bugs críticos
 - [x] Refactorización de código duplicado
 - [x] Actualización de dependencias
@@ -297,6 +334,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Content Security Policy
 
 #### Preparación para Lanzamiento
+
 - [x] Pipeline de CI/CD
 - [x] Materiales de marketing
 - [x] Analytics y monitoreo
@@ -306,6 +344,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Prueba piloto con usuarios
 
 ## Próximo Sprint (Sprint 6)
+
 - [x] Implementar pruebas de integración completas
 - [x] Realizar optimizaciones de rendimiento
 - [x] Mejorar la accesibilidad en toda la aplicación
@@ -315,6 +354,7 @@ Este documento registra el progreso en el desarrollo de la calculadora inmobilia
 - [x] Preparar documentación final del proyecto
 
 ## Leyenda
+
 - ✅ Completado
 - 🚧 En progreso
 - 📅 Pendiente

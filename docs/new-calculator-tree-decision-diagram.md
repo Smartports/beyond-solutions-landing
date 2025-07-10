@@ -1,15 +1,15 @@
 flowchart TD
-  %% ────────────────────────────────
-  %% INICIO
-  %% ────────────────────────────────
-  A([Inicio Plataforma])
+%% ────────────────────────────────
+%% INICIO
+%% ────────────────────────────────
+A([Inicio Plataforma])
 
-  %% ────────────────────────────────
-  %% FASE 1 · IDEA / ONBOARDING
-  %% ────────────────────────────────
-  subgraph Fase1["Fase 1 • Idea / Onboarding"]
-    direction TB
-    A --> B[Wizard 2 Preguntas]
+%% ────────────────────────────────
+%% FASE 1 · IDEA / ONBOARDING
+%% ────────────────────────────────
+subgraph Fase1["Fase 1 • Idea / Onboarding"]
+direction TB
+A --> B[Wizard 2 Preguntas]
 
     B --> C{Selecciona tu perfil}
     C -->|Desarrollador| C1[Perfil Desarrollador]
@@ -24,14 +24,15 @@ flowchart TD
     D -->|Industrial| D4[Industrial]
 
     C1 & C2 & C3 & C4 & D1 & D2 & D3 & D4 --> E[Dashboard Autosave]
-  end
 
-  %% ────────────────────────────────
-  %% FASE 2 · TERRENO
-  %% ────────────────────────────────
-  subgraph Fase2["Fase 2 • Terreno"]
-    direction TB
-    E --> F{Origen del terreno}
+end
+
+%% ────────────────────────────────
+%% FASE 2 · TERRENO
+%% ────────────────────────────────
+subgraph Fase2["Fase 2 • Terreno"]
+direction TB
+E --> F{Origen del terreno}
 
     F -->|Propio| F1[Terreno Propio]
     F -->|Catálogo| F2[Catálogo Geo]
@@ -45,14 +46,15 @@ flowchart TD
     H  --> H1[Motor Físico]
     H1 --> H2[Análisis Solar]
     H1 --> H3[Análisis Viento]
-  end
 
-  %% ────────────────────────────────
-  %% FASE 3 · COSTOS
-  %% ────────────────────────────────
-  subgraph Fase3["Fase 3 • Costos"]
-    direction TB
-    H --> I{Sistema Constructivo}
+end
+
+%% ────────────────────────────────
+%% FASE 3 · COSTOS
+%% ────────────────────────────────
+subgraph Fase3["Fase 3 • Costos"]
+direction TB
+H --> I{Sistema Constructivo}
 
     I --> I1[Estructura]
     I --> I2[Cerramientos]
@@ -81,17 +83,18 @@ flowchart TD
     L2 --> L2b[Realista]
     L2 --> L2c[Pesimista]
     L2a & L2b & L2c --> L3[Proyección 5 años]
-  end
 
-  %% ────────────────────────────────
-  %% FASE 4 · EXPERIENCIA & COMPARTIR
-  %% ────────────────────────────────
-  subgraph Fase4["Fase 4 • Experiencia & Compartir"]
-    direction TB
-    L3 --> M[Visualizador Inmersivo 3D]
-    M  --> M1[Escala Día/Noche]
-    M  --> M2[Estaciones]
-    M  --> M3[Vista Interior / Exterior]
+end
+
+%% ────────────────────────────────
+%% FASE 4 · EXPERIENCIA & COMPARTIR
+%% ────────────────────────────────
+subgraph Fase4["Fase 4 • Experiencia & Compartir"]
+direction TB
+L3 --> M[Visualizador Inmersivo 3D]
+M --> M1[Escala Día/Noche]
+M --> M2[Estaciones]
+M --> M3[Vista Interior / Exterior]
 
     M3 --> N{Gamificación}
     N --> N1[XP y Badges]
@@ -111,17 +114,18 @@ flowchart TD
     P --> P2[Marketplace]
     P --> P3[Financieras]
     P --> P4[Analytics Dashboard]
-  end
 
-  %% ────────────────────────────────
-  %% ESTILOS DE FASE
-  %% ────────────────────────────────
-  classDef idea        fill:#f4d6db,stroke:#333,stroke-width:1px;
-  classDef terreno     fill:#d8e2dc,stroke:#333,stroke-width:1px;
-  classDef costos      fill:#d0f4de,stroke:#333,stroke-width:1px;
-  classDef experiencia fill:#a9def9,stroke:#333,stroke-width:1px;
+end
 
-  class B,C,C1,C2,C3,C4,D,D1,D2,D3,D4,E idea;
-  class F,F1,F2,F2a,G,G1,G2,H,H1,H2,H3 terreno;
-  class I,I1,I2,I3,I4,J,J1,J2,J3,J4,J5,J5a,K,K1,K2,K3,K4,K5,L,L1,L2,L2a,L2b,L2c,L3 costos;
-  class M,M1,M2,M3,N,N1,N2,N3,N4,O,O1,O2,O3,O4,O5,P,P1,P2,P3,P4 experiencia;
+%% ────────────────────────────────
+%% ESTILOS DE FASE
+%% ────────────────────────────────
+classDef idea fill:#f4d6db,stroke:#333,stroke-width:1px;
+classDef terreno fill:#d8e2dc,stroke:#333,stroke-width:1px;
+classDef costos fill:#d0f4de,stroke:#333,stroke-width:1px;
+classDef experiencia fill:#a9def9,stroke:#333,stroke-width:1px;
+
+class B,C,C1,C2,C3,C4,D,D1,D2,D3,D4,E idea;
+class F,F1,F2,F2a,G,G1,G2,H,H1,H2,H3 terreno;
+class I,I1,I2,I3,I4,J,J1,J2,J3,J4,J5,J5a,K,K1,K2,K3,K4,K5,L,L1,L2,L2a,L2b,L2c,L3 costos;
+class M,M1,M2,M3,N,N1,N2,N3,N4,O,O1,O2,O3,O4,O5,P,P1,P2,P3,P4 experiencia;
