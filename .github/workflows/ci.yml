@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches: [consolidation-phase, release-v1.9, main]
+  pull_request:
+    branches: [consolidation-phase, release-v1.9, main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Use Bun 1.2.17
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 1.2.17
+
+      - name: Install dependencies
+        run: bun install --ignore-scripts
+
+      - name: Lint
+        run: bun run lint --if-present
+
+      - name: Type Check
+        run: bun run typecheck --if-present
+
+      - name: Tests
+        run: bun run test --if-present
+
+      - name: Validate CSP Configuration (Quick Check)
+        run: |
+          echo "🔍 Quick CSP validation..."
+          
+          # Only run if calculator-gamified.html exists
+          if [ -f "calculator-gamified.html" ]; then
+            if grep -q "Content-Security-Policy" calculator-gamified.html; then
+              echo "✅ CSP meta tag found"
+            else
+              echo "❌ CSP meta tag missing"
+              exit 1
+            fi
+            
+            if grep -q "@alpinejs/csp" calculator-gamified.html; then
+              echo "✅ Alpine CSP build detected"
+            else
+              echo "⚠️ Alpine CSP build not detected"
+            fi
+          else
+            echo "⚠️ calculator-gamified.html not found, skipping CSP check"
+          fi
+
+      - name: Build Test
+        run: bun run build:prod
+
+      - name: Validate Built Assets
+        run: |
+          echo "🔍 Validating built assets..."
+          
+          if [ -d "dist" ]; then
+            echo "✅ dist directory created"
+            
+            # Check key files exist
+            for file in index.html js/main.js css/colors.css; do
+              if [ -f "dist/$file" ]; then
+                echo "✅ dist/$file exists"
+              else
+                echo "❌ dist/$file missing"
+                exit 1
+              fi
+            done
+            
+            # Check if CSP was preserved in dist
+            if [ -f "dist/calculator-gamified.html" ]; then
+              if grep -q "Content-Security-Policy" dist/calculator-gamified.html; then
+                echo "✅ CSP preserved in built file"
+              else
+                echo "❌ CSP lost during build"
+                exit 1
+              fi
+            fi
+            
+            echo "📊 Dist size: $(du -sh dist | cut -f1)"
+          else
+            echo "❌ dist directory not created"
+            exit 1
+          fi

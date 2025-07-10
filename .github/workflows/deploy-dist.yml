@@ -4,18 +4,22 @@ name: Deploy Dist to GitHub Pages
 
 on:
   push:
-    branches: [release-v1.9]      # ← adjust if you deploy from main or another branch
-    paths:                       # run only when build-relevant files change
+    branches: [release-v1.9] # ← adjust if you deploy from main or another branch
+    paths: # run only when build-relevant files change
       - 'apps/web/**'
+      - 'calculator-gamified.html'
+      - 'js/**'
+      - 'css/**'
+      - 'build.js'
       - '.github/workflows/deploy-dist.yml'
-  workflow_dispatch:             # manual trigger
+  workflow_dispatch: # manual trigger
 
 permissions:
-  contents: read                 # required by actions/checkout
-  pages: write                   # required by actions/deploy-pages
-  id-token: write                # required by actions/deploy-pages
+  contents: read # required by actions/checkout
+  pages: write # required by actions/deploy-pages
+  id-token: write # required by actions/deploy-pages
 
-concurrency:                     # prevent simultaneous deployments
+concurrency: # prevent simultaneous deployments
   group: 'github-pages'
   cancel-in-progress: false
 
@@ -30,10 +34,68 @@ jobs:
       - name: 🧑‍🍳  Set up Bun
         uses: oven-sh/setup-bun@v1
         with:
-          bun-version: 'latest'  # pin a version if you need deterministic builds
+          bun-version: 'latest' # pin a version if you need deterministic builds
 
       - name: 📦  Install dependencies
         run: bun install --frozen-lockfile
+
+      - name: 🔍  Validate CSP Configuration
+        run: |
+          echo "🔍 Validating CSP configuration for GitHub Pages..."
+          
+          # Verificar que el meta tag CSP existe en calculator-gamified.html
+          if grep -q "Content-Security-Policy" calculator-gamified.html; then
+            echo "✅ CSP meta tag found in calculator-gamified.html"
+          else
+            echo "❌ CSP meta tag not found in calculator-gamified.html"
+            exit 1
+          fi
+          
+          # Verificar que no hay nonces (incompatible con GitHub Pages)
+          if grep -q 'nonce=' calculator-gamified.html; then
+            echo "❌ Found nonces in HTML - incompatible with GitHub Pages"
+            exit 1
+          else
+            echo "✅ No nonces found - compatible with GitHub Pages"
+          fi
+          
+          # Verificar que Alpine CSP build está siendo usado
+          if grep -q "@alpinejs/csp" calculator-gamified.html; then
+            echo "✅ Alpine CSP build is being used"
+          else
+            echo "❌ Alpine CSP build not found - required for CSP compliance"
+            exit 1
+          fi
+          
+          # Verificar que hay hash SHA256 para scripts inline
+          if grep -q "sha256-" calculator-gamified.html; then
+            echo "✅ SHA256 hash found for inline scripts"
+          else
+            echo "❌ No SHA256 hash found - required for CSP compliance"
+            exit 1
+          fi
+
+      - name: 🔍  Validate JavaScript Modules
+        run: |
+          echo "🔍 Validating JavaScript modules..."
+          
+          # Verificar que los módulos Alpine CSP existen
+          for file in js/alpine-csp-init.js js/modules/storage.js js/main.js; do
+            if [ -f "$file" ]; then
+              echo "✅ $file exists"
+            else
+              echo "❌ $file missing - required for CSP compliance"
+              exit 1
+            fi
+          done
+          
+          # Verificar que Alpine CSP init no tiene referencias a nonces
+          if grep -q 'nonce' js/alpine-csp-init.js; then
+            echo "❌ Found nonce references in Alpine CSP init - should be removed for GitHub Pages"
+            exit 1
+          else
+            echo "✅ Alpine CSP init is clean of nonce references"
+          fi
 
       - name: 🏗️  Build internal packages
         run: |
@@ -45,7 +107,57 @@ jobs:
           done
 
       - name: 🔧  Build static site (root build.js)
-        run: bun run build:prod  # runs `node build.js` and outputs ./dist
+        run: bun run build:prod # runs `node build.js` and outputs ./dist
+
+      - name: 🔍  Validate CSP in Built Files
+        run: |
+          echo "🔍 Validating CSP in built dist files..."
+          
+          # Verificar que calculator-gamified.html fue copiado correctamente
+          if [ -f "dist/calculator-gamified.html" ]; then
+            echo "✅ calculator-gamified.html copied to dist"
+            
+            # Verificar CSP en el archivo final
+            if grep -q "Content-Security-Policy" dist/calculator-gamified.html; then
+              echo "✅ CSP preserved in built file"
+            else
+              echo "❌ CSP lost during build process"
+              exit 1
+            fi
+          else
+            echo "❌ calculator-gamified.html not found in dist"
+            exit 1
+          fi
+          
+          # Verificar que Alpine CSP build está en el archivo final
+          if grep -q "@alpinejs/csp" dist/calculator-gamified.html; then
+            echo "✅ Alpine CSP build preserved in built file"
+          else
+            echo "❌ Alpine CSP build lost during build process"
+            exit 1
+          fi
+
+      - name: 🔍  Validate Module Structure
+        run: |
+          echo "🔍 Validating module structure in dist..."
+          
+          # Verificar estructura de módulos requerida
+          for module in storage.js wizard.js terrain.js viewer3d.js finance.js; do
+            if [ -f "dist/js/modules/$module" ]; then
+              echo "✅ Module dist/js/modules/$module exists"
+            else
+              echo "❌ Module dist/js/modules/$module missing"
+              exit 1
+            fi
+          done
+          
+          # Verificar Alpine CSP init
+          if [ -f "dist/js/alpine-csp-init.js" ]; then
+            echo "✅ Alpine CSP init copied to dist"
+          else
+            echo "❌ Alpine CSP init missing from dist"
+            exit 1
+          fi
 
       - name: 🗑️  Clean dist for production
         run: |
@@ -53,13 +165,58 @@ jobs:
           rm -rf dist/test dist/test-* dist/**/*.md || true
           # Remove accessibility/performance reports if any
           find dist -type f -name "*report*.md" -delete || true
+          # Remove development-only files
+          rm -rf dist/docs || true
           # Verify size
+          echo "📊 Final dist size:"
           du -sh dist || true
+
+      - name: ⚙️  Create Production Config
+        run: |
+          echo "📝 Creating production config for GitHub Pages..."
+          
+          # Crear config.js optimizado para GitHub Pages
+          cat > dist/config.js << 'EOF'
+          // Configuración optimizada para GitHub Pages
+          window.BEYOND_CONFIG = {
+            // Google Maps API Key - debe ser configurada en GitHub Secrets
+            GOOGLE_MAPS_API_KEY: '${{ secrets.GOOGLE_MAPS_API_KEY }}' || '',
+            
+            // Configuración de entorno
+            ENVIRONMENT: 'production',
+            BASE_URL: '',
+            
+            // Configuración de APIs
+            API_ENDPOINTS: {
+              // APIs externas pueden ir aquí
+            },
+            
+            // Configuración de características
+            FEATURES: {
+              ANALYTICS: true,
+              DEBUG: false,
+              CSP_REPORTING: false, // No disponible en GitHub Pages
+              SERVICE_WORKER: true,
+              PERFORMANCE_MONITORING: true
+            },
+            
+            // Configuración específica de GitHub Pages
+            GITHUB_PAGES: {
+              CSP_MODE: 'hash', // Usar hashes en lugar de nonces
+              STATIC_HOSTING: true,
+              CDN_OPTIMIZATION: true
+            }
+          };
+          
+          console.log('✅ Beyond Solutions config loaded for GitHub Pages production');
+          EOF
+          
+          echo "✅ Production config created successfully"
 
       - name: 📤  Upload dist artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist            # folder generated by build.js
+          path: dist # folder generated by build.js
 
   deploy:
     needs: build
@@ -72,3 +229,26 @@ jobs:
       - name: 🚀  Deploy to GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v4
+
+      - name: ✅  Verify Deployment
+        run: |
+          echo "🎉 Deployment completed successfully!"
+          echo "📍 Site URL: ${{ steps.deploy.outputs.page_url }}"
+          echo ""
+          echo "🔍 Post-deployment checklist:"
+          echo "  ✅ CSP configuration validated"
+          echo "  ✅ Alpine.js CSP build verified"
+          echo "  ✅ JavaScript modules structure validated"
+          echo "  ✅ Production config created"
+          echo ""
+          echo "📚 Next steps:"
+          echo "  1. Test calculator functionality at the deployed URL"
+          echo "  2. Check browser console for any CSP violations"
+          echo "  3. Verify Google Maps integration (if API key configured)"
+          echo "  4. Test Alpine.js components and reactivity"
+          echo "  5. Verify gamification features work correctly"
+          echo ""
+          echo "🐛 If issues arise:"
+          echo "  - Check browser DevTools Console for errors"
+          echo "  - Verify CSP violations in DevTools Security tab"
+          echo "  - Ensure all CDN resources are loading correctly"
