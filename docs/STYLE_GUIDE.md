@@ -19,25 +19,25 @@ Beyond Solutions uses a sophisticated, natural color palette that reflects our f
 
 ### Primary Color Palette
 
-| Shade | Hex Code | CSS Variable | Usage |
-|-------|----------|-------------|-------|
-| ![#192525](https://via.placeholder.com/15/192525/192525.png) 900 | #192525 | `--color-primary-900` | Dark text, dark backgrounds |
-| ![#243b44](https://via.placeholder.com/15/243b44/243b44.png) 800 | #243b44 | `--color-primary-800` | Dark UI elements, hover states |
-| ![#334b4e](https://via.placeholder.com/15/334b4e/334b4e.png) 700 | #334b4e | `--color-primary-700` | Primary brand color, buttons, accents |
-| ![#54676d](https://via.placeholder.com/15/54676d/54676d.png) 600 | #54676d | `--color-primary-600` | Secondary UI elements |
-| ![#68767c](https://via.placeholder.com/15/68767c/68767c.png) 500 | #68767c | `--color-primary-500` | Medium emphasis UI elements |
-| ![#8c8f92](https://via.placeholder.com/15/8c8f92/8c8f92.png) 400 | #8c8f92 | `--color-primary-400` | Low emphasis text, borders |
-| ![#adb3b7](https://via.placeholder.com/15/adb3b7/adb3b7.png) 300 | #adb3b7 | `--color-primary-300` | Subtle UI elements, disabled states |
-| ![#bac4c3](https://via.placeholder.com/15/bac4c3/bac4c3.png) 200 | #bac4c3 | `--color-primary-200` | Light backgrounds, hover states |
-| ![#cccfcf](https://via.placeholder.com/15/cccfcf/cccfcf.png) 100 | #cccfcf | `--color-primary-100` | Light text on dark backgrounds |
+| Shade                                                            | Hex Code | CSS Variable          | Usage                                 |
+| ---------------------------------------------------------------- | -------- | --------------------- | ------------------------------------- |
+| ![#192525](https://via.placeholder.com/15/192525/192525.png) 900 | #192525  | `--color-primary-900` | Dark text, dark backgrounds           |
+| ![#243b44](https://via.placeholder.com/15/243b44/243b44.png) 800 | #243b44  | `--color-primary-800` | Dark UI elements, hover states        |
+| ![#334b4e](https://via.placeholder.com/15/334b4e/334b4e.png) 700 | #334b4e  | `--color-primary-700` | Primary brand color, buttons, accents |
+| ![#54676d](https://via.placeholder.com/15/54676d/54676d.png) 600 | #54676d  | `--color-primary-600` | Secondary UI elements                 |
+| ![#68767c](https://via.placeholder.com/15/68767c/68767c.png) 500 | #68767c  | `--color-primary-500` | Medium emphasis UI elements           |
+| ![#8c8f92](https://via.placeholder.com/15/8c8f92/8c8f92.png) 400 | #8c8f92  | `--color-primary-400` | Low emphasis text, borders            |
+| ![#adb3b7](https://via.placeholder.com/15/adb3b7/adb3b7.png) 300 | #adb3b7  | `--color-primary-300` | Subtle UI elements, disabled states   |
+| ![#bac4c3](https://via.placeholder.com/15/bac4c3/bac4c3.png) 200 | #bac4c3  | `--color-primary-200` | Light backgrounds, hover states       |
+| ![#cccfcf](https://via.placeholder.com/15/cccfcf/cccfcf.png) 100 | #cccfcf  | `--color-primary-100` | Light text on dark backgrounds        |
 
 ### Accent Colors
 
-| Name | Hex Code | CSS Variable | Usage |
-|------|----------|-------------|-------|
-| ![#b1aaa0](https://via.placeholder.com/15/b1aaa0/b1aaa0.png) Accent | #b1aaa0 | `--color-accent` | Accent elements, highlights |
-| ![#b9c6cd](https://via.placeholder.com/15/b9c6cd/b9c6cd.png) Accent Light | #b9c6cd | `--color-accent-light` | Secondary accent, subtle highlights |
-| ![#525853](https://via.placeholder.com/15/525853/525853.png) Secondary | #525853 | `--color-secondary` | Secondary UI elements, alternative emphasis |
+| Name                                                                      | Hex Code | CSS Variable           | Usage                                       |
+| ------------------------------------------------------------------------- | -------- | ---------------------- | ------------------------------------------- |
+| ![#b1aaa0](https://via.placeholder.com/15/b1aaa0/b1aaa0.png) Accent       | #b1aaa0  | `--color-accent`       | Accent elements, highlights                 |
+| ![#b9c6cd](https://via.placeholder.com/15/b9c6cd/b9c6cd.png) Accent Light | #b9c6cd  | `--color-accent-light` | Secondary accent, subtle highlights         |
+| ![#525853](https://via.placeholder.com/15/525853/525853.png) Secondary    | #525853  | `--color-secondary`    | Secondary UI elements, alternative emphasis |
 
 ### Color Usage Guidelines
 
@@ -60,17 +60,17 @@ Beyond Solutions uses a clean, modern typography system that emphasizes readabil
 
 ### Type Scale
 
-| Element | Size | Weight | Line Height | Usage |
-|---------|------|--------|-------------|-------|
-| h1 | 2.5rem (40px) | 700 | 1.2 | Main page headings |
-| h2 | 2rem (32px) | 700 | 1.25 | Section headings |
-| h3 | 1.5rem (24px) | 600 | 1.3 | Sub-section headings |
-| h4 | 1.25rem (20px) | 600 | 1.4 | Card headings, feature titles |
-| h5 | 1.125rem (18px) | 600 | 1.4 | Small headings |
-| h6 | 1rem (16px) | 700 | 1.5 | Minor headings |
-| Body | 1rem (16px) | 400 | 1.6 | Main body text |
-| Small | 0.875rem (14px) | 400 | 1.5 | Secondary text, captions |
-| XSmall | 0.75rem (12px) | 400 | 1.5 | Legal text, footnotes |
+| Element | Size            | Weight | Line Height | Usage                         |
+| ------- | --------------- | ------ | ----------- | ----------------------------- |
+| h1      | 2.5rem (40px)   | 700    | 1.2         | Main page headings            |
+| h2      | 2rem (32px)     | 700    | 1.25        | Section headings              |
+| h3      | 1.5rem (24px)   | 600    | 1.3         | Sub-section headings          |
+| h4      | 1.25rem (20px)  | 600    | 1.4         | Card headings, feature titles |
+| h5      | 1.125rem (18px) | 600    | 1.4         | Small headings                |
+| h6      | 1rem (16px)     | 700    | 1.5         | Minor headings                |
+| Body    | 1rem (16px)     | 400    | 1.6         | Main body text                |
+| Small   | 0.875rem (14px) | 400    | 1.5         | Secondary text, captions      |
+| XSmall  | 0.75rem (12px)  | 400    | 1.5         | Legal text, footnotes         |
 
 ### Typography Guidelines
 
@@ -86,15 +86,15 @@ Beyond Solutions uses a consistent spacing system based on a 4px grid to create 
 
 ### Spacing Scale
 
-| Name | Size | CSS Variable | Usage |
-|------|------|-------------|-------|
-| xs | 4px | `--space-xs` | Minimal spacing, icon padding |
-| sm | 8px | `--space-sm` | Tight spacing, between related items |
-| md | 16px | `--space-md` | Standard spacing, between components |
-| lg | 24px | `--space-lg` | Generous spacing, section padding |
-| xl | 32px | `--space-xl` | Section margins |
-| 2xl | 48px | `--space-2xl` | Large section margins |
-| 3xl | 64px | `--space-3xl` | Page margins |
+| Name | Size | CSS Variable  | Usage                                |
+| ---- | ---- | ------------- | ------------------------------------ |
+| xs   | 4px  | `--space-xs`  | Minimal spacing, icon padding        |
+| sm   | 8px  | `--space-sm`  | Tight spacing, between related items |
+| md   | 16px | `--space-md`  | Standard spacing, between components |
+| lg   | 24px | `--space-lg`  | Generous spacing, section padding    |
+| xl   | 32px | `--space-xl`  | Section margins                      |
+| 2xl  | 48px | `--space-2xl` | Large section margins                |
+| 3xl  | 64px | `--space-3xl` | Page margins                         |
 
 ### Layout Guidelines
 
@@ -204,4 +204,4 @@ Beyond Solutions is committed to creating accessible interfaces that work for ev
 
 ---
 
-This style guide is a living document and will be updated as the Beyond Solutions design system evolves. 
+This style guide is a living document and will be updated as the Beyond Solutions design system evolves.

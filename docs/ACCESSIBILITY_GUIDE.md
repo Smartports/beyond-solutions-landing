@@ -1,17 +1,19 @@
 # Accessibility Implementation Guide
 
 ## Overview
+
 This guide provides detailed instructions for implementing WCAG 2.1 AA accessibility features in the Beyond Solutions landing page.
 
 ## Quick Start
 
 ### 1. Install Accessibility Testing Tools
+
 ```bash
 # Install axe-core for automated testing
-npm install --save-dev @axe-core/cli
+bun install --save-dev @axe-core/cli
 
 # Install pa11y for CI/CD testing
-npm install --save-dev pa11y
+bun install --save-dev pa11y
 
 # Add to package.json scripts
 "scripts": {
@@ -21,6 +23,7 @@ npm install --save-dev pa11y
 ```
 
 ### 2. Basic Accessibility Checklist
+
 - [ ] All images have alt text
 - [ ] Form inputs have labels
 - [ ] Buttons have accessible names
@@ -34,7 +37,9 @@ npm install --save-dev pa11y
 ### Keyboard Navigation
 
 #### Skip Links
+
 Add at the beginning of `<body>`:
+
 ```html
 <div class="skip-links">
   <a href="#main-nav" class="skip-link">Skip to navigation</a>
@@ -43,33 +48,34 @@ Add at the beginning of `<body>`:
 </div>
 
 <style>
-.skip-link {
-  position: absolute;
-  left: -9999px;
-  z-index: 999;
-}
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+  }
 
-.skip-link:focus {
-  left: 50%;
-  transform: translateX(-50%);
-  top: 10px;
-  padding: 10px 20px;
-  background: #000;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-}
+  .skip-link:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+  }
 </style>
 ```
 
 #### Focus Management
+
 ```javascript
 // Focus trap utility
 class FocusTrap {
   constructor(element) {
     this.element = element;
     this.focusableElements = element.querySelectorAll(
-      'a[href], button:not([disabled]), textarea, input:not([disabled]), select'
+      'a[href], button:not([disabled]), textarea, input:not([disabled]), select',
     );
     this.firstFocusable = this.focusableElements[0];
     this.lastFocusable = this.focusableElements[this.focusableElements.length - 1];
@@ -120,6 +126,7 @@ function closeModal() {
 ### ARIA Implementation
 
 #### Live Regions
+
 ```html
 <!-- Status messages -->
 <div role="status" aria-live="polite" aria-atomic="true" class="sr-only">
@@ -142,7 +149,7 @@ function closeModal() {
 function announceStatus(message) {
   const status = document.getElementById('status-message');
   status.textContent = message;
-  
+
   // Clear after announcement
   setTimeout(() => {
     status.textContent = '';
@@ -165,6 +172,7 @@ function logProgress(message) {
 ```
 
 #### Landmarks and Regions
+
 ```html
 <header role="banner">
   <nav role="navigation" aria-label="Main navigation">
@@ -177,7 +185,7 @@ function logProgress(message) {
     <h1 id="calculator-heading">Solar Calculator</h1>
     <!-- Calculator content -->
   </section>
-  
+
   <aside role="complementary" aria-labelledby="help-heading">
     <h2 id="help-heading">Help & Tips</h2>
     <!-- Help content -->
@@ -192,15 +200,16 @@ function logProgress(message) {
 ### Form Accessibility
 
 #### Proper Labeling
+
 ```html
 <!-- Explicit label -->
 <label for="project-name">Project Name</label>
-<input type="text" id="project-name" name="projectName" required>
+<input type="text" id="project-name" name="projectName" required />
 
 <!-- Implicit label -->
 <label>
   <span>Email Address</span>
-  <input type="email" name="email" required>
+  <input type="email" name="email" required />
 </label>
 
 <!-- Label with description -->
@@ -208,42 +217,44 @@ function logProgress(message) {
   Project Area
   <span class="help-text" id="area-help">Enter the area in square meters</span>
 </label>
-<input type="number" 
-       id="area" 
-       name="area" 
-       aria-describedby="area-help"
-       min="100"
-       max="10000"
-       required>
+<input
+  type="number"
+  id="area"
+  name="area"
+  aria-describedby="area-help"
+  min="100"
+  max="10000"
+  required
+/>
 
 <!-- Grouped inputs -->
 <fieldset>
   <legend>Project Type</legend>
   <label>
-    <input type="radio" name="type" value="residential">
+    <input type="radio" name="type" value="residential" />
     Residential
   </label>
   <label>
-    <input type="radio" name="type" value="commercial">
+    <input type="radio" name="type" value="commercial" />
     Commercial
   </label>
 </fieldset>
 ```
 
 #### Error Handling
+
 ```html
 <div class="form-group" role="group">
   <label for="email">Email Address</label>
-  <input type="email" 
-         id="email" 
-         name="email"
-         aria-invalid="false"
-         aria-describedby="email-error"
-         required>
-  <span id="email-error" 
-        role="alert" 
-        aria-live="polite"
-        class="error-message hidden">
+  <input
+    type="email"
+    id="email"
+    name="email"
+    aria-invalid="false"
+    aria-describedby="email-error"
+    required
+  />
+  <span id="email-error" role="alert" aria-live="polite" class="error-message hidden">
     Please enter a valid email address
   </span>
 </div>
@@ -253,33 +264,33 @@ function logProgress(message) {
 // Accessible form validation
 function validateForm(form) {
   const errors = [];
-  
-  form.querySelectorAll('[required]').forEach(field => {
+
+  form.querySelectorAll('[required]').forEach((field) => {
     if (!field.value) {
       errors.push({
         field: field,
-        message: `${field.labels[0].textContent} is required`
+        message: `${field.labels[0].textContent} is required`,
       });
     }
   });
-  
+
   if (errors.length > 0) {
     // Announce errors
     announceAlert(`Form has ${errors.length} errors`);
-    
+
     // Show errors
-    errors.forEach(error => {
+    errors.forEach((error) => {
       error.field.setAttribute('aria-invalid', 'true');
       const errorElement = document.getElementById(`${error.field.id}-error`);
       errorElement.textContent = error.message;
       errorElement.classList.remove('hidden');
     });
-    
+
     // Focus first error
     errors[0].field.focus();
     return false;
   }
-  
+
   return true;
 }
 ```
@@ -287,33 +298,34 @@ function validateForm(form) {
 ### Color and Contrast
 
 #### CSS Custom Properties for Themes
+
 ```css
 :root {
   /* Light theme with AA compliant colors */
-  --color-text-primary: #1F2937;    /* 12.63:1 on white */
-  --color-text-secondary: #4B5563;  /* 7.04:1 on white */
-  --color-text-tertiary: #6B7280;   /* 4.51:1 on white */
-  
-  --color-link: #2563EB;            /* 4.53:1 on white */
-  --color-link-hover: #1D4ED8;     /* 5.87:1 on white */
-  
-  --color-success: #059669;         /* 4.54:1 on white */
-  --color-warning: #D97706;         /* 3.02:1 on white - use with dark bg */
-  --color-error: #DC2626;           /* 4.53:1 on white */
-  
-  --color-focus: #3B82F6;
+  --color-text-primary: #1f2937; /* 12.63:1 on white */
+  --color-text-secondary: #4b5563; /* 7.04:1 on white */
+  --color-text-tertiary: #6b7280; /* 4.51:1 on white */
+
+  --color-link: #2563eb; /* 4.53:1 on white */
+  --color-link-hover: #1d4ed8; /* 5.87:1 on white */
+
+  --color-success: #059669; /* 4.54:1 on white */
+  --color-warning: #d97706; /* 3.02:1 on white - use with dark bg */
+  --color-error: #dc2626; /* 4.53:1 on white */
+
+  --color-focus: #3b82f6;
   --focus-offset: 2px;
   --focus-width: 3px;
 }
 
 /* Dark theme with AA compliant colors */
-[data-theme="dark"] {
-  --color-text-primary: #F9FAFB;    /* 17.35:1 on #111827 */
-  --color-text-secondary: #E5E7EB;  /* 13.03:1 on #111827 */
-  --color-text-tertiary: #D1D5DB;   /* 10.07:1 on #111827 */
-  
-  --color-link: #60A5FA;            /* 7.84:1 on #111827 */
-  --color-link-hover: #93BBFD;      /* 10.62:1 on #111827 */
+[data-theme='dark'] {
+  --color-text-primary: #f9fafb; /* 17.35:1 on #111827 */
+  --color-text-secondary: #e5e7eb; /* 13.03:1 on #111827 */
+  --color-text-tertiary: #d1d5db; /* 10.07:1 on #111827 */
+
+  --color-link: #60a5fa; /* 7.84:1 on #111827 */
+  --color-link-hover: #93bbfd; /* 10.62:1 on #111827 */
 }
 
 /* Focus styles */
@@ -327,8 +339,12 @@ function validateForm(form) {
   * {
     --focus-width: 4px;
   }
-  
-  button, .card, input, select, textarea {
+
+  button,
+  .card,
+  input,
+  select,
+  textarea {
     border: 2px solid currentColor !important;
   }
 }
@@ -337,10 +353,11 @@ function validateForm(form) {
 ### Screen Reader Optimization
 
 #### Hiding Decorative Content
+
 ```css
 /* Hide from screen readers */
 .decorative,
-[aria-hidden="true"] {
+[aria-hidden='true'] {
   speak: none;
 }
 
@@ -371,6 +388,7 @@ function validateForm(form) {
 ```
 
 #### Accessible Data Visualization
+
 ```javascript
 // Make charts accessible
 class AccessibleChart {
@@ -386,10 +404,10 @@ class AccessibleChart {
     // Add ARIA label
     this.canvas.setAttribute('role', 'img');
     this.canvas.setAttribute('aria-label', this.generateDescription());
-    
+
     // Create data table alternative
     this.createDataTable();
-    
+
     // Initialize chart
     this.chart = new Chart(this.canvas, {
       data: this.data,
@@ -403,28 +421,30 @@ class AccessibleChart {
               // Custom accessible tooltips
               label: (context) => {
                 return `${context.dataset.label}: ${context.parsed.y} (${context.label})`;
-              }
-            }
-          }
-        }
-      }
+              },
+            },
+          },
+        },
+      },
     });
   }
 
   generateDescription() {
     const datasets = this.data.datasets;
     const description = `Chart showing ${datasets.length} data series. `;
-    
+
     // Add summary statistics
-    const summaries = datasets.map(dataset => {
-      const values = dataset.data;
-      const max = Math.max(...values);
-      const min = Math.min(...values);
-      const avg = values.reduce((a, b) => a + b) / values.length;
-      
-      return `${dataset.label}: ranges from ${min} to ${max}, average ${avg.toFixed(2)}`;
-    }).join('. ');
-    
+    const summaries = datasets
+      .map((dataset) => {
+        const values = dataset.data;
+        const max = Math.max(...values);
+        const min = Math.min(...values);
+        const avg = values.reduce((a, b) => a + b) / values.length;
+
+        return `${dataset.label}: ranges from ${min} to ${max}, average ${avg.toFixed(2)}`;
+      })
+      .join('. ');
+
     return description + summaries;
   }
 
@@ -433,10 +453,10 @@ class AccessibleChart {
     container.className = 'sr-only';
     container.setAttribute('role', 'table');
     container.setAttribute('aria-label', 'Data table version of chart');
-    
+
     const table = document.createElement('table');
     // ... build accessible table
-    
+
     this.canvas.parentElement.appendChild(container);
   }
 }
@@ -445,6 +465,7 @@ class AccessibleChart {
 ### Testing Tools and Techniques
 
 #### Automated Testing
+
 ```javascript
 // Jest + jest-axe for unit tests
 import { axe, toHaveNoViolations } from 'jest-axe';
@@ -455,10 +476,10 @@ test('calculator should be accessible', async () => {
   const container = document.createElement('div');
   container.innerHTML = calculatorHTML;
   document.body.appendChild(container);
-  
+
   const results = await axe(container);
   expect(results).toHaveNoViolations();
-  
+
   document.body.removeChild(container);
 });
 
@@ -481,6 +502,7 @@ describe('Accessibility Tests', () => {
 ```
 
 #### Manual Testing Checklist
+
 1. **Keyboard Testing**
    - Tab through entire page
    - Verify focus indicators
@@ -508,6 +530,7 @@ describe('Accessibility Tests', () => {
 ## Best Practices
 
 ### Do's
+
 - ✅ Use semantic HTML
 - ✅ Provide multiple ways to access content
 - ✅ Write descriptive link text
@@ -515,6 +538,7 @@ describe('Accessibility Tests', () => {
 - ✅ Test with real users
 
 ### Don'ts
+
 - ❌ Rely solely on color
 - ❌ Use placeholder as label
 - ❌ Auto-play media
@@ -524,6 +548,7 @@ describe('Accessibility Tests', () => {
 ## Resources
 
 ### Tools
+
 - [WAVE](https://wave.webaim.org/) - Web accessibility evaluation
 - [axe DevTools](https://www.deque.com/axe/devtools/) - Browser extension
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse) - Chrome DevTools
@@ -531,6 +556,7 @@ describe('Accessibility Tests', () => {
 - [Contrast Checker](https://webaim.org/resources/contrastchecker/) - Color contrast
 
 ### Documentation
+
 - [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/) - Quick reference
 - [ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/) - Design patterns
 - [WebAIM](https://webaim.org/) - Resources and articles
@@ -538,4 +564,4 @@ describe('Accessibility Tests', () => {
 
 ## Conclusion
 
-Implementing these accessibility features will ensure the Beyond Solutions landing page is usable by everyone, regardless of their abilities. Remember that accessibility is not a one-time task but an ongoing commitment to inclusive design. 
+Implementing these accessibility features will ensure the Beyond Solutions landing page is usable by everyone, regardless of their abilities. Remember that accessibility is not a one-time task but an ongoing commitment to inclusive design.

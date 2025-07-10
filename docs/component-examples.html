@@ -1,319 +1,443 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beyond Solutions Component Examples</title>
-  <meta name="theme-color" content="#334b4e">
-  
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Configure Tailwind with our color palette -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              900: '#192525',
-              800: '#243b44',
-              700: '#334b4e',
-              600: '#54676d',
-              500: '#68767c',
-              400: '#8c8f92',
-              300: '#adb3b7',
-              200: '#bac4c3',
-              100: '#cccfcf',
-              50: '#f8f9fa',
-            },
-          },
-        },
-      },
-      darkMode: 'class',
-    }
-  </script>
-  
-  <!-- Custom styles -->
-  <style>
-    body {
-      font-family: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    .section {
-      margin-bottom: 3rem;
-      padding: 2rem;
-      border-radius: 0.5rem;
-      background-color: white;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-    
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #334b4e;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid #334b4e;
-    }
-    
-    .component-example {
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-      border: 1px solid #bac4c3;
-      border-radius: 0.375rem;
-    }
-    
-    .component-title {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #192525;
-      margin-bottom: 1rem;
-    }
-    
-    .dark {
-      background-color: #192525;
-      color: #cccfcf;
-    }
-    
-    .dark .section {
-      background-color: #243b44;
-    }
-    
-    .dark .section-title {
-      color: #cccfcf;
-      border-bottom-color: #54676d;
-    }
-    
-    .dark .component-example {
-      border-color: #54676d;
-    }
-    
-    .dark .component-title {
-      color: #bac4c3;
-    }
-  </style>
-</head>
-<body class="bg-gray-50 text-primary-900">
-  <header class="bg-primary-700 text-white py-4 px-6">
-    <div class="container mx-auto">
-      <div class="flex justify-between items-center">
-        <h1 class="text-2xl font-bold">Beyond Solutions Components</h1>
-        <button id="theme-toggle" class="p-2 rounded-full hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-white">
-          <svg id="dark-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-          <svg id="light-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </header>
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; connect-src 'self' https:; font-src 'self' https://fonts.gstatic.com; frame-src 'self';"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beyond Solutions Component Examples</title>
+    <meta name="theme-color" content="#334b4e" />
 
-  <main class="container mx-auto py-8 px-4">
-    <div class="section">
-      <h2 class="section-title">Buttons</h2>
-      
-      <div class="component-example">
-        <h3 class="component-title">Primary Button</h3>
-        <button class="bg-primary-700 hover:bg-primary-800 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-opacity-50 transition-colors">
-          Primary Button
-        </button>
-      </div>
-      
-      <div class="component-example">
-        <h3 class="component-title">Secondary Button</h3>
-        <button class="bg-white hover:bg-primary-100 text-primary-700 font-medium py-2 px-4 rounded border border-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-opacity-50 transition-colors">
-          Secondary Button
-        </button>
-      </div>
-      
-      <div class="component-example">
-        <h3 class="component-title">Tertiary Button</h3>
-        <button class="text-primary-700 hover:text-primary-800 font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-opacity-50 transition-colors">
-          Tertiary Button
-        </button>
-      </div>
-      
-      <div class="component-example">
-        <h3 class="component-title">Disabled Button</h3>
-        <button class="bg-primary-300 text-primary-500 font-medium py-2 px-4 rounded cursor-not-allowed" disabled>
-          Disabled Button
-        </button>
-      </div>
-      
-      <div class="component-example">
-        <h3 class="component-title">Icon Button</h3>
-        <button class="bg-primary-700 hover:bg-primary-800 text-white p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-opacity-50 transition-colors" aria-label="Add item">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
-    </div>
+    <!-- Tailwind CSS via CDN -->
 
-    <div class="section">
-      <h2 class="section-title">Form Elements</h2>
-      
-      <div class="component-example">
-        <h3 class="component-title">Text Input</h3>
-        <div class="mb-4">
-          <label for="name" class="block text-primary-900 font-medium mb-1">Name</label>
-          <input type="text" id="name" class="w-full px-3 py-2 border border-primary-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-700 focus:border-primary-700" placeholder="Enter your name">
-        </div>
-      </div>
-      
-      <div class="component-example">
-        <h3 class="component-title">Select Dropdown</h3>
-        <div class="mb-4">
-          <label for="country" class="block text-primary-900 font-medium mb-1">Country</label>
-          <select id="country" class="w-full px-3 py-2 border border-primary-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-700 focus:border-primary-700 bg-white">
-            <option value="" selected disabled>Select a country</option>
-            <option value="us">United States</option>
-            <option value="ca">Canada</option>
-            <option value="mx">Mexico</option>
-          </select>
-        </div>
-      </div>
-      
-      <div class="component-example">
-        <h3 class="component-title">Checkbox</h3>
-        <div class="mb-4">
-          <label class="flex items-center">
-            <input type="checkbox" class="h-4 w-4 text-primary-700 focus:ring-primary-700 border-primary-300 rounded">
-            <span class="ml-2 text-primary-900 dark:text-primary-100">Subscribe to newsletter</span>
-          </label>
-        </div>
-      </div>
-    </div>
+    <!-- Configure Tailwind with our color palette -->
 
-    <div class="section">
-      <h2 class="section-title">Cards</h2>
-      
-      <div class="component-example">
-        <h3 class="component-title">Basic Card</h3>
-        <div class="bg-white dark:bg-primary-800 rounded-lg shadow-sm p-6 border border-primary-200 dark:border-primary-600">
-          <h3 class="text-xl font-semibold text-primary-900 dark:text-primary-100 mb-2">Card Title</h3>
-          <p class="text-primary-700 dark:text-primary-300 mb-4">This is a basic card component with a title and content.</p>
-          <a href="#" class="text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-200 font-medium">Learn More →</a>
+    <!-- Custom styles -->
+    <style>
+      body {
+        font-family:
+          'Open Sans',
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }
+
+      .section {
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        background-color: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #334b4e;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #334b4e;
+      }
+
+      .component-example {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        border: 1px solid #bac4c3;
+        border-radius: 0.375rem;
+      }
+
+      .component-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #192525;
+        margin-bottom: 1rem;
+      }
+
+      .dark {
+        background-color: #192525;
+        color: #cccfcf;
+      }
+
+      .dark .section {
+        background-color: #243b44;
+      }
+
+      .dark .section-title {
+        color: #cccfcf;
+        border-bottom-color: #54676d;
+      }
+
+      .dark .component-example {
+        border-color: #54676d;
+      }
+
+      .dark .component-title {
+        color: #bac4c3;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-primary-900">
+    <header class="bg-primary-700 text-white py-4 px-6">
+      <div class="container mx-auto">
+        <div class="flex justify-between items-center">
+          <h1 class="text-2xl font-bold">Beyond Solutions Components</h1>
+          <button
+            id="theme-toggle"
+            class="p-2 rounded-full hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-white"
+          >
+            <svg
+              id="dark-icon"
+              class="w-6 h-6 hidden"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              />
+            </svg>
+            <svg
+              id="light-icon"
+              class="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+          </button>
         </div>
       </div>
-      
-      <div class="component-example">
-        <h3 class="component-title">Feature Card</h3>
-        <div class="bg-white dark:bg-primary-800 rounded-lg shadow-md p-6 border border-primary-200 dark:border-primary-600 hover:shadow-lg transition-shadow">
-          <div class="flex items-start">
-            <div class="bg-primary-100 dark:bg-primary-700 p-3 rounded-full mr-4">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-primary-700 dark:text-primary-200">
-                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </header>
+
+    <main class="container mx-auto py-8 px-4">
+      <div class="section">
+        <h2 class="section-title">Buttons</h2>
+
+        <div class="component-example">
+          <h3 class="component-title">Primary Button</h3>
+          <button
+            class="bg-primary-700 hover:bg-primary-800 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-opacity-50 transition-colors"
+          >
+            Primary Button
+          </button>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-title">Secondary Button</h3>
+          <button
+            class="bg-white hover:bg-primary-100 text-primary-700 font-medium py-2 px-4 rounded border border-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-opacity-50 transition-colors"
+          >
+            Secondary Button
+          </button>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-title">Tertiary Button</h3>
+          <button
+            class="text-primary-700 hover:text-primary-800 font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-opacity-50 transition-colors"
+          >
+            Tertiary Button
+          </button>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-title">Disabled Button</h3>
+          <button
+            class="bg-primary-300 text-primary-500 font-medium py-2 px-4 rounded cursor-not-allowed"
+            disabled
+          >
+            Disabled Button
+          </button>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-title">Icon Button</h3>
+          <button
+            class="bg-primary-700 hover:bg-primary-800 text-white p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-opacity-50 transition-colors"
+            aria-label="Add item"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 4V16M4 10H16"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Form Elements</h2>
+
+        <div class="component-example">
+          <h3 class="component-title">Text Input</h3>
+          <div class="mb-4">
+            <label for="name" class="block text-primary-900 font-medium mb-1">Name</label>
+            <input
+              type="text"
+              id="name"
+              class="w-full px-3 py-2 border border-primary-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-700 focus:border-primary-700"
+              placeholder="Enter your name"
+            />
+          </div>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-title">Select Dropdown</h3>
+          <div class="mb-4">
+            <label for="country" class="block text-primary-900 font-medium mb-1">Country</label>
+            <select
+              id="country"
+              class="w-full px-3 py-2 border border-primary-300 rounded focus:outline-none focus:ring-2 focus:ring-primary-700 focus:border-primary-700 bg-white"
+            >
+              <option value="" selected disabled>Select a country</option>
+              <option value="us">United States</option>
+              <option value="ca">Canada</option>
+              <option value="mx">Mexico</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-title">Checkbox</h3>
+          <div class="mb-4">
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                class="h-4 w-4 text-primary-700 focus:ring-primary-700 border-primary-300 rounded"
+              />
+              <span class="ml-2 text-primary-900 dark:text-primary-100"
+                >Subscribe to newsletter</span
+              >
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Cards</h2>
+
+        <div class="component-example">
+          <h3 class="component-title">Basic Card</h3>
+          <div
+            class="bg-white dark:bg-primary-800 rounded-lg shadow-sm p-6 border border-primary-200 dark:border-primary-600"
+          >
+            <h3 class="text-xl font-semibold text-primary-900 dark:text-primary-100 mb-2">
+              Card Title
+            </h3>
+            <p class="text-primary-700 dark:text-primary-300 mb-4">
+              This is a basic card component with a title and content.
+            </p>
+            <a
+              href="#"
+              class="text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-200 font-medium"
+              >Learn More →</a
+            >
+          </div>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-title">Feature Card</h3>
+          <div
+            class="bg-white dark:bg-primary-800 rounded-lg shadow-md p-6 border border-primary-200 dark:border-primary-600 hover:shadow-lg transition-shadow"
+          >
+            <div class="flex items-start">
+              <div class="bg-primary-100 dark:bg-primary-700 p-3 rounded-full mr-4">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="text-primary-700 dark:text-primary-200"
+                >
+                  <path
+                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M12 16V12"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M12 8H12.01"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-primary-900 dark:text-primary-100 mb-2">
+                  Feature Title
+                </h3>
+                <p class="text-primary-700 dark:text-primary-300">
+                  This is a feature card with an icon, title, and description.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Alerts & Notifications</h2>
+
+        <div class="component-example">
+          <h3 class="component-title">Info Alert</h3>
+          <div
+            class="bg-primary-100 border-l-4 border-primary-700 text-primary-900 p-4 mb-4 rounded"
+            role="alert"
+          >
+            <div class="flex items-start">
+              <svg
+                class="h-6 w-6 mr-3 mt-0.5 text-primary-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
               </svg>
+              <div>
+                <p class="font-medium">Information</p>
+                <p>This feature is only available to registered users.</p>
+              </div>
             </div>
-            <div>
-              <h3 class="text-lg font-semibold text-primary-900 dark:text-primary-100 mb-2">Feature Title</h3>
-              <p class="text-primary-700 dark:text-primary-300">This is a feature card with an icon, title, and description.</p>
+          </div>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-title">Success Alert</h3>
+          <div
+            class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded"
+            role="alert"
+          >
+            <div class="flex items-start">
+              <svg
+                class="h-6 w-6 mr-3 mt-0.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                ></path>
+              </svg>
+              <div>
+                <p class="font-medium">Success!</p>
+                <p>Your changes have been saved successfully.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="section">
-      <h2 class="section-title">Alerts & Notifications</h2>
-      
-      <div class="component-example">
-        <h3 class="component-title">Info Alert</h3>
-        <div class="bg-primary-100 border-l-4 border-primary-700 text-primary-900 p-4 mb-4 rounded" role="alert">
-          <div class="flex items-start">
-            <svg class="h-6 w-6 mr-3 mt-0.5 text-primary-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <div>
-              <p class="font-medium">Information</p>
-              <p>This feature is only available to registered users.</p>
-            </div>
+      <div class="section">
+        <h2 class="section-title">Typography Components</h2>
+
+        <div class="component-example">
+          <h3 class="component-title">Page Title</h3>
+          <h1 class="text-3xl font-bold text-primary-900 dark:text-primary-100 mb-4">Page Title</h1>
+        </div>
+
+        <div class="component-example">
+          <h3 class="component-title">Section Heading</h3>
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-primary-900 dark:text-primary-100">
+              Section Heading
+            </h2>
+            <div class="w-16 h-1 bg-primary-700 mt-2"></div>
           </div>
         </div>
-      </div>
-      
-      <div class="component-example">
-        <h3 class="component-title">Success Alert</h3>
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded" role="alert">
-          <div class="flex items-start">
-            <svg class="h-6 w-6 mr-3 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <div>
-              <p class="font-medium">Success!</p>
-              <p>Your changes have been saved successfully.</p>
-            </div>
-          </div>
+
+        <div class="component-example">
+          <h3 class="component-title">Quote</h3>
+          <blockquote
+            class="border-l-4 border-primary-700 pl-4 italic text-primary-700 dark:text-primary-300 my-4"
+          >
+            <p>
+              This is a quotation that stands out from the regular text content to highlight
+              important information or testimonials.
+            </p>
+            <footer class="text-primary-600 dark:text-primary-400 mt-2">— John Doe, CEO</footer>
+          </blockquote>
         </div>
       </div>
-    </div>
+    </main>
 
-    <div class="section">
-      <h2 class="section-title">Typography Components</h2>
-      
-      <div class="component-example">
-        <h3 class="component-title">Page Title</h3>
-        <h1 class="text-3xl font-bold text-primary-900 dark:text-primary-100 mb-4">Page Title</h1>
+    <footer class="bg-primary-800 text-primary-100 py-8 px-6">
+      <div class="container mx-auto">
+        <p class="text-center">&copy; 2025 Beyond Solutions. All rights reserved.</p>
       </div>
-      
-      <div class="component-example">
-        <h3 class="component-title">Section Heading</h3>
-        <div class="mb-6">
-          <h2 class="text-2xl font-bold text-primary-900 dark:text-primary-100">Section Heading</h2>
-          <div class="w-16 h-1 bg-primary-700 mt-2"></div>
-        </div>
-      </div>
-      
-      <div class="component-example">
-        <h3 class="component-title">Quote</h3>
-        <blockquote class="border-l-4 border-primary-700 pl-4 italic text-primary-700 dark:text-primary-300 my-4">
-          <p>This is a quotation that stands out from the regular text content to highlight important information or testimonials.</p>
-          <footer class="text-primary-600 dark:text-primary-400 mt-2">— John Doe, CEO</footer>
-        </blockquote>
-      </div>
-    </div>
-  </main>
+    </footer>
 
-  <footer class="bg-primary-800 text-primary-100 py-8 px-6">
-    <div class="container mx-auto">
-      <p class="text-center">&copy; 2025 Beyond Solutions. All rights reserved.</p>
-    </div>
-  </footer>
+    <script>
+      // Theme toggle functionality
+      const themeToggle = document.getElementById('theme-toggle');
+      const darkIcon = document.getElementById('dark-icon');
+      const lightIcon = document.getElementById('light-icon');
 
-  <script>
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    const darkIcon = document.getElementById('dark-icon');
-    const lightIcon = document.getElementById('light-icon');
-    
-    // Check for dark mode preference
-    if (localStorage.getItem('theme') === 'dark' || 
-        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-      darkIcon.classList.remove('hidden');
-      lightIcon.classList.add('hidden');
-    }
-    
-    // Toggle theme
-    themeToggle.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      
-      if (document.documentElement.classList.contains('dark')) {
-        localStorage.setItem('theme', 'dark');
+      // Check for dark mode preference
+      if (
+        localStorage.getItem('theme') === 'dark' ||
+        (!localStorage.getItem('theme') &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
         darkIcon.classList.remove('hidden');
         lightIcon.classList.add('hidden');
-      } else {
-        localStorage.setItem('theme', 'light');
-        darkIcon.classList.add('hidden');
-        lightIcon.classList.remove('hidden');
       }
-    });
-  </script>
-</body>
-</html> 
+
+      // Toggle theme
+      themeToggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+
+        if (document.documentElement.classList.contains('dark')) {
+          localStorage.setItem('theme', 'dark');
+          darkIcon.classList.remove('hidden');
+          lightIcon.classList.add('hidden');
+        } else {
+          localStorage.setItem('theme', 'light');
+          darkIcon.classList.add('hidden');
+          lightIcon.classList.remove('hidden');
+        }
+      });
+    </script>
+  </body>
+</html>

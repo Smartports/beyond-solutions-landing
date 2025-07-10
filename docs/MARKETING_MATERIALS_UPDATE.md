@@ -6,17 +6,17 @@ This document outlines the marketing materials that need to be updated to reflec
 
 The new color palette uses the following primary colors:
 
-| Color Name | Hex Code | Usage |
-|------------|----------|-------|
-| Primary 900 | #192525 | Dark backgrounds, footer |
-| Primary 800 | #243b44 | Dark mode backgrounds |
-| Primary 700 | #334b4e | Primary buttons, headings |
-| Primary 600 | #54676d | Secondary elements |
-| Primary 500 | #68767c | Borders, dividers |
-| Primary 400 | #8c979c | Icons, secondary text |
-| Primary 300 | #adb3b7 | Disabled elements |
-| Primary 200 | #bac4c3 | Light backgrounds |
-| Primary 100 | #cccfcf | Light mode backgrounds |
+| Color Name  | Hex Code | Usage                     |
+| ----------- | -------- | ------------------------- |
+| Primary 900 | #192525  | Dark backgrounds, footer  |
+| Primary 800 | #243b44  | Dark mode backgrounds     |
+| Primary 700 | #334b4e  | Primary buttons, headings |
+| Primary 600 | #54676d  | Secondary elements        |
+| Primary 500 | #68767c  | Borders, dividers         |
+| Primary 400 | #8c979c  | Icons, secondary text     |
+| Primary 300 | #adb3b7  | Disabled elements         |
+| Primary 200 | #bac4c3  | Light backgrounds         |
+| Primary 100 | #cccfcf  | Light mode backgrounds    |
 
 ## Materials Requiring Updates
 
@@ -77,6 +77,7 @@ The new color palette uses the following primary colors:
 ## Update Process
 
 ### Phase 1: High-Priority Updates (1-2 weeks)
+
 - Website assets
 - Email templates
 - Social media profiles
@@ -84,12 +85,14 @@ The new color palette uses the following primary colors:
 - Business cards
 
 ### Phase 2: Medium-Priority Updates (3-4 weeks)
+
 - Brochures and product sheets
 - Digital advertising assets
 - Video assets
 - Case studies
 
 ### Phase 3: Low-Priority Updates (5-8 weeks)
+
 - Remaining print materials
 - Promotional items
 - Event materials
@@ -157,4 +160,4 @@ For questions about the marketing materials update:
 
 - **Design Team Lead:** [Name] (email@beyond-solutions.com)
 - **Marketing Director:** [Name] (email@beyond-solutions.com)
-- **Brand Manager:** [Name] (email@beyond-solutions.com) 
+- **Brand Manager:** [Name] (email@beyond-solutions.com)

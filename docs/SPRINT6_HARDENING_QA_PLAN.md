@@ -8,8 +8,8 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 
 ## Registro de Estado
 
-| Fecha | Estado | Notas |
-|-------|--------|-------|
+| Fecha      | Estado     | Notas                                                  |
+| ---------- | ---------- | ------------------------------------------------------ |
 | 2025-06-25 | Completado | Todas las historias de usuario implementadas con éxito |
 
 ## Historias de Usuario
@@ -21,6 +21,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Realizar auditoría automatizada con axe-core en todos los componentes
 - [x] Realizar pruebas manuales con lectores de pantalla (NVDA, VoiceOver)
 - [x] Verificar navegación completa con teclado
@@ -31,6 +32,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 - [x] Implementar skip links para navegación
 
 **Criterios de Aceptación:**
+
 - [x] Todas las páginas pasan la auditoría automatizada de axe-core sin errores críticos
 - [x] La aplicación es completamente navegable con teclado
 - [x] Todos los elementos interactivos tienen roles ARIA apropiados
@@ -49,6 +51,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Implementar pruebas de carga para simular múltiples usuarios concurrentes
 - [x] Realizar pruebas de estrés en el visualizador 3D con modelos complejos
 - [x] Optimizar tiempos de carga inicial y tiempo hasta interactividad
@@ -59,6 +62,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 - [x] Implementar monitorización de performance
 
 **Criterios de Aceptación:**
+
 - [x] La aplicación mantiene 60fps en operaciones regulares en dispositivos de gama media
 - [x] El visualizador 3D mantiene mínimo 30fps con modelos complejos
 - [x] Tiempo de carga inicial menor a 3 segundos en conexiones 4G
@@ -77,6 +81,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Crear matriz de pruebas para navegadores (Chrome, Firefox, Safari, Edge)
 - [x] Realizar pruebas en dispositivos iOS y Android
 - [x] Verificar comportamiento responsive en diferentes tamaños de pantalla
@@ -87,6 +92,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 - [x] Crear sistema de detección de capacidades del navegador
 
 **Criterios de Aceptación:**
+
 - [x] La aplicación funciona correctamente en las últimas versiones de Chrome, Firefox, Safari y Edge
 - [x] La experiencia es consistente en dispositivos iOS y Android
 - [x] El diseño responsive se adapta correctamente a todos los breakpoints definidos
@@ -105,6 +111,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Crear documentación de arquitectura del sistema
 - [x] Documentar APIs internas y componentes reutilizables
 - [x] Crear guías de usuario con capturas de pantalla y ejemplos
@@ -115,6 +122,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 - [x] Preparar documentación para desarrolladores (contribución)
 
 **Criterios de Aceptación:**
+
 - [x] Documentación técnica cubre todos los componentes principales del sistema
 - [x] Las guías de usuario explican todas las funcionalidades de manera clara
 - [x] El sistema de ayuda contextual está disponible en todas las secciones críticas
@@ -133,6 +141,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Priorizar y resolver bugs críticos y de alta prioridad
 - [x] Refactorizar código duplicado y mejorar patrones
 - [x] Actualizar dependencias a versiones estables más recientes
@@ -143,6 +152,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 - [x] Implementar mejores prácticas de seguridad
 
 **Criterios de Aceptación:**
+
 - [x] No hay bugs críticos o de alta prioridad pendientes
 - [x] La cobertura de pruebas unitarias es de al menos 70% en componentes críticos
 - [x] Todas las dependencias están actualizadas a versiones estables
@@ -161,6 +171,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Completar traducciones faltantes en todos los idiomas soportados
 - [x] Verificar textos dinámicos y mensajes de error
 - [x] Implementar soporte completo para RTL en árabe
@@ -171,6 +182,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 - [x] Implementar detección automática de idioma preferido
 
 **Criterios de Aceptación:**
+
 - [x] La aplicación está completamente traducida en todos los idiomas soportados
 - [x] El cambio de idioma funciona correctamente sin recargar la aplicación
 - [x] Los formatos de números, fechas y monedas son correctos según la localidad
@@ -189,6 +201,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Realizar análisis de vulnerabilidades en dependencias
 - [x] Implementar protección contra XSS en inputs de usuario
 - [x] Revisar manejo seguro de datos locales
@@ -199,6 +212,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 - [x] Implementar Content Security Policy adecuada
 
 **Criterios de Aceptación:**
+
 - [x] No hay vulnerabilidades conocidas en dependencias utilizadas
 - [x] Todas las entradas de usuario están correctamente sanitizadas
 - [x] Los datos almacenados localmente están protegidos adecuadamente
@@ -217,6 +231,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Crear proceso de CI/CD para despliegue automatizado
 - [x] Preparar materiales de marketing (screenshots, videos)
 - [x] Configurar analytics y monitoreo de errores
@@ -227,6 +242,7 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 - [x] Preparar estrategia de rollback en caso de problemas
 
 **Criterios de Aceptación:**
+
 - [x] Pipeline de CI/CD despliega correctamente la aplicación
 - [x] Materiales de marketing están listos para distribución
 - [x] Sistema de analytics y monitoreo está configurado
@@ -243,9 +259,11 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 ## Riesgos y Mitigaciones
 
 ### Riesgo 1: Problemas de Accesibilidad Complejos
+
 **Descripción:** Algunos componentes complejos como el visualizador 3D pueden presentar desafíos significativos de accesibilidad difíciles de resolver.
 
 **Mitigación:**
+
 - Priorizar accesibilidad por componente según criticidad
 - Implementar alternativas textuales para experiencias visuales complejas
 - Consultar con expertos en accesibilidad para componentes críticos
@@ -256,9 +274,11 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Resuelto
 
 ### Riesgo 2: Rendimiento Inconsistente en Dispositivos Diversos
+
 **Descripción:** La amplia variedad de dispositivos y navegadores puede resultar en experiencias inconsistentes, especialmente en visualizaciones 3D.
 
 **Mitigación:**
+
 - Implementar detección de capacidades y degradación elegante
 - Establecer requisitos mínimos claros
 - Crear versiones optimizadas para diferentes niveles de hardware
@@ -269,9 +289,11 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Resuelto
 
 ### Riesgo 3: Deuda Técnica Residual
+
 **Descripción:** Puede no ser posible resolver toda la deuda técnica acumulada durante el desarrollo rápido de los sprints anteriores.
 
 **Mitigación:**
+
 - Priorizar deuda técnica según impacto en usuario y mantenibilidad
 - Documentar claramente deuda técnica conocida para futuras iteraciones
 - Establecer estándares mínimos de calidad para código nuevo
@@ -282,9 +304,11 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 **Estado:** ✅ Resuelto
 
 ### Riesgo 4: Problemas de Última Hora
+
 **Descripción:** Problemas críticos descubiertos cerca de la fecha de lanzamiento podrían comprometer la calidad o retrasar el lanzamiento.
 
 **Mitigación:**
+
 - Implementar congelamiento de características una semana antes del lanzamiento
 - Crear plan de contingencia con features toggles
 - Preparar estrategia de lanzamiento progresivo
@@ -296,17 +320,17 @@ El Sprint 6 es la fase final del proyecto, dedicada a pulir y asegurar la calida
 
 ## Estimación Total del Sprint
 
-| Historia | Estimación (días) | Estado |
-|----------|------------------|--------|
-| #1: Auditoría de Accesibilidad WCAG 2.1 AA | 1.0 | ✅ Completado |
-| #2: Optimización de Rendimiento y Pruebas de Estrés | 1.0 | ✅ Completado |
-| #3: Pruebas de Compatibilidad Cross-Browser/Cross-Device | 0.5 | ✅ Completado |
-| #4: Documentación Técnica y Guías de Usuario | 1.0 | ✅ Completado |
-| #5: Corrección de Bugs y Deuda Técnica | 1.0 | ✅ Completado |
-| #6: Internacionalización y Localización | 0.5 | ✅ Completado |
-| #7: Pruebas de Seguridad | 0.5 | ✅ Completado |
-| #8: Preparación para Lanzamiento | 0.5 | ✅ Completado |
-| **Total** | **6.0** | ✅ **Completado** |
+| Historia                                                 | Estimación (días) | Estado            |
+| -------------------------------------------------------- | ----------------- | ----------------- |
+| #1: Auditoría de Accesibilidad WCAG 2.1 AA               | 1.0               | ✅ Completado     |
+| #2: Optimización de Rendimiento y Pruebas de Estrés      | 1.0               | ✅ Completado     |
+| #3: Pruebas de Compatibilidad Cross-Browser/Cross-Device | 0.5               | ✅ Completado     |
+| #4: Documentación Técnica y Guías de Usuario             | 1.0               | ✅ Completado     |
+| #5: Corrección de Bugs y Deuda Técnica                   | 1.0               | ✅ Completado     |
+| #6: Internacionalización y Localización                  | 0.5               | ✅ Completado     |
+| #7: Pruebas de Seguridad                                 | 0.5               | ✅ Completado     |
+| #8: Preparación para Lanzamiento                         | 0.5               | ✅ Completado     |
+| **Total**                                                | **6.0**           | ✅ **Completado** |
 
 ## Leyenda de Estado
 
@@ -327,7 +351,7 @@ graph TD
     PrevSprints -->|Requerido| H5
     PrevSprints -->|Requerido| H6
     PrevSprints -->|Requerido| H7
-    
+
     H1[Historia #1: Accesibilidad] --> H8
     H2[Historia #2: Rendimiento] --> H8
     H3[Historia #3: Compatibilidad] --> H8
@@ -335,7 +359,7 @@ graph TD
     H5[Historia #5: Bugs y Deuda Técnica] --> H8
     H6[Historia #6: Internacionalización] --> H8
     H7[Historia #7: Seguridad] --> H8
-    
+
     H8[Historia #8: Preparación para Lanzamiento]
 ```
 
@@ -351,4 +375,4 @@ graph TD
 
 ---
 
-> Este plan representa la fase final de desarrollo antes del lanzamiento. El enfoque principal es garantizar la calidad, accesibilidad y rendimiento de la aplicación, así como preparar todos los elementos necesarios para un lanzamiento exitoso. 
+> Este plan representa la fase final de desarrollo antes del lanzamiento. El enfoque principal es garantizar la calidad, accesibilidad y rendimiento de la aplicación, así como preparar todos los elementos necesarios para un lanzamiento exitoso.

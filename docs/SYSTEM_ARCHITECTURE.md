@@ -13,7 +13,7 @@ graph TD
     subgraph "Frontend Applications"
         WebApp[Web Application]
     end
-    
+
     subgraph "Core Packages"
         Core[Core Package]
         UI[UI Package]
@@ -22,27 +22,27 @@ graph TD
         Finance[Finance Package]
         Experience3D[Experience3D Package]
     end
-    
+
     subgraph "External Services"
         GoogleMaps[Google Maps API]
         Analytics[Analytics Service]
     end
-    
+
     WebApp --> Core
     WebApp --> UI
     WebApp --> Maps
     WebApp --> Geo
     WebApp --> Finance
     WebApp --> Experience3D
-    
+
     Maps --> GoogleMaps
     WebApp --> Analytics
-    
+
     subgraph "Browser Storage"
         IndexedDB[(IndexedDB)]
         LocalStorage[(LocalStorage)]
     end
-    
+
     Core --> IndexedDB
     Core --> LocalStorage
 ```
@@ -54,6 +54,7 @@ graph TD
 The main web application that integrates all packages and provides the user interface. Built with React, TypeScript, and Tailwind CSS.
 
 **Key Features:**
+
 - User onboarding wizard
 - Project dashboard
 - Terrain selection and editing
@@ -66,6 +67,7 @@ The main web application that integrates all packages and provides the user inte
 Provides fundamental functionality used across the application.
 
 **Key Components:**
+
 - Data storage and persistence layer
 - Authentication utilities
 - Internationalization (i18n) support
@@ -77,6 +79,7 @@ Provides fundamental functionality used across the application.
 Contains reusable UI components shared across the application.
 
 **Key Components:**
+
 - Design system implementation
 - Form components
 - Navigation elements
@@ -88,6 +91,7 @@ Contains reusable UI components shared across the application.
 Handles map-related functionality and integration with mapping services.
 
 **Key Components:**
+
 - Map container and controls
 - Search functionality
 - Location selection
@@ -98,6 +102,7 @@ Handles map-related functionality and integration with mapping services.
 Provides geospatial data processing and visualization capabilities.
 
 **Key Components:**
+
 - CAD/DXF file import
 - GeoJSON processing
 - Terrain 3D rendering
@@ -108,6 +113,7 @@ Provides geospatial data processing and visualization capabilities.
 Handles financial calculations and cost estimation.
 
 **Key Components:**
+
 - Construction cost calculator
 - Financing calculator
 - ROI and KPI calculations
@@ -118,6 +124,7 @@ Handles financial calculations and cost estimation.
 Provides immersive 3D visualization and interaction capabilities.
 
 **Key Components:**
+
 - Immersive 3D viewer
 - Day/night lighting system
 - Seasonal visualization
@@ -187,6 +194,7 @@ Provides immersive 3D visualization and interaction capabilities.
 ### 6.1 Internationalization (i18n)
 
 The application supports multiple languages through a comprehensive i18n system:
+
 - Language files stored in JSON format
 - Dynamic language switching
 - RTL support for languages like Arabic
@@ -195,6 +203,7 @@ The application supports multiple languages through a comprehensive i18n system:
 ### 6.2 Accessibility
 
 The application follows WCAG 2.1 AA standards:
+
 - Proper semantic HTML
 - ARIA attributes
 - Keyboard navigation
@@ -226,16 +235,16 @@ graph LR
     subgraph "Hosting"
         StaticFiles[Static Files]
     end
-    
+
     subgraph "Client Browser"
         WebApp[Web Application]
         ClientStorage[(Client Storage)]
     end
-    
+
     subgraph "External Services"
         Maps[Maps API]
     end
-    
+
     StaticFiles --> WebApp
     WebApp --> ClientStorage
     WebApp --> Maps
@@ -246,22 +255,22 @@ graph LR
 ### 8.1 Local Development
 
 1. Clone the monorepo
-2. Install dependencies with `npm install`
-3. Start development server with `npm run dev`
+2. Install dependencies with `bun install`
+3. Start development server with `bun run dev`
 4. Access the application at `http://localhost:3000`
 
 ### 8.2 Building for Production
 
-1. Run `npm run build`
+1. Run `bun run build`
 2. Static files are generated in the `dist` directory
 3. Deploy these files to a static hosting service
 
 ### 8.3 Testing
 
-1. Unit tests: `npm run test:unit`
-2. Integration tests: `npm run test:integration`
-3. Accessibility tests: `npm run test:a11y`
-4. Performance tests: `npm run test:performance`
+1. Unit tests: `bun run test:unit`
+2. Integration tests: `bun run test:integration`
+3. Accessibility tests: `bun run test:a11y`
+4. Performance tests: `bun run test:performance`
 
 ## 9. Future Enhancements
 
@@ -277,6 +286,6 @@ The Beyond Solutions Calculator architecture is designed for modularity, extensi
 
 ---
 
-*Document Version: 1.0*  
-*Last Updated: 2025-06-25*  
-*Authors: Beyond Solutions Development Team* 
+_Document Version: 1.0_  
+_Last Updated: 2025-06-25_  
+_Authors: Beyond Solutions Development Team_

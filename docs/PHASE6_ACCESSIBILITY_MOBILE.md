@@ -1,20 +1,24 @@
 # Phase 6: Accessibility & Mobile Optimization Plan
 
 ## Overview
+
 This document outlines the implementation plan for the final 5% of the Beyond Solutions project, focusing on WCAG 2.1 AA compliance and mobile optimization.
 
 ## 1. Accessibility Implementation (WCAG 2.1 AA)
 
 ### 1.1 Keyboard Navigation
+
 **Priority: HIGH**
 
 #### Current Issues:
+
 - 3D viewer lacks keyboard controls
 - Modal dialogs don't trap focus
 - Tab order is not logical in some sections
 - Skip links are missing
 
 #### Implementation Tasks:
+
 ```javascript
 // 1. Add skip links to calculator-gamified.html
 <a href="#main-content" class="sr-only focus:not-sr-only">Skip to main content</a>
@@ -62,9 +66,11 @@ const keyboardControls = {
 ```
 
 ### 1.2 ARIA Labels and Live Regions
+
 **Priority: HIGH**
 
 #### Implementation:
+
 ```javascript
 // 1. Add ARIA labels to all interactive elements
 <button aria-label="Calculate solar savings" aria-describedby="calc-help">
@@ -77,9 +83,9 @@ const keyboardControls = {
 </div>
 
 // 3. Add ARIA attributes to custom components
-<div role="progressbar" 
-     aria-valuenow="75" 
-     aria-valuemin="0" 
+<div role="progressbar"
+     aria-valuenow="75"
+     aria-valuemin="0"
      aria-valuemax="100"
      aria-label="Experience points progress">
   <div class="progress-fill" style="width: 75%"></div>
@@ -93,46 +99,61 @@ function announcePhaseChange(phase) {
 ```
 
 ### 1.3 Color Contrast Improvements
+
 **Priority: MEDIUM**
 
 #### Issues to Fix:
+
 - Gray text on white background (3.8:1 ratio, needs 4.5:1)
 - Blue links on dark backgrounds
 - Disabled button states
 
 #### CSS Updates:
+
 ```css
 /* Update text colors for better contrast */
-.text-gray-500 { color: #4B5563; } /* Changed from #6B7280 */
-.text-gray-400 { color: #374151; } /* Changed from #9CA3AF */
+.text-gray-500 {
+  color: #4b5563;
+} /* Changed from #6B7280 */
+.text-gray-400 {
+  color: #374151;
+} /* Changed from #9CA3AF */
 
 /* Fix link colors on dark backgrounds */
-.dark a { color: #60A5FA; } /* Light blue with 4.6:1 ratio */
+.dark a {
+  color: #60a5fa;
+} /* Light blue with 4.6:1 ratio */
 
 /* Improve disabled states */
 button:disabled {
-  background-color: #E5E7EB;
+  background-color: #e5e7eb;
   color: #374151;
-  border: 2px dashed #9CA3AF;
+  border: 2px dashed #9ca3af;
 }
 
 /* Add focus indicators */
 *:focus {
-  outline: 3px solid #3B82F6;
+  outline: 3px solid #3b82f6;
   outline-offset: 2px;
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-  .card { border: 2px solid currentColor; }
-  .button { border: 2px solid currentColor; }
+  .card {
+    border: 2px solid currentColor;
+  }
+  .button {
+    border: 2px solid currentColor;
+  }
 }
 ```
 
 ### 1.4 Screen Reader Optimization
+
 **Priority: HIGH**
 
 #### Implementation:
+
 ```javascript
 // 1. Add descriptive text for complex UI elements
 <div role="img" aria-label="3D terrain visualization showing a 5000m² plot with 15° slope facing south">
@@ -176,6 +197,7 @@ function createAccessibleTable(data) {
 ## 2. Mobile Optimization
 
 ### 2.1 Touch Controls for 3D Viewer
+
 **Priority: HIGH**
 
 ```javascript
@@ -195,22 +217,22 @@ canvas.addEventListener('touchstart', (e) => {
 
 canvas.addEventListener('touchmove', (e) => {
   e.preventDefault();
-  
+
   if (e.touches.length === 1) {
     // Rotate camera
     const deltaX = e.touches[0].clientX - touchStartX;
     const deltaY = e.touches[0].clientY - touchStartY;
-    
+
     camera.alpha += deltaX * 0.01;
     camera.beta += deltaY * 0.01;
-    
+
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
   } else if (e.touches.length === 2) {
     // Pinch to zoom
     const distance = getDistance(e.touches[0], e.touches[1]);
     const scale = distance / initialDistance;
-    
+
     camera.radius = Math.max(50, Math.min(500, camera.radius / scale));
     initialDistance = distance;
   }
@@ -233,6 +255,7 @@ const mobileControls = `
 ```
 
 ### 2.2 Responsive Layout Improvements
+
 **Priority: MEDIUM**
 
 ```css
@@ -243,29 +266,36 @@ const mobileControls = `
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   /* Full-width cards */
   .card {
     margin: 0;
     border-radius: 0;
   }
-  
+
   /* Larger touch targets */
-  button, a, input, select {
+  button,
+  a,
+  input,
+  select {
     min-height: 44px;
     min-width: 44px;
   }
-  
+
   /* Simplified navigation */
-  .desktop-nav { display: none; }
-  .mobile-nav { display: block; }
-  
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-nav {
+    display: block;
+  }
+
   /* Optimized charts for mobile */
   .chart-container {
     height: 250px;
     overflow-x: auto;
   }
-  
+
   /* Stack financial KPIs */
   .kpi-grid {
     grid-template-columns: 1fr;
@@ -277,7 +307,7 @@ const mobileControls = `
   .phases-container {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .sidebar {
     position: static;
     width: 100%;
@@ -286,6 +316,7 @@ const mobileControls = `
 ```
 
 ### 2.3 Performance Optimization for Mobile
+
 **Priority: HIGH**
 
 ```javascript
@@ -293,11 +324,11 @@ const mobileControls = `
 if (window.innerWidth < 768) {
   // Defer 3D viewer loading
   const load3DViewer = () => {
-    import('./modules/viewer3d.js').then(module => {
+    import('./modules/viewer3d.js').then((module) => {
       module.init({ lowQuality: true });
     });
   };
-  
+
   // Load on user interaction
   document.getElementById('show-3d').addEventListener('click', load3DViewer, { once: true });
 }
@@ -318,6 +349,7 @@ const particleCount = isMobile ? 50 : 200;
 ```
 
 ### 2.4 Mobile-Specific Features
+
 **Priority: LOW**
 
 ```javascript
@@ -348,7 +380,7 @@ async function shareResults() {
       await navigator.share({
         title: 'My Solar Project Analysis',
         text: `ROI: ${roi}%, Payback: ${payback} years`,
-        url: window.location.href
+        url: window.location.href,
       });
     } catch (err) {
       console.log('Share cancelled');
@@ -360,16 +392,19 @@ async function shareResults() {
 ## 3. Implementation Timeline
 
 ### Week 1: Accessibility Foundation
+
 - [ ] Day 1-2: Implement keyboard navigation
 - [ ] Day 3-4: Add ARIA labels and live regions
 - [ ] Day 5: Fix color contrast issues
 
 ### Week 2: Mobile Optimization
+
 - [ ] Day 1-2: Implement touch controls for 3D viewer
 - [ ] Day 3-4: Responsive layout improvements
 - [ ] Day 5: Performance optimization for mobile
 
 ### Week 3: Testing and Polish
+
 - [ ] Day 1-2: Screen reader testing (NVDA, JAWS, VoiceOver)
 - [ ] Day 3: Mobile device testing
 - [ ] Day 4: Cross-browser testing
@@ -378,6 +413,7 @@ async function shareResults() {
 ## 4. Testing Checklist
 
 ### Accessibility Testing
+
 - [ ] Keyboard navigation works for all interactive elements
 - [ ] Tab order is logical
 - [ ] Focus indicators are visible
@@ -388,6 +424,7 @@ async function shareResults() {
 - [ ] Form labels are associated correctly
 
 ### Mobile Testing
+
 - [ ] Touch gestures work smoothly
 - [ ] Tap targets are at least 44x44px
 - [ ] Content is readable without horizontal scrolling
@@ -397,6 +434,7 @@ async function shareResults() {
 - [ ] Modals are properly sized
 
 ### Device Testing Matrix
+
 - [ ] iPhone 12/13/14 (Safari)
 - [ ] Samsung Galaxy S21/S22 (Chrome)
 - [ ] iPad Pro (Safari)
@@ -406,12 +444,14 @@ async function shareResults() {
 ## 5. Success Metrics
 
 ### Accessibility
+
 - [ ] WAVE tool shows 0 errors
 - [ ] axe DevTools shows 0 violations
 - [ ] Lighthouse Accessibility score > 95
 - [ ] Manual screen reader testing passes
 
 ### Mobile
+
 - [ ] Lighthouse Mobile Performance > 90
 - [ ] Touch interactions feel native
 - [ ] No horizontal scrolling
@@ -420,12 +460,14 @@ async function shareResults() {
 ## 6. Documentation Updates
 
 ### Files to Update:
+
 1. `README.md` - Add accessibility features section
 2. `docs/ACCESSIBILITY_GUIDE.md` - Create comprehensive guide
 3. `docs/MOBILE_OPTIMIZATION.md` - Document mobile features
 4. `docs/KEYBOARD_SHORTCUTS.md` - List all keyboard controls
 
 ### Code Comments:
+
 - Add inline comments for accessibility features
 - Document touch gesture calculations
 - Explain performance optimizations
@@ -433,10 +475,11 @@ async function shareResults() {
 ## Conclusion
 
 Completing Phase 6 will bring the Beyond Solutions project to 100% completion with:
+
 - Full WCAG 2.1 AA compliance
 - Excellent mobile user experience
 - Native-like touch interactions
 - Optimal performance on all devices
 
 Estimated time to complete: 3 weeks
-Final project completion: 100% 🎉 
+Final project completion: 100% 🎉

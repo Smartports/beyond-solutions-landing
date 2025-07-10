@@ -8,9 +8,9 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 
 ## Registro de Estado
 
-| Fecha | Estado | Notas |
-|-------|--------|-------|
-| 2025-06-16 | Planeado | Plan inicial creado |
+| Fecha      | Estado     | Notas                                        |
+| ---------- | ---------- | -------------------------------------------- |
+| 2025-06-16 | Planeado   | Plan inicial creado                          |
 | 2025-06-17 | Completado | Todas las historias de usuario implementadas |
 
 ## Historias de Usuario
@@ -22,6 +22,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Configurar proyecto en Google Cloud Console
 - [x] Obtener y configurar API Keys para Maps JavaScript API
 - [x] Implementar componente base de mapa interactivo
@@ -30,6 +31,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 - [x] Implementar estado para guardar coordenadas seleccionadas
 
 **Criterios de Aceptación:**
+
 - [x] Mapa se carga correctamente con API de Google Maps
 - [x] Usuario puede buscar ubicaciones por dirección o nombre
 - [x] El mapa es responsive en diferentes dispositivos
@@ -48,6 +50,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Diseñar la UI del selector de terreno
 - [x] Implementar herramientas de zoom in/out
 - [x] Agregar botones para centrar mapa y mi ubicación
@@ -56,6 +59,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 - [x] Agregar tooltips y ayudas visuales para usabilidad
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede hacer zoom y navegar el mapa intuitivamente
 - [x] Botón de "Mi ubicación" solicita permisos y centra el mapa
 - [x] Usuario puede alternar entre vista satelital y mapa normal
@@ -74,6 +78,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Diseñar interfaz para selección de origen del terreno
 - [x] Implementar opción "Terreno Propio" con selección manual
 - [x] Implementar opción básica de "Catálogo" para selección de terrenos precargados
@@ -82,6 +87,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 - [x] Integrar con el sistema de autosave
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede elegir entre "Terreno Propio" y "Catálogo"
 - [x] Al seleccionar "Terreno Propio", se activan herramientas de selección manual
 - [x] Al seleccionar "Catálogo", se muestran opciones básicas predefinidas
@@ -100,6 +106,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Diseñar interfaz para el catálogo de terrenos
 - [x] Crear estructura de datos para terrenos predefinidos
 - [x] Implementar filtros básicos (ubicación, tamaño, tipo)
@@ -108,6 +115,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 - [x] Implementar paginación y búsqueda en el catálogo
 
 **Criterios de Aceptación:**
+
 - [x] Catálogo muestra al menos 10 terrenos predefinidos
 - [x] Usuario puede filtrar terrenos por al menos 3 criterios
 - [x] Al seleccionar un terreno, se muestran datos básicos (área, ubicación, dimensiones)
@@ -126,6 +134,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Diseñar interfaz para herramientas de dibujo 2D
 - [x] Implementar herramienta para crear polígonos punto a punto
 - [x] Agregar función para editar vértices
@@ -134,6 +143,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 - [x] Agregar feedback visual durante el proceso de dibujo
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede dibujar un polígono colocando puntos en el mapa
 - [x] Usuario puede editar la posición de los vértices después de colocarlos
 - [x] Sistema calcula y muestra en tiempo real el área y perímetro del polígono
@@ -152,6 +162,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Diseñar interfaz para ingreso de datos de elevación
 - [x] Implementar campo de entrada para altura promedio
 - [x] Crear visualización básica 2D+ de la elevación
@@ -160,6 +171,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 - [x] Agregar tooltips informativos sobre elevación y pendientes
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede ingresar la altura promedio del terreno
 - [x] Sistema muestra visualización básica de la elevación en 2D+
 - [x] Los datos de elevación se validan correctamente
@@ -178,6 +190,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Integrar los datos del terreno con el sistema de autosave
 - [x] Implementar exportación básica a formato GeoJSON
 - [x] Crear vista previa de datos guardados
@@ -186,6 +199,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 - [x] Crear pantalla de resumen del terreno
 
 **Criterios de Aceptación:**
+
 - [x] Todos los datos del terreno se guardan correctamente con autosave
 - [x] Usuario puede exportar el terreno en formato GeoJSON
 - [x] Vista previa muestra correctamente los datos guardados
@@ -204,6 +218,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Crear flujo de navegación entre onboarding y selección de terreno
 - [x] Implementar paso del contexto entre fases
 - [x] Diseñar UI para mostrar progreso entre fases
@@ -212,6 +227,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 - [x] Crear animaciones de transición entre fases
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede navegar fluidamente del onboarding a la selección de terreno
 - [x] Contexto y datos se mantienen consistentes entre fases
 - [x] UI muestra claramente el progreso actual del usuario
@@ -226,9 +242,11 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 ## Riesgos y Mitigaciones
 
 ### Riesgo 1: Problemas de Rendimiento con Google Maps API
+
 **Descripción:** El uso intensivo de Google Maps API podría afectar el rendimiento, especialmente en dispositivos móviles o conexiones lentas.
 
 **Mitigación:**
+
 - Implementar carga lazy y progresiva de los componentes de mapas
 - Limitar el tamaño de datos iniciales y cargar más detalles según demanda
 - Configurar caché local de tiles y datos geográficos frecuentes
@@ -238,21 +256,25 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 **Estado:** ✅ Mitigado
 
 ### Riesgo 2: Precisión de Dibujo en Dispositivos Táctiles
+
 **Descripción:** La herramienta de sketch 2D podría tener problemas de precisión y usabilidad en dispositivos táctiles.
 
 **Mitigación:**
+
 - Implementar controles específicos para experiencia táctil
 - Agregar función de zoom automático durante el dibujo
-- Crear herramientas de ajuste y snapping para mayor precisión 
+- Crear herramientas de ajuste y snapping para mayor precisión
 - Probar extensivamente en diferentes tamaños de pantalla táctil
 - Implementar modo de edición simplificado para móviles
 
 **Estado:** ✅ Mitigado
 
 ### Riesgo 3: Complejidad de Cálculos Geométricos
+
 **Descripción:** Los cálculos de áreas, perímetros y validaciones geométricas pueden ser complejos y propensos a errores.
 
 **Mitigación:**
+
 - Utilizar bibliotecas geoespaciales probadas como Turf.js
 - Implementar pruebas unitarias exhaustivas para todos los cálculos
 - Limitar inicialmente la complejidad de los polígonos permitidos
@@ -262,9 +284,11 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 **Estado:** ✅ Mitigado
 
 ### Riesgo 4: Integración con el Backend para Catálogo
+
 **Descripción:** La implementación del catálogo podría retrasarse si depende de integraciones con backends no disponibles.
 
 **Mitigación:**
+
 - Desarrollar primero con datos mock estáticos
 - Implementar una API middleware para facilitar futuras integraciones
 - Crear adaptadores para diferentes fuentes de datos
@@ -275,17 +299,17 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 
 ## Estimación Total del Sprint
 
-| Historia | Estimación (días) | Estado |
-|----------|------------------|--------|
-| #1: Integración con Google Maps API | 1.0 | ✅ Completado |
-| #2: Componente MapPicker | 1.0 | ✅ Completado |
-| #3: Selección de Origen del Terreno | 0.5 | ✅ Completado |
-| #4: Catálogo Geo Básico | 1.0 | ✅ Completado |
-| #5: Sketch 2D Básico | 1.0 | ✅ Completado |
-| #6: Editor de Elevación Básico | 0.5 | ✅ Completado |
-| #7: Persistencia y Exportación Básica | 0.5 | ✅ Completado |
-| #8: Integración con Wizard/Onboarding | 0.5 | ✅ Completado |
-| **Total** | **6.0** | ✅ **Completado** |
+| Historia                              | Estimación (días) | Estado            |
+| ------------------------------------- | ----------------- | ----------------- |
+| #1: Integración con Google Maps API   | 1.0               | ✅ Completado     |
+| #2: Componente MapPicker              | 1.0               | ✅ Completado     |
+| #3: Selección de Origen del Terreno   | 0.5               | ✅ Completado     |
+| #4: Catálogo Geo Básico               | 1.0               | ✅ Completado     |
+| #5: Sketch 2D Básico                  | 1.0               | ✅ Completado     |
+| #6: Editor de Elevación Básico        | 0.5               | ✅ Completado     |
+| #7: Persistencia y Exportación Básica | 0.5               | ✅ Completado     |
+| #8: Integración con Wizard/Onboarding | 0.5               | ✅ Completado     |
+| **Total**                             | **6.0**           | ✅ **Completado** |
 
 ## Leyenda de Estado
 
@@ -300,7 +324,7 @@ La Épica E2 busca permitir a los usuarios seleccionar o dibujar un terreno y ge
 ```mermaid
 graph TD
     Sprint1[Finalización Sprint 1: Wizard/Onboarding] -->|Requerido| H1
-    
+
     H1[Historia #1: Integración con Google Maps API] --> H2
     H2[Historia #2: Componente MapPicker] --> H3
     H2 --> H5
@@ -325,4 +349,4 @@ graph TD
 
 ---
 
-> Este plan ha sido completado exitosamente. Todas las historias de usuario fueron implementadas y los riesgos mitigados. El Sprint 3 se enfocará en mejorar la experiencia con funcionalidades avanzadas como importación CAD y visualización 3D. 
+> Este plan ha sido completado exitosamente. Todas las historias de usuario fueron implementadas y los riesgos mitigados. El Sprint 3 se enfocará en mejorar la experiencia con funcionalidades avanzadas como importación CAD y visualización 3D.

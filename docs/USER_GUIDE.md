@@ -22,6 +22,7 @@ The Beyond Solutions Calculator is a comprehensive tool for real estate professi
 ### 3.1 Selecting Terrain Source
 
 Choose from three options:
+
 - **Draw on Map**: Draw your terrain boundaries on Google Maps
 - **Select from Catalog**: Choose a pre-defined terrain
 - **Import File**: Upload CAD/DXF or GeoJSON files
@@ -42,6 +43,7 @@ Choose from three options:
 ### 3.4 Terrain Analysis
 
 Access terrain analysis tools to view:
+
 - Area and perimeter calculations
 - Elevation profile
 - Solar exposure analysis
@@ -58,6 +60,7 @@ Access terrain analysis tools to view:
 ### 4.2 Cost Breakdown
 
 View detailed cost estimates including:
+
 - Direct construction costs
 - Indirect costs
 - Financing costs
@@ -66,6 +69,7 @@ View detailed cost estimates including:
 ### 4.3 Financial Analysis
 
 Access financial tools to calculate:
+
 - Return on investment (ROI)
 - Internal rate of return (IRR)
 - Net present value (NPV)
@@ -134,5 +138,5 @@ For additional help, contact support@beyondsolutions.com
 
 ---
 
-*Document Version: 1.0*  
-*Last Updated: 2025-06-25* 
+_Document Version: 1.0_  
+_Last Updated: 2025-06-25_
