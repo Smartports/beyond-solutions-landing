@@ -61,55 +61,81 @@ function initializePhase6Features(a11y, mobile) {
 function detectPageType() {
   const path = window.location.pathname;
   const filename = path.split('/').pop() || 'index.html';
-  
+
   if (filename.includes('calculator-gamified')) return 'calculator-gamified';
   if (filename.includes('calculator')) return 'calculator';
   if (filename.includes('dashboard')) return 'dashboard';
   if (filename.includes('wizard')) return 'wizard';
   if (filename.includes('test-phase6')) return 'test-phase6';
-  
+
   return 'generic';
 }
 
 function initializeGamifiedCalculator(a11y, mobile) {
-  // Try to retrieve the calculator component; if not ready, observe DOM mutations instead of polling
-  const calculatorElement = document.querySelector('[x-data="calculatorGamified"]');
-
-  if (!calculatorElement || !calculatorElement.__x) {
-    console.log('⏳ Waiting for gamified calculator to initialize using MutationObserver...');
-
-    const timeoutId = setTimeout(() => {
-      console.warn('⚠️ Gamified calculator component not found after 10 s. Initializing generic features only.');
-      observer && observer.disconnect();
-      initializeGenericPage(a11y, mobile);
-    }, 10000); // 10 s timeout
-
-    const observer = new MutationObserver(() => {
-      const el = document.querySelector('[x-data="calculatorGamified"]');
-      if (el && el.__x) {
-        clearTimeout(timeoutId);
-        observer.disconnect();
-        // Re-call to proceed with full initialization
-        initializeGamifiedCalculator(a11y, mobile);
-      }
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
+  // Check if Alpine.js is loaded first
+  if (!window.Alpine) {
+    console.log('⏳ Waiting for Alpine.js to load...');
+    setTimeout(() => initializeGamifiedCalculator(a11y, mobile), 100);
     return;
   }
 
-  const calculator = calculatorElement.__x.data;
+  // Wait for Alpine to be initialized
+  const initializeWhenReady = () => {
+    const calculatorElement = document.querySelector('[x-data="calculatorGamified"]');
+    
+    if (!calculatorElement) {
+      console.log('⏳ Waiting for calculator element...');
+      setTimeout(() => initializeGamifiedCalculator(a11y, mobile), 100);
+      return;
+    }
 
-  // Initialize all gamified calculator features
-  enhancePhaseNavigation(a11y);
-  setupGameAnnouncements(a11y, calculator);
-  enhance3DViewer(mobile);
-  makeChartsAccessible(a11y);
-  enhanceForms(a11y);
-  setupMobileFeatures(mobile, calculator);
+    // For CSP build, we can't access __x directly
+    // Instead, we'll check if the element has been processed by Alpine
+    const isAlpineInitialized = calculatorElement.hasAttribute('x-id') || 
+                                 calculatorElement._x_dataStack || 
+                                 calculatorElement.__x;
 
-  initializationComplete = true;
-  console.log('✅ Phase 6 features initialized for gamified calculator!');
+    if (!isAlpineInitialized) {
+      console.log('⏳ Waiting for Alpine component to initialize...');
+      
+      // Set a timeout to prevent infinite waiting
+      if (!window._phase6InitTimeout) {
+        window._phase6InitTimeout = setTimeout(() => {
+          console.warn(
+            '⚠️ Alpine component initialization timeout. Initializing generic features only.',
+          );
+          initializeGenericPage(a11y, mobile);
+        }, 10000);
+      }
+      
+      setTimeout(() => initializeGamifiedCalculator(a11y, mobile), 100);
+      return;
+    }
+
+    // Clear timeout if we got here
+    if (window._phase6InitTimeout) {
+      clearTimeout(window._phase6InitTimeout);
+      delete window._phase6InitTimeout;
+    }
+
+    // Get calculator data - for CSP build, we can't directly access the data
+    // So we'll work with the DOM elements instead
+    const calculator = calculatorElement.__x ? calculatorElement.__x.data : null;
+
+    // Initialize all gamified calculator features
+    enhancePhaseNavigation(a11y);
+    setupGameAnnouncements(a11y, calculator);
+    enhance3DViewer(mobile);
+    makeChartsAccessible(a11y);
+    enhanceForms(a11y);
+    setupMobileFeatures(mobile, calculator);
+
+    initializationComplete = true;
+    console.log('✅ Phase 6 features initialized for gamified calculator!');
+  };
+
+  // Start the initialization process
+  initializeWhenReady();
 }
 
 function initializeStandardCalculator(a11y, mobile) {
@@ -154,14 +180,14 @@ function initializeGenericPage(a11y, mobile) {
 
 function setupGenericMobileFeatures(mobile) {
   // Generic mobile features that don't require calculator context
-  
+
   // Optimize images based on connection
   document.addEventListener('connection:slow', () => {
-    document.querySelectorAll('img[data-low-src]').forEach(img => {
+    document.querySelectorAll('img[data-low-src]').forEach((img) => {
       img.src = img.dataset.lowSrc;
     });
   });
-  
+
   // Add native share for results
   const shareButton = document.querySelector('[data-share-results]');
   if (shareButton && navigator.share) {
@@ -170,26 +196,28 @@ function setupGenericMobileFeatures(mobile) {
         await navigator.share({
           title: 'Beyond Solutions - Real Estate Calculator',
           text: 'Check out this amazing real estate calculator',
-          url: window.location.href
+          url: window.location.href,
         });
       } catch (err) {
         console.log('Share cancelled or not supported');
       }
     });
   }
-  
+
   console.log('✅ Generic mobile features setup complete');
 }
 
 function enhanceProjectCards(a11y) {
   // Enhance project cards on dashboard
-  const projectCards = document.querySelectorAll('[x-data*="dashboardData"] .project-card, .project-item');
-  
+  const projectCards = document.querySelectorAll(
+    '[x-data*="dashboardData"] .project-card, .project-item',
+  );
+
   projectCards.forEach((card, index) => {
     card.setAttribute('role', 'article');
     card.setAttribute('tabindex', '0');
     card.setAttribute('aria-label', `Project ${index + 1}`);
-    
+
     // Add keyboard navigation
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -199,24 +227,24 @@ function enhanceProjectCards(a11y) {
       }
     });
   });
-  
+
   console.log('✅ Project cards enhanced with accessibility features');
 }
 
 // Enhance phase navigation with keyboard support
 function enhancePhaseNavigation(a11y) {
   const phaseButtons = document.querySelectorAll('.phase-indicator, [x-on\\:click*="goToPhase"]');
-  
+
   phaseButtons.forEach((button, index) => {
     // Add ARIA labels
     const phaseName = button.getAttribute('title') || `Phase ${index + 1}`;
     button.setAttribute('aria-label', `Navigate to ${phaseName}`);
     button.setAttribute('role', 'button');
     button.setAttribute('tabindex', '0');
-    
+
     // Add keyboard navigation
     button.addEventListener('keydown', (e) => {
-      switch(e.key) {
+      switch (e.key) {
         case 'Enter':
         case ' ':
           e.preventDefault();
@@ -270,7 +298,7 @@ function setupGameAnnouncements(a11y, calculator) {
   try {
     // Watch for XP changes
     let lastXP = calculator.currentXP || 0;
-    
+
     const xpWatcher = setInterval(() => {
       try {
         if (calculator.currentXP !== lastXP) {
@@ -288,7 +316,7 @@ function setupGameAnnouncements(a11y, calculator) {
 
     // Watch for level changes
     let lastLevel = calculator.playerLevel || 1;
-    
+
     const levelWatcher = setInterval(() => {
       try {
         if (calculator.playerLevel !== lastLevel) {
@@ -304,17 +332,17 @@ function setupGameAnnouncements(a11y, calculator) {
     // Watch for badge unlocks
     const unlockedBadges = new Set();
     if (calculator.recentBadges && Array.isArray(calculator.recentBadges)) {
-      calculator.recentBadges.forEach(badge => {
+      calculator.recentBadges.forEach((badge) => {
         if (badge && badge.id) {
           unlockedBadges.add(badge.id);
         }
       });
     }
-    
+
     const badgeWatcher = setInterval(() => {
       try {
         if (calculator.recentBadges && Array.isArray(calculator.recentBadges)) {
-          calculator.recentBadges.forEach(badge => {
+          calculator.recentBadges.forEach((badge) => {
             if (badge && badge.id && badge.name && !unlockedBadges.has(badge.id)) {
               a11y.announceAlert(`Achievement unlocked: ${badge.name}!`);
               unlockedBadges.add(badge.id);
@@ -329,7 +357,7 @@ function setupGameAnnouncements(a11y, calculator) {
 
     // Announce phase changes
     let currentPhase = calculator.currentPhase || 0;
-    
+
     const phaseWatcher = setInterval(() => {
       try {
         if (calculator.currentPhase !== currentPhase) {
@@ -355,32 +383,40 @@ function setupGameAnnouncements(a11y, calculator) {
 function enhance3DViewer(mobile) {
   // Wait for 3D viewer to be initialized
   const check3DViewer = setInterval(() => {
-    const canvas = document.querySelector('#viewer3d-canvas, #immersive-canvas, canvas[id*="babylon"]');
-    
+    const canvas = document.querySelector(
+      '#viewer3d-canvas, #immersive-canvas, canvas[id*="babylon"]',
+    );
+
     if (canvas) {
       clearInterval(check3DViewer);
-      
+
       // Add mobile touch controls
       mobile.setup3DViewerTouch(canvas);
-      
+
       // Add keyboard controls for desktop
       const keyControls = {
-        'ArrowUp': () => {
+        ArrowUp: () => {
           if (window.viewer3DModule && window.viewer3DModule.camera) {
-            window.viewer3DModule.camera.beta = Math.max(0.1, window.viewer3DModule.camera.beta - 0.1);
+            window.viewer3DModule.camera.beta = Math.max(
+              0.1,
+              window.viewer3DModule.camera.beta - 0.1,
+            );
           }
         },
-        'ArrowDown': () => {
+        ArrowDown: () => {
           if (window.viewer3DModule && window.viewer3DModule.camera) {
-            window.viewer3DModule.camera.beta = Math.min(Math.PI/2 - 0.1, window.viewer3DModule.camera.beta + 0.1);
+            window.viewer3DModule.camera.beta = Math.min(
+              Math.PI / 2 - 0.1,
+              window.viewer3DModule.camera.beta + 0.1,
+            );
           }
         },
-        'ArrowLeft': () => {
+        ArrowLeft: () => {
           if (window.viewer3DModule && window.viewer3DModule.camera) {
             window.viewer3DModule.camera.alpha -= 0.1;
           }
         },
-        'ArrowRight': () => {
+        ArrowRight: () => {
           if (window.viewer3DModule && window.viewer3DModule.camera) {
             window.viewer3DModule.camera.alpha += 0.1;
           }
@@ -395,43 +431,52 @@ function enhance3DViewer(mobile) {
             window.viewer3DModule.camera.radius *= 1.1;
           }
         },
-        'r': () => {
+        r: () => {
           if (window.viewer3DModule && typeof window.viewer3DModule.resetCamera === 'function') {
             window.viewer3DModule.resetCamera();
           }
         },
-        'd': () => {
+        d: () => {
           if (window.viewer3DModule && typeof window.viewer3DModule.toggleDayNight === 'function') {
             window.viewer3DModule.toggleDayNight();
           }
         },
-        's': () => {
-          if (window.viewer3DModule && typeof window.viewer3DModule.enableSolarAnalysis === 'function') {
+        s: () => {
+          if (
+            window.viewer3DModule &&
+            typeof window.viewer3DModule.enableSolarAnalysis === 'function'
+          ) {
             window.viewer3DModule.enableSolarAnalysis();
           }
         },
-        'w': () => {
-          if (window.viewer3DModule && typeof window.viewer3DModule.enableWindAnalysis === 'function') {
+        w: () => {
+          if (
+            window.viewer3DModule &&
+            typeof window.viewer3DModule.enableWindAnalysis === 'function'
+          ) {
             window.viewer3DModule.enableWindAnalysis();
           }
-        }
+        },
       };
-      
+
       canvas.setAttribute('tabindex', '0');
       canvas.setAttribute('role', 'application');
-      canvas.setAttribute('aria-label', '3D terrain viewer. Use arrow keys to rotate, plus/minus to zoom, R to reset, D for day/night, S for solar analysis, W for wind analysis');
-      
+      canvas.setAttribute(
+        'aria-label',
+        '3D terrain viewer. Use arrow keys to rotate, plus/minus to zoom, R to reset, D for day/night, S for solar analysis, W for wind analysis',
+      );
+
       canvas.addEventListener('keydown', (e) => {
         if (keyControls[e.key]) {
           e.preventDefault();
           keyControls[e.key]();
         }
       });
-      
+
       console.log('✅ 3D viewer enhanced with mobile and keyboard controls');
     }
   }, 100);
-  
+
   // Stop checking after 10 seconds
   setTimeout(() => clearInterval(check3DViewer), 10000);
 }
@@ -440,18 +485,23 @@ function enhance3DViewer(mobile) {
 function makeChartsAccessible(a11y) {
   // Wait for charts to be rendered
   setTimeout(() => {
-    const charts = document.querySelectorAll('canvas[id*="chart"], .chart-container canvas, #projection-chart');
-    
+    const charts = document.querySelectorAll(
+      'canvas[id*="chart"], .chart-container canvas, #projection-chart',
+    );
+
     charts.forEach((canvas, index) => {
       // Add ARIA labels
-      const chartType = canvas.id.includes('roi') ? 'ROI projection' : 
-                       canvas.id.includes('cash') ? 'Cash flow' : 
-                       canvas.id.includes('projection') ? 'Financial projection' :
-                       'Financial data';
-      
+      const chartType = canvas.id.includes('roi')
+        ? 'ROI projection'
+        : canvas.id.includes('cash')
+          ? 'Cash flow'
+          : canvas.id.includes('projection')
+            ? 'Financial projection'
+            : 'Financial data';
+
       canvas.setAttribute('role', 'img');
       canvas.setAttribute('aria-label', `${chartType} chart. Press T to view as table.`);
-      
+
       // Add keyboard handler to show data table
       canvas.setAttribute('tabindex', '0');
       canvas.addEventListener('keydown', (e) => {
@@ -460,19 +510,20 @@ function makeChartsAccessible(a11y) {
           showChartAsTable(canvas);
         }
       });
-      
+
       // Add button to view as table
       const existingButton = canvas.parentElement.querySelector('.chart-table-button');
       if (!existingButton) {
         const button = document.createElement('button');
-        button.className = 'chart-table-button mt-2 text-sm text-blue-600 hover:text-blue-800 underline bg-transparent border-none cursor-pointer';
+        button.className =
+          'chart-table-button mt-2 text-sm text-blue-600 hover:text-blue-800 underline bg-transparent border-none cursor-pointer';
         button.textContent = 'View as table';
         button.onclick = () => showChartAsTable(canvas);
-        
+
         canvas.parentElement.appendChild(button);
       }
     });
-    
+
     console.log('✅ Charts enhanced with accessibility features');
   }, 1000);
 }
@@ -486,7 +537,7 @@ function showChartAsTable(canvas) {
     showFallbackTable(canvas);
     return;
   }
-  
+
   // Create table HTML
   const data = chart.data;
   const tableHTML = `
@@ -498,16 +549,20 @@ function showChartAsTable(canvas) {
           <thead>
             <tr>
               <th scope="col" class="border border-gray-300 dark:border-gray-600 p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white">Period</th>
-              ${data.datasets.map(ds => `<th scope="col" class="border border-gray-300 dark:border-gray-600 p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white">${ds.label}</th>`).join('')}
+              ${data.datasets.map((ds) => `<th scope="col" class="border border-gray-300 dark:border-gray-600 p-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white">${ds.label}</th>`).join('')}
             </tr>
           </thead>
           <tbody>
-            ${data.labels.map((label, i) => `
+            ${data.labels
+              .map(
+                (label, i) => `
               <tr>
                 <th scope="row" class="border border-gray-300 dark:border-gray-600 p-2 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white">${label}</th>
-                ${data.datasets.map(ds => `<td class="border border-gray-300 dark:border-gray-600 p-2 text-gray-900 dark:text-white">${ds.data[i] || 'N/A'}</td>`).join('')}
+                ${data.datasets.map((ds) => `<td class="border border-gray-300 dark:border-gray-600 p-2 text-gray-900 dark:text-white">${ds.data[i] || 'N/A'}</td>`).join('')}
               </tr>
-            `).join('')}
+            `,
+              )
+              .join('')}
           </tbody>
         </table>
         <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" onclick="this.closest('.chart-table-modal').remove()">
@@ -516,19 +571,19 @@ function showChartAsTable(canvas) {
       </div>
     </div>
   `;
-  
+
   document.body.insertAdjacentHTML('beforeend', tableHTML);
-  
+
   // Focus management
   const modal = document.querySelector('.chart-table-modal');
   const closeButton = modal.querySelector('button');
   closeButton.focus();
-  
+
   // Trap focus
   if (window.accessibilityManager) {
     window.accessibilityManager.createFocusTrap(modal.firstElementChild);
   }
-  
+
   // Close on escape
   modal.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -553,9 +608,9 @@ function showFallbackTable(canvas) {
       </div>
     </div>
   `;
-  
+
   document.body.insertAdjacentHTML('beforeend', tableHTML);
-  
+
   const modal = document.querySelector('.chart-table-modal');
   const closeButton = modal.querySelector('button');
   closeButton.focus();
@@ -564,17 +619,19 @@ function showFallbackTable(canvas) {
 // Enhance forms
 function enhanceForms(a11y) {
   // Enhance all forms in the calculator
-  const forms = document.querySelectorAll('.calculator-form, form, [role="form"], [x-data*="calculator"]');
-  
-  forms.forEach(form => {
+  const forms = document.querySelectorAll(
+    '.calculator-form, form, [role="form"], [x-data*="calculator"]',
+  );
+
+  forms.forEach((form) => {
     // Add form landmark if missing
     if (!form.hasAttribute('role')) {
       form.setAttribute('role', 'form');
     }
-    
+
     // Enhance inputs
     const inputs = form.querySelectorAll('input, select, textarea, button[type="button"]');
-    inputs.forEach(input => {
+    inputs.forEach((input) => {
       // Add labels if missing
       if (!input.labels || input.labels.length === 0) {
         if (input.placeholder) {
@@ -583,7 +640,7 @@ function enhanceForms(a11y) {
           input.setAttribute('aria-label', input.textContent.trim());
         }
       }
-      
+
       // Add error message containers for inputs only
       if (input.tagName !== 'BUTTON' && !input.getAttribute('aria-describedby')) {
         const errorId = `${input.id || input.name || 'input'}-error-${Date.now()}`;
@@ -592,16 +649,18 @@ function enhanceForms(a11y) {
         errorSpan.className = 'error-message text-red-600 text-sm mt-1 hidden';
         errorSpan.setAttribute('role', 'alert');
         errorSpan.setAttribute('aria-live', 'polite');
-        
+
         input.setAttribute('aria-describedby', errorId);
-        
+
         // Insert after the input or its immediate parent
-        const insertAfter = input.parentElement.querySelector('.form-group') ? input.parentElement : input;
+        const insertAfter = input.parentElement.querySelector('.form-group')
+          ? input.parentElement
+          : input;
         insertAfter.parentElement.insertBefore(errorSpan, insertAfter.nextSibling);
       }
     });
   });
-  
+
   console.log('✅ Forms enhanced with accessibility features');
 }
 
@@ -622,7 +681,7 @@ function setupMobileFeatures(mobile, calculator) {
         }
       }
     });
-    
+
     document.addEventListener('swipe:right', () => {
       if (calculator.currentPhase !== undefined && calculator.currentPhase > 0) {
         const prevPhase = calculator.currentPhase - 1;
@@ -634,12 +693,12 @@ function setupMobileFeatures(mobile, calculator) {
       }
     });
   }
-  
+
   // Setup generic mobile features
   setupGenericMobileFeatures(mobile);
-  
+
   console.log('✅ Mobile features setup complete');
 }
 
 // Export for testing
-export { enhancePhaseNavigation, setupGameAnnouncements, enhance3DViewer, makeChartsAccessible }; 
+export { enhancePhaseNavigation, setupGameAnnouncements, enhance3DViewer, makeChartsAccessible };
