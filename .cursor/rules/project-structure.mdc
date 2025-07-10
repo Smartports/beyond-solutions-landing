@@ -27,7 +27,7 @@ This project is a landing page for Beyond Solutions, a platform for real estate 
 The site is optimized for SEO with proper meta tags, hreflang annotations, and a comprehensive sitemap. Accessibility features include keyboard navigation, ARIA attributes, and proper color contrast.
 
 ## Monorepo Workspace
-- The repository uses a monorepo layout managed via npm workspaces/Bun with a root `package.json`.
+- The repository uses a monorepo layout managed via bun workspaces/Bun with a root `package.json`.
 - Apps:
   - `apps/web/` – React + TypeScript front-end built with Vite and TailwindCSS.
 - Packages:

@@ -25,7 +25,7 @@ This repository is organised as a **monorepo** that unifies the landing pages an
 
 ## Build & CI
 - **Vite** drives the dev server and production build for React apps.
-- **Bun** lockfile (`bun.lock`) tracks dependency versions; `npm run build` will invoke workspace builds sequentially.
+- **Bun** lockfile (`bun.lock`) tracks dependency versions; `bun run build` will invoke workspace builds sequentially.
 - **CI Pipeline** ensures lint, unit tests, type-checking, and accessibility audits pass before merge.
 
 ## Shared Storage Layer
