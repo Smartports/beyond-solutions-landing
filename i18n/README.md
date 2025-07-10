@@ -67,7 +67,7 @@ To translate HTML attributes, use `data-i18n-attr`:
 For multiple attributes:
 
 ```html
-<img src="image.jpg" data-i18n-attr="alt:image.alt,title:image.title">
+<img src="image.jpg" data-i18n-attr="alt:image.alt,title:image.title" />
 ```
 
 ### Internal HTML Translation

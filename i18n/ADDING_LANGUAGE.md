@@ -68,19 +68,19 @@ For languages written from right to left (RTL) such as Arabic (ar) or Hebrew (he
 ## Common Language and Flag Codes
 
 | Language   | Language Code | Flag Code |
-|------------|--------------|-----------|
-| Spanish    | es           | es        |
-| English    | en           | us/gb     |
-| French     | fr           | fr        |
-| German     | de           | de        |
-| Italian    | it           | it        |
-| Portuguese | pt           | pt/br     |
-| Russian    | ru           | ru        |
-| Chinese    | zh           | cn        |
-| Japanese   | ja           | jp        |
-| Korean     | ko           | kr        |
-| Arabic     | ar           | sa/ae     |
-| Hebrew     | he           | il        |
+| ---------- | ------------- | --------- |
+| Spanish    | es            | es        |
+| English    | en            | us/gb     |
+| French     | fr            | fr        |
+| German     | de            | de        |
+| Italian    | it            | it        |
+| Portuguese | pt            | pt/br     |
+| Russian    | ru            | ru        |
+| Chinese    | zh            | cn        |
+| Japanese   | ja            | jp        |
+| Korean     | ko            | kr        |
+| Arabic     | ar            | sa/ae     |
+| Hebrew     | he            | il        |
 
 For a complete list of ISO 639-1 (languages) and ISO 3166-1 alpha-2 (countries) codes, see:
 
