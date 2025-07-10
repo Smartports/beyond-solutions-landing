@@ -19,7 +19,7 @@ export interface ElevationData {
 export const ElevationEditor: React.FC<ElevationEditorProps> = ({
   onElevationChange,
   initialElevation = 0,
-  className = ''
+  className = '',
 }) => {
   const [averageHeight, setAverageHeight] = useState(initialElevation);
   const [slope, setSlope] = useState(0);
@@ -27,19 +27,19 @@ export const ElevationEditor: React.FC<ElevationEditorProps> = ({
     { name: 'Plano', value: 0 },
     { name: 'Ligera pendiente', value: 2 },
     { name: 'Pendiente moderada', value: 5 },
-    { name: 'Pendiente pronunciada', value: 10 }
+    { name: 'Pendiente pronunciada', value: 10 },
   ]);
-  
+
   // Notificar cambios en la elevación
   useEffect(() => {
     if (onElevationChange) {
       onElevationChange({
         averageHeight,
-        slope
+        slope,
       });
     }
   }, [averageHeight, slope, onElevationChange]);
-  
+
   // Manejar cambio en la altura promedio
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
@@ -47,7 +47,7 @@ export const ElevationEditor: React.FC<ElevationEditorProps> = ({
       setAverageHeight(value);
     }
   };
-  
+
   // Manejar cambio en la pendiente
   const handleSlopeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
@@ -55,21 +55,24 @@ export const ElevationEditor: React.FC<ElevationEditorProps> = ({
       setSlope(value);
     }
   };
-  
+
   // Aplicar preset de elevación
   const applyPreset = (preset: { name: string; value: number }) => {
     setSlope(preset.value);
   };
-  
+
   return (
     <div className={`elevation-editor ${className}`}>
       <h2 className="text-xl font-bold mb-4 text-primary-800 dark:text-accent-50">
         Elevación del Terreno
       </h2>
-      
+
       <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700">
         <div className="mb-4">
-          <label htmlFor="average-height" className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label
+            htmlFor="average-height"
+            className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+          >
             Altura promedio (metros sobre nivel del mar)
           </label>
           <input
@@ -85,9 +88,12 @@ export const ElevationEditor: React.FC<ElevationEditorProps> = ({
             Altura promedio del terreno en metros sobre el nivel del mar.
           </p>
         </div>
-        
+
         <div className="mb-4">
-          <label htmlFor="slope" className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label
+            htmlFor="slope"
+            className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+          >
             Pendiente (%)
           </label>
           <input
@@ -102,14 +108,16 @@ export const ElevationEditor: React.FC<ElevationEditorProps> = ({
           />
           <div className="flex justify-between mt-1">
             <span className="text-xs text-gray-500 dark:text-gray-400">0%</span>
-            <span className="text-sm font-medium text-primary-800 dark:text-primary-300">{slope}%</span>
+            <span className="text-sm font-medium text-primary-800 dark:text-primary-300">
+              {slope}%
+            </span>
             <span className="text-xs text-gray-500 dark:text-gray-400">30%</span>
           </div>
           <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
             Pendiente promedio del terreno en porcentaje.
           </p>
         </div>
-        
+
         <div>
           <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
             Presets de pendiente
@@ -132,30 +140,31 @@ export const ElevationEditor: React.FC<ElevationEditorProps> = ({
           </div>
         </div>
       </div>
-      
+
       <div className="p-4 bg-gray-100 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-semibold mb-2 text-primary-800 dark:text-accent-100">
           Información de elevación
         </h3>
-        
+
         <div className="grid grid-cols-2 gap-4">
           <div>
             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Altura promedio</p>
             <p className="text-gray-800 dark:text-gray-200">{averageHeight} m.s.n.m.</p>
           </div>
-          
+
           <div>
             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Pendiente</p>
             <p className="text-gray-800 dark:text-gray-200">{slope}%</p>
           </div>
         </div>
-        
+
         <div className="mt-4">
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            <strong>Nota:</strong> En la versión completa, podrás visualizar un modelo 3D del terreno con la elevación configurada.
+            <strong>Nota:</strong> En la versión completa, podrás visualizar un modelo 3D del
+            terreno con la elevación configurada.
           </p>
         </div>
       </div>
     </div>
   );
-}; 
+};

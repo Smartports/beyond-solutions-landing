@@ -23,7 +23,7 @@ enum TerrainStep {
   TERRAIN_IMPORT = 3,
   ELEVATION = 4,
   ANALYSIS = 5,
-  EXPORT = 6
+  EXPORT = 6,
 }
 
 /**
@@ -32,7 +32,7 @@ enum TerrainStep {
 export const TerrainModule: React.FC<TerrainModuleProps> = ({
   onComplete,
   onBack,
-  className = ''
+  className = '',
 }) => {
   // Estado del módulo
   const [currentStep, setCurrentStep] = useState<TerrainStep>(TerrainStep.SOURCE_SELECTION);
@@ -48,11 +48,11 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
     analysis?: any;
     importSource?: string;
   }>({});
-  
+
   // Manejar selección de origen del terreno
   const handleSourceSelect = (source: 'own' | 'catalog' | 'import') => {
     setTerrainSource(source);
-    
+
     if (source === 'own') {
       setCurrentStep(TerrainStep.TERRAIN_PICKER);
     } else if (source === 'catalog') {
@@ -61,7 +61,7 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
       setCurrentStep(TerrainStep.TERRAIN_IMPORT);
     }
   };
-  
+
   // Manejar selección de terreno del catálogo
   const handleCatalogSelect = useCallback((terrain: TerrainItem) => {
     setTerrainData({
@@ -73,60 +73,66 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
         [terrain.location.lng - 0.001, terrain.location.lat - 0.001],
         [terrain.location.lng + 0.001, terrain.location.lat - 0.001],
         [terrain.location.lng + 0.001, terrain.location.lat + 0.001],
-        [terrain.location.lng - 0.001, terrain.location.lat + 0.001]
-      ]
+        [terrain.location.lng - 0.001, terrain.location.lat + 0.001],
+      ],
     });
   }, []);
-  
+
   // Manejar selección de ubicación en el mapa
-  const handleLocationSelect = useCallback((terrainInfo: { location: { lat: number; lng: number }; address?: string; area?: number }) => {
-    setTerrainData(prev => ({
-      ...prev,
-      location: terrainInfo.location,
-      address: terrainInfo.address,
-      area: terrainInfo.area
-    }));
-  }, []);
-  
+  const handleLocationSelect = useCallback(
+    (terrainInfo: { location: { lat: number; lng: number }; address?: string; area?: number }) => {
+      setTerrainData((prev) => ({
+        ...prev,
+        location: terrainInfo.location,
+        address: terrainInfo.address,
+        area: terrainInfo.area,
+      }));
+    },
+    [],
+  );
+
   // Manejar completado del polígono
-  const handlePolygonComplete = useCallback((polygonData: { coordinates: Array<[number, number]>; area: number; perimeter: number }) => {
-    setTerrainData(prev => ({
-      ...prev,
-      polygon: polygonData.coordinates,
-      area: polygonData.area,
-      perimeter: polygonData.perimeter
-    }));
-  }, []);
-  
+  const handlePolygonComplete = useCallback(
+    (polygonData: { coordinates: Array<[number, number]>; area: number; perimeter: number }) => {
+      setTerrainData((prev) => ({
+        ...prev,
+        polygon: polygonData.coordinates,
+        area: polygonData.area,
+        perimeter: polygonData.perimeter,
+      }));
+    },
+    [],
+  );
+
   // Manejar importación de archivos
   const handleImportComplete = useCallback((importData: any) => {
-    setTerrainData(prev => ({
+    setTerrainData((prev) => ({
       ...prev,
       geoJson: importData.geoJson,
       area: importData.area || prev.area,
       perimeter: importData.perimeter || prev.perimeter,
-      importSource: importData.fileName
+      importSource: importData.fileName,
     }));
     setCurrentStep(TerrainStep.ANALYSIS);
   }, []);
-  
+
   // Manejar cambio en la elevación
   const handleElevationChange = useCallback((elevation: ElevationData) => {
-    setTerrainData(prev => ({
+    setTerrainData((prev) => ({
       ...prev,
-      elevation
+      elevation,
     }));
   }, []);
-  
+
   // Manejar análisis completado
   const handleAnalysisComplete = useCallback((analysisData: any) => {
-    setTerrainData(prev => ({
+    setTerrainData((prev) => ({
       ...prev,
-      analysis: analysisData
+      analysis: analysisData,
     }));
     setCurrentStep(TerrainStep.EXPORT);
   }, []);
-  
+
   // Manejar navegación entre pasos
   const goToNextStep = useCallback(() => {
     if (currentStep < TerrainStep.EXPORT) {
@@ -136,13 +142,13 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
       } else if (currentStep === TerrainStep.ELEVATION) {
         setCurrentStep(TerrainStep.ANALYSIS);
       } else {
-        setCurrentStep(prevStep => (prevStep + 1) as TerrainStep);
+        setCurrentStep((prevStep) => (prevStep + 1) as TerrainStep);
       }
     } else if (onComplete) {
       onComplete(terrainData);
     }
   }, [currentStep, terrainData, onComplete, terrainSource]);
-  
+
   const goToPreviousStep = useCallback(() => {
     if (currentStep > TerrainStep.SOURCE_SELECTION) {
       // Lógica especial para retroceder del análisis al paso correspondiente
@@ -153,13 +159,13 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
           setCurrentStep(TerrainStep.ELEVATION);
         }
       } else {
-        setCurrentStep(prevStep => (prevStep - 1) as TerrainStep);
+        setCurrentStep((prevStep) => (prevStep - 1) as TerrainStep);
       }
     } else if (onBack) {
       onBack();
     }
   }, [currentStep, onBack, terrainSource]);
-  
+
   // Verificar si se puede avanzar al siguiente paso
   const canProceed = useCallback(() => {
     switch (currentStep) {
@@ -181,7 +187,7 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
         return false;
     }
   }, [currentStep, terrainSource, terrainData]);
-  
+
   // Renderizar el paso actual
   const renderCurrentStep = () => {
     switch (currentStep) {
@@ -191,7 +197,7 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
             <h2 className="text-xl font-bold mb-6 text-primary-800 dark:text-accent-50">
               Selecciona el origen del terreno
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div
                 className={`cursor-pointer rounded-lg overflow-hidden border transition-all p-6 ${
@@ -202,8 +208,19 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
                 onClick={() => handleSourceSelect('own')}
               >
                 <div className="flex flex-col items-center text-center">
-                  <svg className="w-16 h-16 text-primary-800 dark:text-accent-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                  <svg
+                    className="w-16 h-16 text-primary-800 dark:text-accent-300 mb-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                    />
                   </svg>
                   <h3 className="text-lg font-semibold text-primary-900 dark:text-accent-100 mb-2">
                     Terreno Propio
@@ -213,7 +230,7 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
                   </p>
                 </div>
               </div>
-              
+
               <div
                 className={`cursor-pointer rounded-lg overflow-hidden border transition-all p-6 ${
                   terrainSource === 'catalog'
@@ -223,8 +240,19 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
                 onClick={() => handleSourceSelect('catalog')}
               >
                 <div className="flex flex-col items-center text-center">
-                  <svg className="w-16 h-16 text-primary-800 dark:text-accent-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-16 h-16 text-primary-800 dark:text-accent-300 mb-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <h3 className="text-lg font-semibold text-primary-900 dark:text-accent-100 mb-2">
                     Catálogo
@@ -234,7 +262,7 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
                   </p>
                 </div>
               </div>
-              
+
               <div
                 className={`cursor-pointer rounded-lg overflow-hidden border transition-all p-6 ${
                   terrainSource === 'import'
@@ -244,8 +272,19 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
                 onClick={() => handleSourceSelect('import')}
               >
                 <div className="flex flex-col items-center text-center">
-                  <svg className="w-16 h-16 text-primary-800 dark:text-accent-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                  <svg
+                    className="w-16 h-16 text-primary-800 dark:text-accent-300 mb-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"
+                    />
                   </svg>
                   <h3 className="text-lg font-semibold text-primary-900 dark:text-accent-100 mb-2">
                     Importar
@@ -258,22 +297,22 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
             </div>
           </div>
         );
-        
+
       case TerrainStep.TERRAIN_PICKER:
         return terrainSource === 'catalog' ? (
           <TerrainCatalog onTerrainSelect={handleCatalogSelect} />
         ) : (
           <TerrainPicker onTerrainSelected={handleLocationSelect} />
         );
-        
+
       case TerrainStep.TERRAIN_SKETCH:
         return (
-          <TerrainSketch 
+          <TerrainSketch
             initialCenter={terrainData.location}
             onPolygonComplete={handlePolygonComplete}
           />
         );
-      
+
       case TerrainStep.TERRAIN_IMPORT:
         return (
           <TerrainImport
@@ -281,36 +320,30 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
             onCancel={() => setCurrentStep(TerrainStep.SOURCE_SELECTION)}
           />
         );
-        
+
       case TerrainStep.ELEVATION:
-        return (
-          <ElevationEditor 
-            onElevationChange={handleElevationChange}
-            initialElevation={0}
-          />
-        );
-      
+        return <ElevationEditor onElevationChange={handleElevationChange} initialElevation={0} />;
+
       case TerrainStep.ANALYSIS:
         return (
           <TerrainAnalysis
             onComplete={handleAnalysisComplete}
-            onCancel={() => terrainSource === 'import' 
-              ? setCurrentStep(TerrainStep.TERRAIN_IMPORT) 
-              : setCurrentStep(TerrainStep.ELEVATION)
+            onCancel={() =>
+              terrainSource === 'import'
+                ? setCurrentStep(TerrainStep.TERRAIN_IMPORT)
+                : setCurrentStep(TerrainStep.ELEVATION)
             }
           />
         );
-        
+
       case TerrainStep.EXPORT:
-        return (
-          <TerrainExport terrainData={terrainData} />
-        );
-        
+        return <TerrainExport terrainData={terrainData} />;
+
       default:
         return null;
     }
   };
-  
+
   // Nombres de los pasos
   const getStepNames = () => {
     if (terrainSource === 'import') {
@@ -318,7 +351,7 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
         { id: 'source', title: 'Origen' },
         { id: 'import', title: 'Importar' },
         { id: 'analysis', title: 'Análisis 3D' },
-        { id: 'export', title: 'Exportar' }
+        { id: 'export', title: 'Exportar' },
       ];
     } else {
       return [
@@ -327,11 +360,11 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
         { id: 'sketch', title: 'Dibujo' },
         { id: 'elevation', title: 'Elevación' },
         { id: 'analysis', title: 'Análisis 3D' },
-        { id: 'export', title: 'Exportar' }
+        { id: 'export', title: 'Exportar' },
       ];
     }
   };
-  
+
   // Mapear el paso actual al índice del paso en el indicador
   const getCurrentStepIndex = () => {
     if (terrainSource === 'import') {
@@ -366,11 +399,11 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
       }
     }
   };
-  
+
   return (
     <div className={`terrain-module ${className}`}>
       <div className="mb-8">
-        <StepIndicator 
+        <StepIndicator
           steps={getStepNames()}
           currentStep={getCurrentStepIndex()}
           onStepClick={(step) => {
@@ -418,14 +451,11 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
           }}
         />
       </div>
-      
-      <StepContainer
-        isActive={true}
-        stepId={`step-${currentStep}`}
-      >
+
+      <StepContainer isActive={true} stepId={`step-${currentStep}`}>
         {renderCurrentStep()}
       </StepContainer>
-      
+
       <div className="mt-8 flex justify-between">
         <button
           type="button"
@@ -434,7 +464,7 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
         >
           {currentStep === TerrainStep.SOURCE_SELECTION ? 'Volver' : 'Anterior'}
         </button>
-        
+
         <button
           type="button"
           onClick={goToNextStep}
@@ -450,4 +480,4 @@ export const TerrainModule: React.FC<TerrainModuleProps> = ({
       </div>
     </div>
   );
-}; 
+};

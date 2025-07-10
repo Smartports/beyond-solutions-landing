@@ -11,7 +11,7 @@ interface TerrainAnalysisProps {
    * Callback cuando se completa el análisis
    */
   onComplete?: (data: any) => void;
-  
+
   /**
    * Callback cuando se cancela el análisis
    */
@@ -21,17 +21,14 @@ interface TerrainAnalysisProps {
 /**
  * Componente para análisis de terreno
  */
-const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
-  onComplete,
-  onCancel
-}) => {
+const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({ onComplete, onCancel }) => {
   // Estados
   const [step, setStep] = useState<'import' | 'view3d' | 'report'>('import');
   const [terrainData, setTerrainData] = useState<any>(null);
   const [geoJson, setGeoJson] = useState<FeatureCollection | null>(null);
   const [snapshots, setSnapshots] = useState<string[]>([]);
   const [report, setReport] = useState<any>(null);
-  
+
   /**
    * Maneja la importación completada
    */
@@ -40,14 +37,14 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
     setGeoJson(data.geoJson);
     setStep('view3d');
   };
-  
+
   /**
    * Maneja la captura de la vista 3D
    */
   const handleSnapshot = (dataUrl: string) => {
     setSnapshots([...snapshots, dataUrl]);
   };
-  
+
   /**
    * Genera un informe del análisis
    */
@@ -59,19 +56,19 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
       date: new Date().toISOString(),
       metadata: {
         area: calculateArea(geoJson),
-        perimeter: calculatePerimeter(geoJson)
-      }
+        perimeter: calculatePerimeter(geoJson),
+      },
     };
-    
+
     setReport(reportData);
     setStep('report');
-    
+
     // Notificar al padre si es necesario
     if (onComplete) {
       onComplete(reportData);
     }
   };
-  
+
   /**
    * Calcula el área del terreno
    */
@@ -79,13 +76,13 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
     if (!geoJson || !geoJson.features || geoJson.features.length === 0) {
       return 0;
     }
-    
+
     // Usar turf.js para calcular el área
     // Esto es solo un placeholder, en la implementación real
     // se usaría la biblioteca turf.js
     return 1000; // m²
   };
-  
+
   /**
    * Calcula el perímetro del terreno
    */
@@ -93,13 +90,13 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
     if (!geoJson || !geoJson.features || geoJson.features.length === 0) {
       return 0;
     }
-    
+
     // Usar turf.js para calcular el perímetro
     // Esto es solo un placeholder, en la implementación real
     // se usaría la biblioteca turf.js
     return 130; // m
   };
-  
+
   /**
    * Maneja el botón de cancelar
    */
@@ -108,25 +105,20 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
       onCancel();
     }
   };
-  
+
   /**
    * Renderiza el paso actual
    */
   const renderStep = () => {
     switch (step) {
       case 'import':
-        return (
-          <TerrainImport
-            onImportComplete={handleImportComplete}
-            onCancel={handleCancel}
-          />
-        );
-        
+        return <TerrainImport onImportComplete={handleImportComplete} onCancel={handleCancel} />;
+
       case 'view3d':
         if (!geoJson) {
           return <div>Error: No hay datos de terreno</div>;
         }
-        
+
         return (
           <div className="terrain-analysis-view3d">
             <TerrainViewer3D
@@ -135,7 +127,7 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
               maxElevation={10}
               onSnapshot={handleSnapshot}
             />
-            
+
             <div className="terrain-analysis-actions">
               <button onClick={() => setStep('import')} className="terrain-analysis-button-back">
                 Volver a Importación
@@ -144,7 +136,7 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
                 Generar Informe
               </button>
             </div>
-            
+
             {snapshots.length > 0 && (
               <div className="terrain-analysis-snapshots">
                 <h3>Capturas ({snapshots.length})</h3>
@@ -159,24 +151,34 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
             )}
           </div>
         );
-        
+
       case 'report':
         if (!report) {
           return <div>Generando informe...</div>;
         }
-        
+
         return (
           <div className="terrain-analysis-report">
             <h2>Informe de Análisis de Terreno</h2>
-            
+
             <div className="terrain-analysis-report-metadata">
-              <p><strong>Fecha:</strong> {new Date(report.date).toLocaleString()}</p>
-              <p><strong>Archivo:</strong> {report.terrainData?.fileName || 'N/A'}</p>
-              <p><strong>Tipo:</strong> {report.terrainData?.type || 'N/A'}</p>
-              <p><strong>Área:</strong> {report.metadata.area.toLocaleString()} m²</p>
-              <p><strong>Perímetro:</strong> {report.metadata.perimeter.toLocaleString()} m</p>
+              <p>
+                <strong>Fecha:</strong> {new Date(report.date).toLocaleString()}
+              </p>
+              <p>
+                <strong>Archivo:</strong> {report.terrainData?.fileName || 'N/A'}
+              </p>
+              <p>
+                <strong>Tipo:</strong> {report.terrainData?.type || 'N/A'}
+              </p>
+              <p>
+                <strong>Área:</strong> {report.metadata.area.toLocaleString()} m²
+              </p>
+              <p>
+                <strong>Perímetro:</strong> {report.metadata.perimeter.toLocaleString()} m
+              </p>
             </div>
-            
+
             {report.snapshots.length > 0 && (
               <div className="terrain-analysis-report-snapshots">
                 <h3>Análisis Visuales</h3>
@@ -189,7 +191,7 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
                 </div>
               </div>
             )}
-            
+
             <div className="terrain-analysis-report-actions">
               <button onClick={() => setStep('view3d')} className="terrain-analysis-button-back">
                 Volver al Análisis
@@ -200,12 +202,12 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
             </div>
           </div>
         );
-        
+
       default:
         return <div>Paso desconocido</div>;
     }
   };
-  
+
   return (
     <div className="terrain-analysis">
       <div className="terrain-analysis-header">
@@ -222,12 +224,10 @@ const TerrainAnalysis: React.FC<TerrainAnalysisProps> = ({
           </div>
         </div>
       </div>
-      
-      <div className="terrain-analysis-content">
-        {renderStep()}
-      </div>
+
+      <div className="terrain-analysis-content">{renderStep()}</div>
     </div>
   );
 };
 
-export default TerrainAnalysis; 
+export default TerrainAnalysis;

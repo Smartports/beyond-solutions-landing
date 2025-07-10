@@ -29,8 +29,9 @@ const MOCK_TERRAINS: TerrainItem[] = [
     location: { lat: 19.4326, lng: -99.1332 },
     area: 500,
     price: 2500000,
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGFuZHxlbnwwfHwwfHw%3D&w=300&q=80',
-    description: 'Terreno en exclusiva zona residencial con todos los servicios.'
+    imageUrl:
+      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGFuZHxlbnwwfHwwfHw%3D&w=300&q=80',
+    description: 'Terreno en exclusiva zona residencial con todos los servicios.',
   },
   {
     id: 'terrain-002',
@@ -38,27 +39,30 @@ const MOCK_TERRAINS: TerrainItem[] = [
     location: { lat: 19.4287, lng: -99.1359 },
     area: 800,
     price: 5000000,
-    imageUrl: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGxhbmR8ZW58MHx8MHx8&w=300&q=80',
-    description: 'Ubicación estratégica para negocio con alto flujo peatonal.'
+    imageUrl:
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGxhbmR8ZW58MHx8MHx8&w=300&q=80',
+    description: 'Ubicación estratégica para negocio con alto flujo peatonal.',
   },
   {
     id: 'terrain-003',
     name: 'Lote Industrial - Zona Norte',
-    location: { lat: 19.4412, lng: -99.1280 },
+    location: { lat: 19.4412, lng: -99.128 },
     area: 2000,
     price: 8000000,
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGFuZHxlbnwwfHwwfHw%3D&w=300&q=80',
-    description: 'Ideal para nave industrial o bodega con acceso a vías principales.'
+    imageUrl:
+      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGFuZHxlbnwwfHwwfHw%3D&w=300&q=80',
+    description: 'Ideal para nave industrial o bodega con acceso a vías principales.',
   },
   {
     id: 'terrain-004',
     name: 'Terreno Campestre - Valle Verde',
-    location: { lat: 19.4500, lng: -99.1400 },
+    location: { lat: 19.45, lng: -99.14 },
     area: 1500,
     price: 3000000,
-    imageUrl: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGxhbmR8ZW58MHx8MHx8&w=300&q=80',
-    description: 'Hermoso terreno con vista panorámica y clima privilegiado.'
-  }
+    imageUrl:
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGxhbmR8ZW58MHx8MHx8&w=300&q=80',
+    description: 'Hermoso terreno con vista panorámica y clima privilegiado.',
+  },
 ];
 
 /**
@@ -66,44 +70,44 @@ const MOCK_TERRAINS: TerrainItem[] = [
  */
 export const TerrainCatalog: React.FC<TerrainCatalogProps> = ({
   onTerrainSelect,
-  className = ''
+  className = '',
 }) => {
   const [terrains, setTerrains] = useState<TerrainItem[]>([]);
   const [selectedTerrain, setSelectedTerrain] = useState<string | null>(null);
   const [filter, setFilter] = useState('');
-  
+
   // Cargar terrenos (simulación de API)
   useEffect(() => {
     // Simular carga de datos
     const loadTerrains = async () => {
       // En una implementación real, aquí haríamos un fetch a una API
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setTerrains(MOCK_TERRAINS);
     };
-    
+
     loadTerrains();
   }, []);
-  
+
   // Filtrar terrenos por nombre
-  const filteredTerrains = terrains.filter(terrain => 
-    terrain.name.toLowerCase().includes(filter.toLowerCase())
+  const filteredTerrains = terrains.filter((terrain) =>
+    terrain.name.toLowerCase().includes(filter.toLowerCase()),
   );
-  
+
   // Manejar selección de terreno
   const handleTerrainSelect = (terrain: TerrainItem) => {
     setSelectedTerrain(terrain.id);
-    
+
     if (onTerrainSelect) {
       onTerrainSelect(terrain);
     }
   };
-  
+
   return (
     <div className={`terrain-catalog ${className}`}>
       <h2 className="text-xl font-bold mb-4 text-primary-800 dark:text-accent-50">
         Catálogo de Terrenos
       </h2>
-      
+
       <div className="mb-4">
         <input
           type="text"
@@ -113,7 +117,7 @@ export const TerrainCatalog: React.FC<TerrainCatalogProps> = ({
           onChange={(e) => setFilter(e.target.value)}
         />
       </div>
-      
+
       {terrains.length === 0 ? (
         <div className="flex items-center justify-center h-40 bg-gray-100 dark:bg-gray-800 rounded-lg">
           <div className="text-center">
@@ -123,11 +127,13 @@ export const TerrainCatalog: React.FC<TerrainCatalogProps> = ({
         </div>
       ) : filteredTerrains.length === 0 ? (
         <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-center">
-          <p className="text-gray-600 dark:text-gray-400">No se encontraron terrenos con ese nombre.</p>
+          <p className="text-gray-600 dark:text-gray-400">
+            No se encontraron terrenos con ese nombre.
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredTerrains.map(terrain => (
+          {filteredTerrains.map((terrain) => (
             <div
               key={terrain.id}
               className={`cursor-pointer rounded-lg overflow-hidden border transition-all ${
@@ -147,18 +153,20 @@ export const TerrainCatalog: React.FC<TerrainCatalogProps> = ({
                     />
                   </div>
                 )}
-                
+
                 <div className="p-4 flex-grow bg-white dark:bg-gray-800">
                   <h3 className="font-semibold text-primary-900 dark:text-accent-100">
                     {terrain.name}
                   </h3>
-                  
+
                   <div className="mt-2 grid grid-cols-2 gap-2 text-sm">
                     <div>
                       <span className="text-gray-500 dark:text-gray-400">Área:</span>
-                      <span className="ml-1 text-gray-800 dark:text-gray-200">{terrain.area} m²</span>
+                      <span className="ml-1 text-gray-800 dark:text-gray-200">
+                        {terrain.area} m²
+                      </span>
                     </div>
-                    
+
                     <div>
                       <span className="text-gray-500 dark:text-gray-400">Precio:</span>
                       <span className="ml-1 text-gray-800 dark:text-gray-200">
@@ -166,7 +174,7 @@ export const TerrainCatalog: React.FC<TerrainCatalogProps> = ({
                       </span>
                     </div>
                   </div>
-                  
+
                   {terrain.description && (
                     <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                       {terrain.description}
@@ -180,4 +188,4 @@ export const TerrainCatalog: React.FC<TerrainCatalogProps> = ({
       )}
     </div>
   );
-}; 
+};
