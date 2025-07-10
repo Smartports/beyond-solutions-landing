@@ -8,8 +8,8 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 ## Registro de Estado
 
-| Fecha | Estado | Notas |
-|-------|--------|-------|
+| Fecha      | Estado     | Notas                                        |
+| ---------- | ---------- | -------------------------------------------- |
 | 2025-06-18 | Completado | Todas las historias de usuario implementadas |
 
 ## Historias de Usuario
@@ -21,6 +21,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Investigar y seleccionar biblioteca para parsing de archivos DXF
 - [x] Implementar UI para carga de archivos CAD
 - [x] Crear parser para extraer polígonos y datos relevantes
@@ -29,6 +30,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 - [x] Añadir soporte para capas básicas (layers)
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede cargar archivos DXF hasta 10MB
 - [x] Sistema extrae correctamente polígonos y líneas del archivo
 - [x] Se validan los archivos por formato y contenido antes de procesarlos
@@ -47,6 +49,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Implementar UI para carga de archivos GeoJSON
 - [x] Crear parser para GeoJSON y extracción de geometría
 - [x] Integrar con coordenadas geográficas y proyección
@@ -55,6 +58,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 - [x] Añadir soporte para visualización preliminar
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede cargar archivos GeoJSON hasta 5MB
 - [x] Sistema extrae correctamente polígonos, líneas y propiedades
 - [x] Las coordenadas se proyectan correctamente en el mapa
@@ -73,6 +77,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Integrar Babylon.js en el proyecto
 - [x] Configurar escena 3D básica con cámara, luces y controles
 - [x] Implementar sistema de coordenadas y escalas
@@ -81,6 +86,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 - [x] Añadir controles de navegación 3D accesibles
 
 **Criterios de Aceptación:**
+
 - [x] Motor 3D se inicializa correctamente en desktop y dispositivos móviles
 - [x] Cámara y controles permiten navegación intuitiva en la escena
 - [x] FPS estable (mínimo 30fps) en dispositivos de gama media
@@ -99,6 +105,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Implementar algoritmo de triangulación para polígonos 2D
 - [x] Crear generador de malla 3D a partir de triangulación
 - [x] Aplicar elevación y datos de altura al terreno
@@ -107,6 +114,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 - [x] Optimizar geometría para renderizado eficiente
 
 **Criterios de Aceptación:**
+
 - [x] Sistema genera malla 3D correcta a partir de polígonos 2D
 - [x] El terreno refleja con precisión los datos de elevación
 - [x] La malla mantiene rendimiento óptimo con terrenos complejos
@@ -125,6 +133,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Implementar sistema de posicionamiento solar basado en coordenadas y fecha/hora
 - [x] Crear controles para selección de fecha y hora
 - [x] Implementar cálculo y visualización de sombras
@@ -133,6 +142,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 - [x] Implementar capturas/instantáneas del análisis
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede seleccionar fecha y hora para análisis solar
 - [x] Las sombras se renderizan correctamente según la posición solar
 - [x] Sistema muestra trayectoria solar para la ubicación seleccionada
@@ -151,6 +161,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Implementar modelo simplificado de flujo de viento
 - [x] Crear controles para dirección e intensidad del viento
 - [x] Añadir visualización de vectores de viento
@@ -159,6 +170,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 - [x] Optimizar para rendimiento en dispositivos objetivo
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede configurar dirección e intensidad del viento
 - [x] Visualización muestra flujo de viento sobre el terreno
 - [x] Sistema indica zonas de presión/succión en el terreno
@@ -177,6 +189,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Implementar sincronización entre Sketch 2D y vista 3D
 - [x] Crear switch/toggle entre vistas 2D y 3D
 - [x] Implementar editor de perfil de elevación
@@ -185,6 +198,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 - [x] Implementar transiciones suaves entre modos
 
 **Criterios de Aceptación:**
+
 - [x] Cambios en Sketch 2D se reflejan en tiempo real en vista 3D
 - [x] Usuario puede alternar fácilmente entre vistas 2D y 3D
 - [x] Editor de perfil de elevación modifica correctamente la vista 3D
@@ -203,6 +217,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** ✅ Completado
 
 **Tareas:**
+
 - [x] Implementar exportación de geometría 3D en formato glTF
 - [x] Crear sistema de guardado de análisis realizados
 - [x] Añadir exportación de capturas de análisis
@@ -211,6 +226,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 - [x] Diseñar UI de transición entre fases
 
 **Criterios de Aceptación:**
+
 - [x] Usuario puede exportar geometría 3D en formato glTF
 - [x] Análisis y configuraciones se guardan correctamente
 - [x] Sistema permite capturas y exportación de visualizaciones
@@ -225,9 +241,11 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 ## Riesgos y Mitigaciones
 
 ### Riesgo 1: Rendimiento 3D en Dispositivos de Gama Baja
+
 **Descripción:** La visualización 3D y análisis pueden tener bajo rendimiento en dispositivos de gama baja o móviles.
 
 **Mitigación:**
+
 - Implementar sistema de LOD (Level of Detail) automático
 - Crear modos de visualización simplificados para dispositivos limitados
 - Optimizar geometría y texturas de forma agresiva
@@ -237,9 +255,11 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** 🔍 Monitorizado
 
 ### Riesgo 2: Complejidad de Importación CAD
+
 **Descripción:** Los archivos CAD pueden tener estructuras complejas y difíciles de interpretar correctamente.
 
 **Mitigación:**
+
 - Iniciar con soporte limitado para formatos/versiones más comunes
 - Crear guía clara para usuarios sobre formatos soportados
 - Implementar validaciones robustas para rechazar archivos incompatibles
@@ -249,9 +269,11 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** 🔍 Monitorizado
 
 ### Riesgo 3: Precisión de Análisis Solar/Viento
+
 **Descripción:** Los análisis solares y de viento simplificados pueden carecer de precisión necesaria para decisiones reales.
 
 **Mitigación:**
+
 - Comunicar claramente que son análisis aproximados/educativos
 - Añadir disclaimers sobre el uso para decisiones profesionales
 - Verificar algoritmos con fuentes publicadas/conocidas
@@ -261,9 +283,11 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 **Estado:** 🔍 Monitorizado
 
 ### Riesgo 4: Curva de Aprendizaje para Usuarios
+
 **Descripción:** Las herramientas 3D pueden resultar complejas para usuarios sin experiencia previa.
 
 **Mitigación:**
+
 - Crear tutoriales interactivos paso a paso
 - Implementar controles simplificados con opciones avanzadas ocultas
 - Añadir tooltips y guías contextuales
@@ -274,17 +298,17 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 
 ## Estimación Total del Sprint
 
-| Historia | Estimación (días) | Estado |
-|----------|------------------|--------|
-| #1: Importación de Archivos CAD | 1.0 | ✅ Completado |
-| #2: Importación de Archivos GeoJSON | 0.5 | ✅ Completado |
-| #3: Implementación de Motor de Renderizado 3D | 1.0 | ✅ Completado |
-| #4: Generación de Malla 3D Low-Poly | 1.0 | ✅ Completado |
-| #5: Análisis Solar Básico | 1.0 | ✅ Completado |
-| #6: Análisis de Viento Básico | 0.5 | ✅ Completado |
-| #7: Integración con Sketch 2D y Perfil de Elevación | 0.5 | ✅ Completado |
-| #8: Exportación Avanzada y Preparación para Fase 3 | 0.5 | ✅ Completado |
-| **Total** | **6.0** | ✅ **Completado** |
+| Historia                                            | Estimación (días) | Estado            |
+| --------------------------------------------------- | ----------------- | ----------------- |
+| #1: Importación de Archivos CAD                     | 1.0               | ✅ Completado     |
+| #2: Importación de Archivos GeoJSON                 | 0.5               | ✅ Completado     |
+| #3: Implementación de Motor de Renderizado 3D       | 1.0               | ✅ Completado     |
+| #4: Generación de Malla 3D Low-Poly                 | 1.0               | ✅ Completado     |
+| #5: Análisis Solar Básico                           | 1.0               | ✅ Completado     |
+| #6: Análisis de Viento Básico                       | 0.5               | ✅ Completado     |
+| #7: Integración con Sketch 2D y Perfil de Elevación | 0.5               | ✅ Completado     |
+| #8: Exportación Avanzada y Preparación para Fase 3  | 0.5               | ✅ Completado     |
+| **Total**                                           | **6.0**           | ✅ **Completado** |
 
 ## Leyenda de Estado
 
@@ -300,7 +324,7 @@ En este Sprint 3 completaremos la Épica E2 (Terreno) implementando la funcional
 graph TD
     Sprint2[Finalización Sprint 2: Terreno MVP] -->|Requerido| H1
     Sprint2 -->|Requerido| H3
-    
+
     H1[Historia #1: Importación de Archivos CAD] --> H2
     H2[Historia #2: Importación de Archivos GeoJSON]
     H3[Historia #3: Implementación de Motor de Renderizado 3D] --> H4
@@ -324,4 +348,4 @@ graph TD
 
 ---
 
-> Este plan está sujeto a ajustes según el feedback del equipo y los desafíos encontrados durante la implementación. 
+> Este plan está sujeto a ajustes según el feedback del equipo y los desafíos encontrados durante la implementación.

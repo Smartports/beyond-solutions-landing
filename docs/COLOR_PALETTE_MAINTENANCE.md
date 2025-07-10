@@ -7,24 +7,24 @@ This document outlines the maintenance plan for the Beyond Solutions color palet
 ### Monthly
 
 1. **Consistency Check**
-   - Run the consistency check script: `npm run test:consistency`
+   - Run the consistency check script: `bun run test:consistency`
    - Review and address any issues found
    - Update documentation if necessary
 
 2. **Accessibility Verification**
-   - Run the accessibility audit: `npm run test:a11y:audit`
+   - Run the accessibility audit: `bun run test:a11y:audit`
    - Ensure all color combinations maintain WCAG 2.1 AA compliance
    - Address any new accessibility issues
 
 ### Quarterly
 
 1. **Cross-Browser Testing**
-   - Run the cross-browser test script: `npm run test:integration`
+   - Run the cross-browser test script: `bun run test:integration`
    - Test on latest browser versions
    - Address any rendering inconsistencies
 
 2. **Performance Review**
-   - Run the CSS performance analysis: `npm run test:css-performance`
+   - Run the CSS performance analysis: `bun run test:css-performance`
    - Implement optimization recommendations
    - Monitor impact on page load times
 
@@ -161,4 +161,4 @@ For questions or issues related to the color palette maintenance:
 
 - **Design Team Lead:** [Name] (email@beyond-solutions.com)
 - **Frontend Development Lead:** [Name] (email@beyond-solutions.com)
-- **Accessibility Specialist:** [Name] (email@beyond-solutions.com) 
+- **Accessibility Specialist:** [Name] (email@beyond-solutions.com)

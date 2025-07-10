@@ -4,20 +4,20 @@ This document summarizes the changes made to implement the new color palette acr
 
 ## New Color Palette
 
-| Color Code | Name/Usage |
-|------------|------------|
-| #334b4e | Primary (Main) |
-| #243b44 | Primary Dark |
-| #54676d | Primary Medium |
-| #68767c | Primary Light |
-| #192525 | Dark Text |
-| #cccfcf | Light Text/Background |
-| #525853 | Secondary Dark |
-| #adb3b7 | Neutral Medium |
-| #b1aaa0 | Accent |
-| #8c8f92 | Neutral Dark |
-| #bac4c3 | Light Neutral |
-| #b9c6cd | Pale Accent |
+| Color Code | Name/Usage            |
+| ---------- | --------------------- |
+| #334b4e    | Primary (Main)        |
+| #243b44    | Primary Dark          |
+| #54676d    | Primary Medium        |
+| #68767c    | Primary Light         |
+| #192525    | Dark Text             |
+| #cccfcf    | Light Text/Background |
+| #525853    | Secondary Dark        |
+| #adb3b7    | Neutral Medium        |
+| #b1aaa0    | Accent                |
+| #8c8f92    | Neutral Dark          |
+| #bac4c3    | Light Neutral         |
+| #b9c6cd    | Pale Accent           |
 
 ## Files Updated
 
@@ -63,7 +63,7 @@ For easier maintenance, the following CSS variables have been implemented:
   --color-primary-300: #adb3b7;
   --color-primary-200: #bac4c3;
   --color-primary-100: #cccfcf;
-  
+
   --color-accent: #b1aaa0;
   --color-accent-light: #b9c6cd;
   --color-secondary: #525853;
@@ -83,4 +83,4 @@ The dark mode has been updated to use the appropriate color combinations from th
 
 1. Review all dynamically generated content to ensure color consistency
 2. Update any additional pages or components that may not be included in the main website structure
-3. Update marketing materials to reflect the new color palette 
+3. Update marketing materials to reflect the new color palette
