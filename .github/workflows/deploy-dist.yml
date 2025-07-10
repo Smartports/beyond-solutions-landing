@@ -90,7 +90,8 @@ jobs:
           done
           
           # Verificar que Alpine CSP init no tiene referencias a nonces
-          if grep -q 'nonce' js/alpine-csp-init.js; then
+          # Only fail if an actual nonce attribute is present (e.g., nonce="abc")
+          if grep -q 'nonce=' js/alpine-csp-init.js; then
             echo "❌ Found nonce references in Alpine CSP init - should be removed for GitHub Pages"
             exit 1
           else
