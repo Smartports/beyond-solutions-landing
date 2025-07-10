@@ -14,18 +14,18 @@
   --color-primary-300: #adb3b7;
   --color-primary-200: #bac4c3;
   --color-primary-100: #cccfcf;
-  
+
   /* Accent colors */
   --color-accent: #b1aaa0;
   --color-accent-light: #b9c6cd;
   --color-secondary: #525853;
-  
+
   /* Functional colors */
   --color-text-dark: var(--color-primary-900);
   --color-text-light: var(--color-primary-100);
   --color-background-light: #ffffff;
   --color-background-dark: var(--color-primary-900);
-  
+
   /* UI element colors */
   --color-border: var(--color-primary-300);
   --color-focus-ring: var(--color-primary-700);
@@ -39,21 +39,21 @@
   --primary-800: #334b4e;
   --primary-700: #54676d;
   --primary-600: #68767c;
-  
+
   /* Accent Colors */
   --accent-500: #8c8f92;
   --accent-300: #adb3b7;
   --accent-200: #b1aaa0;
   --accent-100: #b9c6cd;
   --accent-50: #bac4c3;
-  
+
   /* Text Colors */
   --text-primary: #334b4e;
   --text-secondary: #6b7280;
   --text-light: #9ca3af;
   --text-dark: #1f2937;
   --text-white: #ffffff;
-  
+
   /* Background Colors */
   --bg-white: #ffffff;
   --bg-light: #f9fafb;
@@ -62,12 +62,12 @@
   --bg-gray-200: #d1d5db;
   --bg-dark: #1f2937;
   --bg-darker: #111827;
-  
+
   /* Border Colors */
   --border-light: #e5e7eb;
   --border-default: #d1d5db;
   --border-dark: #6b7280;
-  
+
   /* Success/Error/Warning Colors */
   --success: #10b981;
   --success-light: #34d399;
@@ -77,12 +77,12 @@
   --warning-light: #fbbf24;
   --info: #3b82f6;
   --info-light: #60a5fa;
-  
+
   /* Shadow Colors */
   --shadow-sm: rgba(0, 0, 0, 0.05);
   --shadow-md: rgba(0, 0, 0, 0.1);
   --shadow-lg: rgba(0, 0, 0, 0.15);
-  
+
   /* Form Field Colors - WCAG AA Compliant */
   --input-bg: #ffffff;
   --input-text: #0f172a;
@@ -91,7 +91,7 @@
   --input-focus-ring: #2563eb;
   --input-disabled-bg: #f1f5f9;
   --input-disabled-text: #9ca3af;
-  
+
   /* Button Colors */
   --btn-primary-bg: #334b4e;
   --btn-primary-text: #ffffff;
@@ -99,12 +99,12 @@
   --btn-secondary-bg: #e5e7eb;
   --btn-secondary-text: #1f2937;
   --btn-secondary-hover: #d1d5db;
-  
+
   /* Link Colors */
   --link-color: #2563eb;
   --link-hover: #1d4ed8;
   --link-visited: #7c3aed;
-  
+
   /* Overlay Colors */
   --overlay-dark: rgba(0, 0, 0, 0.5);
   --overlay-light: rgba(255, 255, 255, 0.9);
@@ -129,13 +129,14 @@
   --border-color-hover: var(--color-primary-700);
 }
 
-.dark, .dark-mode {
+.dark,
+.dark-mode {
   --bg-surface: var(--color-primary-800);
   --bg-surface-hover: var(--color-primary-700);
   --text-primary: var(--color-primary-100);
   --border-color: var(--color-primary-600);
   --border-color-hover: var(--color-primary-500);
-  
+
   --bg-surface-dark: var(--color-primary-800);
   --bg-surface-hover-dark: var(--color-primary-700);
   --text-primary-dark: var(--color-primary-100);
@@ -147,17 +148,17 @@
   --text-secondary: #cbd5e1;
   --text-light: #f9fafb;
   --text-dark: #0f172a;
-  
+
   --bg-white: #1f2937;
   --bg-light: #111827;
   --bg-gray-50: #374151;
   --bg-gray-100: #4b5563;
   --bg-gray-200: #6b7280;
-  
+
   --border-light: #4b5563;
   --border-default: #6b7280;
   --border-dark: #9ca3af;
-  
+
   /* Form Field Colors for Dark Mode */
   --input-bg: #1f2937;
   --input-text: #f1f5f9;
@@ -166,7 +167,7 @@
   --input-focus-ring: #3b82f6;
   --input-disabled-bg: #334155;
   --input-disabled-text: #64748b;
-  
+
   /* Button Colors for Dark Mode */
   --btn-primary-bg: #3b82f6;
   --btn-primary-text: #ffffff;
@@ -174,7 +175,7 @@
   --btn-secondary-bg: #374151;
   --btn-secondary-text: #f9fafb;
   --btn-secondary-hover: #4b5563;
-  
+
   /* Link Colors for Dark Mode */
   --link-color: #60a5fa;
   --link-hover: #93bbfc;
@@ -182,15 +183,27 @@
 }
 
 /* Utility Classes using CSS Variables */
-.text-primary { color: var(--text-primary); }
-.text-secondary { color: var(--text-secondary); }
-.text-light { color: var(--text-light); }
-.bg-primary { background-color: var(--primary-800); }
-.bg-light { background-color: var(--bg-light); }
-.border-default { border-color: var(--border-default); }
+.text-primary {
+  color: var(--text-primary);
+}
+.text-secondary {
+  color: var(--text-secondary);
+}
+.text-light {
+  color: var(--text-light);
+}
+.bg-primary {
+  background-color: var(--primary-800);
+}
+.bg-light {
+  background-color: var(--bg-light);
+}
+.border-default {
+  border-color: var(--border-default);
+}
 
 /* Form Field Styles using CSS Variables */
-input:not([type="radio"]):not([type="checkbox"]),
+input:not([type='radio']):not([type='checkbox']),
 textarea,
 select {
   background-color: var(--input-bg);
@@ -198,7 +211,7 @@ select {
   border: 1px solid var(--input-border);
 }
 
-input:not([type="radio"]):not([type="checkbox"]):focus,
+input:not([type='radio']):not([type='checkbox']):focus,
 textarea:focus,
 select:focus {
   outline: 2px solid var(--input-focus-ring);
@@ -247,4 +260,4 @@ a:hover {
 
 a:visited {
   color: var(--link-visited);
-} 
+}

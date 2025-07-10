@@ -23,7 +23,9 @@
 /* Animaciones */
 #language-dropdown {
   transform-origin: top right;
-  transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+  transition:
+    opacity 0.15s ease-out,
+    transform 0.15s ease-out;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 81vh;
@@ -37,7 +39,7 @@
   #language-dropdown-toggle {
     padding: 0.8em 0.6em;
   }
-  #language-dropdown-toggle>span>span {
+  #language-dropdown-toggle > span > span {
     display: none;
   }
 }
@@ -54,7 +56,7 @@
 }
 
 /* RTL Support */
-html[dir="rtl"] .language-selector #language-dropdown {
+html[dir='rtl'] .language-selector #language-dropdown {
   transform-origin: top left;
 }
 
@@ -186,12 +188,12 @@ html[dir="rtl"] .language-selector #language-dropdown {
 }
 
 /* Estilos RTL */
-html[dir="rtl"] .language-selector__button::after {
+html[dir='rtl'] .language-selector__button::after {
   margin-left: 0;
   margin-right: 0.5rem;
 }
 
-html[dir="rtl"] .language-selector__dropdown {
+html[dir='rtl'] .language-selector__dropdown {
   left: auto;
   right: 0;
 }
@@ -263,4 +265,4 @@ html[dir="rtl"] .language-selector__dropdown {
   .language-selector__name {
     font-size: 1rem;
   }
-} 
+}
