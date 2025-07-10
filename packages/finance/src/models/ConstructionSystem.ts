@@ -6,7 +6,7 @@ export enum StructureType {
   STEEL_FRAME = 'steel_frame',
   WOOD_FRAME = 'wood_frame',
   MASONRY = 'masonry',
-  PREFABRICATED = 'prefabricated'
+  PREFABRICATED = 'prefabricated',
 }
 
 /**
@@ -18,7 +18,7 @@ export enum EnclosureType {
   DRYWALL = 'drywall',
   GLASS_CURTAIN = 'glass_curtain',
   PREFAB_PANEL = 'prefab_panel',
-  WOOD_PANEL = 'wood_panel'
+  WOOD_PANEL = 'wood_panel',
 }
 
 /**
@@ -29,7 +29,7 @@ export enum RoofingType {
   METAL_DECK = 'metal_deck',
   TILE_ROOF = 'tile_roof',
   GREEN_ROOF = 'green_roof',
-  SHINGLE_ROOF = 'shingle_roof'
+  SHINGLE_ROOF = 'shingle_roof',
 }
 
 /**
@@ -40,7 +40,7 @@ export enum MepSystemType {
   STANDARD = 'standard',
   ADVANCED = 'advanced',
   SMART = 'smart',
-  SUSTAINABLE = 'sustainable'
+  SUSTAINABLE = 'sustainable',
 }
 
 /**
@@ -63,7 +63,7 @@ export const CONSTRUCTION_SYSTEM_COSTS = {
     [StructureType.STEEL_FRAME]: { costPerM2: 300, timeMultiplier: 0.8 },
     [StructureType.WOOD_FRAME]: { costPerM2: 180, timeMultiplier: 0.7 },
     [StructureType.MASONRY]: { costPerM2: 200, timeMultiplier: 1.2 },
-    [StructureType.PREFABRICATED]: { costPerM2: 220, timeMultiplier: 0.6 }
+    [StructureType.PREFABRICATED]: { costPerM2: 220, timeMultiplier: 0.6 },
   },
   enclosure: {
     [EnclosureType.BRICK_WALL]: { costPerM2: 80, timeMultiplier: 1.0 },
@@ -71,22 +71,22 @@ export const CONSTRUCTION_SYSTEM_COSTS = {
     [EnclosureType.DRYWALL]: { costPerM2: 50, timeMultiplier: 0.6 },
     [EnclosureType.GLASS_CURTAIN]: { costPerM2: 350, timeMultiplier: 0.8 },
     [EnclosureType.PREFAB_PANEL]: { costPerM2: 120, timeMultiplier: 0.5 },
-    [EnclosureType.WOOD_PANEL]: { costPerM2: 90, timeMultiplier: 0.7 }
+    [EnclosureType.WOOD_PANEL]: { costPerM2: 90, timeMultiplier: 0.7 },
   },
   roofing: {
     [RoofingType.CONCRETE_SLAB]: { costPerM2: 150, timeMultiplier: 1.0 },
     [RoofingType.METAL_DECK]: { costPerM2: 120, timeMultiplier: 0.7 },
     [RoofingType.TILE_ROOF]: { costPerM2: 100, timeMultiplier: 0.9 },
     [RoofingType.GREEN_ROOF]: { costPerM2: 200, timeMultiplier: 1.2 },
-    [RoofingType.SHINGLE_ROOF]: { costPerM2: 80, timeMultiplier: 0.8 }
+    [RoofingType.SHINGLE_ROOF]: { costPerM2: 80, timeMultiplier: 0.8 },
   },
   mepSystem: {
     [MepSystemType.BASIC]: { costPerM2: 100, timeMultiplier: 1.0 },
     [MepSystemType.STANDARD]: { costPerM2: 150, timeMultiplier: 1.0 },
     [MepSystemType.ADVANCED]: { costPerM2: 250, timeMultiplier: 1.2 },
     [MepSystemType.SMART]: { costPerM2: 350, timeMultiplier: 1.3 },
-    [MepSystemType.SUSTAINABLE]: { costPerM2: 300, timeMultiplier: 1.1 }
-  }
+    [MepSystemType.SUSTAINABLE]: { costPerM2: 300, timeMultiplier: 1.1 },
+  },
 };
 
 /**
@@ -99,7 +99,7 @@ export function calculateBaseConstructionCost(system: ConstructionSystem): numbe
   const enclosureCost = CONSTRUCTION_SYSTEM_COSTS.enclosure[system.enclosure].costPerM2;
   const roofingCost = CONSTRUCTION_SYSTEM_COSTS.roofing[system.roofing].costPerM2;
   const mepCost = CONSTRUCTION_SYSTEM_COSTS.mepSystem[system.mepSystem].costPerM2;
-  
+
   return structureCost + enclosureCost + roofingCost + mepCost;
 }
 
@@ -114,10 +114,10 @@ export function calculateConstructionTime(system: ConstructionSystem, areaM2: nu
   const enclosureTime = CONSTRUCTION_SYSTEM_COSTS.enclosure[system.enclosure].timeMultiplier;
   const roofingTime = CONSTRUCTION_SYSTEM_COSTS.roofing[system.roofing].timeMultiplier;
   const mepTime = CONSTRUCTION_SYSTEM_COSTS.mepSystem[system.mepSystem].timeMultiplier;
-  
+
   // Base: 1 semana por cada 50m² con los multiplicadores aplicados
   const baseTime = areaM2 / 50;
   const timeMultiplier = (structureTime + enclosureTime + roofingTime + mepTime) / 4;
-  
+
   return Math.ceil(baseTime * timeMultiplier);
 }
