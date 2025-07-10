@@ -28,6 +28,30 @@
   <body>
     <noscript>Necesitas habilitar JavaScript para ejecutar esta aplicación.</noscript>
     <div id="root"></div>
+    
+    <!-- Configuration script -->
+    <script src="/config.js"></script>
+    
+    <!-- Google Maps API with loading=async -->
+    <script>
+      // Initialize Google Maps callback before loading the API
+      window.initMap = function() {
+        console.log('Google Maps API loaded');
+        // Dispatch event for React components to know Maps is ready
+        window.dispatchEvent(new CustomEvent('google-maps-loaded'));
+      };
+      
+      // Load Google Maps API asynchronously
+      (function() {
+        const script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHZEIwEo3h7Ah3skmMbyMOEcj6H85eG_c&libraries=places,drawing,geometry&loading=async&callback=initMap';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      })();
+    </script>
+    
+    <!-- React app entry point -->
     <script type="module" src="/src/index.tsx"></script>
   </body>
-</html>
+</html> 
