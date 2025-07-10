@@ -26,13 +26,28 @@ jobs:
         run: bun install --ignore-scripts
 
       - name: Lint
-        run: bun run lint --if-present
+        run: |
+          if [ -f "package.json" ] && grep -q '"lint"' package.json; then
+            bun run lint
+          else
+            echo "No lint script found, skipping linting"
+          fi
 
       - name: Type Check
-        run: bun run typecheck --if-present
+        run: |
+          if [ -f "package.json" ] && grep -q '"typecheck"' package.json; then
+            bun run typecheck
+          else
+            echo "No typecheck script found, skipping type checking"
+          fi
 
       - name: Tests
-        run: bun run test --if-present
+        run: |
+          if [ -f "package.json" ] && grep -q '"test"' package.json; then
+            bun run test
+          else
+            echo "No test script found, skipping tests"
+          fi
 
       - name: Validate CSP Configuration (Quick Check)
         run: |

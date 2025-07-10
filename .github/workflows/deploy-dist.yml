@@ -67,7 +67,7 @@ jobs:
             exit 1
           fi
           
-          # Verificar que hay hash SHA256 para scripts inline
+          # Verificar que hay hash SHA256 para scripts inline (Alpine.js expressions)
           if grep -q "sha256-" calculator-gamified.html; then
             echo "✅ SHA256 hash found for inline scripts"
           else
